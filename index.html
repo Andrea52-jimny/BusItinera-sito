@@ -3,152 +3,835 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CeolAgenda in Manutenzione</title>
+<title>CeolAgenda Autotrasporti</title>
 <link rel="icon" type="image/png" href="logo.png">
-<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Pianifica viaggi, gestisci la flotta e coordina gli autisti con un unico ecosistema digitale. NCC, Bus, Scuolabus: tutto sotto controllo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#080c12;--bg3:#131b27;--bg4:#192333;
-  --border:rgba(56,189,248,.08);--border2:rgba(56,189,248,.15);
-  --cyan:#38bdf8;--cyan2:#0ea5e9;--cyan-g2:rgba(56,189,248,.15);--cyan-glow:rgba(56,189,248,.3);
-  --orange:#fb923c;--or-g2:rgba(251,146,60,.15);--or-glow:rgba(251,146,60,.3);
-  --green:#34d399;
+  --bg:#080c12;--bg2:#0d1219;--bg3:#131b27;--bg4:#192333;--bg5:#1e2b3d;
+  --border:rgba(56,189,248,.06);--border2:rgba(56,189,248,.12);--border3:rgba(56,189,248,.22);
+  --cyan:#38bdf8;--cyan2:#0ea5e9;--cyan-g:rgba(56,189,248,.08);--cyan-g2:rgba(56,189,248,.15);--cyan-glow:rgba(56,189,248,.3);
+  --orange:#fb923c;--orange2:#f97316;--or-g:rgba(251,146,60,.08);--or-g2:rgba(251,146,60,.15);--or-glow:rgba(251,146,60,.3);
+  --green:#34d399;--green2:#10b981;--gr-g:rgba(52,211,153,.08);--gr-g2:rgba(52,211,153,.15);
+  --purple:#a78bfa;--pu-g:rgba(167,139,250,.08);--pu-g2:rgba(167,139,250,.15);
+  --red:#f87171;--re-g:rgba(248,113,113,.08);
   --t1:#eaf0f8;--t2:#94a3b8;--t3:#64748b;--t4:#475569;
+  --r:18px;--rs:12px;--rx:6px;
   --font:'Outfit',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
 }
-html,body{height:100%}
-body{font-family:var(--font);background:var(--bg);color:var(--t1);display:flex;align-items:center;justify-content:center;overflow:hidden;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font);background:var(--bg);color:var(--t1);line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-/* Atmosphere */
 body::before{content:'';position:fixed;inset:0;background:
-  radial-gradient(ellipse 80% 60% at 30% 20%,rgba(56,189,248,.04) 0%,transparent 60%),
-  radial-gradient(ellipse 60% 50% at 70% 80%,rgba(251,146,60,.03) 0%,transparent 60%);pointer-events:none}
-.hex{position:fixed;inset:0;pointer-events:none;opacity:.02;
+  radial-gradient(ellipse 90% 70% at 15% 5%,rgba(56,189,248,.035) 0%,transparent 60%),
+  radial-gradient(ellipse 70% 60% at 85% 85%,rgba(251,146,60,.025) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 50% 50%,rgba(167,139,250,.015) 0%,transparent 50%);pointer-events:none;z-index:0}
+.hex-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.018;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='49'%3E%3Cpath d='M28 0l28 14v21L28 49 0 35V14z' fill='none' stroke='%2338bdf8' stroke-width='.4'/%3E%3C/svg%3E");background-size:56px 49px}
 
-/* Orbs */
-.orb{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none;animation:drift 10s ease-in-out infinite}
-.orb-1{width:500px;height:500px;background:rgba(56,189,248,.05);top:-15%;left:-10%;animation-duration:12s}
-.orb-2{width:400px;height:400px;background:rgba(251,146,60,.04);bottom:-10%;right:-8%;animation-duration:14s;animation-delay:2s}
-.orb-3{width:280px;height:280px;background:rgba(167,139,250,.035);top:40%;right:20%;animation-duration:16s;animation-delay:4s}
-@keyframes drift{0%,100%{transform:translate(0,0)}25%{transform:translate(30px,-20px)}50%{transform:translate(-20px,30px)}75%{transform:translate(15px,15px)}}
+.wrap{max-width:1220px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
+.tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.7rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;padding:7px 18px;border-radius:100px;margin-bottom:22px}
+.tag-cyan{color:var(--cyan);background:var(--cyan-g2);border:1px solid rgba(56,189,248,.15)}
+.tag-orange{color:var(--orange);background:var(--or-g2);border:1px solid rgba(251,146,60,.15)}
+.tag-green{color:var(--green);background:var(--gr-g2);border:1px solid rgba(52,211,153,.15)}
+.tag-purple{color:var(--purple);background:var(--pu-g2);border:1px solid rgba(167,139,250,.15)}
+.tag::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+.h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;line-height:1.1;letter-spacing:-.035em;margin-bottom:16px}
+.sub{font-size:1.08rem;color:var(--t2);max-width:620px;line-height:1.75}
+.center{text-align:center}.center .sub{margin:0 auto}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 
-/* Main card */
-.card{position:relative;z-index:1;text-align:center;max-width:560px;padding:60px 48px;background:var(--bg3);border:1px solid var(--border2);border-radius:24px;
-  box-shadow:0 40px 100px rgba(0,0,0,.5),0 0 80px rgba(56,189,248,.04);
-  animation:card-in 1s cubic-bezier(.22,1,.36,1) both}
-@keyframes card-in{0%{opacity:0;transform:translateY(40px) scale(.96)}100%{opacity:1;transform:none}}
+.rv{opacity:0;transform:translateY(36px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
+.rv.vis{opacity:1;transform:none}
+.rv-left{opacity:0;transform:translateX(-50px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.rv-left.vis{opacity:1;transform:none}
+.rv-right{opacity:0;transform:translateX(50px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.rv-right.vis{opacity:1;transform:none}
+.rv-scale{opacity:0;transform:scale(.85);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.rv-scale.vis{opacity:1;transform:none}
+.rv-rotate{opacity:0;transform:translateY(30px) rotate(-2deg);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.rv-rotate.vis{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.4s}.d6{transition-delay:.48s}.d7{transition-delay:.56s}
 
-/* Logo */
-.logo{width:100px;margin:0 auto 28px;animation:float 6s ease-in-out infinite}
-.logo img{width:100%;height:auto;filter:drop-shadow(0 0 30px rgba(56,189,248,.12))}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes float2{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-6px) rotate(1deg)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes glow-pulse{0%,100%{box-shadow:0 0 24px rgba(56,189,248,.15)}50%{box-shadow:0 0 48px rgba(56,189,248,.3)}}
+@keyframes glow-pulse-or{0%,100%{box-shadow:0 0 24px rgba(251,146,60,.15)}50%{box-shadow:0 0 48px rgba(251,146,60,.3)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes spin-slow{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes border-dance{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes gradient-text{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes tilt-in{0%{transform:perspective(800px) rotateY(8deg) scale(.95);opacity:0}100%{transform:perspective(800px) rotateY(0) scale(1);opacity:1}}
+@keyframes slide-up-bounce{0%{transform:translateY(60px);opacity:0}60%{transform:translateY(-8px);opacity:1}100%{transform:translateY(0);opacity:1}}
+@keyframes orbit{0%{transform:rotate(0deg) translateX(300px) rotate(0deg)}100%{transform:rotate(360deg) translateX(300px) rotate(-360deg)}}
+@keyframes dash{0%{stroke-dashoffset:1000}100%{stroke-dashoffset:0}}
 
-/* Gear animation */
-.gear-wrap{position:relative;width:72px;height:72px;margin:0 auto 32px}
-.gear{position:absolute;inset:0}
-.gear svg{width:72px;height:72px;animation:spin 8s linear infinite;filter:drop-shadow(0 0 12px var(--cyan-glow))}
-.gear-inner{position:absolute;inset:18px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center}
-.gear-inner svg{width:24px;height:24px;color:var(--orange);animation:pulse-icon 2s ease-in-out infinite}
-@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-@keyframes pulse-icon{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.9)}}
+/* ── Hero orbs ── */
+.hero-orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(80px);z-index:0}
+.hero-orb-1{width:500px;height:500px;background:rgba(56,189,248,.06);top:-100px;left:-150px;animation:float 8s ease-in-out infinite}
+.hero-orb-2{width:400px;height:400px;background:rgba(251,146,60,.05);bottom:-50px;right:-100px;animation:float 10s ease-in-out infinite 1s}
+.hero-orb-3{width:250px;height:250px;background:rgba(167,139,250,.04);top:30%;right:10%;animation:float2 12s ease-in-out infinite 2s}
 
-h1{font-size:1.8rem;font-weight:800;letter-spacing:-.03em;margin-bottom:12px;line-height:1.2}
-h1 .cy{color:var(--cyan)}
-h1 .or{color:var(--orange)}
-.sub{font-size:1.02rem;color:var(--t2);line-height:1.7;margin-bottom:36px}
+/* ── Animated gradient on hero text ── */
+.hero h1 .cy{background:linear-gradient(90deg,var(--cyan),#7dd3fc,var(--cyan));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradient-text 4s ease-in-out infinite}
+.hero h1 .or{background:linear-gradient(90deg,var(--orange),#fbbf24,var(--orange));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradient-text 4s ease-in-out infinite 1s}
 
-/* Progress bar */
-.progress-wrap{width:100%;height:4px;background:var(--bg4);border-radius:4px;overflow:hidden;margin-bottom:36px;position:relative}
-.progress-bar{height:100%;width:30%;border-radius:4px;background:linear-gradient(90deg,var(--cyan),var(--orange));animation:progress-move 2.5s ease-in-out infinite}
-@keyframes progress-move{0%{width:5%;margin-left:0}50%{width:45%;margin-left:30%}100%{width:5%;margin-left:95%}}
+/* ── Button glow pulse ── */
+.btn-p{animation:glow-pulse 3s ease-in-out infinite}
+.btn-p:hover{animation:none}
 
-/* Contact row */
-.contact-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
-.contact-link{display:inline-flex;align-items:center;gap:8px;background:var(--bg4);border:1px solid var(--border);border-radius:100px;padding:10px 22px;font-size:.84rem;font-weight:500;color:var(--t2);text-decoration:none;transition:border-color .3s,transform .2s,box-shadow .3s}
-.contact-link:hover{border-color:var(--cyan);transform:translateY(-2px);box-shadow:0 8px 24px rgba(56,189,248,.1);color:var(--t1)}
-.contact-link .ic{font-size:1rem}
+/* ── Trust chip hover ── */
+.trust-chip{transition:transform .25s,border-color .3s,background .3s}
+.trust-chip:hover{transform:translateY(-3px) scale(1.03);border-color:var(--border2);background:var(--bg4)}
+.trust-chip .dot{animation:pulse 2.5s ease-in-out infinite}
+.trust-chip:nth-child(2) .dot{animation-delay:.3s}
+.trust-chip:nth-child(3) .dot{animation-delay:.6s}
+.trust-chip:nth-child(4) .dot{animation-delay:.9s}
+.trust-chip:nth-child(5) .dot{animation-delay:1.2s}
+.trust-chip:nth-child(6) .dot{animation-delay:1.5s}
+.trust-chip:nth-child(7) .dot{animation-delay:1.8s}
+.trust-chip:nth-child(8) .dot{animation-delay:2.1s}
 
-/* Status badge */
-.status{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);background:var(--or-g2);border:1px solid rgba(251,146,60,.15);padding:6px 18px;border-radius:100px}
-.status .dot{width:7px;height:7px;border-radius:50%;background:var(--orange);animation:blink 1.5s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+/* ── Animated divider ── */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--cyan),var(--orange),var(--purple),transparent);background-size:300% 100%;animation:shimmer 6s ease-in-out infinite;margin:0 auto;max-width:900px}
 
-/* Footer */
-.foot{position:fixed;bottom:24px;left:0;right:0;text-align:center;z-index:1}
-.foot p{font-size:.75rem;color:var(--t4)}
-.foot a{color:var(--cyan);text-decoration:none}
+/* ── Number cards counter ── */
+.num-card{transition:border-color .3s,transform .3s,box-shadow .3s}
+.num-card:hover{border-color:var(--border3);transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.num-card .big{transition:transform .3s}
+.num-card:hover .big{transform:scale(1.1)}
 
-/* Particles */
-.particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.particle{position:absolute;width:2px;height:2px;background:var(--cyan);border-radius:50%;opacity:0;animation:rise linear infinite}
-@keyframes rise{0%{opacity:0;transform:translateY(100vh) scale(0)}10%{opacity:.6}90%{opacity:.6}100%{opacity:0;transform:translateY(-10vh) scale(1)}}
+/* ── Screenshot tilt on hover ── */
+.cal-screenshot{transition:transform .6s cubic-bezier(.22,1,.36,1),box-shadow .6s}
+.cal-screenshot:hover{transform:perspective(1200px) rotateY(-3deg) rotateX(1deg) scale(1.02);box-shadow:0 32px 100px rgba(0,0,0,.6),0 0 80px rgba(56,189,248,.08)}
 
-@media(max-width:600px){
-  .card{margin:20px;padding:40px 28px}
-  h1{font-size:1.4rem}
-  .contact-row{flex-direction:column;align-items:center}
-}
+/* ── Feature card animated border sweep ── */
+.fcard{position:relative}
+.fcard::before{content:'';position:absolute;inset:-1px;border-radius:var(--r);background:conic-gradient(from 0deg,transparent,transparent 70%,var(--cyan) 80%,transparent 90%);opacity:0;transition:opacity .5s;z-index:-1;animation:spin-slow 4s linear infinite paused}
+.fcard:hover::before{opacity:0;animation-play-state:paused}
+
+/* ── Detail icon hover ── */
+.detail-icon{transition:transform .3s,box-shadow .3s}
+.detail-item:hover .detail-icon{transform:scale(1.15) rotate(-5deg);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+
+/* ── Phone mockup float ── */
+.phone-frame{animation:float2 5s ease-in-out infinite;transition:transform .4s}
+.phone-frame:hover{animation-play-state:paused;transform:scale(1.03)}
+
+/* ── Card inner content animations ── */
+.ph-card.green{animation:glow-pulse 4s ease-in-out infinite}
+.ph-card.orange{animation:glow-pulse-or 4s ease-in-out infinite 2s}
+
+/* ── Step number hover ── */
+.step-n{transition:transform .3s,box-shadow .3s}
+.step:hover .step-n{transform:scale(1.15) rotate(-5deg)}
+
+/* ── Terminal scan line ── */
+.term::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent);opacity:.2;animation:scan 3s linear infinite}
+@keyframes scan{0%{top:0}100%{top:100%}}
+
+/* ── Direct link hover glow ── */
+.dl{transition:border-color .3s,transform .2s,box-shadow .3s}
+.dl:hover{border-color:var(--cyan);transform:translateX(6px);box-shadow:0 8px 30px rgba(56,189,248,.1)}
+
+/* ── Submit button shimmer ── */
+.btn-submit{position:relative;overflow:hidden}
+.btn-submit::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);animation:shimmer-btn 3s ease-in-out infinite}
+@keyframes shimmer-btn{0%{left:-100%}100%{left:200%}}
+
+/* ── Tag dot pulse ── */
+.tag::before{animation:pulse 2s ease-in-out infinite}
+
+/* ── Nav logo hover ── */
+.nav-logo img{transition:transform .3s}
+.nav-logo:hover img{transform:rotate(-8deg) scale(1.1)}
+
+/* ── Parallax sections ── */
+.parallax-bg{transition:transform .1s linear}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,12,18,.7);backdrop-filter:blur(24px) saturate(1.5);border-bottom:1px solid var(--border);transition:background .3s}
+.nav-in{display:flex;align-items:center;justify-content:space-between;max-width:1220px;margin:0 auto;padding:14px 28px}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-logo img{height:38px}
+.nav-logo-t{font-weight:800;font-size:1.15rem;color:var(--t1);letter-spacing:-.02em}
+.nav-logo-t span{color:var(--orange)}
+.nav-links{display:flex;align-items:center;gap:36px}
+.nav-links a{font-size:.87rem;font-weight:500;color:var(--t2);text-decoration:none;transition:color .25s}
+.nav-links a:hover{color:var(--cyan)}
+.nav-cta{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#000!important;font-weight:700!important;padding:10px 26px;border-radius:100px;font-size:.84rem!important;box-shadow:0 0 24px rgba(56,189,248,.2);transition:transform .2s,box-shadow .3s}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 4px 32px var(--cyan-glow)}
+.mob-tog{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.mob-tog span{display:block;width:22px;height:2px;background:var(--t2);margin:5px 0;border-radius:2px;transition:.3s}
+
+/* HERO */
+.hero{padding:170px 0 100px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:40px;left:50%;transform:translateX(-50%);width:1000px;height:1000px;background:radial-gradient(circle,rgba(56,189,248,.05) 0%,transparent 65%);pointer-events:none}
+.hero-logo{width:260px;margin:0 auto 36px;filter:drop-shadow(0 0 50px rgba(56,189,248,.12));animation:float 6s ease-in-out infinite}
+.hero h1{font-size:clamp(2.8rem,6.5vw,5rem);font-weight:900;line-height:1.04;letter-spacing:-.04em;max-width:1000px;margin:0 auto 28px}
+.hero h1 .cy{color:var(--cyan)}.hero h1 .or{color:var(--orange)}
+.hero-p{font-size:1.25rem;color:var(--t2);max-width:680px;margin:0 auto 48px;line-height:1.75;font-weight:400}
+.hero-p strong{color:var(--t1);font-weight:600}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn-p{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#000;font-weight:700;font-size:1.05rem;padding:18px 40px;border-radius:100px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 4px 36px rgba(56,189,248,.25);transition:transform .2s,box-shadow .3s}
+.btn-p:hover{transform:translateY(-3px);box-shadow:0 8px 48px var(--cyan-glow)}
+.btn-s{display:inline-flex;align-items:center;gap:10px;background:var(--bg3);border:1px solid var(--border2);color:var(--t1);font-weight:500;font-size:1.05rem;padding:18px 36px;border-radius:100px;cursor:pointer;text-decoration:none;transition:background .25s,border-color .25s}
+.btn-s:hover{background:var(--bg4);border-color:var(--cyan)}
+
+/* TRUST */
+.trust{padding:20px 0 80px}
+.trust-row{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+.trust-chip{display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:100px;padding:10px 22px;font-size:.82rem;font-weight:500;color:var(--t2);white-space:nowrap}
+.trust-chip .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-cy{background:var(--cyan);box-shadow:0 0 8px var(--cyan-glow)}
+.dot-or{background:var(--orange);box-shadow:0 0 8px var(--or-glow)}
+.dot-gr{background:var(--green);box-shadow:0 0 8px rgba(52,211,153,.3)}
+.dot-pu{background:var(--purple);box-shadow:0 0 8px rgba(167,139,250,.3)}
+
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:0 auto;max-width:900px}
+
+/* SECTIONS */
+.sec{padding:100px 0}
+.sec-alt{background:var(--bg2)}
+.sec-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+
+/* NUMBERS */
+.nums{padding:80px 0}
+.nums-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:24px}
+.num-card{text-align:center;padding:32px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);transition:border-color .3s,transform .3s}
+.num-card:hover{border-color:var(--border2);transform:translateY(-3px)}
+.num-card .big{font-size:2.6rem;font-weight:900;letter-spacing:-.03em;line-height:1;margin-bottom:6px;background:linear-gradient(135deg,var(--cyan),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.num-card .lbl{font-size:.78rem;color:var(--t3);font-weight:500}
+
+/* CALENDAR MOCK */
+.cal-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.cal-screenshot{border-radius:var(--r);overflow:hidden;border:1px solid var(--border2);box-shadow:0 24px 80px rgba(0,0,0,.5),0 0 60px rgba(56,189,248,.06);position:relative}
+.cal-screenshot::after{content:'';position:absolute;inset:0;border-radius:var(--r);pointer-events:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
+.cal-screenshot img{width:100%;height:auto;display:block;border-radius:var(--r)}
+
+/* DETAIL LISTS */
+.details-list{display:flex;flex-direction:column;gap:18px;margin-top:28px}
+.detail-item{display:flex;gap:14px;align-items:flex-start}
+.detail-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.95rem}
+.detail-item h4{font-size:.93rem;font-weight:600;margin-bottom:3px}
+.detail-item p{font-size:.84rem;color:var(--t2);line-height:1.6}
+
+/* FEATURE CARDS */
+.fcard{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:36px 32px;position:relative;overflow:hidden;transition:border-color .35s,transform .3s,box-shadow .35s}
+.fcard::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:opacity .4s}
+.fcard:hover{border-color:var(--border3);transform:translateY(-4px);box-shadow:0 24px 64px rgba(0,0,0,.35)}
+.fcard:hover::after{opacity:1}
+.fcard-icon{width:52px;height:52px;border-radius:13px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:1.4rem}
+.fcard h3{font-size:1.2rem;font-weight:700;margin-bottom:10px}
+.fcard p{color:var(--t2);font-size:.9rem;line-height:1.7}
+.fc-cy::after{background:linear-gradient(90deg,transparent,var(--cyan),transparent)}.fc-cy .fcard-icon{background:var(--cyan-g2);color:var(--cyan)}.fc-cy:hover{border-color:rgba(56,189,248,.2)}
+.fc-or::after{background:linear-gradient(90deg,transparent,var(--orange),transparent)}.fc-or .fcard-icon{background:var(--or-g2);color:var(--orange)}.fc-or:hover{border-color:rgba(251,146,60,.2)}
+.fc-gr::after{background:linear-gradient(90deg,transparent,var(--green),transparent)}.fc-gr .fcard-icon{background:var(--gr-g2);color:var(--green)}.fc-gr:hover{border-color:rgba(52,211,153,.2)}
+.fc-pu::after{background:linear-gradient(90deg,transparent,var(--purple),transparent)}.fc-pu .fcard-icon{background:var(--pu-g2);color:var(--purple)}.fc-pu:hover{border-color:rgba(167,139,250,.2)}
+.fc-re::after{background:linear-gradient(90deg,transparent,var(--red),transparent)}.fc-re .fcard-icon{background:var(--re-g);color:var(--red)}.fc-re:hover{border-color:rgba(248,113,113,.2)}
+
+.arrow-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.arrow-list li{display:flex;align-items:flex-start;gap:8px;font-size:.84rem;color:var(--t2);line-height:1.55}
+.arrow-list li::before{content:'→';font-weight:700;flex-shrink:0;margin-top:0}
+.fc-cy .arrow-list li::before{color:var(--cyan)}.fc-or .arrow-list li::before{color:var(--orange)}.fc-gr .arrow-list li::before{color:var(--green)}.fc-pu .arrow-list li::before{color:var(--purple)}.fc-re .arrow-list li::before{color:var(--red)}
+
+/* PHONE MOCKUP */
+.phone-frame{width:280px;margin:0 auto;background:var(--bg3);border:2px solid var(--border2);border-radius:36px;padding:12px;position:relative}
+.phone-notch{width:100px;height:6px;background:var(--bg);border-radius:6px;margin:0 auto 12px}
+.phone-screen{background:var(--bg);border-radius:24px;padding:20px 16px;min-height:420px}
+.ph-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.ph-header h5{font-size:.85rem;font-weight:700}
+.ph-tabs{display:flex;gap:4px;margin-bottom:16px}
+.ph-tab{flex:1;text-align:center;padding:7px;border-radius:8px;font-size:.65rem;font-weight:600;background:var(--bg3);color:var(--t3)}
+.ph-tab.active{background:var(--cyan-g2);color:var(--cyan)}
+.ph-card{border-radius:12px;padding:14px;margin-bottom:10px}
+.ph-card.green{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2)}
+.ph-card.orange{background:rgba(251,146,60,.08);border:1px solid rgba(251,146,60,.2)}
+.ph-badge{display:inline-flex;align-items:center;gap:5px;font-size:.6rem;font-weight:700;padding:3px 10px;border-radius:100px;margin-bottom:10px;letter-spacing:.03em}
+.ph-badge.green{background:rgba(52,211,153,.15);color:var(--green)}
+.ph-badge.orange{background:rgba(251,146,60,.15);color:var(--orange)}
+.pulse-dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:pulse 2s ease-in-out infinite}
+.ph-timeline{padding-left:14px;border-left:2px solid var(--border2);display:flex;flex-direction:column;gap:10px}
+.ph-stop{position:relative;font-size:.72rem;color:var(--t2);line-height:1.4}
+.ph-stop::before{content:'';position:absolute;left:-19px;top:4px;width:10px;height:10px;border-radius:50%;border:2px solid var(--green);background:var(--bg)}
+.ph-stop .time{color:var(--cyan);font-family:var(--mono);font-weight:600;font-size:.65rem}
+.ph-stop strong{color:var(--t1)}
+.ph-info{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.ph-chip{font-size:.6rem;font-weight:600;padding:3px 8px;border-radius:6px;background:var(--bg4);color:var(--t3)}
+
+/* TERMINAL */
+.term{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:28px 32px;font-family:var(--mono);font-size:.78rem;line-height:2.1;position:relative;overflow:hidden}
+.term::before{content:'● ● ●';position:absolute;top:12px;left:16px;font-size:.55rem;letter-spacing:6px;color:var(--t4)}
+.term-body{margin-top:20px}
+.term .ln{display:flex;gap:10px}
+.term .k{color:var(--t4);min-width:180px;flex-shrink:0}
+.term .v{color:var(--cyan)}.term .v-or{color:var(--orange)}.term .v-gr{color:var(--green)}.term .v-pu{color:var(--purple)}
+.status-d{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:6px;animation:pulse 2s ease-in-out infinite}
+
+/* STEPS */
+.steps-row{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;position:relative}
+.steps-row::before{content:'';position:absolute;top:48px;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent)}
+.step{text-align:center;position:relative;z-index:1}
+.step-n{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.4rem;margin:0 auto 24px;color:var(--bg)}
+.step:nth-child(1) .step-n{background:var(--cyan);box-shadow:0 0 32px var(--cyan-glow)}
+.step:nth-child(2) .step-n{background:var(--orange);box-shadow:0 0 32px var(--or-glow)}
+.step:nth-child(3) .step-n{background:var(--green);box-shadow:0 0 32px rgba(52,211,153,.3)}
+.step h4{font-weight:700;font-size:1.1rem;margin-bottom:8px}
+.step p{font-size:.88rem;color:var(--t2);max-width:300px;margin:0 auto;line-height:1.6}
+
+/* CONTACT */
+.contact{padding:100px 0 120px}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.contact-form{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:44px}
+.fr{margin-bottom:20px}
+.fr label{display:block;font-size:.8rem;font-weight:500;color:var(--t2);margin-bottom:8px;letter-spacing:.02em}
+.fr input,.fr textarea{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rs);padding:14px 18px;font-size:.95rem;color:var(--t1);font-family:var(--font);transition:border-color .3s,box-shadow .3s;outline:none}
+.fr input:focus,.fr textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px var(--cyan-g2)}
+.fr input::placeholder,.fr textarea::placeholder{color:var(--t4)}
+.fr textarea{resize:vertical;min-height:130px}
+.fr-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.btn-submit{width:100%;margin-top:8px;background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#000;font-weight:700;font-size:1rem;padding:17px;border-radius:var(--rs);border:none;cursor:pointer;box-shadow:0 4px 24px rgba(56,189,248,.2);font-family:var(--font);transition:transform .2s,box-shadow .3s}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 36px var(--cyan-glow)}
+.direct-links{display:flex;flex-direction:column;gap:14px;margin-bottom:36px}
+.dl{display:flex;align-items:center;gap:14px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);padding:16px 20px;text-decoration:none;color:var(--t1);transition:border-color .3s,transform .2s}
+.dl:hover{border-color:var(--cyan);transform:translateX(4px)}
+.dl-icon{font-size:1.3rem;flex-shrink:0}
+.dl strong{display:block;font-size:.93rem;font-weight:600}
+.dl small{font-size:.76rem;color:var(--t4)}
+.benefits{display:flex;flex-direction:column;gap:20px;margin-top:32px}
+.ben{display:flex;gap:14px;align-items:flex-start}
+.ben-ic{width:36px;height:36px;border-radius:10px;background:var(--or-g2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem}
+.ben h4{font-size:.9rem;font-weight:600;margin-bottom:3px}
+.ben p{font-size:.82rem;color:var(--t2);line-height:1.6}
+
+footer{border-top:1px solid var(--border);padding:40px 0;text-align:center}
+footer p{font-size:.8rem;color:var(--t4)}
+footer a{color:var(--cyan);text-decoration:none}
+footer strong{color:var(--t2)}
+
+@media(max-width:1024px){.grid4{grid-template-columns:repeat(2,1fr)}.nums-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){.grid2,.grid3,.sec-grid,.cal-grid,.contact-wrap{grid-template-columns:1fr}.steps-row{grid-template-columns:1fr;gap:40px}.steps-row::before{display:none}.nums-grid{grid-template-columns:repeat(2,1fr)}.fr-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.hero{padding:140px 0 80px}.hero h1{font-size:2.3rem}.nav-links{display:none}.mob-tog{display:block}.grid4{grid-template-columns:1fr}.nums-grid{grid-template-columns:1fr}.trust-row{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding-bottom:8px;-webkit-overflow-scrolling:touch}}
+.nav-links.open{display:flex!important;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(8,12,18,.97);backdrop-filter:blur(20px);padding:24px;gap:20px;border-bottom:1px solid var(--border)}
 </style>
 </head>
 <body>
-<div class="hex"></div>
-<div class="orb orb-1"></div>
-<div class="orb orb-2"></div>
-<div class="orb orb-3"></div>
+<div class="hex-bg"></div>
 
-<!-- Particles -->
-<div class="particles" id="particles"></div>
-
-<div class="card">
-  <div class="logo"><img src="logo.png" alt="CeolAgenda"></div>
-
-  <div class="gear-wrap">
-    <div class="gear">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="3"/>
-        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-      </svg>
+<!-- NAV -->
+<nav>
+  <div class="nav-in">
+    <a href="#" class="nav-logo"><img src="logo.png" alt="CeolAgenda"><div class="nav-logo-t">Ce<span>o</span>lAgenda</div></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#calendario">Calendario</a>
+      <a href="#gestione">Gestione</a>
+      <a href="#autisti">Portale Autista</a>
+      <a href="#deploy">Deploy</a>
+      <a href="#sicurezza">Sicurezza</a>
+      <a href="chi-sono.html">Chi Sono</a>
+      <a href="#contatti" class="nav-cta">Richiedi Demo</a>
     </div>
-    <div class="gear-inner">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10" stroke-width="2"/></svg>
+    <button class="mob-tog" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+  <div class="wrap">
+    <img src="logo.png" alt="CeolAgenda" class="hero-logo rv">
+    <h1 class="rv d1">Il <span class="cy">cervello digitale</span> della tua flotta <span class="or">viaggia con te</span></h1>
+    <p class="hero-p rv d2">Agenda robusta e intelligente con controllo conflitti, portale autisti mobile-first, gestione flotta completa e contabilità integrata — in un <strong>unico ecosistema</strong> che gira sul tuo NAS o in cloud. <strong>Self-hosted per il massimo controllo, cloud per la massima semplicità.</strong></p>
+    <div class="hero-btns rv d3">
+      <a href="#contatti" class="btn-p">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Richiedi Demo Gratuita
+      </a>
+      <a href="#calendario" class="btn-s">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        Scopri Tutto
+      </a>
     </div>
   </div>
+</section>
 
-  <h1>Sito in <span class="or">manutenzione</span></h1>
-  <p class="sub">Stiamo lavorando per migliorare CeolAgenda. Torneremo online a breve con novità e miglioramenti. Nel frattempo puoi contattarmi direttamente.</p>
-
-  <div class="progress-wrap"><div class="progress-bar"></div></div>
-
-  <div class="contact-row">
-    <a href="mailto:ceolandrea006@gmail.com" class="contact-link"><span class="ic">✉️</span>ceolandrea006@gmail.com</a>
-    <a href="tel:+393274997730" class="contact-link"><span class="ic">📞</span>+39 327 499 7730</a>
+<!-- TRUST CHIPS -->
+<div class="trust">
+  <div class="wrap">
+    <div class="trust-row rv d4">
+      <div class="trust-chip"><span class="dot dot-cy"></span>3 Viste Calendario</div>
+      <div class="trust-chip"><span class="dot dot-or"></span>Conflitti Automatici</div>
+      <div class="trust-chip"><span class="dot dot-gr"></span>Portale Autista Mobile</div>
+      <div class="trust-chip"><span class="dot dot-pu"></span>Google Maps Integrato</div>
+      <div class="trust-chip"><span class="dot dot-cy"></span>~140 MB RAM</div>
+      <div class="trust-chip"><span class="dot dot-or"></span>PHP 8.2 + MariaDB 11</div>
+      <div class="trust-chip"><span class="dot dot-gr"></span>Docker Ready</div>
+      <div class="trust-chip"><span class="dot dot-pu"></span>Self-hosted o Cloud</div>
+      <div class="trust-chip"><span class="dot dot-cy"></span>Disaster Recovery AI</div>
+    </div>
   </div>
-
-  <div class="status"><span class="dot"></span>Manutenzione in corso</div>
 </div>
 
-<div class="foot">
-  <p>© 2026 CeolAgenda Autotrasporti — <strong>Andrea Ceol</strong></p>
-</div>
+<div class="divider"></div>
+
+<!-- NUMERI -->
+<section class="nums">
+  <div class="wrap">
+    <div class="nums-grid">
+      <div class="num-card rv"><div class="big" data-count="3">0</div><div class="lbl">Viste Calendario</div></div>
+      <div class="num-card rv d1"><div class="big" data-count="3">0</div><div class="lbl">Tipi Evento</div></div>
+      <div class="num-card rv d2"><div class="big" data-count="5" data-suffix="+">0</div><div class="lbl">Costi Extra Tracciabili</div></div>
+      <div class="num-card rv d3"><div class="big" data-count="140">0</div><div class="lbl">MB RAM Totali</div></div>
+      <div class="num-card rv d4"><div class="big" data-count="2">0</div><div class="lbl">Modalità Deploy</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDARIO -->
+<section class="sec sec-alt" id="calendario">
+  <div class="wrap">
+    <div class="cal-grid">
+      <div class="cal-screenshot rv-rotate">
+        <img src="screenshot-calendario.png" alt="CeolAgenda — Vista Calendario Mese con viaggi, noleggi e appuntamenti" loading="lazy">
+      </div>
+
+      <div class="rv d1">
+        <div class="tag tag-cyan">Calendario Intelligente</div>
+        <h2 class="h2">Tre viste. Zero conflitti.<br>Totale controllo.</h2>
+        <p class="sub">Il cuore di CeolAgenda è un calendario multi-vista che ti mostra esattamente cosa succede nella tua flotta — oggi, questa settimana, tutto il mese.</p>
+        <div class="details-list">
+          <div class="detail-item"><div class="detail-icon" style="background:var(--cyan-g2);color:var(--cyan)">📅</div><div><h4>Vista Mese — stile Google Calendar</h4><p>Barre multi-giorno con algoritmo greedy first-fit per evitare sovrapposizioni verticali. Chip colorati per veicolo, icone tipo evento (🚌 🔑 🔔). Click su cella vuota → form creazione con data preimpostata. Tooltip dettagliato al hover. Modalità fullscreen.</p></div></div>
+          <div class="detail-item"><div class="detail-icon" style="background:var(--or-g2);color:var(--orange)">📋</div><div><h4>Vista Settimana — dettaglio completo</h4><p>7 colonne con badge stato (In viaggio/Rientro/Partenza). I viaggi multi-giorno in transito appaiono in cima. Percorso, veicolo con pallino colore, autisti e cliente visibili senza click.</p></div></div>
+          <div class="detail-item"><div class="detail-icon" style="background:var(--gr-g2);color:var(--green)">🔍</div><div><h4>Vista Giorno — 4 categorie intelligenti</h4><p>Classificazione automatica: In viaggio, Giornaliero, Partenza, Rientro. Card espanse con ogni dettaglio, conteggio totale eventi e messaggio se vuoto.</p></div></div>
+          <div class="detail-item"><div class="detail-icon" style="background:var(--pu-g2);color:var(--purple)">⚡</div><div><h4>Switcher rapido Viaggio / Noleggio / Appuntamento</h4><p>Selettore a 3 pulsanti cambia tipo evento senza chiudere il modale. Navigazione avanti/indietro e pulsante "Oggi". Click sull'header giorno → salto alla vista giornaliera.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONFLITTI & VIAGGI -->
+<section class="sec" id="gestione">
+  <div class="wrap">
+    <div class="center" style="margin-bottom:64px">
+      <div class="tag tag-orange">Gestione Viaggi & Conflitti</div>
+      <h2 class="h2 rv">Ogni viaggio sotto controllo,<br>dal preventivo al pagamento</h2>
+      <p class="sub rv d1">Form completi, validazioni a prova di errore, rilevamento sovrapposizioni in tempo reale e calcolo automatico dei costi extra.</p>
+    </div>
+    <div class="grid2">
+      <div class="fcard fc-or rv">
+        <div class="fcard-icon">🚌</div>
+        <h3>Creazione Viaggio Completa</h3>
+        <p>Un unico form per ogni aspetto del servizio — dalla selezione cliente all'ultimo costo extra.</p>
+        <ul class="arrow-list">
+          <li>Ricerca cliente asincrona (debounce 300ms) con card selezione e creazione inline con controllo duplicati telefono</li>
+          <li>Date partenza/rientro con validazione automatica e orari preimpostabili</li>
+          <li>Autocomplete indirizzi con Google Places API (New) — salva Place ID, lat/lng e indirizzo formattato</li>
+          <li>Tappe intermedie illimitate con nome personalizzato, numerazione dinamica e pulsante rimozione</li>
+          <li>Selezione veicolo con pallino colore e badge "OCCUPATO" in tempo reale — veicoli fuori servizio filtrati</li>
+          <li>Multi-selezione autisti con chip rimovibili — autisti sospesi filtrati, occupati evidenziati</li>
+          <li>Servizi extra: Pasto, Parcheggio, ZTL, Hotel, Varie — ciascuno con importo, sommati al totale</li>
+          <li>Codice CIG/Ordine, metodo pagamento (Bonifico/Contanti/POS), data scadenza pagamento</li>
+        </ul>
+      </div>
+      <div class="fcard fc-re rv d1">
+        <div class="fcard-icon">🛡️</div>
+        <h3>Rilevamento Conflitti Automatico</h3>
+        <p>Mai più un veicolo assegnato a due viaggi — il sistema lo impedisce prima che tu salvi.</p>
+        <ul class="arrow-list">
+          <li>Verifica sovrapposizione veicolo cross-entity: viaggi vs viaggi, viaggi vs noleggi</li>
+          <li>Verifica individuale per ogni autista con nome completo nel messaggio di errore</li>
+          <li>Esclusione automatica dell'evento corrente in modifica (AND id ≠ ?)</li>
+          <li>Errore HTTP 409: "Marco Bianchi è già assegnato a un altro viaggio nello stesso orario"</li>
+          <li>Badge rosso "OCCUPATO" nei dropdown, risorse libere ordinate per prime</li>
+          <li>Chiamata API in tempo reale basata sulle date selezionate nel form</li>
+        </ul>
+      </div>
+      <div class="fcard fc-cy rv d2">
+        <div class="fcard-icon">📋</div>
+        <h3>Dettaglio Viaggio Interattivo</h3>
+        <p>Click su qualsiasi evento → modale completo con ogni informazione e azioni rapide.</p>
+        <ul class="arrow-list">
+          <li>Stripe verticale col colore del veicolo assegnato</li>
+          <li>Percorso Partenza → Tappe → Arrivo cliccabile su Google Maps per navigazione diretta</li>
+          <li>Modifica inline località: mini-editor con autocomplete senza riaprire il form intero</li>
+          <li>Sezione economica: prezzo base + lista servizi extra + riga TOTALE calcolata</li>
+          <li>3 flag toggle istantanei: Fatturato 🧾, Pagato ✅, Busta ✉️ — un click, API istantanea</li>
+          <li>Banner allerta rosso se veicolo fuori servizio o autista sospeso</li>
+          <li>Telefono e email cliente cliccabili (link tel: e mailto:)</li>
+        </ul>
+      </div>
+      <div class="fcard fc-pu rv d3">
+        <div class="fcard-icon">🔑</div>
+        <h3>Noleggi & Appuntamenti</h3>
+        <p>Due moduli integrati nello stesso ecosistema con le stesse protezioni anticonflitto.</p>
+        <ul class="arrow-list">
+          <li>Noleggi: data ritiro/riconsegna, luogo con autocomplete, numero contratto, prezzo</li>
+          <li>Conflitto cross-entity: un veicolo a noleggio non può essere in viaggio nello stesso periodo</li>
+          <li>Appuntamenti: titolo, descrizione, data, ora, durata — orario fine calcolato dal backend</li>
+          <li>Icone a calendario: 🔑 bordo dorato per noleggi, 🔔 giallo per appuntamenti</li>
+          <li>Flag fatturato/pagato/busta anche sui noleggi — stessa UX dei viaggi</li>
+          <li>Appuntamenti visibili solo a editor/admin, nascosti ai viewer per privacy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTALE AUTISTA -->
+<section class="sec sec-alt" id="autisti">
+  <div class="wrap">
+    <div class="sec-grid">
+      <div class="rv">
+        <div class="tag tag-green">Portale Autista</div>
+        <h2 class="h2">Lo smartphone dell'autista<br>diventa il suo cruscotto</h2>
+        <p class="sub" style="margin-bottom:28px">Interfaccia mobile-first dedicata — l'autista vede solo i suoi viaggi, con navigazione Google Maps a portata di tap e countdown in tempo reale.</p>
+        <div class="details-list">
+          <div class="detail-item"><div class="detail-icon" style="background:var(--gr-g2);color:var(--green)">🟢</div><div><h4>Card "In corso" — verde, prominente</h4><p>Timeline verticale: Partenza → ogni Tappa → Arrivo. Ogni località link a Google Maps dalla posizione corrente. Info veicolo, cliente, colleghi e note. Card attive sempre sopra quelle in partenza.</p></div></div>
+          <div class="detail-item"><div class="detail-icon" style="background:var(--or-g2);color:var(--orange)">🟠</div><div><h4>Card "In partenza" — countdown arancione</h4><p>"In partenza — tra X minuti" con countdown aggiornato ogni 60 secondi via setInterval. Stessa timeline e link navigazione della card attiva.</p></div></div>
+          <div class="detail-item"><div class="detail-icon" style="background:var(--cyan-g2);color:var(--cyan)">📱</div><div><h4>3 viste calendario ottimizzate per mobile</h4><p>Vista Giorno con card viaggio, Settimana con 7 sezioni verticali, Mese con pallini colorati. Tap su un giorno → salto alla vista giornaliera.</p></div></div>
+          <div class="detail-item"><div class="detail-icon" style="background:var(--pu-g2);color:var(--purple)">🔒</div><div><h4>Privacy — dati sensibili rimossi lato server</h4><p>L'autista NON vede: prezzi, CIG, pagamenti, flag economici, azienda esterna. Filtrati dalla risposta API, non solo nascosti via CSS. Admin/Editor con flag autista vedono il portale da mobile.</p></div></div>
+        </div>
+      </div>
+      <div class="rv-scale d2" style="display:flex;justify-content:center">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="ph-header"><h5>I Miei Viaggi</h5><span style="font-size:.7rem;color:var(--t4)">Marco B.</span></div>
+            <div class="ph-tabs"><div class="ph-tab active">Giorno</div><div class="ph-tab">Settimana</div><div class="ph-tab">Mese</div></div>
+            <div class="ph-card green">
+              <div class="ph-badge green"><span class="pulse-dot"></span>In corso</div>
+              <div class="ph-timeline">
+                <div class="ph-stop"><span class="time">07:30</span><br><strong>Piazzale Roma, Venezia</strong></div>
+                <div class="ph-stop"><span class="time">09:15</span><br>Sosta pranzo — Autogrill</div>
+                <div class="ph-stop"><span class="time">12:00</span><br><strong>Fiera di Roma</strong></div>
+              </div>
+              <div class="ph-info"><span class="ph-chip">🚌 Corriera Blu</span><span class="ph-chip">Comune di Venezia</span></div>
+            </div>
+            <div class="ph-card orange">
+              <div class="ph-badge orange"><span class="pulse-dot"></span>Tra 45 min</div>
+              <div class="ph-timeline">
+                <div class="ph-stop"><span class="time">14:30</span><br><strong>Hotel Danieli, VE</strong></div>
+                <div class="ph-stop"><span class="time">16:00</span><br><strong>Aeroporto Marco Polo</strong></div>
+              </div>
+              <div class="ph-info"><span class="ph-chip">🚐 NCC Nero</span><span class="ph-chip">Agenzia Stella</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ECOSISTEMA FLOTTA -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center" style="margin-bottom:64px">
+      <div class="tag tag-purple">Ecosistema Flotta</div>
+      <h2 class="h2 rv">Veicoli, clienti, autisti, utenti.<br>Tutto connesso.</h2>
+      <p class="sub rv d1">Quattro anagrafiche integrate con protezioni antiduplicato, ruoli granulari e integrità referenziale.</p>
+    </div>
+    <div class="grid4">
+      <div class="fcard fc-cy rv"><div class="fcard-icon">🚌</div><h3>Veicoli</h3><p>Targa unica (auto-maiuscolo), soprannome, tipo (Pullman/Scuolabus/NCC/Altro).</p><ul class="arrow-list"><li>Selettore colore honeycomb 54 tonalità</li><li>Colore visibile come stripe a calendario</li><li>Flag "Fuori servizio" — nascosto dalle ricerche, grigio a calendario con icona avviso</li><li>Protezione eliminazione con conteggio viaggi</li></ul></div>
+      <div class="fcard fc-or rv d1"><div class="fcard-icon">👥</div><h3>Clienti</h3><p>Nome, ragione sociale, telefono (link cliccabile), email.</p><ul class="arrow-list"><li>Duplicato telefono bloccato server + client</li><li>Creazione inline dal form viaggio</li><li>Ricerca istantanea con filtro testuale</li><li>Eliminazione bloccata se ha viaggi (409)</li></ul></div>
+      <div class="fcard fc-gr rv d2"><div class="fcard-icon">🧑‍✈️</div><h3>Autisti</h3><p>Account viewer con portale mobile dedicato.</p><ul class="arrow-list"><li>Duplicato nome+cognome bloccato</li><li>Sospensione con disconnessione immediata</li><li>Storico viaggi preservato dopo sospensione</li><li>Grigio a calendario con icona avviso</li></ul></div>
+      <div class="fcard fc-pu rv d3"><div class="fcard-icon">👤</div><h3>Utenti & Ruoli</h3><p>Admin, Editor, Viewer — matrice permessi completa.</p><ul class="arrow-list"><li>Username auto-generato nome.cognome</li><li>bcrypt cost 12 + blocklist password comuni</li><li>2FA TOTP per admin/editor (Google Authenticator)</li><li>Cambio password forzato al primo accesso</li><li>User versioning → reload forzato su tutti i device</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- AMMINISTRAZIONE -->
+<section class="sec sec-alt">
+  <div class="wrap">
+    <div class="center" style="margin-bottom:64px">
+      <div class="tag tag-orange">Amministrazione Evoluta</div>
+      <h2 class="h2 rv">Pagamenti, export, notifiche.<br>Tutto a portata di click.</h2>
+      <p class="sub rv d1">Strumenti operativi che trasformano il caos amministrativo in un flusso ordinato.</p>
+    </div>
+    <div class="grid3">
+      <div class="fcard fc-or rv"><div class="fcard-icon">🔔</div><h3>Notifiche Scadenze</h3><p>Badge campanella con conteggio pagamenti scaduti. Pannello con: cliente, totale (prezzo + servizi), telefono/email cliccabili, CIG, percorso e <strong>giorni di ritardo in tempo reale</strong>. Include viaggi e noleggi.</p></div>
+      <div class="fcard fc-cy rv d1"><div class="fcard-icon">📊</div><h3>Export CSV Avanzato</h3><p>8 gruppi selezionabili: Generale, Date, Percorso, Cliente, Veicolo/Autisti, Economia, Note, Stato. Selezione/deselezione per gruppo. <strong>Rispetta filtri attivi</strong>. Separatore punto e virgola, BOM UTF-8 per Excel italiano.</p></div>
+      <div class="fcard fc-gr rv d2"><div class="fcard-icon">🔎</div><h3>Filtri Combinabili</h3><p>Ricerca testuale su tutto (cliente, indirizzo, veicolo, autisti, contratto). Filtro mese, range date, autista, veicolo. <strong>Pulsante reset filtri</strong>. Vista tabellare viaggi + noleggi unificata.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPLOY -->
+<section class="sec sec-alt" id="deploy">
+  <div class="wrap">
+    <div class="center" style="margin-bottom:64px">
+      <div class="tag tag-cyan">Modalità di Deploy</div>
+      <h2 class="h2 rv">Il tuo server o il nostro cloud.<br>Tu scegli, noi ci adattiamo.</h2>
+      <p class="sub rv d1">Non hai un NAS? Nessun problema. CeolAgenda gira anche su VPS e cloud provider — stessa app, stesse funzionalità, zero compromessi.</p>
+    </div>
+    <div class="grid2">
+      <div class="fcard fc-cy rv" style="position:relative;overflow:hidden">
+        <div style="position:absolute;top:16px;right:16px;font-size:.65rem;font-weight:700;padding:5px 14px;border-radius:100px;background:var(--cyan-g2);color:var(--cyan);border:1px solid rgba(56,189,248,.2);letter-spacing:.06em;text-transform:uppercase">Opzione A</div>
+        <div class="fcard-icon">🏠</div>
+        <h3>Self-Hosted — Sul Tuo Hardware</h3>
+        <p>La soluzione originale. CeolAgenda gira sul tuo NAS QNAP, Synology o qualsiasi macchina Linux con Docker.</p>
+        <ul class="arrow-list">
+          <li><strong>Massima privacy</strong> — i dati non escono mai dalla tua rete locale</li>
+          <li><strong>Zero costi ricorrenti</strong> — nessun abbonamento, nessun canone mensile</li>
+          <li><strong>Internet non richiesto</strong> — funziona anche offline sulla LAN</li>
+          <li><strong>~140 MB RAM</strong> — gira su hardware minimo, anche NAS entry-level</li>
+          <li><strong>Backup locale</strong> — cron + mysqldump con retention 14 giorni</li>
+          <li><strong>Ideale per</strong> — aziende con infrastruttura IT, NAS già in uso, requisiti privacy stringenti</li>
+        </ul>
+      </div>
+      <div class="fcard fc-or rv d1" style="position:relative;overflow:hidden">
+        <div style="position:absolute;top:16px;right:16px;font-size:.65rem;font-weight:700;padding:5px 14px;border-radius:100px;background:var(--or-g2);color:var(--orange);border:1px solid rgba(251,146,60,.2);letter-spacing:.06em;text-transform:uppercase">Opzione B</div>
+        <div class="fcard-icon">☁️</div>
+        <h3>Cloud — Senza Hardware</h3>
+        <p>Non hai un NAS o un server? Ti configuro CeolAgenda su un VPS cloud — pronta all'uso, accessibile da ovunque.</p>
+        <ul class="arrow-list">
+          <li><strong>Zero hardware richiesto</strong> — nessun NAS, nessun server fisico da gestire</li>
+          <li><strong>Accessibile ovunque</strong> — basta una connessione internet e un browser</li>
+          <li><strong>Setup guidato</strong> — ti configuro tutto io su VPS (Hetzner, OVH, DigitalOcean o altro)</li>
+          <li><strong>Stessa app identica</strong> — Docker Compose, stesse funzionalità, stessa sicurezza</li>
+          <li><strong>Backup remoto</strong> — snapshot automatici del provider + backup applicativo</li>
+          <li><strong>Ideale per</strong> — piccole flotte, chi non ha competenze IT, chi vuole partire subito</li>
+        </ul>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:48px" class="rv d2">
+      <p style="color:var(--t2);font-size:.95rem;max-width:700px;margin:0 auto 24px;line-height:1.7">In entrambi i casi l'applicazione è <strong style="color:var(--t1)">identica</strong> — stesso codice, stesse protezioni, stesso portale autista. La differenza è solo dove gira il container Docker.</p>
+      <a href="#contatti" class="btn-p" style="display:inline-flex">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Parliamone — Scegli la Soluzione Giusta
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SICUREZZA -->
+<section class="sec" id="sicurezza">
+  <div class="wrap">
+    <div class="sec-grid">
+      <div class="term rv-left">
+        <div class="term-body">
+          <div class="ln"><span class="k">Piattaforma</span><span class="v">Docker + Compose</span></div>
+          <div class="ln"><span class="k">Backend</span><span class="v-or">PHP 8.2 + Apache</span></div>
+          <div class="ln"><span class="k">Database</span><span class="v">MariaDB 11 LTS</span></div>
+          <div class="ln"><span class="k">Frontend</span><span class="v-or">Vanilla JS — 0 framework</span></div>
+          <div class="ln"><span class="k">RAM totale</span><span class="v-gr">~140 MB (app + db)</span></div>
+          <div class="ln"><span class="k">Deploy target</span><span class="v">NAS · VPS · Cloud · Linux</span></div>
+          <div class="ln"><span class="k">Internet</span><span class="v-gr">Opzionale (self-hosted) · richiesto (cloud)</span></div>
+          <div class="ln"><span class="k">CSRF</span><span class="v-gr">Token 64 char + hash_equals</span></div>
+          <div class="ln"><span class="k">Brute-force</span><span class="v-gr">5 tentativi → lockout 5 min</span></div>
+          <div class="ln"><span class="k">Rate Limit</span><span class="v-gr">60 write/min per sessione</span></div>
+          <div class="ln"><span class="k">Password Hash</span><span class="v">bcrypt cost 12</span></div>
+          <div class="ln"><span class="k">2FA (TOTP)</span><span class="v-gr">Google Authenticator · codici recovery</span></div>
+          <div class="ln"><span class="k">Timing-safe</span><span class="v-gr">password_verify su hash dummy</span></div>
+          <div class="ln"><span class="k">CSP</span><span class="v-pu">No unsafe-inline · frame-ancestors none</span></div>
+          <div class="ln"><span class="k">DB Port 3306</span><span class="v-gr">Non esposta — rete Docker</span></div>
+          <div class="ln"><span class="k">SQL Injection</span><span class="v-gr">100% prepared statements</span></div>
+          <div class="ln"><span class="k">Session</span><span class="v">HttpOnly · SameSite=Strict</span></div>
+          <div class="ln"><span class="k">Disaster Recovery</span><span class="v-pu">Claude AI · ricostruzione assistita</span></div>
+          <div class="ln"><span class="k">Status</span><span class="v-gr"><span class="status-d"></span>Operativo</span></div>
+        </div>
+      </div>
+      <div class="rv d1">
+        <div class="tag tag-green">Sicurezza & Infrastruttura</div>
+        <h2 class="h2">I tuoi dati.<br>Il tuo controllo.<br>Ovunque.</h2>
+        <p class="sub" style="margin-bottom:28px">Self-hosted su NAS o in cloud — la sicurezza non cambia. Autenticazione blindata, backup automatici e disaster recovery AI in entrambe le modalità.</p>
+        <div class="details-list">
+          <div class="detail-item"><div class="detail-icon" style="background:var(--gr-g2);color:var(--green)">🔐</div><div><h4>Autenticazione blindata + 2FA</h4><p>Cookie HttpOnly + SameSite=Strict, rigenerazione ID dopo login, timeout 30 min (24h con "Ricordami"), scadenza assoluta 15 giorni. Timing-safe su utente inesistente per prevenire username enumeration. Autenticazione a due fattori TOTP per admin e editor — compatibile Google Authenticator, Authy e qualsiasi app TOTP. 8 codici di recupero usa-e-getta. "Ricordami" salta il 2FA per 15 giorni sullo stesso browser. Dispositivi fidati invalidati al cambio password.</p></div></div>
+          <div class="detail-item"><div class="detail-icon" style="background:var(--cyan-g2);color:var(--cyan)">💾</div><div><h4>Backup automatico con rotazione</h4><p>Script cron — mysqldump compresso gzip, single-transaction, routine e trigger. Retention 14 giorni. Compatibilità Nextcloud/WebDAV. Credenziali in file temp chmod 600, cancellato dopo il dump.</p></div></div>
+          <div class="detail-item"><div class="detail-icon" style="background:var(--or-g2);color:var(--orange)">🔄</div><div><h4>Migrazioni zero-downtime</h4><p>ensureSchema() al boot: verifica colonne con SHOW COLUMNS, aggiunge mancanti con ALTER TABLE, crea tabelle nuove. Versione schema in sessione — nessun check ripetuto.</p></div></div>
+          <div class="detail-item"><div class="detail-icon" style="background:var(--pu-g2);color:var(--purple)">🧹</div><div><h4>Gestione errori blindata</h4><p>strip_tags + troncamento su ogni input. error_log per il dev, messaggio generico per l'utente. Shutdown handler per errori fatali. Eccezioni MySQL 1062 (duplicati) tradotte in messaggi utente.</p></div></div>
+          <div class="detail-item"><div class="detail-icon" style="background:var(--gr-g2);color:var(--green)">🔗</div><div><h4>Integrità referenziale completa</h4><p>Impossibile eliminare clienti/veicoli/autisti con viaggi associati (409 con conteggio). Eliminazione viaggio → CASCADE su trip_drivers, trip_services, trip_stops. Admin non può eliminare sé stesso né cambiare il proprio ruolo.</p></div></div>
+          <div class="detail-item"><div class="detail-icon" style="background:var(--pu-g2);color:var(--purple)">🤖</div><div><h4>Disaster Recovery con Claude AI</h4><p>L'intero progetto — codice sorgente, struttura database, configurazioni Docker e logiche di business — è archiviato nelle conversazioni di Claude AI. In caso di perdita totale (guasto NAS, ransomware, furto), lo sviluppatore può ricostruire l'intera applicazione in tempi rapidi con assistenza AI, partendo dalla knowledge base completa del progetto. Un secondo livello di resilienza oltre al backup locale.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COME FUNZIONA -->
+<section class="sec sec-alt">
+  <div class="wrap">
+    <div class="center" style="margin-bottom:64px">
+      <div class="tag tag-cyan">Come Funziona</div>
+      <h2 class="h2 rv">Operativo in tre passi</h2>
+      <p class="sub rv d1">Dal setup al primo viaggio pianificato — in meno di un'ora. Due percorsi, stesso risultato.</p>
+    </div>
+    <div class="steps-row">
+      <div class="step rv"><div class="step-n">1</div><h4>Scegli il Deploy</h4><p><strong style="color:var(--cyan)">Self-hosted:</strong> <code style="color:var(--cyan);font-family:var(--mono);font-size:.88em">docker compose up</code> sul tuo NAS.<br><strong style="color:var(--orange)">Cloud:</strong> ti configuro tutto io su un VPS — tu ricevi solo il link di accesso.</p></div>
+      <div class="step rv d1"><div class="step-n">2</div><h4>Configura la Flotta</h4><p>Carica veicoli con colori personalizzati, crea autisti con account viewer, importa clienti. Username generato, duplicati prevenuti.</p></div>
+      <div class="step rv d2"><div class="step-n">3</div><h4>Pianifica e Parti</h4><p>Crea viaggi dall'agenda, il sistema verifica conflitti. Gli autisti aprono il telefono e vedono card con countdown, timeline e Maps.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATTI -->
+<section class="contact" id="contatti">
+  <div class="wrap">
+    <div class="contact-wrap">
+      <div class="rv">
+        <div class="tag tag-orange">Contattami</div>
+        <h2 class="h2">Pronto a digitalizzare<br>la tua flotta?</h2>
+        <p class="sub" style="margin-bottom:32px">Sono Andrea Ceol, sviluppatore di CeolAgenda. Questo è il mio primo progetto — ci ho messo testa, cuore e notti insonni. Scrivimi direttamente per una demo o per qualsiasi domanda.</p>
+        <div class="direct-links rv d1">
+          <a href="mailto:ceolandrea006@gmail.com" class="dl"><span class="dl-icon">✉️</span><span><strong>ceolandrea006@gmail.com</strong><small>Rispondo entro 24 ore</small></span></a>
+          <a href="tel:+393274997730" class="dl"><span class="dl-icon">📞</span><span><strong>+39 327 499 7730</strong><small>Anche WhatsApp</small></span></a>
+        </div>
+        <div class="benefits">
+          <div class="ben"><div class="ben-ic">🎯</div><div><h4>Demo su misura</h4><p>Ti mostro le funzionalità più rilevanti per il tuo tipo di trasporto — NCC, bus, scuolabus.</p></div></div>
+          <div class="ben"><div class="ben-ic">⚡</div><div><h4>Installazione guidata</h4><p>Ti affianco nel setup su NAS o server dedicato con i tuoi dati reali — dal Docker al primo login.</p></div></div>
+          <div class="ben"><div class="ben-ic">🤝</div><div><h4>Supporto diretto</h4><p>Parli con chi ha scritto ogni riga di codice. Nessun call center, nessun ticket.</p></div></div>
+        </div>
+      </div>
+      <div class="contact-form rv d2">
+        <div class="fr-grid">
+          <div class="fr"><label for="nome">Il tuo nome</label><input type="text" id="nome" placeholder="Mario Rossi" required></div>
+          <div class="fr"><label for="azienda">Azienda (opzionale)</label><input type="text" id="azienda" placeholder="Trasporti Rossi Srl"></div>
+        </div>
+        <div class="fr"><label for="emailUser">La tua email</label><input type="email" id="emailUser" placeholder="info@tuaazienda.it" required></div>
+        <div class="fr"><label for="telefono">Telefono (opzionale)</label><input type="tel" id="telefono" placeholder="+39 333 123 4567"></div>
+        <div class="fr"><label for="messaggio">Messaggio</label><textarea id="messaggio" placeholder="Parlami della tua flotta: quanti veicoli, che tipo di servizio offri, quali problemi vuoi risolvere..." required></textarea></div>
+        <button class="btn-submit" type="button" onclick="inviaForm()">Invia Richiesta Demo →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <p>© 2026 CeolAgenda Autotrasporti — Progetto di <strong>Andrea Ceol</strong> · <a href="mailto:ceolandrea006@gmail.com">ceolandrea006@gmail.com</a> · <a href="tel:+393274997730">+39 327 499 7730</a></p>
+  </div>
+</footer>
 
 <script>
-// Floating particles
-const container=document.getElementById('particles');
-for(let i=0;i<30;i++){
-  const p=document.createElement('div');
-  p.className='particle';
-  p.style.left=Math.random()*100+'%';
-  p.style.animationDuration=(6+Math.random()*10)+'s';
-  p.style.animationDelay=Math.random()*10+'s';
-  p.style.width=p.style.height=(1+Math.random()*2)+'px';
-  if(Math.random()>.6) p.style.background='#fb923c';
-  if(Math.random()>.85) p.style.background='#a78bfa';
-  container.appendChild(p);
+/* ── Scroll Reveal (all types) ── */
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('vis')})},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rv,.rv-left,.rv-right,.rv-scale,.rv-rotate').forEach(el=>obs.observe(el));
+
+/* ── Nav scroll ── */
+window.addEventListener('scroll',()=>{
+  document.querySelector('nav').style.background=scrollY>60?'rgba(8,12,18,.93)':'rgba(8,12,18,.7)';
+});
+
+/* ── Animated counters ── */
+const counterObs=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(!entry.isIntersecting) return;
+    const el=entry.target;
+    if(el.dataset.counted) return;
+    el.dataset.counted='1';
+    const target=parseInt(el.dataset.count);
+    const suffix=el.dataset.suffix||'';
+    const duration=1400;
+    const start=performance.now();
+    const tick=now=>{
+      const p=Math.min((now-start)/duration,1);
+      const ease=1-Math.pow(1-p,3);
+      el.textContent=Math.round(target*ease)+suffix;
+      if(p<1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  });
+},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>counterObs.observe(el));
+
+/* ── Parallax on scroll ── */
+const parallaxEls=document.querySelectorAll('.hero-orb,.cal-screenshot,.phone-frame');
+let ticking=false;
+window.addEventListener('scroll',()=>{
+  if(!ticking){
+    requestAnimationFrame(()=>{
+      const sy=window.scrollY;
+      parallaxEls.forEach(el=>{
+        const speed=el.classList.contains('hero-orb')?0.15:0.03;
+        const rect=el.getBoundingClientRect();
+        if(rect.bottom>0&&rect.top<window.innerHeight){
+          el.style.transform=el.style.transform.replace(/translateY\([^)]*\)/,'')+` translateY(${sy*speed}px)`;
+        }
+      });
+      ticking=false;
+    });
+    ticking=true;
+  }
+});
+
+/* ── Mouse tilt on phone mockup ── */
+const phone=document.querySelector('.phone-frame');
+if(phone){
+  phone.parentElement.addEventListener('mousemove',e=>{
+    const rect=phone.getBoundingClientRect();
+    const x=(e.clientX-rect.left)/rect.width-.5;
+    const y=(e.clientY-rect.top)/rect.height-.5;
+    phone.style.transform=`perspective(800px) rotateY(${x*10}deg) rotateX(${-y*8}deg)`;
+    phone.style.animationPlayState='paused';
+  });
+  phone.parentElement.addEventListener('mouseleave',()=>{
+    phone.style.transform='';
+    phone.style.animationPlayState='running';
+  });
+}
+
+/* ── Magnetic buttons ── */
+document.querySelectorAll('.btn-p,.btn-s,.nav-cta').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const rect=btn.getBoundingClientRect();
+    const x=e.clientX-rect.left-rect.width/2;
+    const y=e.clientY-rect.top-rect.height/2;
+    btn.style.transform=`translate(${x*.15}px,${y*.15}px)`;
+  });
+  btn.addEventListener('mouseleave',()=>{
+    btn.style.transform='';
+    btn.style.transition='transform .4s cubic-bezier(.22,1,.36,1)';
+    setTimeout(()=>btn.style.transition='',400);
+  });
+  btn.addEventListener('mouseenter',()=>{btn.style.transition='none'});
+});
+
+/* ── Smooth anchor scroll ── */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const target=document.querySelector(a.getAttribute('href'));
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+    const nl=document.getElementById('navLinks');
+    if(nl.classList.contains('open')) nl.classList.remove('open');
+  });
+});
+
+/* ── Terminal typing effect on reveal ── */
+const termObs=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(!entry.isIntersecting||entry.target.dataset.typed) return;
+    entry.target.dataset.typed='1';
+    const lines=entry.target.querySelectorAll('.ln');
+    lines.forEach((ln,i)=>{
+      ln.style.opacity='0';
+      ln.style.transform='translateX(-10px)';
+      ln.style.transition=`opacity .4s ease ${i*0.08}s, transform .4s ease ${i*0.08}s`;
+      requestAnimationFrame(()=>{
+        ln.style.opacity='1';
+        ln.style.transform='none';
+      });
+    });
+  });
+},{threshold:.3});
+document.querySelectorAll('.term-body').forEach(el=>termObs.observe(el));
+
+/* ── Form ── */
+function inviaForm(){
+  const n=document.getElementById('nome').value.trim(),a=document.getElementById('azienda').value.trim(),e=document.getElementById('emailUser').value.trim(),t=document.getElementById('telefono').value.trim(),m=document.getElementById('messaggio').value.trim();
+  if(!n||!e||!m){alert('Per favore compila almeno Nome, Email e Messaggio.');return}
+  const s=encodeURIComponent('Richiesta Demo CeolAgenda — '+n),b=encodeURIComponent('Nome: '+n+'\n'+(a?'Azienda: '+a+'\n':'')+'Email: '+e+'\n'+(t?'Telefono: '+t+'\n':'')+'\n--- Messaggio ---\n\n'+m);
+  window.location.href='mailto:ceolandrea006@gmail.com?subject='+s+'&body='+b;
 }
 </script>
 </body>
