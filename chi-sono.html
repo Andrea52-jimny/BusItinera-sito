@@ -8,250 +8,193 @@
 <meta name="description" content="Andrea Ceol — sviluppatore, system administrator, appassionato di programmazione e infrastrutture IT. Creatore di CeolAgenda Autotrasporti.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#080c12;--bg2:#0d1219;--bg3:#131b27;--bg4:#192333;--bg5:#1e2b3d;
-  --border:rgba(56,189,248,.06);--border2:rgba(56,189,248,.12);--border3:rgba(56,189,248,.22);
-  --cyan:#38bdf8;--cyan2:#0ea5e9;--cyan-g:rgba(56,189,248,.08);--cyan-g2:rgba(56,189,248,.15);--cyan-glow:rgba(56,189,248,.3);
-  --orange:#fb923c;--orange2:#f97316;--or-g:rgba(251,146,60,.08);--or-g2:rgba(251,146,60,.15);--or-glow:rgba(251,146,60,.3);
-  --green:#34d399;--green2:#10b981;--gr-g:rgba(52,211,153,.08);--gr-g2:rgba(52,211,153,.15);
-  --purple:#a78bfa;--pu-g:rgba(167,139,250,.08);--pu-g2:rgba(167,139,250,.15);
-  --red:#f87171;--re-g:rgba(248,113,113,.08);
-  --t1:#eaf0f8;--t2:#94a3b8;--t3:#64748b;--t4:#475569;
-  --r:18px;--rs:12px;--rx:6px;
-  --font:'Outfit',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  --bg:#ffffff;--soft:#f5f8fc;--soft2:#eef3fa;--card:#ffffff;
+  --ink:#0f1b2d;--ink2:#3b4a5e;--muted:#6b7a90;
+  --line:#e6ecf3;--line2:#d6deea;
+  --primary:#2563eb;--primary-soft:#eaf1ff;
+  --accent:#f97316;--accent-soft:#fff3ea;
+  --green:#059669;--green-soft:#e9faf3;
+  --violet:#7c3aed;--violet-soft:#f2ecfe;
+  --r:20px;--rs:14px;
+  --shadow:0 1px 2px rgba(16,27,45,.04),0 8px 24px rgba(16,27,45,.06);
+  --shadow-lg:0 24px 60px rgba(16,27,45,.12);
+  --font:'Outfit',system-ui,-apple-system,sans-serif;
 }
 html{scroll-behavior:smooth;font-size:16px}
-body{font-family:var(--font);background:var(--bg);color:var(--t1);line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-body::before{content:'';position:fixed;inset:0;background:
-  radial-gradient(ellipse 90% 70% at 15% 5%,rgba(56,189,248,.035) 0%,transparent 60%),
-  radial-gradient(ellipse 70% 60% at 85% 85%,rgba(251,146,60,.025) 0%,transparent 60%),
-  radial-gradient(ellipse 50% 40% at 50% 50%,rgba(167,139,250,.015) 0%,transparent 50%);pointer-events:none;z-index:0}
-.hex-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.018;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='49'%3E%3Cpath d='M28 0l28 14v21L28 49 0 35V14z' fill='none' stroke='%2338bdf8' stroke-width='.4'/%3E%3C/svg%3E");background-size:56px 49px}
+body{font-family:var(--font);background:var(--bg);color:var(--ink2);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:7px 16px;border-radius:100px;margin-bottom:20px;color:var(--primary);background:var(--primary-soft)}
+.eyebrow.or{color:var(--accent);background:var(--accent-soft)}
+.eyebrow.gr{color:var(--green);background:var(--green-soft)}
+.eyebrow.vi{color:var(--violet);background:var(--violet-soft)}
+.eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+h2.h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;line-height:1.12;letter-spacing:-.03em;color:var(--ink);margin-bottom:14px}
+.sub{font-size:1.05rem;color:var(--muted);max-width:620px;line-height:1.7}
 
-.wrap{max-width:1100px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
-.tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.7rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;padding:7px 18px;border-radius:100px;margin-bottom:22px}
-.tag-cyan{color:var(--cyan);background:var(--cyan-g2);border:1px solid rgba(56,189,248,.15)}
-.tag-orange{color:var(--orange);background:var(--or-g2);border:1px solid rgba(251,146,60,.15)}
-.tag-green{color:var(--green);background:var(--gr-g2);border:1px solid rgba(52,211,153,.15)}
-.tag-purple{color:var(--purple);background:var(--pu-g2);border:1px solid rgba(167,139,250,.15)}
-.tag::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;animation:pulse 2s ease-in-out infinite}
-.h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;line-height:1.1;letter-spacing:-.035em;margin-bottom:16px}
-.sub{font-size:1.08rem;color:var(--t2);max-width:620px;line-height:1.75}
-
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes float2{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-6px) rotate(1deg)}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-@keyframes glow-pulse{0%,100%{box-shadow:0 0 24px rgba(56,189,248,.15)}50%{box-shadow:0 0 48px rgba(56,189,248,.3)}}
-@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-@keyframes gradient-text{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-
-.rv{opacity:0;transform:translateY(36px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
 .rv.vis{opacity:1;transform:none}
-.rv-left{opacity:0;transform:translateX(-50px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
-.rv-left.vis{opacity:1;transform:none}
-.rv-scale{opacity:0;transform:scale(.85);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
-.rv-scale.vis{opacity:1;transform:none}
-.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.4s}.d6{transition-delay:.48s}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,12,18,.7);backdrop-filter:blur(24px) saturate(1.5);border-bottom:1px solid var(--border);transition:background .3s}
-.nav-in{display:flex;align-items:center;justify-content:space-between;max-width:1220px;margin:0 auto;padding:14px 28px}
-.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.nav-logo img{height:38px;transition:transform .3s}
-.nav-logo:hover img{transform:rotate(-8deg) scale(1.1)}
-.nav-logo-t{font-weight:800;font-size:1.15rem;color:var(--t1);letter-spacing:-.02em}
-.nav-logo-t span{color:var(--orange)}
-.nav-links{display:flex;align-items:center;gap:36px}
-.nav-links a{font-size:.87rem;font-weight:500;color:var(--t2);text-decoration:none;transition:color .25s}
-.nav-links a:hover{color:var(--cyan)}
-.nav-cta{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#000!important;font-weight:700!important;padding:10px 26px;border-radius:100px;font-size:.84rem!important;box-shadow:0 0 24px rgba(56,189,248,.2);transition:transform .2s,box-shadow .3s}
-.nav-cta:hover{transform:translateY(-2px);box-shadow:0 4px 32px var(--cyan-glow)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.82);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid var(--line);transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 4px 24px rgba(16,27,45,.06)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;max-width:1180px;margin:0 auto;padding:13px 28px}
+.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.nav-logo img{height:36px}
+.nav-logo-t{font-weight:800;font-size:1.12rem;color:var(--ink);letter-spacing:-.02em}
+.nav-logo-t span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{font-size:.9rem;font-weight:500;color:var(--ink2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--primary)}
+.nav-cta{background:var(--primary);color:#fff!important;font-weight:600!important;padding:10px 22px;border-radius:100px;font-size:.88rem!important;box-shadow:0 6px 18px rgba(37,99,235,.25);transition:transform .2s,box-shadow .3s}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(37,99,235,.32)}
 .mob-tog{display:none;background:none;border:none;cursor:pointer;padding:4px}
-.mob-tog span{display:block;width:22px;height:2px;background:var(--t2);margin:5px 0;border-radius:2px;transition:.3s}
+.mob-tog span{display:block;width:22px;height:2px;background:var(--ink2);margin:5px 0;border-radius:2px;transition:.3s}
 
-/* HERO CHI SONO */
-.hero-about{padding:160px 0 80px;position:relative;overflow:hidden}
-.hero-about::before{content:'';position:absolute;top:40px;left:50%;transform:translateX(-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(56,189,248,.04) 0%,transparent 65%);pointer-events:none}
-.hero-orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(80px);z-index:0}
-.hero-orb-1{width:400px;height:400px;background:rgba(56,189,248,.05);top:-80px;left:-100px;animation:float 8s ease-in-out infinite}
-.hero-orb-2{width:350px;height:350px;background:rgba(251,146,60,.04);bottom:-50px;right:-80px;animation:float 10s ease-in-out infinite 1s}
-
-.about-header{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center}
-.avatar-ring{width:180px;height:180px;border-radius:50%;padding:4px;background:conic-gradient(var(--cyan),var(--orange),var(--purple),var(--green),var(--cyan));animation:spin-slow 8s linear infinite;flex-shrink:0}
-@keyframes spin-slow{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-.avatar-inner{width:100%;height:100%;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:4.5rem;font-weight:900;letter-spacing:-.04em;background:var(--bg3);border:3px solid var(--bg)}
-.avatar-inner .initials{background:linear-gradient(135deg,var(--cyan),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.about-intro h1{font-size:clamp(2.4rem,5vw,3.8rem);font-weight:900;line-height:1.05;letter-spacing:-.04em;margin-bottom:12px}
-.about-intro h1 .cy{color:var(--cyan)}
-.about-intro h1 .or{color:var(--orange)}
-.about-intro .role{font-family:var(--mono);font-size:.85rem;color:var(--cyan);letter-spacing:.05em;margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.about-intro .role::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 12px rgba(52,211,153,.5);animation:pulse 2s ease-in-out infinite}
-.about-intro .bio{font-size:1.1rem;color:var(--t2);line-height:1.8;max-width:600px}
-.about-intro .bio strong{color:var(--t1);font-weight:600}
-
-.info-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-.info-chip{display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:100px;padding:8px 18px;font-size:.8rem;font-weight:500;color:var(--t2);transition:transform .25s,border-color .3s}
-.info-chip:hover{transform:translateY(-2px);border-color:var(--border2)}
-.info-chip .ic{font-size:.95rem}
-
-.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:0 auto;max-width:900px}
+/* HERO */
+.hero-about{padding:150px 0 70px;background:radial-gradient(ellipse 60% 60% at 50% 0%,rgba(37,99,235,.06),transparent 70%),linear-gradient(180deg,var(--soft),var(--bg) 80%)}
+.about-header{display:grid;grid-template-columns:auto 1fr;gap:44px;align-items:center}
+.avatar{width:170px;height:170px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:4rem;font-weight:900;letter-spacing:-.04em;color:#fff;background:linear-gradient(135deg,var(--primary),var(--violet));box-shadow:var(--shadow-lg)}
+.about-intro .role{font-size:.85rem;font-weight:600;color:var(--primary);letter-spacing:.03em;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.about-intro .role::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--green)}
+.about-intro h1{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:800;line-height:1.05;letter-spacing:-.035em;color:var(--ink);margin-bottom:14px}
+.about-intro h1 .hl{color:var(--primary)}
+.about-intro .bio{font-size:1.08rem;color:var(--ink2);line-height:1.75;max-width:600px}
+.about-intro .bio strong{color:var(--ink);font-weight:600}
+.info-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.info-chip{display:flex;align-items:center;gap:8px;background:var(--soft);border:1px solid var(--line);border-radius:100px;padding:8px 16px;font-size:.82rem;font-weight:500;color:var(--ink2)}
 
 /* SECTIONS */
 .sec{padding:80px 0}
-.sec-alt{background:var(--bg2)}
+.sec-soft{background:var(--soft)}
 
 /* TIMELINE */
-.timeline{position:relative;padding-left:40px}
-.timeline::before{content:'';position:absolute;left:14px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--cyan),var(--orange),var(--purple),var(--green));border-radius:2px}
-.tl-item{position:relative;margin-bottom:36px}
+.timeline{position:relative;padding-left:38px;margin-top:44px}
+.timeline::before{content:'';position:absolute;left:13px;top:8px;bottom:8px;width:2px;background:var(--line2);border-radius:2px}
+.tl-item{position:relative;margin-bottom:34px}
 .tl-item:last-child{margin-bottom:0}
-.tl-dot{position:absolute;left:-33px;top:6px;width:16px;height:16px;border-radius:50%;border:3px solid;background:var(--bg)}
-.tl-dot-cy{border-color:var(--cyan);box-shadow:0 0 12px var(--cyan-glow)}
-.tl-dot-or{border-color:var(--orange);box-shadow:0 0 12px var(--or-glow)}
-.tl-dot-gr{border-color:var(--green);box-shadow:0 0 12px rgba(52,211,153,.3)}
-.tl-dot-pu{border-color:var(--purple);box-shadow:0 0 12px rgba(167,139,250,.3)}
-.tl-date{font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.08em;margin-bottom:4px}
-.tl-date-cy{color:var(--cyan)}
-.tl-date-or{color:var(--orange)}
-.tl-date-gr{color:var(--green)}
-.tl-date-pu{color:var(--purple)}
-.tl-title{font-size:1.15rem;font-weight:700;margin-bottom:2px}
-.tl-place{font-size:.82rem;color:var(--t3);margin-bottom:8px;display:flex;align-items:center;gap:6px}
-.tl-desc{font-size:.88rem;color:var(--t2);line-height:1.7}
-.tl-current{display:inline-flex;align-items:center;gap:5px;font-size:.65rem;font-weight:700;padding:3px 12px;border-radius:100px;margin-left:10px;letter-spacing:.04em;vertical-align:middle}
-.tl-current-cy{background:var(--cyan-g2);color:var(--cyan)}
-.tl-current-gr{background:var(--gr-g2);color:var(--green)}
+.tl-dot{position:absolute;left:-32px;top:5px;width:14px;height:14px;border-radius:50%;border:3px solid var(--bg);background:var(--primary)}
+.tl-dot.or{background:var(--accent)}.tl-dot.gr{background:var(--green)}.tl-dot.vi{background:var(--violet)}
+.tl-date{font-size:.75rem;font-weight:700;letter-spacing:.05em;margin-bottom:4px;color:var(--primary)}
+.tl-date.or{color:var(--accent)}.tl-date.gr{color:var(--green)}.tl-date.vi{color:var(--violet)}
+.tl-badge{display:inline-flex;align-items:center;gap:5px;font-size:.62rem;font-weight:700;padding:3px 10px;border-radius:100px;margin-left:8px;background:var(--green-soft);color:var(--green);letter-spacing:.03em;vertical-align:middle}
+.tl-title{font-size:1.12rem;font-weight:700;color:var(--ink);margin-bottom:2px}
+.tl-place{font-size:.83rem;color:var(--muted);margin-bottom:8px}
+.tl-desc{font-size:.9rem;color:var(--ink2);line-height:1.7}
 
-/* SKILLS GRID */
-.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.skill-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:28px 24px;transition:border-color .3s,transform .3s}
-.skill-card:hover{border-color:var(--border3);transform:translateY(-4px)}
-.skill-card-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:1.2rem}
-.skill-card h3{font-size:1rem;font-weight:700;margin-bottom:8px}
-.skill-card p{font-size:.83rem;color:var(--t2);line-height:1.6}
+/* GRIDS */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px 24px;box-shadow:var(--shadow);transition:transform .3s,box-shadow .3s,border-color .3s}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:var(--line2)}
+.card-ic{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;margin-bottom:15px;font-size:1.25rem}
+.ic-b{background:var(--primary-soft)}.ic-o{background:var(--accent-soft)}.ic-g{background:var(--green-soft)}.ic-v{background:var(--violet-soft)}
+.card h3{font-size:1.02rem;font-weight:700;color:var(--ink);margin-bottom:8px}
+.card p{font-size:.87rem;color:var(--muted);line-height:1.6}
+.hobby{text-align:center}
+.hobby .hic{font-size:1.9rem;margin-bottom:10px;display:block}
+.hobby h4{font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:6px}
+.hobby p{font-size:.82rem;color:var(--muted);line-height:1.55}
 
-/* HOBBY CARDS */
-.hobby-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.hobby-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:24px;text-align:center;transition:border-color .3s,transform .3s}
-.hobby-card:hover{border-color:var(--border3);transform:translateY(-4px)}
-.hobby-icon{font-size:2rem;margin-bottom:12px;display:block}
-.hobby-card h4{font-size:.92rem;font-weight:600;margin-bottom:6px}
-.hobby-card p{font-size:.78rem;color:var(--t2);line-height:1.55}
+/* PROJECT */
+.project-card{background:var(--card);border:1px solid var(--line2);border-radius:var(--r);padding:40px;box-shadow:var(--shadow);margin-top:12px;position:relative;overflow:hidden}
+.project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--accent),var(--violet))}
+.project-card h3{font-size:1.35rem;font-weight:800;color:var(--ink);margin-bottom:10px}
+.project-card .pd{font-size:.98rem;color:var(--ink2);line-height:1.75;margin-bottom:22px}
+.ptags{display:flex;flex-wrap:wrap;gap:8px}
+.ptag{font-size:.74rem;font-weight:600;padding:6px 14px;border-radius:100px;background:var(--soft);border:1px solid var(--line);color:var(--ink2)}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.btn-p{display:inline-flex;align-items:center;gap:9px;background:var(--primary);color:#fff;font-weight:600;font-size:1rem;padding:15px 30px;border-radius:100px;text-decoration:none;box-shadow:0 10px 26px rgba(37,99,235,.28);transition:transform .2s,box-shadow .3s}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(37,99,235,.35)}
+.btn-s{display:inline-flex;align-items:center;gap:9px;background:var(--bg);border:1px solid var(--line2);color:var(--ink);font-weight:600;font-size:1rem;padding:15px 28px;border-radius:100px;text-decoration:none;transition:background .2s,border-color .2s,transform .2s}
+.btn-s:hover{background:var(--soft);border-color:var(--primary);transform:translateY(-2px)}
 
-/* PROJECT CARD */
-.project-card{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);padding:40px;position:relative;overflow:hidden;transition:border-color .35s,transform .3s}
-.project-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--orange),var(--purple))}
-.project-card:hover{border-color:var(--border3);transform:translateY(-4px)}
-.project-card h3{font-size:1.4rem;font-weight:800;margin-bottom:10px}
-.project-card .proj-desc{font-size:.95rem;color:var(--t2);line-height:1.7;margin-bottom:20px}
-.project-tags{display:flex;flex-wrap:wrap;gap:8px}
-.ptag{font-family:var(--mono);font-size:.68rem;font-weight:500;padding:5px 14px;border-radius:100px;letter-spacing:.04em}
-.ptag-cy{color:var(--cyan);background:var(--cyan-g2);border:1px solid rgba(56,189,248,.15)}
-.ptag-or{color:var(--orange);background:var(--or-g2);border:1px solid rgba(251,146,60,.15)}
-.ptag-gr{color:var(--green);background:var(--gr-g2);border:1px solid rgba(52,211,153,.15)}
-.ptag-pu{color:var(--purple);background:var(--pu-g2);border:1px solid rgba(167,139,250,.15)}
+footer{border-top:1px solid var(--line);padding:40px 0;text-align:center;background:var(--soft)}
+footer p{font-size:.85rem;color:var(--muted)}
+footer a{color:var(--primary);text-decoration:none;font-weight:500}
+footer strong{color:var(--ink2)}
 
-/* CTA */
-.cta-row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:32px}
-.btn-p{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#000;font-weight:700;font-size:1rem;padding:16px 36px;border-radius:100px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 4px 36px rgba(56,189,248,.25);transition:transform .2s,box-shadow .3s;animation:glow-pulse 3s ease-in-out infinite}
-.btn-p:hover{transform:translateY(-3px);box-shadow:0 8px 48px var(--cyan-glow);animation:none}
-.btn-s{display:inline-flex;align-items:center;gap:10px;background:var(--bg3);border:1px solid var(--border2);color:var(--t1);font-weight:500;font-size:1rem;padding:16px 32px;border-radius:100px;cursor:pointer;text-decoration:none;transition:background .25s,border-color .25s}
-.btn-s:hover{background:var(--bg4);border-color:var(--cyan)}
-
-/* FOOTER */
-footer{border-top:1px solid var(--border);padding:40px 0;text-align:center}
-footer p{font-size:.8rem;color:var(--t4)}
-footer a{color:var(--cyan);text-decoration:none}
-footer strong{color:var(--t2)}
-
-/* RESPONSIVE */
-@media(max-width:900px){.about-header{grid-template-columns:1fr;text-align:center;justify-items:center}.info-chips{justify-content:center}.skills-grid{grid-template-columns:1fr}.hobby-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:700px){.hero-about{padding:140px 0 60px}.nav-links{display:none}.mob-tog{display:block}.hobby-grid{grid-template-columns:1fr}.avatar-ring{width:140px;height:140px}.avatar-inner{font-size:3.5rem}}
-.nav-links.open{display:flex!important;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(8,12,18,.97);backdrop-filter:blur(20px);padding:24px;gap:20px;border-bottom:1px solid var(--border)}
+@media(max-width:900px){.about-header{grid-template-columns:1fr;text-align:center;justify-items:center}.info-chips{justify-content:center}.grid3{grid-template-columns:1fr}.grid4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.hero-about{padding:120px 0 56px}.nav-links{display:none}.mob-tog{display:block}.grid4{grid-template-columns:1fr}.avatar{width:140px;height:140px;font-size:3.2rem}.project-card{padding:28px}}
+.nav-links.open{display:flex!important;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,.98);backdrop-filter:blur(16px);padding:22px;gap:18px;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
 </style>
 </head>
 <body>
-<div class="hex-bg"></div>
 
 <!-- NAV -->
-<nav>
+<nav id="nav">
   <div class="nav-in">
     <a href="index.html" class="nav-logo"><img src="logo.png" alt="CeolAgenda"><div class="nav-logo-t">Ce<span>o</span>lAgenda</div></a>
     <div class="nav-links" id="navLinks">
       <a href="index.html">Home</a>
-      <a href="index.html#calendario">Calendario</a>
-      <a href="index.html#deploy">Deploy</a>
-      <a href="index.html#sicurezza">Sicurezza</a>
-      <a href="index.html#contatti" class="nav-cta">Richiedi Demo</a>
+      <a href="index.html#calendario">Agenda</a>
+      <a href="index.html#deploy">Dove funziona</a>
+      <a href="chi-sono.html">Chi sono</a>
+      <a href="index.html#contatti" class="nav-cta">Richiedi demo</a>
     </div>
     <button class="mob-tog" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
-<!-- HERO CHI SONO -->
+<!-- HERO -->
 <section class="hero-about">
-  <div class="hero-orb hero-orb-1"></div>
-  <div class="hero-orb hero-orb-2"></div>
   <div class="wrap">
     <div class="about-header rv">
-      <div class="avatar-ring">
-        <div class="avatar-inner"><span class="initials">AC</span></div>
-      </div>
+      <div class="avatar">AC</div>
       <div class="about-intro">
-        <div class="role">Sviluppatore & System Administrator</div>
-        <h1>Andrea <span class="cy">Ceol</span></h1>
-        <p class="bio">Classe <strong>2006</strong>, bellunese. Diplomato in <strong>Informatica e Telecomunicazioni</strong>, ora sto frequentando l'<strong>ITS Alto Adriatico</strong> a Pordenone — indirizzo System Administrator. Appassionato di programmazione, infrastrutture IT e gestione di sistemi. CeolAgenda è il mio primo progetto reale: ci ho messo testa, cuore e notti insonni.</p>
+        <div class="role">Sviluppatore &amp; System Administrator</div>
+        <h1>Andrea <span class="hl">Ceol</span></h1>
+        <p class="bio">Classe <strong>2006</strong>, bellunese. Diplomato in <strong>Informatica e Telecomunicazioni</strong>, ora frequento l'<strong>ITS Alto Adriatico</strong> a Pordenone, indirizzo System Administrator. Appassionato di programmazione, infrastrutture IT e gestione di sistemi. CeolAgenda è il mio primo progetto reale: ci ho messo testa, cuore e notti insonni.</p>
         <div class="info-chips">
-          <div class="info-chip"><span class="ic">📍</span>Belluno, Veneto</div>
-          <div class="info-chip"><span class="ic">🎓</span>ITS Alto Adriatico</div>
-          <div class="info-chip"><span class="ic">💻</span>System Administrator</div>
-          <div class="info-chip"><span class="ic">🇮🇹</span>Italiano · <span style="color:var(--cyan)">B2</span> Inglese</div>
+          <div class="info-chip">📍 Belluno, Veneto</div>
+          <div class="info-chip">🎓 ITS Alto Adriatico</div>
+          <div class="info-chip">💻 System Administrator</div>
+          <div class="info-chip">🇮🇹 Italiano · Inglese B2</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
-
 <!-- FORMAZIONE -->
-<section class="sec sec-alt">
+<section class="sec sec-soft">
   <div class="wrap">
-    <div class="tag tag-cyan">Istruzione & Formazione</div>
+    <div class="eyebrow">Istruzione &amp; Formazione</div>
     <h2 class="h2 rv">Il percorso che mi ha portato qui</h2>
-    <p class="sub rv d1" style="margin-bottom:48px">Dal primo codice alle infrastrutture enterprise — un percorso lineare con una direzione chiara.</p>
+    <p class="sub rv d1">Dal primo codice alle infrastrutture aziendali, un percorso lineare con una direzione chiara.</p>
     <div class="timeline rv d2">
       <div class="tl-item">
-        <div class="tl-dot tl-dot-cy"></div>
-        <div class="tl-date tl-date-cy">2025 — IN CORSO <span class="tl-current tl-current-cy">ATTUALE</span></div>
+        <div class="tl-dot"></div>
+        <div class="tl-date">2025 — IN CORSO <span class="tl-badge">ATTUALE</span></div>
         <div class="tl-title">ITS Alto Adriatico — System Administrator</div>
         <div class="tl-place">📍 Pordenone, Friuli-Venezia Giulia</div>
-        <div class="tl-desc">Percorso post-diploma focalizzato su amministrazione di sistemi, reti, sicurezza informatica e gestione infrastrutture IT aziendali. Formazione pratica con laboratori su ambienti reali — virtualizzazione, cloud, automazione e monitoring.</div>
+        <div class="tl-desc">Percorso post-diploma focalizzato su amministrazione di sistemi, reti, sicurezza informatica e gestione infrastrutture IT aziendali. Formazione pratica con laboratori su ambienti reali: virtualizzazione, cloud, automazione e monitoring.</div>
       </div>
       <div class="tl-item">
-        <div class="tl-dot tl-dot-or"></div>
-        <div class="tl-date tl-date-or">2020 — 2025</div>
+        <div class="tl-dot or"></div>
+        <div class="tl-date or">2020 — 2025</div>
         <div class="tl-title">Diploma in Informatica e Telecomunicazioni</div>
         <div class="tl-place">📍 IIS Segato Brustolon — Belluno</div>
-        <div class="tl-desc">Cinque anni di programmazione (Java, C++, C), reti (Cisco Packet Tracer), database (SQL, Entity Framework), sviluppo web (HTML, CSS, JS, PHP) e sicurezza informatica. Include PCTO presso startup informatica con esperienza su WordPress, hardware e installazioni.</div>
+        <div class="tl-desc">Cinque anni di programmazione (Java, C++, C), reti, database (SQL), sviluppo web (HTML, CSS, JS, PHP) e sicurezza informatica. Include esperienza in azienda presso una startup informatica.</div>
       </div>
       <div class="tl-item">
-        <div class="tl-dot tl-dot-pu"></div>
-        <div class="tl-date tl-date-pu">ESTATE 2023</div>
+        <div class="tl-dot vi"></div>
+        <div class="tl-date vi">ESTATE 2023</div>
         <div class="tl-title">Scambio Culturale — Oregon, USA</div>
         <div class="tl-place">📍 Oregon, Stati Uniti</div>
-        <div class="tl-desc">Scambio culturale family-to-family di quasi due mesi negli Stati Uniti. Esperienza formativa che ha consolidato la conoscenza dell'inglese e aperto la mente a una mentalità internazionale.</div>
+        <div class="tl-desc">Scambio culturale family-to-family di quasi due mesi negli Stati Uniti. Un'esperienza che ha consolidato l'inglese e aperto la mente a una mentalità internazionale.</div>
       </div>
       <div class="tl-item">
-        <div class="tl-dot tl-dot-gr"></div>
-        <div class="tl-date tl-date-gr">2019 — 2020</div>
+        <div class="tl-dot gr"></div>
+        <div class="tl-date gr">2019 — 2020</div>
         <div class="tl-title">Licenza Media</div>
         <div class="tl-place">📍 IST G. Rodari — Santa Giustina (BL)</div>
-        <div class="tl-desc">Diploma di scuola media inferiore — il primo passo verso il percorso tecnico-informatico.</div>
+        <div class="tl-desc">Il primo passo verso il percorso tecnico-informatico.</div>
       </div>
     </div>
   </div>
@@ -260,109 +203,62 @@ footer strong{color:var(--t2)}
 <!-- COMPETENZE -->
 <section class="sec">
   <div class="wrap">
-    <div class="tag tag-green">Competenze Tecniche</div>
+    <div class="eyebrow gr">Competenze Tecniche</div>
     <h2 class="h2 rv">Il mio stack</h2>
-    <p class="sub rv d1" style="margin-bottom:48px">Dalle basi della programmazione all'infrastruttura — un set di competenze in costante espansione.</p>
-    <div class="skills-grid">
-      <div class="skill-card rv">
-        <div class="skill-card-icon" style="background:var(--cyan-g2);color:var(--cyan)">💻</div>
-        <h3>Programmazione</h3>
-        <p>Java, C++, C, PHP 8, JavaScript (Vanilla), HTML5, CSS3. Sviluppo web full-stack con architettura MVC. API RESTful con autenticazione session-based.</p>
-      </div>
-      <div class="skill-card rv d1">
-        <div class="skill-card-icon" style="background:var(--or-g2);color:var(--orange)">🗄️</div>
-        <h3>Database & Backend</h3>
-        <p>MariaDB, MySQL, SQL avanzato. Entity Framework. Prepared statements, migrazioni schema, integrità referenziale. Backup automatici con mysqldump.</p>
-      </div>
-      <div class="skill-card rv d2">
-        <div class="skill-card-icon" style="background:var(--gr-g2);color:var(--green)">🐳</div>
-        <h3>Infrastruttura & DevOps</h3>
-        <p>Docker, Docker Compose. Deploy su NAS (QNAP, Synology) e VPS cloud. Networking con Cisco Packet Tracer. Amministrazione sistemi Linux.</p>
-      </div>
-      <div class="skill-card rv d3">
-        <div class="skill-card-icon" style="background:var(--pu-g2);color:var(--purple)">🔐</div>
-        <h3>Sicurezza Informatica</h3>
-        <p>CSRF protection, rate limiting, bcrypt, 2FA TOTP. CSP headers, session security. Prevenzione SQL injection, XSS e brute-force.</p>
-      </div>
-      <div class="skill-card rv d4">
-        <div class="skill-card-icon" style="background:var(--or-g2);color:var(--orange)">🔧</div>
-        <h3>Hardware & Supporto</h3>
-        <p>Assemblaggio PC, upgrade componenti, installazione OS. Diagnosi guasti hardware/software. Montaggio dispositivi tecnologici e cablaggio impianti elettrici.</p>
-      </div>
-      <div class="skill-card rv d5">
-        <div class="skill-card-icon" style="background:var(--cyan-g2);color:var(--cyan)">📦</div>
-        <h3>Strumenti & Workflow</h3>
-        <p>Pacchetto Office, gestione email. Google Places API, Google Maps integration. Git. WordPress per CMS. Claude AI per sviluppo assistito e disaster recovery.</p>
-      </div>
+    <p class="sub rv d1" style="margin-bottom:44px">Dalle basi della programmazione all'infrastruttura, un set di competenze in costante espansione.</p>
+    <div class="grid3">
+      <div class="card rv"><div class="card-ic ic-b">💻</div><h3>Programmazione</h3><p>Java, C++, C, PHP 8, JavaScript, HTML5, CSS3. Sviluppo web full-stack con architettura MVC e API sicure.</p></div>
+      <div class="card rv d1"><div class="card-ic ic-o">🗄️</div><h3>Database &amp; Backend</h3><p>MariaDB, MySQL, SQL avanzato. Migrazioni schema, integrità dei dati e backup automatici.</p></div>
+      <div class="card rv d2"><div class="card-ic ic-g">🐳</div><h3>Infrastruttura &amp; DevOps</h3><p>Docker e Docker Compose. Deploy su NAS (QNAP, Synology) e su server cloud. Amministrazione sistemi Linux e networking.</p></div>
+      <div class="card rv"><div class="card-ic ic-v">🔐</div><h3>Sicurezza Informatica</h3><p>Autenticazione a due fattori, protezione degli accessi, gestione sessioni e prevenzione degli attacchi più comuni.</p></div>
+      <div class="card rv d1"><div class="card-ic ic-o">🔧</div><h3>Hardware &amp; Supporto</h3><p>Assemblaggio PC, upgrade componenti, installazione sistemi operativi, diagnosi guasti e cablaggio.</p></div>
+      <div class="card rv d2"><div class="card-ic ic-b">📦</div><h3>Strumenti &amp; Workflow</h3><p>Pacchetto Office, integrazione Google Maps, controllo versione con Git e sviluppo assistito da AI.</p></div>
     </div>
   </div>
 </section>
 
-<!-- HOBBY E INTERESSI -->
-<section class="sec sec-alt">
+<!-- HOBBY -->
+<section class="sec sec-soft">
   <div class="wrap">
-    <div class="tag tag-purple">Oltre il Codice</div>
+    <div class="eyebrow vi">Oltre il Codice</div>
     <h2 class="h2 rv">Quando spengo il monitor</h2>
-    <p class="sub rv d1" style="margin-bottom:48px">Disciplina, creatività e adrenalina — le stesse qualità che porto nel lavoro.</p>
-    <div class="hobby-grid">
-      <div class="hobby-card rv">
-        <span class="hobby-icon">🏀</span>
-        <h4>Arbitro FIP</h4>
-        <p>Arbitro federale di pallacanestro dal 2020. Decisioni rapide, gestione della pressione, fair play.</p>
-      </div>
-      <div class="hobby-card rv d1">
-        <span class="hobby-icon">🥊</span>
-        <h4>Muay Thai</h4>
-        <p>Arti marziali per disciplina mentale e fisica. Allenamento costante che insegna resilienza e focus.</p>
-      </div>
-      <div class="hobby-card rv d2">
-        <span class="hobby-icon">📸</span>
-        <h4>Fotografia & Viaggi</h4>
-        <p>Appassionato di fotografia e viaggi. Oregon (USA), Italia — ogni viaggio è una lezione.</p>
-      </div>
-      <div class="hobby-card rv d3">
-        <span class="hobby-icon">🎮</span>
-        <h4>Droni & Video</h4>
-        <p>Pilotaggio droni e montaggio video. Unione tra tecnologia e creatività visiva.</p>
-      </div>
+    <p class="sub rv d1" style="margin-bottom:44px">Disciplina, creatività e adrenalina: le stesse qualità che porto nel lavoro.</p>
+    <div class="grid4">
+      <div class="card hobby rv"><span class="hic">🏀</span><h4>Arbitro FIP</h4><p>Arbitro federale di pallacanestro dal 2020. Decisioni rapide e gestione della pressione.</p></div>
+      <div class="card hobby rv d1"><span class="hic">🥊</span><h4>Muay Thai</h4><p>Arti marziali per disciplina mentale e fisica. Resilienza e concentrazione.</p></div>
+      <div class="card hobby rv d2"><span class="hic">📸</span><h4>Fotografia &amp; Viaggi</h4><p>Ogni viaggio è una lezione: Oregon, Italia e oltre.</p></div>
+      <div class="card hobby rv d3"><span class="hic">🚁</span><h4>Droni &amp; Video</h4><p>Pilotaggio droni e montaggio video: tecnologia e creatività visiva.</p></div>
     </div>
   </div>
 </section>
 
-<!-- IL MIO PROGETTO -->
+<!-- PROGETTO -->
 <section class="sec">
   <div class="wrap">
-    <div class="tag tag-orange">Il Mio Progetto</div>
+    <div class="eyebrow or">Il Mio Progetto</div>
     <h2 class="h2 rv">CeolAgenda Autotrasporti</h2>
-    <p class="sub rv d1" style="margin-bottom:36px">Il primo progetto reale — nato da un bisogno concreto, costruito da zero, riga per riga.</p>
+    <p class="sub rv d1" style="margin-bottom:24px">Il primo progetto reale, nato da un bisogno concreto e costruito da zero.</p>
     <div class="project-card rv d2">
       <h3>Un gestionale completo per il trasporto persone</h3>
-      <p class="proj-desc">Calendario intelligente con 3 viste e rilevamento conflitti automatico. Portale autista mobile-first con countdown e navigazione Google Maps. Gestione completa di veicoli, clienti, autisti e contabilità. Architettura PHP 8.2 + MariaDB 11 in Docker — self-hosted su NAS o deployabile in cloud. Sicurezza enterprise: 2FA TOTP, CSRF, rate limiting, CSP headers. Disaster recovery assistito da Claude AI.</p>
-      <div class="project-tags">
-        <span class="ptag ptag-cy">PHP 8.2</span>
-        <span class="ptag ptag-or">MariaDB 11</span>
-        <span class="ptag ptag-gr">Docker</span>
-        <span class="ptag ptag-pu">Vanilla JS</span>
-        <span class="ptag ptag-cy">Google Maps API</span>
-        <span class="ptag ptag-or">2FA TOTP</span>
-        <span class="ptag ptag-gr">Self-hosted / Cloud</span>
-        <span class="ptag ptag-pu">Claude AI DR</span>
+      <p class="pd">Un'agenda intelligente che mostra la flotta a colpo d'occhio ed evita in automatico le doppie prenotazioni di mezzi e autisti. Un portale dedicato che porta i viaggi sul telefono degli autisti, con navigazione e conto alla rovescia. Gestione completa di mezzi, clienti, autisti e pagamenti, con accessi protetti e backup automatici. Funziona sul server dell'azienda o nel cloud.</p>
+      <div class="ptags">
+        <span class="ptag">Agenda multi-vista</span>
+        <span class="ptag">Controllo conflitti</span>
+        <span class="ptag">Portale autista mobile</span>
+        <span class="ptag">Google Maps</span>
+        <span class="ptag">Accessi protetti &amp; 2FA</span>
+        <span class="ptag">Server o Cloud</span>
       </div>
     </div>
     <div class="cta-row rv d3">
-      <a href="index.html" class="btn-p">
+      <a href="index.html" class="btn-p">Scopri CeolAgenda
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        Scopri CeolAgenda
       </a>
-      <a href="index.html#contatti" class="btn-s">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        Contattami
-      </a>
+      <a href="index.html#contatti" class="btn-s">Contattami</a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="wrap">
     <p>© 2026 Andrea Ceol — <a href="index.html">CeolAgenda Autotrasporti</a> · <a href="mailto:ceolandrea006@gmail.com">ceolandrea006@gmail.com</a> · <a href="tel:+393274997730">+39 327 499 7730</a></p>
@@ -370,14 +266,11 @@ footer strong{color:var(--t2)}
 </footer>
 
 <script>
-/* Scroll Reveal */
-const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('vis')})},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
-document.querySelectorAll('.rv,.rv-left,.rv-scale').forEach(el=>obs.observe(el));
-
-/* Nav scroll */
-window.addEventListener('scroll',()=>{
-  document.querySelector('nav').style.background=scrollY>60?'rgba(8,12,18,.93)':'rgba(8,12,18,.7)';
-});
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('vis');obs.unobserve(el.target)}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>20)});
+document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
 </script>
 </body>
 </html>
