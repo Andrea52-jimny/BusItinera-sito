@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BusItinera - Plan for Bus</title>
+<link rel="icon" type="image/png" href="logo.png">
+<meta name="description" content="BusItinera: pianifica viaggi, evita doppie prenotazioni di mezzi e autisti, gestisci pagamenti e clienti. Gli autisti vedono i loro viaggi sul telefono. Sul tuo server o nel cloud.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;
+  --soft:#f5f8fc;
+  --soft2:#eef3fa;
+  --card:#ffffff;
+  --ink:#0f1b2d;
+  --ink2:#3b4a5e;
+  --muted:#6b7a90;
+  --line:#e6ecf3;
+  --line2:#d6deea;
+  --primary:#2563eb;
+  --primary-d:#1d4ed8;
+  --primary-soft:#eaf1ff;
+  --accent:#f97316;
+  --accent-soft:#fff3ea;
+  --green:#059669;
+  --green-soft:#e9faf3;
+  --violet:#7c3aed;
+  --violet-soft:#f2ecfe;
+  --r:20px;--rs:14px;--rx:10px;
+  --shadow:0 1px 2px rgba(16,27,45,.04),0 8px 24px rgba(16,27,45,.06);
+  --shadow-lg:0 24px 60px rgba(16,27,45,.12);
+  --font:'Outfit',system-ui,-apple-system,sans-serif;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font);background:var(--bg);color:var(--ink2);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px;position:relative}
+.center{text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:7px 16px;border-radius:100px;margin-bottom:20px;color:var(--primary);background:var(--primary-soft)}
+.eyebrow.or{color:var(--accent);background:var(--accent-soft)}
+.eyebrow.gr{color:var(--green);background:var(--green-soft)}
+.eyebrow.vi{color:var(--violet);background:var(--violet-soft)}
+.eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+h2.h2{font-size:clamp(1.9rem,4vw,2.85rem);font-weight:800;line-height:1.12;letter-spacing:-.03em;color:var(--ink);margin-bottom:16px}
+.sub{font-size:1.08rem;color:var(--muted);max-width:640px;line-height:1.7}
+.center .sub{margin-left:auto;margin-right:auto}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.rv.vis{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.82);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid var(--line);transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 4px 24px rgba(16,27,45,.06)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;max-width:1180px;margin:0 auto;padding:13px 28px}
+.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.nav-badge{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#1a2b45,#0f1b2d);box-shadow:0 3px 10px rgba(16,27,45,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-badge img{width:66%;height:auto;display:block}
+.nav-logo-t{font-weight:800;font-size:1.12rem;color:var(--ink);letter-spacing:-.02em}
+.nav-logo-t span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:.9rem;font-weight:500;color:var(--ink2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--primary)}
+.nav-cta{background:var(--primary);color:#fff!important;font-weight:600!important;padding:10px 22px;border-radius:100px;font-size:.88rem!important;box-shadow:0 6px 18px rgba(37,99,235,.25);transition:transform .2s,box-shadow .3s}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(37,99,235,.32)}
+.mob-tog{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.mob-tog span{display:block;width:22px;height:2px;background:var(--ink2);margin:5px 0;border-radius:2px;transition:.3s}
+
+/* buttons */
+.btn-p{display:inline-flex;align-items:center;gap:9px;background:var(--primary);color:#fff;font-weight:600;font-size:1rem;padding:15px 30px;border-radius:100px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 10px 26px rgba(37,99,235,.28);transition:transform .2s,box-shadow .3s}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(37,99,235,.35)}
+.btn-s{display:inline-flex;align-items:center;gap:9px;background:var(--bg);border:1px solid var(--line2);color:var(--ink);font-weight:600;font-size:1rem;padding:15px 28px;border-radius:100px;cursor:pointer;text-decoration:none;transition:background .2s,border-color .2s,transform .2s}
+.btn-s:hover{background:var(--soft);border-color:var(--primary);transform:translateY(-2px)}
+
+/* HERO */
+.hero{padding:150px 0 90px;text-align:center;position:relative;overflow:hidden;background:
+  radial-gradient(ellipse 60% 50% at 50% 0%,rgba(37,99,235,.07),transparent 70%),
+  linear-gradient(180deg,var(--soft),var(--bg) 70%)}
+.hero-logo{width:400px;height:400px;max-width:82vw;border-radius:50%;background:linear-gradient(135deg,#1a2b45,#0f1b2d);box-shadow:0 30px 70px rgba(16,27,45,.32);margin:0 auto 40px;display:flex;align-items:center;justify-content:center}
+.hero-logo img{width:60%;height:auto;display:block}
+.hero h1{font-size:clamp(2.4rem,5.5vw,4rem);font-weight:800;line-height:1.06;letter-spacing:-.035em;color:var(--ink);max-width:900px;margin:0 auto 22px}
+.hero h1 .hl{color:var(--primary)}
+.hero h1 .hl2{color:var(--accent)}
+.hero-p{font-size:1.2rem;color:var(--ink2);max-width:660px;margin:0 auto 38px;line-height:1.7}
+.hero-p strong{color:var(--ink);font-weight:600}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.hero-note{margin-top:22px;font-size:.86rem;color:var(--muted)}
+
+/* trust strip */
+.strip{padding:34px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg)}
+.strip-row{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+.chip{display:flex;align-items:center;gap:9px;background:var(--soft);border:1px solid var(--line);border-radius:100px;padding:10px 20px;font-size:.86rem;font-weight:500;color:var(--ink2);white-space:nowrap}
+.chip .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-b{background:var(--primary)}.dot-o{background:var(--accent)}.dot-g{background:var(--green)}.dot-v{background:var(--violet)}
+
+/* sections */
+.sec{padding:96px 0}
+.sec-soft{background:var(--soft)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+
+/* detail list */
+.dlist{display:flex;flex-direction:column;gap:22px;margin-top:28px}
+.ditem{display:flex;gap:16px;align-items:flex-start}
+.dicon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem}
+.di-b{background:var(--primary-soft)}.di-o{background:var(--accent-soft)}.di-g{background:var(--green-soft)}.di-v{background:var(--violet-soft)}
+.ditem h4{font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:3px}
+.ditem p{font-size:.92rem;color:var(--muted);line-height:1.6}
+
+/* screenshot */
+.shot{border-radius:var(--r);overflow:hidden;border:1px solid var(--line2);box-shadow:var(--shadow-lg)}
+.shot img{width:100%;height:auto;display:block}
+
+/* feature cards */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:32px 28px;box-shadow:var(--shadow);transition:transform .3s,box-shadow .3s,border-color .3s}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:var(--line2)}
+.card-ic{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:1.4rem}
+.ic-b{background:var(--primary-soft)}.ic-o{background:var(--accent-soft)}.ic-g{background:var(--green-soft)}.ic-v{background:var(--violet-soft)}
+.card h3{font-size:1.18rem;font-weight:700;color:var(--ink);margin-bottom:9px}
+.card>p{color:var(--ink2);font-size:.95rem;line-height:1.65}
+.clist{list-style:none;display:flex;flex-direction:column;gap:9px;margin-top:15px}
+.clist li{display:flex;align-items:flex-start;gap:9px;font-size:.9rem;color:var(--muted);line-height:1.55}
+.clist li svg{flex-shrink:0;margin-top:3px}
+.tick-b{color:var(--primary)}.tick-o{color:var(--accent)}.tick-g{color:var(--green)}.tick-v{color:var(--violet)}
+
+/* phone mockup */
+.phone{width:280px;margin:0 auto;background:var(--ink);border-radius:38px;padding:12px;box-shadow:var(--shadow-lg)}
+.phone-notch{width:120px;height:26px;background:var(--ink);border-radius:0 0 16px 16px;margin:0 auto}
+.phone-screen{background:var(--soft);border-radius:28px;padding:20px 16px;min-height:440px;margin-top:-13px}
+.ph-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.ph-head h5{font-size:.9rem;font-weight:700;color:var(--ink)}
+.ph-head span{font-size:.72rem;color:var(--muted)}
+.ph-tabs{display:flex;gap:5px;margin-bottom:14px}
+.ph-tab{flex:1;text-align:center;padding:7px;border-radius:9px;font-size:.68rem;font-weight:600;background:var(--bg);color:var(--muted);border:1px solid var(--line)}
+.ph-tab.on{background:var(--primary);color:#fff;border-color:var(--primary)}
+.ph-card{border-radius:14px;padding:14px;margin-bottom:11px;background:var(--bg);border:1px solid var(--line)}
+.ph-card.g{border-left:4px solid var(--green)}
+.ph-card.o{border-left:4px solid var(--accent)}
+.ph-badge{display:inline-flex;align-items:center;gap:6px;font-size:.64rem;font-weight:700;padding:3px 11px;border-radius:100px;margin-bottom:11px}
+.ph-badge.g{background:var(--green-soft);color:var(--green)}
+.ph-badge.o{background:var(--accent-soft);color:var(--accent)}
+.pdot{width:6px;height:6px;border-radius:50%;background:currentColor}
+.ph-line{padding-left:16px;border-left:2px solid var(--line2);display:flex;flex-direction:column;gap:11px}
+.ph-stop{position:relative;font-size:.76rem;color:var(--ink2);line-height:1.4}
+.ph-stop::before{content:'';position:absolute;left:-21px;top:3px;width:10px;height:10px;border-radius:50%;border:2px solid var(--green);background:var(--bg)}
+.ph-stop .t{color:var(--primary);font-weight:700;font-size:.7rem}
+.ph-stop strong{color:var(--ink)}
+.ph-info{display:flex;gap:7px;margin-top:11px;flex-wrap:wrap}
+.ph-chip{font-size:.64rem;font-weight:600;padding:4px 9px;border-radius:7px;background:var(--soft2);color:var(--ink2)}
+
+/* deploy cards */
+.deploy-card{position:relative;overflow:hidden}
+.deploy-badge{position:absolute;top:20px;right:20px;font-size:.66rem;font-weight:700;padding:5px 13px;border-radius:100px;letter-spacing:.05em;text-transform:uppercase}
+.db-b{background:var(--primary-soft);color:var(--primary)}
+.db-o{background:var(--accent-soft);color:var(--accent)}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;position:relative}
+.steps::before{content:'';position:absolute;top:28px;left:16%;right:16%;height:2px;background:var(--line2)}
+.step{text-align:center;position:relative}
+.step-n{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.3rem;margin:0 auto 20px;color:#fff;position:relative;z-index:1}
+.step:nth-child(1) .step-n{background:var(--primary)}
+.step:nth-child(2) .step-n{background:var(--accent)}
+.step:nth-child(3) .step-n{background:var(--green)}
+.step h4{font-weight:700;font-size:1.1rem;color:var(--ink);margin-bottom:8px}
+.step p{font-size:.92rem;color:var(--muted);max-width:290px;margin:0 auto;line-height:1.6}
+
+/* summary band */
+.band{background:linear-gradient(135deg,#1a2b45,#0f1b2d);border-radius:28px;padding:56px 48px;color:#fff}
+.band h2{color:#fff;font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:800;letter-spacing:-.03em;margin-bottom:32px;text-align:center}
+.band-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:22px}
+.band-item{text-align:center}
+.band-item .bic{width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin:0 auto 12px}
+.band-item h4{font-size:.98rem;font-weight:700;margin-bottom:5px}
+.band-item p{font-size:.82rem;color:rgba(255,255,255,.7);line-height:1.5}
+
+/* contact */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.dlinks{display:flex;flex-direction:column;gap:13px;margin-bottom:32px}
+.dl{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--rs);padding:16px 20px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:border-color .25s,transform .2s}
+.dl:hover{border-color:var(--primary);transform:translateX(4px)}
+.dl-ic{width:42px;height:42px;border-radius:11px;background:var(--primary-soft);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.dl strong{display:block;font-size:.96rem;font-weight:600}
+.dl small{font-size:.8rem;color:var(--muted)}
+.benefits{display:flex;flex-direction:column;gap:18px}
+.ben{display:flex;gap:14px;align-items:flex-start}
+.ben-ic{width:38px;height:38px;border-radius:11px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.05rem}
+.ben h4{font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:2px}
+.ben p{font-size:.87rem;color:var(--muted);line-height:1.55}
+.form{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:40px;box-shadow:var(--shadow)}
+.fr{margin-bottom:18px}
+.fr label{display:block;font-size:.85rem;font-weight:600;color:var(--ink2);margin-bottom:7px}
+.fr input,.fr textarea{width:100%;background:var(--bg);border:1px solid var(--line2);border-radius:var(--rs);padding:13px 16px;font-size:.95rem;color:var(--ink);font-family:var(--font);transition:border-color .25s,box-shadow .25s;outline:none}
+.fr input:focus,.fr textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-soft)}
+.fr input::placeholder,.fr textarea::placeholder{color:#9aa7b8}
+.fr textarea{resize:vertical;min-height:120px}
+.fr-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.btn-submit{width:100%;margin-top:6px;background:var(--primary);color:#fff;font-weight:700;font-size:1rem;padding:16px;border-radius:var(--rs);border:none;cursor:pointer;box-shadow:0 10px 26px rgba(37,99,235,.28);font-family:var(--font);transition:transform .2s,box-shadow .3s}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(37,99,235,.35)}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:40px 0;text-align:center;background:var(--soft)}
+footer p{font-size:.85rem;color:var(--muted)}
+footer a{color:var(--primary);text-decoration:none;font-weight:500}
+footer strong{color:var(--ink2)}
+
+/* responsive */
+@media(max-width:980px){.split,.contact-wrap{grid-template-columns:1fr;gap:44px}.grid4{grid-template-columns:repeat(2,1fr)}.band-grid{grid-template-columns:repeat(2,1fr);gap:26px}.steps{grid-template-columns:1fr;gap:36px}.steps::before{display:none}}
+@media(max-width:700px){.hero{padding:120px 0 70px}.nav-links{display:none}.mob-tog{display:block}.grid2,.grid3,.grid4{grid-template-columns:1fr}.band{padding:40px 26px}.band-grid{grid-template-columns:1fr}.form{padding:28px}.fr-grid{grid-template-columns:1fr}.sec{padding:72px 0}.strip-row{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding-bottom:6px}}
+.nav-links.open{display:flex!important;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,.98);backdrop-filter:blur(16px);padding:22px;gap:18px;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+
+/* screenshot rows & figures */
+figure.shot{display:flex;flex-direction:column;background:var(--card)}
+.shot figcaption{padding:11px 16px;font-size:.83rem;font-weight:600;color:var(--ink2);border-top:1px solid var(--line);background:var(--card)}
+.shot-duo{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.shot-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+.shot-single{max-width:780px;margin:44px auto 0}
+img.zoom{cursor:zoom-in;transition:opacity .2s}
+img.zoom:hover{opacity:.92}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.gitem{border-radius:var(--rs);overflow:hidden;border:1px solid var(--line2);box-shadow:var(--shadow);background:var(--card);cursor:zoom-in;transition:transform .3s,box-shadow .3s}
+.gitem:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.gitem img{width:100%;height:180px;object-fit:cover;object-position:top center;display:block}
+.gitem figcaption{padding:11px 15px;font-size:.82rem;font-weight:600;color:var(--ink2)}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:1000;background:rgba(10,17,28,.92);display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:36px}
+.lb.open{display:flex}
+.lb img{max-width:92vw;max-height:80vh;border-radius:12px;box-shadow:0 30px 90px rgba(0,0,0,.55)}
+.lb-cap{color:#eaf0f8;font-size:.95rem;font-weight:500;text-align:center}
+.lb-close{position:absolute;top:20px;right:24px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;border:none;font-size:1.6rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.lb-close:hover{background:rgba(255,255,255,.24)}
+
+@media(max-width:900px){.shot-trio,.gallery{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.shot-duo,.shot-trio,.gallery{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo"><span class="nav-badge"><img src="logo.png" alt="BusItinera"></span><div class="nav-logo-t">Bus<span>Itinera</span></div></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#calendario">Agenda</a>
+      <a href="#gestione">Viaggi</a>
+      <a href="#autisti">Autisti</a>
+      <a href="#deploy">Dove funziona</a>
+      <a href="#galleria">Galleria</a>
+      <a href="chi-sono.html">Chi sono</a>
+      <a href="#contatti" class="nav-cta">Richiedi demo</a>
+    </div>
+    <button class="mob-tog" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-logo rv"><img src="logo.png" alt="BusItinera"></div>
+    <h1 class="rv d1">L'<span class="hl">agenda digitale</span> della tua flotta, <span class="hl2">sempre aggiornata</span></h1>
+    <p class="hero-p rv d2">BusItinera sostituisce quaderni, fogli Excel e messaggi sparsi con un unico posto dove pianifichi i viaggi, sai sempre quale mezzo e quale autista è libero, e tieni sotto controllo pagamenti e clienti. <strong>Gli autisti vedono i loro viaggi direttamente sul telefono.</strong></p>
+    <div class="hero-btns rv d3">
+      <a href="#contatti" class="btn-p">Richiedi una demo gratuita
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#calendario" class="btn-s">Scopri come funziona</a>
+    </div>
+    <p class="hero-note rv d3">Sul tuo server aziendale o nel cloud · Nessun canone obbligatorio · Demo su misura</p>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="strip">
+  <div class="wrap">
+    <div class="strip-row rv">
+      <div class="chip"><span class="dot dot-b"></span>Agenda con vista giorno, settimana e mese</div>
+      <div class="chip"><span class="dot dot-o"></span>Niente doppie prenotazioni</div>
+      <div class="chip"><span class="dot dot-g"></span>App per gli autisti sul telefono</div>
+      <div class="chip"><span class="dot dot-v"></span>Navigazione Google Maps integrata</div>
+      <div class="chip"><span class="dot dot-b"></span>Pagamenti sotto controllo</div>
+    </div>
+  </div>
+</div>
+
+<!-- CALENDARIO -->
+<section class="sec sec-soft" id="calendario">
+  <div class="wrap">
+    <div class="split">
+      <figure class="shot rv">
+        <img class="zoom" src="images/calendario.png" data-cap="Calendario — vista mese" alt="BusItinera — vista calendario del mese con viaggi, noleggi e appuntamenti" loading="lazy">
+      </figure>
+      <div class="rv d1">
+        <div class="eyebrow">L'agenda</div>
+        <h2 class="h2">La tua flotta a colpo d'occhio</h2>
+        <p class="sub">Apri l'agenda e vedi subito cosa sta succedendo. È come avere un grande planning appeso al muro, ma sempre aggiornato, consultabile da qualsiasi computer o telefono, e senza cancellature.</p>
+        <div class="dlist">
+          <div class="ditem"><div class="dicon di-b">📅</div><div><h4>Giorno, settimana o mese</h4><p>Guardi la giornata di oggi, la settimana intera o tutto il mese con un clic. Ogni viaggio è colorato in base al mezzo, così riconosci al volo chi è dove.</p></div></div>
+          <div class="ditem"><div class="dicon di-o">➕</div><div><h4>Aggiungere un viaggio è immediato</h4><p>Clicchi sul giorno che ti serve e il modulo si apre con la data già compilata. Meno passaggi, meno errori.</p></div></div>
+          <div class="ditem"><div class="dicon di-g">🎨</div><div><h4>Tutto riconoscibile a vista</h4><p>Colori per i mezzi e icone per il tipo di impegno (viaggio, noleggio, appuntamento). Capisci la situazione senza aprire nulla.</p></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="shot-duo rv d2" style="margin-top:32px">
+      <figure class="shot"><img class="zoom" src="images/giorno.png" data-cap="Calendario — vista giorno" alt="Vista giorno" loading="lazy"><figcaption>Vista giorno — le corse della giornata</figcaption></figure>
+      <figure class="shot"><img class="zoom" src="images/settimana.png" data-cap="Calendario — vista settimana" alt="Vista settimana" loading="lazy"><figcaption>Vista settimana — la panoramica dei 7 giorni</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- GESTIONE VIAGGI -->
+<section class="sec" id="gestione">
+  <div class="wrap">
+    <div class="center" style="margin-bottom:56px">
+      <div class="eyebrow or">Gestione viaggi</div>
+      <h2 class="h2 rv">Ogni viaggio sotto controllo, dal preventivo al pagamento</h2>
+      <p class="sub rv d1">Inserisci tutto in un'unica schermata e lascia che il programma ti eviti gli errori più costosi.</p>
+    </div>
+    <div class="grid2">
+      <div class="card rv">
+        <div class="card-ic ic-o">🚌</div>
+        <h3>Creare un viaggio in un colpo solo</h3>
+        <p>Cliente, data e ora, luogo di ritiro, tappe, mezzo, autisti e prezzo: tutto in un unico modulo, senza saltare da una schermata all'altra.</p>
+        <ul class="clist">
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Gli indirizzi si completano da soli mentre scrivi, come su Google Maps</li>
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Aggiungi tutte le tappe intermedie che vuoi</li>
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Crei un cliente nuovo al volo, con avviso se il numero esiste già</li>
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Costi extra (pasto, parcheggio, ZTL, hotel) sommati in automatico al totale</li>
+        </ul>
+      </div>
+      <div class="card rv d1">
+        <div class="card-ic ic-b">🛡️</div>
+        <h3>Niente più mezzi o autisti prenotati due volte</h3>
+        <p>Il cuore del programma. Se assegni un mezzo o un autista già impegnato in quelle ore, il sistema ti ferma prima che tu salvi e ti dice esattamente chi c'è già.</p>
+        <ul class="clist">
+          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Il controllo è automatico: non devi verificarlo tu a mente</li>
+          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Vale anche tra viaggi e noleggi dello stesso mezzo</li>
+          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Messaggio chiaro: “Marco Bianchi è già assegnato in questo orario”</li>
+          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Le risorse libere compaiono per prime, quelle occupate sono segnate</li>
+        </ul>
+      </div>
+      <div class="card rv d2">
+        <div class="card-ic ic-v">📋</div>
+        <h3>Il dettaglio del viaggio, sempre a portata</h3>
+        <p>Clicchi su un viaggio e vedi tutto: percorso, mezzo, cliente e conti. Con pochi tocchi aggiorni lo stato senza rifare il modulo.</p>
+        <ul class="clist">
+          <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Percorso apribile su Google Maps per la navigazione</li>
+          <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Riepilogo economico: prezzo base, extra e totale</li>
+          <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Segni con un tocco: fatturato, pagato, busta consegnata</li>
+          <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Telefono ed email del cliente cliccabili</li>
+        </ul>
+      </div>
+      <div class="card rv d3">
+        <div class="card-ic ic-g">🔑</div>
+        <h3>Non solo viaggi: noleggi e appuntamenti</h3>
+        <p>Gestisci nello stesso posto i noleggi dei mezzi e gli appuntamenti (revisioni, manutenzioni), con le stesse protezioni anti-sovrapposizione.</p>
+        <ul class="clist">
+          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Noleggi con data di ritiro e riconsegna, luogo, contratto e prezzo</li>
+          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Un mezzo a noleggio non risulta libero per un viaggio nello stesso periodo</li>
+          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Appuntamenti con titolo, data, ora e durata</li>
+          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Tutto colorato e riconoscibile a calendario</li>
+        </ul>
+      </div>
+    </div>
+    <div class="shot-trio">
+      <figure class="shot rv"><img class="zoom" src="images/nuovo_viaggio.png" data-cap="Creazione di un nuovo viaggio" alt="Modulo nuovo viaggio" loading="lazy"><figcaption>Creazione viaggio</figcaption></figure>
+      <figure class="shot rv d1"><img class="zoom" src="images/dettagli_viaggio.png" data-cap="Dettaglio di un viaggio" alt="Dettaglio viaggio" loading="lazy"><figcaption>Dettaglio viaggio</figcaption></figure>
+      <figure class="shot rv d2"><img class="zoom" src="images/viaggi_noleggi.png" data-cap="Elenco viaggi e noleggi con filtri" alt="Elenco viaggi e noleggi" loading="lazy"><figcaption>Elenco viaggi e noleggi</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- PORTALE AUTISTA -->
+<section class="sec sec-soft" id="autisti">
+  <div class="wrap">
+    <div class="split">
+      <div class="rv">
+        <div class="eyebrow gr">Portale autista</div>
+        <h2 class="h2">Il telefono dell'autista diventa il suo cruscotto</h2>
+        <p class="sub">Ogni autista accede a una versione dedicata sul suo smartphone, dove vede solo i suoi viaggi. Semplice, pulita, sempre in tasca.</p>
+        <div class="dlist">
+          <div class="ditem"><div class="dicon di-g">🟢</div><div><h4>Il viaggio in corso, evidenziato</h4><p>La tappa di partenza, le soste e l'arrivo in ordine. Ogni indirizzo è un pulsante che apre la navigazione su Google Maps.</p></div></div>
+          <div class="ditem"><div class="dicon di-o">⏱️</div><div><h4>Conto alla rovescia sul prossimo viaggio</h4><p>“In partenza tra 45 minuti”, aggiornato da solo. L'autista sa sempre quando muoversi.</p></div></div>
+          <div class="ditem"><div class="dicon di-v">🔒</div><div><h4>Solo ciò che gli serve</h4><p>Prezzi, pagamenti e dati riservati non sono visibili all'autista. Meno telefonate del tipo “dove devo andare?” e “a che ora?”.</p></div></div>
+        </div>
+      </div>
+      <div class="rv d1" style="display:flex;justify-content:center">
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="ph-head"><h5>I miei viaggi</h5><span>Marco B.</span></div>
+            <div class="ph-tabs"><div class="ph-tab on">Giorno</div><div class="ph-tab">Settimana</div><div class="ph-tab">Mese</div></div>
+            <div class="ph-card g">
+              <div class="ph-badge g"><span class="pdot"></span>In corso</div>
+              <div class="ph-line">
+                <div class="ph-stop"><span class="t">07:30</span><br><strong>Piazzale Roma, Venezia</strong></div>
+                <div class="ph-stop"><span class="t">09:15</span><br>Sosta pranzo — Autogrill</div>
+                <div class="ph-stop"><span class="t">12:00</span><br><strong>Fiera di Roma</strong></div>
+              </div>
+              <div class="ph-info"><span class="ph-chip">🚌 Corriera Blu</span><span class="ph-chip">Comune di Venezia</span></div>
+            </div>
+            <div class="ph-card o">
+              <div class="ph-badge o"><span class="pdot"></span>Tra 45 min</div>
+              <div class="ph-line">
+                <div class="ph-stop"><span class="t">14:30</span><br><strong>Hotel Danieli, VE</strong></div>
+                <div class="ph-stop"><span class="t">16:00</span><br><strong>Aeroporto Marco Polo</strong></div>
+              </div>
+              <div class="ph-info"><span class="ph-chip">🚐 NCC Nero</span><span class="ph-chip">Agenzia Stella</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANAGRAFICHE -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center" style="margin-bottom:56px">
+      <div class="eyebrow vi">Le anagrafiche</div>
+      <h2 class="h2 rv">Mezzi, clienti e autisti sempre in ordine</h2>
+      <p class="sub rv d1">Registri le tue risorse una volta e le richiami con un clic. Il programma protegge i dati da errori e doppioni.</p>
+    </div>
+    <div class="grid3">
+      <div class="card rv"><div class="card-ic ic-b">🚌</div><h3>Mezzi</h3><p>Targa, soprannome, tipo e un colore personalizzato che ritrovi a calendario.</p><ul class="clist"><li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Segni “fuori servizio” quando è in officina e sparisce dalle scelte</li><li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Non lo cancelli per sbaglio se ha viaggi collegati</li></ul></div>
+      <div class="card rv d1"><div class="card-ic ic-o">👥</div><h3>Clienti</h3><p>Nome, ragione sociale, telefono ed email, tutti a portata di clic.</p><ul class="clist"><li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Niente doppioni: il numero di telefono è controllato</li><li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Ricerca istantanea per trovarli subito</li></ul></div>
+      <div class="card rv d2"><div class="card-ic ic-g">🧑‍✈️</div><h3>Autisti</h3><p>Ognuno con il suo accesso e il portale dedicato sul telefono.</p><ul class="clist"><li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Se sospendi un autista, lo storico dei suoi viaggi resta</li><li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Un autista non disponibile è segnato a calendario</li></ul></div>
+    </div>
+    <div class="shot-trio">
+      <figure class="shot rv"><img class="zoom" src="images/veicoli.png" data-cap="Anagrafica veicoli" alt="Anagrafica veicoli" loading="lazy"><figcaption>Veicoli</figcaption></figure>
+      <figure class="shot rv d1"><img class="zoom" src="images/clienti.png" data-cap="Anagrafica clienti" alt="Anagrafica clienti" loading="lazy"><figcaption>Clienti</figcaption></figure>
+      <figure class="shot rv d2"><img class="zoom" src="images/utenti.png" data-cap="Utenti e ruoli" alt="Utenti e ruoli" loading="lazy"><figcaption>Utenti e ruoli</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- AMMINISTRAZIONE -->
+<section class="sec sec-soft">
+  <div class="wrap">
+    <div class="center" style="margin-bottom:56px">
+      <div class="eyebrow or">Amministrazione</div>
+      <h2 class="h2 rv">Pagamenti e conti sotto controllo</h2>
+      <p class="sub rv d1">Gli strumenti che trasformano il caos amministrativo in un flusso ordinato.</p>
+    </div>
+    <div class="grid3">
+      <div class="card rv"><div class="card-ic ic-o">🔔</div><h3>Avvisi sui pagamenti</h3><p>Una campanella ti segnala i pagamenti in scadenza o già scaduti, con i giorni di ritardo, il nome del cliente, l'importo e i contatti. Sai chi sollecitare senza cercare tra le carte.</p></div>
+      <div class="card rv d1"><div class="card-ic ic-b">📊</div><h3>Esporti in Excel</h3><p>Ti serve un riepilogo per il commercialista? Esporti tutto in un file Excel scegliendo quali informazioni includere. Già pronto per aprirsi correttamente in Excel italiano.</p></div>
+      <div class="card rv d2"><div class="card-ic ic-g">🔎</div><h3>Ricerca unica</h3><p>Scrivi un nome cliente, un indirizzo o una targa e trovi subito tutti i viaggi collegati. Filtri per mese, periodo, autista o mezzo.</p></div>
+    </div>
+    <figure class="shot shot-single rv d1"><img class="zoom" src="images/avvisi.png" data-cap="Avvisi sui pagamenti in scadenza e scaduti" alt="Avvisi pagamenti" loading="lazy"><figcaption>Il pannello avvisi: pagamenti in scadenza e scaduti, con giorni di ritardo e contatti</figcaption></figure>
+  </div>
+</section>
+
+<!-- SICUREZZA & ACCESSI -->
+<section class="sec" id="sicurezza">
+  <div class="wrap">
+    <div class="split">
+      <div class="rv">
+        <div class="eyebrow">Accessi e sicurezza</div>
+        <h2 class="h2">I tuoi dati al sicuro, il giusto accesso a ciascuno</h2>
+        <p class="sub">Ognuno entra con il proprio account e vede solo quello che gli spetta. I dati sono protetti e salvati in automatico.</p>
+        <div class="dlist">
+          <div class="ditem"><div class="dicon di-b">👤</div><div><h4>Accessi su misura</h4><p>Chi comanda tutto (amministratore), chi gestisce i viaggi (editor) e gli autisti che vedono solo i propri. Sai sempre chi fa cosa.</p></div></div>
+          <div class="ditem"><div class="dicon di-g">🔐</div><div><h4>Ingresso protetto</h4><p>Password robuste e, per chi gestisce l'azienda, un secondo codice di sicurezza sul telefono, come per l'home banking.</p></div></div>
+          <div class="ditem"><div class="dicon di-o">💾</div><div><h4>Backup automatici</h4><p>I dati vengono salvati ogni giorno e le copie conservate per due settimane. Anche se qualcosa va storto, non si perde nulla.</p></div></div>
+        </div>
+      </div>
+      <div class="rv d1">
+        <div class="card" style="padding:38px">
+          <div class="card-ic ic-b" style="width:56px;height:56px;font-size:1.6rem">🗂️</div>
+          <h3 style="font-size:1.3rem">Tre livelli di accesso</h3>
+          <p style="margin-bottom:20px">A ognuno il suo, senza rischi di sovrapposizione.</p>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;gap:12px;align-items:center;padding:14px 16px;background:var(--primary-soft);border-radius:12px"><strong style="color:var(--primary)">Amministratore</strong><span style="font-size:.86rem;color:var(--ink2)">— gestisce tutto, anche gli utenti</span></div>
+            <div style="display:flex;gap:12px;align-items:center;padding:14px 16px;background:var(--accent-soft);border-radius:12px"><strong style="color:var(--accent)">Editor</strong><span style="font-size:.86rem;color:var(--ink2)">— gestisce i viaggi, non gli utenti</span></div>
+            <div style="display:flex;gap:12px;align-items:center;padding:14px 16px;background:var(--green-soft);border-radius:12px"><strong style="color:var(--green)">Autista</strong><span style="font-size:.86rem;color:var(--ink2)">— vede solo i propri viaggi dal telefono</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPLOY -->
+<section class="sec sec-soft" id="deploy">
+  <div class="wrap">
+    <div class="center" style="margin-bottom:56px">
+      <div class="eyebrow">Dove funziona</div>
+      <h2 class="h2 rv">Sul tuo server o nel cloud: decidi tu</h2>
+      <p class="sub rv d1">L'applicazione è identica nei due casi. Cambia solo dove “abita”. Gira su hardware modesto, senza macchine costose.</p>
+    </div>
+    <div class="grid2">
+      <div class="card deploy-card rv">
+        <div class="deploy-badge db-b">Opzione A</div>
+        <div class="card-ic ic-b">🏠</div>
+        <h3>Sul tuo server aziendale</h3>
+        <p>BusItinera gira sul tuo NAS o su una macchina in azienda: i dati restano fisicamente da te.</p>
+        <ul class="clist">
+          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Massima privacy: i dati non escono dalla tua rete</li>
+          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Nessun canone mensile</li>
+          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Funziona anche senza internet, sulla rete interna</li>
+          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Ideale per chi ha già un NAS o esigenze di privacy</li>
+        </ul>
+      </div>
+      <div class="card deploy-card rv d1">
+        <div class="deploy-badge db-o">Opzione B</div>
+        <div class="card-ic ic-o">☁️</div>
+        <h3>Nel cloud, senza hardware</h3>
+        <p>Non hai un server? Te la configuro nel cloud, pronta all'uso e accessibile da ovunque.</p>
+        <ul class="clist">
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Zero hardware da gestire</li>
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Accessibile ovunque, basta un browser</li>
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Configurazione guidata: ci penso io</li>
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Ideale per piccole flotte e chi vuole partire subito</li>
+        </ul>
+      </div>
+    </div>
+    <p class="center rv d2" style="margin-top:36px;color:var(--muted);font-size:.95rem;max-width:680px;margin-left:auto;margin-right:auto">In entrambi i casi ricevi la <strong style="color:var(--ink)">stessa identica applicazione</strong>: stesse funzioni, stessa sicurezza, stesso portale autista.</p>
+  </div>
+</section>
+
+<!-- COME FUNZIONA -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center" style="margin-bottom:56px">
+      <div class="eyebrow gr">Come si parte</div>
+      <h2 class="h2 rv">Operativo in tre passi</h2>
+      <p class="sub rv d1">Dal primo accesso al primo viaggio pianificato, con il mio affiancamento.</p>
+    </div>
+    <div class="steps">
+      <div class="step rv"><div class="step-n">1</div><h4>Scegli dove installarla</h4><p>Sul tuo server o nel cloud. Nel secondo caso configuro tutto io: tu ricevi solo il link di accesso.</p></div>
+      <div class="step rv d1"><div class="step-n">2</div><h4>Carichi la tua flotta</h4><p>Inserisci mezzi, autisti e clienti. Colori, account e controlli anti-doppione sono già pronti.</p></div>
+      <div class="step rv d2"><div class="step-n">3</div><h4>Pianifichi e parti</h4><p>Crei i viaggi dall'agenda, il sistema controlla i conflitti e gli autisti li vedono sul telefono.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SUMMARY BAND -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="band rv">
+      <h2>In sintesi: cosa ci guadagni</h2>
+      <div class="band-grid">
+        <div class="band-item"><div class="bic">✅</div><h4>Meno errori</h4><p>Niente doppie prenotazioni di mezzi e autisti</p></div>
+        <div class="band-item"><div class="bic">📵</div><h4>Meno telefonate</h4><p>Gli autisti hanno viaggi e navigazione sul telefono</p></div>
+        <div class="band-item"><div class="bic">⚡</div><h4>Meno tempo perso</h4><p>Pianifichi, cerchi ed esporti in pochi clic</p></div>
+        <div class="band-item"><div class="bic">🎯</div><h4>Più controllo</h4><p>Sai chi deve pagarti e chi sta facendo cosa</p></div>
+        <div class="band-item"><div class="bic">🔒</div><h4>Dati al sicuro</h4><p>Accessi protetti e backup automatici</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERIA -->
+<section class="sec" id="galleria">
+  <div class="wrap">
+    <div class="center" style="margin-bottom:56px">
+      <div class="eyebrow vi">Guarda l'app</div>
+      <h2 class="h2 rv">Screenshot reali della dashboard</h2>
+      <p class="sub rv d1">Nessun mockup: queste sono le schermate vere di BusItinera. Clicca su un'immagine per ingrandirla.</p>
+    </div>
+    <div class="gallery">
+      <figure class="gitem rv"><img class="zoom" src="images/calendario.png" data-cap="Calendario — vista mese" alt="Calendario vista mese" loading="lazy"><figcaption>Calendario — vista mese</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/giorno.png" data-cap="Calendario — vista giorno" alt="Vista giorno" loading="lazy"><figcaption>Calendario — vista giorno</figcaption></figure>
+      <figure class="gitem rv d2"><img class="zoom" src="images/settimana.png" data-cap="Calendario — vista settimana" alt="Vista settimana" loading="lazy"><figcaption>Calendario — vista settimana</figcaption></figure>
+      <figure class="gitem rv"><img class="zoom" src="images/nuovo_viaggio.png" data-cap="Creazione di un nuovo viaggio" alt="Nuovo viaggio" loading="lazy"><figcaption>Nuovo viaggio</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/dettagli_viaggio.png" data-cap="Dettaglio di un viaggio" alt="Dettaglio viaggio" loading="lazy"><figcaption>Dettaglio viaggio</figcaption></figure>
+      <figure class="gitem rv d2"><img class="zoom" src="images/viaggi_noleggi.png" data-cap="Elenco viaggi e noleggi con filtri" alt="Elenco viaggi e noleggi" loading="lazy"><figcaption>Elenco viaggi e noleggi</figcaption></figure>
+      <figure class="gitem rv"><img class="zoom" src="images/nuovo_noleggio.png" data-cap="Creazione di un nuovo noleggio" alt="Nuovo noleggio" loading="lazy"><figcaption>Nuovo noleggio</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/nuovo_appuntamento.png" data-cap="Creazione di un nuovo appuntamento" alt="Nuovo appuntamento" loading="lazy"><figcaption>Nuovo appuntamento</figcaption></figure>
+      <figure class="gitem rv d2"><img class="zoom" src="images/avvisi.png" data-cap="Avvisi sui pagamenti in scadenza e scaduti" alt="Avvisi pagamenti" loading="lazy"><figcaption>Avvisi pagamenti</figcaption></figure>
+      <figure class="gitem rv"><img class="zoom" src="images/veicoli.png" data-cap="Anagrafica veicoli" alt="Anagrafica veicoli" loading="lazy"><figcaption>Anagrafica veicoli</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/nuovo_veicolo.png" data-cap="Inserimento di un nuovo veicolo" alt="Nuovo veicolo" loading="lazy"><figcaption>Nuovo veicolo</figcaption></figure>
+      <figure class="gitem rv d2"><img class="zoom" src="images/clienti.png" data-cap="Anagrafica clienti" alt="Anagrafica clienti" loading="lazy"><figcaption>Anagrafica clienti</figcaption></figure>
+      <figure class="gitem rv"><img class="zoom" src="images/utenti.png" data-cap="Gestione utenti e ruoli" alt="Utenti e ruoli" loading="lazy"><figcaption>Utenti e ruoli</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/dati_azienda.png" data-cap="Dati e impostazioni dell'azienda" alt="Dati azienda" loading="lazy"><figcaption>Dati azienda</figcaption></figure>
+      <figure class="gitem rv d2"><img class="zoom" src="images/documentazione.png" data-cap="Documentazione integrata nell'app" alt="Documentazione" loading="lazy"><figcaption>Documentazione integrata</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATTI -->
+<section class="sec sec-soft" id="contatti">
+  <div class="wrap">
+    <div class="contact-wrap">
+      <div class="rv">
+        <div class="eyebrow or">Contattami</div>
+        <h2 class="h2">Pronto a digitalizzare la tua flotta?</h2>
+        <p class="sub" style="margin-bottom:30px">Sono Andrea Ceol, lo sviluppatore di BusItinera. Scrivimi direttamente per una demo o per qualsiasi domanda: risponde chi ha costruito il programma.</p>
+        <div class="dlinks">
+          <a href="mailto:ceolandrea006@gmail.com" class="dl"><span class="dl-ic">✉️</span><span><strong>ceolandrea006@gmail.com</strong><small>Rispondo entro 24 ore</small></span></a>
+          <a href="tel:+393274997730" class="dl"><span class="dl-ic">📞</span><span><strong>+39 327 499 7730</strong><small>Anche WhatsApp</small></span></a>
+        </div>
+        <div class="benefits">
+          <div class="ben"><div class="ben-ic">🎯</div><div><h4>Demo su misura</h4><p>Ti mostro le funzioni più utili per il tuo tipo di trasporto: NCC, bus, scuolabus.</p></div></div>
+          <div class="ben"><div class="ben-ic">⚡</div><div><h4>Installazione guidata</h4><p>Ti affianco nel setup con i tuoi dati reali, fino al primo accesso.</p></div></div>
+          <div class="ben"><div class="ben-ic">🤝</div><div><h4>Supporto diretto</h4><p>Parli con me. Nessun call center, nessun ticket.</p></div></div>
+        </div>
+      </div>
+      <div class="form rv d1">
+        <div class="fr-grid">
+          <div class="fr"><label for="nome">Il tuo nome</label><input type="text" id="nome" placeholder="Mario Rossi" required></div>
+          <div class="fr"><label for="azienda">Azienda (opzionale)</label><input type="text" id="azienda" placeholder="Trasporti Rossi Srl"></div>
+        </div>
+        <div class="fr"><label for="emailUser">La tua email</label><input type="email" id="emailUser" placeholder="info@tuaazienda.it" required></div>
+        <div class="fr"><label for="telefono">Telefono (opzionale)</label><input type="tel" id="telefono" placeholder="+39 333 123 4567"></div>
+        <div class="fr"><label for="messaggio">Messaggio</label><textarea id="messaggio" placeholder="Parlami della tua flotta: quanti mezzi, che servizio offri, quali problemi vuoi risolvere..." required></textarea></div>
+        <button class="btn-submit" type="button" onclick="inviaForm()">Invia richiesta demo →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <p>© 2026 BusItinera Autotrasporti — Progetto di <strong>Andrea Ceol</strong> · <a href="mailto:ceolandrea006@gmail.com">ceolandrea006@gmail.com</a> · <a href="tel:+393274997730">+39 327 499 7730</a></p>
+  </div>
+</footer>
+
+<script>
+/* scroll reveal */
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('vis');obs.unobserve(el.target)}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+/* nav shadow on scroll */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>20)});
+
+/* close mobile menu on link click */
+document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+
+/* lightbox per gli screenshot */
+const lb=document.createElement('div');lb.className='lb';
+lb.innerHTML='<button class="lb-close" aria-label="Chiudi">×</button><img alt=""><div class="lb-cap"></div>';
+document.body.appendChild(lb);
+const lbImg=lb.querySelector('img'),lbCap=lb.querySelector('.lb-cap');
+function openLb(src,cap){lbImg.src=src;lbCap.textContent=cap||'';lb.classList.add('open');document.body.style.overflow='hidden';}
+function closeLb(){lb.classList.remove('open');document.body.style.overflow='';}
+lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('lb-close'))closeLb();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();});
+document.querySelectorAll('img.zoom').forEach(im=>im.addEventListener('click',()=>openLb(im.src,im.dataset.cap||im.alt)));
+
+/* form -> mailto */
+function inviaForm(){
+  const nome=document.getElementById('nome').value.trim();
+  const azienda=document.getElementById('azienda').value.trim();
+  const email=document.getElementById('emailUser').value.trim();
+  const tel=document.getElementById('telefono').value.trim();
+  const msg=document.getElementById('messaggio').value.trim();
+  if(!nome||!email||!msg){alert('Compila nome, email e messaggio.');return;}
+  const corpo=`Nome: ${nome}%0D%0AAzienda: ${azienda||'-'}%0D%0AEmail: ${email}%0D%0ATelefono: ${tel||'-'}%0D%0A%0D%0A${msg}`;
+  window.location.href=`mailto:ceolandrea006@gmail.com?subject=Richiesta demo BusItinera — ${encodeURIComponent(nome)}&body=${corpo}`;
+}
+</script>
+</body>
+</html>
