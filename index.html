@@ -60,7 +60,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 nav.scrolled{box-shadow:0 4px 24px rgba(16,27,45,.06)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;max-width:1180px;margin:0 auto;padding:13px 28px}
 .nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none}
-.nav-logo img{height:36px}
+.nav-badge{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#1a2b45,#0f1b2d);box-shadow:0 3px 10px rgba(16,27,45,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-badge img{width:66%;height:auto;display:block}
 .nav-logo-t{font-weight:800;font-size:1.12rem;color:var(--ink);letter-spacing:-.02em}
 .nav-logo-t span{color:var(--accent)}
 .nav-links{display:flex;align-items:center;gap:32px}
@@ -81,7 +82,8 @@ nav.scrolled{box-shadow:0 4px 24px rgba(16,27,45,.06)}
 .hero{padding:150px 0 90px;text-align:center;position:relative;overflow:hidden;background:
   radial-gradient(ellipse 60% 50% at 50% 0%,rgba(37,99,235,.07),transparent 70%),
   linear-gradient(180deg,var(--soft),var(--bg) 70%)}
-.hero-logo{width:78px;margin:0 auto 28px;filter:drop-shadow(0 12px 30px rgba(37,99,235,.18))}
+.hero-logo{width:400px;height:400px;max-width:82vw;border-radius:50%;background:linear-gradient(135deg,#1a2b45,#0f1b2d);box-shadow:0 30px 70px rgba(16,27,45,.32);margin:0 auto 40px;display:flex;align-items:center;justify-content:center}
+.hero-logo img{width:60%;height:auto;display:block}
 .hero h1{font-size:clamp(2.4rem,5.5vw,4rem);font-weight:800;line-height:1.06;letter-spacing:-.035em;color:var(--ink);max-width:900px;margin:0 auto 22px}
 .hero h1 .hl{color:var(--primary)}
 .hero h1 .hl2{color:var(--accent)}
@@ -214,6 +216,33 @@ footer strong{color:var(--ink2)}
 @media(max-width:980px){.split,.contact-wrap{grid-template-columns:1fr;gap:44px}.grid4{grid-template-columns:repeat(2,1fr)}.band-grid{grid-template-columns:repeat(2,1fr);gap:26px}.steps{grid-template-columns:1fr;gap:36px}.steps::before{display:none}}
 @media(max-width:700px){.hero{padding:120px 0 70px}.nav-links{display:none}.mob-tog{display:block}.grid2,.grid3,.grid4{grid-template-columns:1fr}.band{padding:40px 26px}.band-grid{grid-template-columns:1fr}.form{padding:28px}.fr-grid{grid-template-columns:1fr}.sec{padding:72px 0}.strip-row{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding-bottom:6px}}
 .nav-links.open{display:flex!important;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,.98);backdrop-filter:blur(16px);padding:22px;gap:18px;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+
+/* screenshot rows & figures */
+figure.shot{display:flex;flex-direction:column;background:var(--card)}
+.shot figcaption{padding:11px 16px;font-size:.83rem;font-weight:600;color:var(--ink2);border-top:1px solid var(--line);background:var(--card)}
+.shot-duo{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.shot-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+.shot-single{max-width:780px;margin:44px auto 0}
+img.zoom{cursor:zoom-in;transition:opacity .2s}
+img.zoom:hover{opacity:.92}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.gitem{border-radius:var(--rs);overflow:hidden;border:1px solid var(--line2);box-shadow:var(--shadow);background:var(--card);cursor:zoom-in;transition:transform .3s,box-shadow .3s}
+.gitem:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.gitem img{width:100%;height:180px;object-fit:cover;object-position:top center;display:block}
+.gitem figcaption{padding:11px 15px;font-size:.82rem;font-weight:600;color:var(--ink2)}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:1000;background:rgba(10,17,28,.92);display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:36px}
+.lb.open{display:flex}
+.lb img{max-width:92vw;max-height:80vh;border-radius:12px;box-shadow:0 30px 90px rgba(0,0,0,.55)}
+.lb-cap{color:#eaf0f8;font-size:.95rem;font-weight:500;text-align:center}
+.lb-close{position:absolute;top:20px;right:24px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;border:none;font-size:1.6rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.lb-close:hover{background:rgba(255,255,255,.24)}
+
+@media(max-width:900px){.shot-trio,.gallery{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.shot-duo,.shot-trio,.gallery{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -221,12 +250,13 @@ footer strong{color:var(--ink2)}
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-in">
-    <a href="index.html" class="nav-logo"><img src="logo.png" alt="BusItinera"><div class="nav-logo-t">Bus<span>Itinera</span></div></a>
+    <a href="index.html" class="nav-logo"><span class="nav-badge"><img src="logo.png" alt="BusItinera"></span><div class="nav-logo-t">Bus<span>Itinera</span></div></a>
     <div class="nav-links" id="navLinks">
       <a href="#calendario">Agenda</a>
       <a href="#gestione">Viaggi</a>
       <a href="#autisti">Autisti</a>
       <a href="#deploy">Dove funziona</a>
+      <a href="#galleria">Galleria</a>
       <a href="chi-sono.html">Chi sono</a>
       <a href="#contatti" class="nav-cta">Richiedi demo</a>
     </div>
@@ -237,7 +267,7 @@ footer strong{color:var(--ink2)}
 <!-- HERO -->
 <section class="hero">
   <div class="wrap">
-    <img src="logo.png" alt="BusItinera" class="hero-logo rv">
+    <div class="hero-logo rv"><img src="logo.png" alt="BusItinera"></div>
     <h1 class="rv d1">L'<span class="hl">agenda digitale</span> della tua flotta, <span class="hl2">sempre aggiornata</span></h1>
     <p class="hero-p rv d2">BusItinera sostituisce quaderni, fogli Excel e messaggi sparsi con un unico posto dove pianifichi i viaggi, sai sempre quale mezzo e quale autista è libero, e tieni sotto controllo pagamenti e clienti. <strong>Gli autisti vedono i loro viaggi direttamente sul telefono.</strong></p>
     <div class="hero-btns rv d3">
@@ -267,9 +297,9 @@ footer strong{color:var(--ink2)}
 <section class="sec sec-soft" id="calendario">
   <div class="wrap">
     <div class="split">
-      <div class="shot rv">
-        <img src="screenshot-calendario.png" alt="BusItinera — vista calendario del mese con viaggi, noleggi e appuntamenti" loading="lazy">
-      </div>
+      <figure class="shot rv">
+        <img class="zoom" src="images/calendario.png" data-cap="Calendario — vista mese" alt="BusItinera — vista calendario del mese con viaggi, noleggi e appuntamenti" loading="lazy">
+      </figure>
       <div class="rv d1">
         <div class="eyebrow">L'agenda</div>
         <h2 class="h2">La tua flotta a colpo d'occhio</h2>
@@ -280,6 +310,10 @@ footer strong{color:var(--ink2)}
           <div class="ditem"><div class="dicon di-g">🎨</div><div><h4>Tutto riconoscibile a vista</h4><p>Colori per i mezzi e icone per il tipo di impegno (viaggio, noleggio, appuntamento). Capisci la situazione senza aprire nulla.</p></div></div>
         </div>
       </div>
+    </div>
+    <div class="shot-duo rv d2" style="margin-top:32px">
+      <figure class="shot"><img class="zoom" src="images/giorno.png" data-cap="Calendario — vista giorno" alt="Vista giorno" loading="lazy"><figcaption>Vista giorno — le corse della giornata</figcaption></figure>
+      <figure class="shot"><img class="zoom" src="images/settimana.png" data-cap="Calendario — vista settimana" alt="Vista settimana" loading="lazy"><figcaption>Vista settimana — la panoramica dei 7 giorni</figcaption></figure>
     </div>
   </div>
 </section>
@@ -337,6 +371,11 @@ footer strong{color:var(--ink2)}
           <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Tutto colorato e riconoscibile a calendario</li>
         </ul>
       </div>
+    </div>
+    <div class="shot-trio">
+      <figure class="shot rv"><img class="zoom" src="images/nuovo_viaggio.png" data-cap="Creazione di un nuovo viaggio" alt="Modulo nuovo viaggio" loading="lazy"><figcaption>Creazione viaggio</figcaption></figure>
+      <figure class="shot rv d1"><img class="zoom" src="images/dettagli_viaggio.png" data-cap="Dettaglio di un viaggio" alt="Dettaglio viaggio" loading="lazy"><figcaption>Dettaglio viaggio</figcaption></figure>
+      <figure class="shot rv d2"><img class="zoom" src="images/viaggi_noleggi.png" data-cap="Elenco viaggi e noleggi con filtri" alt="Elenco viaggi e noleggi" loading="lazy"><figcaption>Elenco viaggi e noleggi</figcaption></figure>
     </div>
   </div>
 </section>
@@ -398,6 +437,11 @@ footer strong{color:var(--ink2)}
       <div class="card rv d1"><div class="card-ic ic-o">👥</div><h3>Clienti</h3><p>Nome, ragione sociale, telefono ed email, tutti a portata di clic.</p><ul class="clist"><li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Niente doppioni: il numero di telefono è controllato</li><li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Ricerca istantanea per trovarli subito</li></ul></div>
       <div class="card rv d2"><div class="card-ic ic-g">🧑‍✈️</div><h3>Autisti</h3><p>Ognuno con il suo accesso e il portale dedicato sul telefono.</p><ul class="clist"><li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Se sospendi un autista, lo storico dei suoi viaggi resta</li><li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Un autista non disponibile è segnato a calendario</li></ul></div>
     </div>
+    <div class="shot-trio">
+      <figure class="shot rv"><img class="zoom" src="images/veicoli.png" data-cap="Anagrafica veicoli" alt="Anagrafica veicoli" loading="lazy"><figcaption>Veicoli</figcaption></figure>
+      <figure class="shot rv d1"><img class="zoom" src="images/clienti.png" data-cap="Anagrafica clienti" alt="Anagrafica clienti" loading="lazy"><figcaption>Clienti</figcaption></figure>
+      <figure class="shot rv d2"><img class="zoom" src="images/utenti.png" data-cap="Utenti e ruoli" alt="Utenti e ruoli" loading="lazy"><figcaption>Utenti e ruoli</figcaption></figure>
+    </div>
   </div>
 </section>
 
@@ -414,6 +458,7 @@ footer strong{color:var(--ink2)}
       <div class="card rv d1"><div class="card-ic ic-b">📊</div><h3>Esporti in Excel</h3><p>Ti serve un riepilogo per il commercialista? Esporti tutto in un file Excel scegliendo quali informazioni includere. Già pronto per aprirsi correttamente in Excel italiano.</p></div>
       <div class="card rv d2"><div class="card-ic ic-g">🔎</div><h3>Ricerca unica</h3><p>Scrivi un nome cliente, un indirizzo o una targa e trovi subito tutti i viaggi collegati. Filtri per mese, periodo, autista o mezzo.</p></div>
     </div>
+    <figure class="shot shot-single rv d1"><img class="zoom" src="images/avvisi.png" data-cap="Avvisi sui pagamenti in scadenza e scaduti" alt="Avvisi pagamenti" loading="lazy"><figcaption>Il pannello avvisi: pagamenti in scadenza e scaduti, con giorni di ritardo e contatti</figcaption></figure>
   </div>
 </section>
 
@@ -517,6 +562,34 @@ footer strong{color:var(--ink2)}
   </div>
 </section>
 
+<!-- GALLERIA -->
+<section class="sec" id="galleria">
+  <div class="wrap">
+    <div class="center" style="margin-bottom:56px">
+      <div class="eyebrow vi">Guarda l'app</div>
+      <h2 class="h2 rv">Screenshot reali della dashboard</h2>
+      <p class="sub rv d1">Nessun mockup: queste sono le schermate vere di BusItinera. Clicca su un'immagine per ingrandirla.</p>
+    </div>
+    <div class="gallery">
+      <figure class="gitem rv"><img class="zoom" src="images/calendario.png" data-cap="Calendario — vista mese" alt="Calendario vista mese" loading="lazy"><figcaption>Calendario — vista mese</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/giorno.png" data-cap="Calendario — vista giorno" alt="Vista giorno" loading="lazy"><figcaption>Calendario — vista giorno</figcaption></figure>
+      <figure class="gitem rv d2"><img class="zoom" src="images/settimana.png" data-cap="Calendario — vista settimana" alt="Vista settimana" loading="lazy"><figcaption>Calendario — vista settimana</figcaption></figure>
+      <figure class="gitem rv"><img class="zoom" src="images/nuovo_viaggio.png" data-cap="Creazione di un nuovo viaggio" alt="Nuovo viaggio" loading="lazy"><figcaption>Nuovo viaggio</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/dettagli_viaggio.png" data-cap="Dettaglio di un viaggio" alt="Dettaglio viaggio" loading="lazy"><figcaption>Dettaglio viaggio</figcaption></figure>
+      <figure class="gitem rv d2"><img class="zoom" src="images/viaggi_noleggi.png" data-cap="Elenco viaggi e noleggi con filtri" alt="Elenco viaggi e noleggi" loading="lazy"><figcaption>Elenco viaggi e noleggi</figcaption></figure>
+      <figure class="gitem rv"><img class="zoom" src="images/nuovo_noleggio.png" data-cap="Creazione di un nuovo noleggio" alt="Nuovo noleggio" loading="lazy"><figcaption>Nuovo noleggio</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/nuovo_appuntamento.png" data-cap="Creazione di un nuovo appuntamento" alt="Nuovo appuntamento" loading="lazy"><figcaption>Nuovo appuntamento</figcaption></figure>
+      <figure class="gitem rv d2"><img class="zoom" src="images/avvisi.png" data-cap="Avvisi sui pagamenti in scadenza e scaduti" alt="Avvisi pagamenti" loading="lazy"><figcaption>Avvisi pagamenti</figcaption></figure>
+      <figure class="gitem rv"><img class="zoom" src="images/veicoli.png" data-cap="Anagrafica veicoli" alt="Anagrafica veicoli" loading="lazy"><figcaption>Anagrafica veicoli</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/nuovo_veicolo.png" data-cap="Inserimento di un nuovo veicolo" alt="Nuovo veicolo" loading="lazy"><figcaption>Nuovo veicolo</figcaption></figure>
+      <figure class="gitem rv d2"><img class="zoom" src="images/clienti.png" data-cap="Anagrafica clienti" alt="Anagrafica clienti" loading="lazy"><figcaption>Anagrafica clienti</figcaption></figure>
+      <figure class="gitem rv"><img class="zoom" src="images/utenti.png" data-cap="Gestione utenti e ruoli" alt="Utenti e ruoli" loading="lazy"><figcaption>Utenti e ruoli</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/dati_azienda.png" data-cap="Dati e impostazioni dell'azienda" alt="Dati azienda" loading="lazy"><figcaption>Dati azienda</figcaption></figure>
+      <figure class="gitem rv d2"><img class="zoom" src="images/documentazione.png" data-cap="Documentazione integrata nell'app" alt="Documentazione" loading="lazy"><figcaption>Documentazione integrata</figcaption></figure>
+    </div>
+  </div>
+</section>
+
 <!-- CONTATTI -->
 <section class="sec sec-soft" id="contatti">
   <div class="wrap">
@@ -567,6 +640,17 @@ window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scr
 
 /* close mobile menu on link click */
 document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+
+/* lightbox per gli screenshot */
+const lb=document.createElement('div');lb.className='lb';
+lb.innerHTML='<button class="lb-close" aria-label="Chiudi">×</button><img alt=""><div class="lb-cap"></div>';
+document.body.appendChild(lb);
+const lbImg=lb.querySelector('img'),lbCap=lb.querySelector('.lb-cap');
+function openLb(src,cap){lbImg.src=src;lbCap.textContent=cap||'';lb.classList.add('open');document.body.style.overflow='hidden';}
+function closeLb(){lb.classList.remove('open');document.body.style.overflow='';}
+lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('lb-close'))closeLb();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();});
+document.querySelectorAll('img.zoom').forEach(im=>im.addEventListener('click',()=>openLb(im.src,im.dataset.cap||im.alt)));
 
 /* form -> mailto */
 function inviaForm(){
