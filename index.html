@@ -368,13 +368,20 @@ img.zoom:hover{opacity:.92}
       </div>
       <div class="form rv d1">
         <div class="fr-grid">
-          <div class="fr"><label for="nome">Il tuo nome</label><input type="text" id="nome" placeholder="Mario Rossi" required></div>
-          <div class="fr"><label for="azienda">Azienda (opzionale)</label><input type="text" id="azienda" placeholder="Trasporti Rossi Srl"></div>
+          <div class="fr"><label for="f_azienda">Nome azienda *</label><input type="text" id="f_azienda" placeholder="Trasporti Rossi Srl" required></div>
+          <div class="fr"><label for="f_referente">Persona di riferimento *</label><input type="text" id="f_referente" placeholder="Mario Rossi" required></div>
         </div>
-        <div class="fr"><label for="emailUser">La tua email</label><input type="email" id="emailUser" placeholder="info@tuaazienda.it" required></div>
-        <div class="fr"><label for="telefono">Telefono (opzionale)</label><input type="tel" id="telefono" placeholder="+39 333 123 4567"></div>
-        <div class="fr"><label for="messaggio">Messaggio</label><textarea id="messaggio" placeholder="Parlami della tua flotta: quanti mezzi, che servizio offri, quali problemi vuoi risolvere..." required></textarea></div>
-        <button class="btn-submit" type="button" onclick="inviaForm()">Invia richiesta demo →</button>
+        <div class="fr-grid">
+          <div class="fr"><label for="f_email">Email *</label><input type="email" id="f_email" placeholder="info@tuaazienda.it" required></div>
+          <div class="fr"><label for="f_tel">Telefono</label><input type="tel" id="f_tel" placeholder="+39 333 123 4567"></div>
+        </div>
+        <div class="fr"><label for="f_sito">Sito dell'azienda (opzionale)</label><input type="text" id="f_sito" placeholder="www.tuaazienda.it"></div>
+        <div class="fr"><label for="f_msg">Messaggio (opzionale)</label><textarea id="f_msg" placeholder="Parlami della tua flotta: quanti mezzi, che servizio offri, quali problemi vuoi risolvere..."></textarea></div>
+        <!-- honeypot anti-bot: nascosto agli umani, compilato solo dai bot -->
+        <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label for="f_website">Lascia vuoto</label><input type="text" id="f_website" tabindex="-1" autocomplete="off"></div>
+        <div id="tsWidget" style="margin:4px 0"></div>
+        <div id="demoMsg" role="status" style="display:none"></div>
+        <button class="btn-submit" type="button" onclick="inviaDemo(event)">Invia richiesta demo →</button>
       </div>
     </div>
   </div>
@@ -411,18 +418,51 @@ lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('l
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();});
 document.querySelectorAll('img.zoom').forEach(im=>im.addEventListener('click',()=>openLb(im.src,im.dataset.cap||im.alt)));
 
-/* form -> mailto */
-function inviaForm(){
-  const nome=document.getElementById('nome').value.trim();
-  const azienda=document.getElementById('azienda').value.trim();
-  const email=document.getElementById('emailUser').value.trim();
-  const tel=document.getElementById('telefono').value.trim();
-  const msg=document.getElementById('messaggio').value.trim();
-  if(!nome||!email||!msg){alert('Compila nome, email e messaggio.');return;}
-  const corpo=`Nome: ${nome}%0D%0AAzienda: ${azienda||'-'}%0D%0AEmail: ${email}%0D%0ATelefono: ${tel||'-'}%0D%0A%0D%0A${msg}`;
-  window.location.href=`mailto:ceolandrea006@gmail.com?subject=Richiesta demo BusItinera — ${encodeURIComponent(nome)}&body=${corpo}`;
+/* ── Richiesta demo → Worker Cloudflare (coda in console) ── */
+var DEMO_WORKER_BASE = 'https://busitinera-push.ceolandrea006.workers.dev';
+/* Per attivare il captcha Turnstile: crea le chiavi su Cloudflare e incolla qui
+   la SITE KEY (e imposta il secret sul Worker: wrangler secret put TURNSTILE_SECRET).
+   Finché resta il placeholder, il captcha è disattivato ma il resto funziona. */
+var TURNSTILE_SITEKEY = 'REPLACE_WITH_TURNSTILE_SITEKEY';
+
+function _tsActive(){ return TURNSTILE_SITEKEY && TURNSTILE_SITEKEY.indexOf('REPLACE') < 0; }
+window.addEventListener('load', function(){
+  var el=document.getElementById('tsWidget');
+  if(el && _tsActive() && window.turnstile){
+    try{ window.__tsId = window.turnstile.render(el, { sitekey: TURNSTILE_SITEKEY }); }catch(e){}
+  }
+});
+
+function _v(id){ var e=document.getElementById(id); return e ? e.value.trim() : ''; }
+async function inviaDemo(ev){
+  var msg=document.getElementById('demoMsg');
+  function show(t, ok){ msg.textContent=t; msg.style.display='block'; msg.style.padding='11px 14px';
+    msg.style.borderRadius='10px'; msg.style.fontSize='.9rem'; msg.style.marginBottom='10px';
+    msg.style.background = ok ? 'rgba(16,185,129,.12)' : 'rgba(239,68,68,.12)';
+    msg.style.color = ok ? '#059669' : '#dc2626'; }
+  var azienda=_v('f_azienda'), referente=_v('f_referente'), email=_v('f_email'),
+      tel=_v('f_tel'), sito=_v('f_sito'), note=_v('f_msg'), hp=_v('f_website');
+  if(!azienda||!referente||(!email&&!tel)){ show('Compila azienda, referente e almeno un contatto (email o telefono).', false); return; }
+  var ts=''; try{ if(window.turnstile && window.__tsId!=null) ts=window.turnstile.getResponse(window.__tsId)||''; }catch(e){}
+  if(_tsActive() && !ts){ show('Completa la verifica anti-bot qui sopra.', false); return; }
+  var btn=ev && ev.target ? ev.target : null, old = btn ? btn.textContent : '';
+  if(btn){ btn.disabled=true; btn.textContent='Invio…'; }
+  try{
+    var r=await fetch(DEMO_WORKER_BASE+'/api/demo', { method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ azienda:azienda, referente:referente, email:email, telefono:tel, sito:sito, note:note, hp:hp, ts:ts }) });
+    var d=await r.json().catch(function(){ return {}; });
+    if(r.ok && d.ok){
+      show('Richiesta inviata ✓ Ti ricontatto al più presto per organizzare la demo.', true);
+      ['f_azienda','f_referente','f_email','f_tel','f_sito','f_msg'].forEach(function(id){ var e=document.getElementById(id); if(e) e.value=''; });
+      try{ if(window.turnstile && window.__tsId!=null) window.turnstile.reset(window.__tsId); }catch(e){}
+    } else {
+      show((d && d.message) || 'Invio non riuscito. Riprova, oppure scrivimi a ceolandrea006@gmail.com.', false);
+    }
+  }catch(e){ show('Errore di rete. Riprova, oppure scrivimi a ceolandrea006@gmail.com.', false); }
+  finally{ if(btn){ btn.disabled=false; btn.textContent=old; } }
 }
 </script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script src="bus-notify.js" defer></script>
 </body>
 </html>

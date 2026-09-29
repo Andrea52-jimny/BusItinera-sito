@@ -49,6 +49,36 @@ async function sha256hex(str) {
   return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
+// ── Richieste demo: helper anti-abuso ────────────────────────────────────────
+function clip(s, n) { return String(s == null ? '' : s).slice(0, n).trim(); }
+
+// Rate limit per IP: max 5 richieste demo all'ora (contatore in KV con TTL).
+async function demoRateOk(env, ip) {
+  try {
+    const key = 'rl:' + await sha256hex('demo|' + (ip || 'noip'));
+    const cur = parseInt(await env.SUBS.get(key) || '0', 10) || 0;
+    if (cur >= 5) return false;
+    await env.SUBS.put(key, String(cur + 1), { expirationTtl: 3600 });
+    return true;
+  } catch (e) { return true; } // errore KV: non blocchiamo l'utente onesto
+}
+
+// Verifica Turnstile. Se TURNSTILE_SECRET non è impostato, il controllo è
+// disattivato (ritorna true) così il form funziona anche prima di creare le chiavi.
+async function turnstileOk(env, token, ip) {
+  if (!env.TURNSTILE_SECRET) return true;
+  if (!token) return false;
+  try {
+    const form = new URLSearchParams();
+    form.append('secret', env.TURNSTILE_SECRET);
+    form.append('response', token);
+    if (ip) form.append('remoteip', ip);
+    const r = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', { method: 'POST', body: form });
+    const d = await r.json();
+    return !!(d && d.success);
+  } catch (e) { return false; }
+}
+
 async function vapidJWT(endpoint, env) {
   const aud = new URL(endpoint).origin;
   const header = bytesToB64url(enc.encode(JSON.stringify({ typ: 'JWT', alg: 'ES256' })));
@@ -174,6 +204,58 @@ export default {
           }
         } while (cursor);
         return json({ ok: true, sent, gone, failed }, 200, env, req);
+      }
+
+      // ── Richieste demo ──────────────────────────────────────────────────
+      // POST /api/demo  (pubblico): form del sito → coda in KV (prefisso demo:).
+      if (path === '/api/demo' && req.method === 'POST') {
+        const b = await req.json().catch(() => ({}));
+        // Honeypot: se il campo trappola è pieno è un bot → fingi successo e scarta.
+        if (b && b.hp) return json({ ok: true }, 200, env, req);
+        const azienda = clip(b && b.azienda, 120), referente = clip(b && b.referente, 120);
+        const email = clip(b && b.email, 160), telefono = clip(b && b.telefono, 60);
+        const sito = clip(b && b.sito, 160), note = clip(b && b.note, 1000);
+        if (!azienda || !referente || (!email && !telefono)) {
+          return json({ error: 'invalid', message: 'Azienda, referente e almeno un contatto sono obbligatori.' }, 400, env, req);
+        }
+        const ip = req.headers.get('CF-Connecting-IP') || '';
+        if (!(await turnstileOk(env, b && b.ts, ip))) {
+          return json({ error: 'captcha', message: 'Verifica anti-bot non superata. Riprova.' }, 400, env, req);
+        }
+        if (!(await demoRateOk(env, ip))) {
+          return json({ error: 'rate', message: "Troppe richieste da questo indirizzo. Riprova tra un'ora." }, 429, env, req);
+        }
+        const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+        await env.SUBS.put('demo:' + id, JSON.stringify({
+          id, azienda, referente, email, telefono, sito, note,
+          ts_created: new Date().toISOString(), ip
+        }));
+        return json({ ok: true }, 200, env, req);
+      }
+
+      // GET /api/demo  (Bearer SEND_SECRET): elenco richieste in coda (per la console).
+      if (path === '/api/demo' && req.method === 'GET') {
+        const auth = req.headers.get('Authorization') || '';
+        if (!env.SEND_SECRET || auth !== 'Bearer ' + env.SEND_SECRET) return json({ error: 'unauthorized' }, 401, env, req);
+        const out = []; let cursor;
+        do {
+          const list = await env.SUBS.list({ prefix: 'demo:', cursor });
+          cursor = list.list_complete ? null : list.cursor;
+          for (const k of list.keys) { const raw = await env.SUBS.get(k.name); if (raw) { try { out.push(JSON.parse(raw)); } catch (e) {} } }
+        } while (cursor);
+        out.sort((a, b) => (a.ts_created < b.ts_created ? 1 : -1)); // più recenti prima
+        return json({ ok: true, requests: out }, 200, env, req);
+      }
+
+      // POST /api/demo/resolve  (Bearer SEND_SECRET): rimuove una richiesta dalla coda.
+      if (path === '/api/demo/resolve' && req.method === 'POST') {
+        const auth = req.headers.get('Authorization') || '';
+        if (!env.SEND_SECRET || auth !== 'Bearer ' + env.SEND_SECRET) return json({ error: 'unauthorized' }, 401, env, req);
+        const b = await req.json().catch(() => ({}));
+        const id = clip(b && b.id, 64);
+        if (!id) return json({ error: 'invalid' }, 400, env, req);
+        await env.SUBS.delete('demo:' + id);
+        return json({ ok: true }, 200, env, req);
       }
 
       if (path === '/' || path === '') {
