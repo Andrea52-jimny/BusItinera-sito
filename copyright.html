@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Copyright e licenza d'uso — BusItinera</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="manifest" href="manifest.json">
+<meta name="description" content="Avviso di Copyright e Proprietà Intellettuale del software BusItinera — © 2024–2026 Ceol Andrea, tutti i diritti riservati.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#ffffff;--soft:#f5f8fc;--soft2:#eef3fa;--card:#ffffff;--ink:#0f1b2d;--ink2:#3b4a5e;--muted:#6b7a90;--line:#e6ecf3;--line2:#d6deea;--primary:#2563eb;--primary-soft:#eaf1ff;--accent:#f97316;--accent-soft:#fff3ea;--r:20px;--rs:14px;--shadow:0 1px 2px rgba(16,27,45,.04),0 8px 24px rgba(16,27,45,.06);--font:'Outfit',system-ui,-apple-system,sans-serif}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font);background:var(--bg);color:var(--ink2);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.narrow{max-width:820px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:7px 16px;border-radius:100px;margin-bottom:20px;color:var(--accent);background:var(--accent-soft)}
+.eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+h1.h1{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;line-height:1.12;letter-spacing:-.03em;color:var(--ink);margin-bottom:10px}
+.owner{font-weight:700;color:var(--ink);font-size:1.05rem;margin-bottom:6px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.82);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid var(--line)}
+nav.scrolled{box-shadow:0 4px 24px rgba(16,27,45,.06)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;max-width:1180px;margin:0 auto;padding:13px 28px}
+.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.nav-badge{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#1a2b45,#0f1b2d);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-badge img{width:66%;height:auto;display:block}
+.nav-logo-t{font-weight:800;font-size:1.12rem;color:var(--ink);letter-spacing:-.02em}
+.nav-logo-t span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:.9rem;font-weight:500;color:var(--ink2);text-decoration:none}
+.nav-links a:hover{color:var(--primary)}
+.nav-cta{background:var(--primary);color:#fff!important;font-weight:600!important;padding:10px 22px;border-radius:100px;font-size:.88rem!important}
+.mob-tog{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.mob-tog span{display:block;width:22px;height:2px;background:var(--ink2);margin:5px 0;border-radius:2px}
+.head{padding:150px 0 30px;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(249,115,22,.06),transparent 70%),linear-gradient(180deg,var(--soft),var(--bg) 85%)}
+.legal-banner{background:var(--soft);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--rs);padding:18px 22px;margin:22px 0 8px;font-size:.92rem;color:var(--ink2)}
+.legal{padding:24px 0 80px}
+.legal h2{font-size:1.15rem;font-weight:700;color:var(--ink);margin:26px 0 8px;padding-top:10px;border-top:1px solid var(--line)}
+.legal p{font-size:.93rem;color:var(--ink2);margin-bottom:9px}
+.legal ul{margin:6px 0 10px 20px}
+.legal li{font-size:.93rem;color:var(--ink2);margin-bottom:6px}
+.legal .close{margin-top:28px;padding:20px 24px;background:linear-gradient(135deg,#1a2b45,#0f1b2d);color:#fff;border-radius:var(--r)}
+.legal .close p{color:rgba(255,255,255,.86);margin-bottom:5px}
+.legal .close b{color:#fff}
+footer{border-top:1px solid var(--line);padding:40px 0;text-align:center;background:var(--soft)}
+footer p{font-size:.85rem;color:var(--muted)}
+footer a{color:var(--primary);text-decoration:none;font-weight:500}
+footer strong{color:var(--ink2)}
+@media(max-width:700px){.nav-links{display:none}.mob-tog{display:block}.head{padding:120px 0 24px}}
+.nav-links.open{display:flex!important;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,.98);backdrop-filter:blur(16px);padding:22px;gap:18px;border-bottom:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo"><span class="nav-badge"><img src="logo.png" alt="BusItinera"></span><div class="nav-logo-t">Bus<span>Itinera</span></div></a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="funzionalita.html">Funzionalità</a>
+      <a href="galleria.html">Galleria</a>
+      <a href="novita.html">Novità</a>
+      <a href="download.html">Download</a>
+      <a href="chi-sono.html">Chi sono</a>
+      <a href="index.html#contatti" class="nav-cta">Richiedi demo</a>
+    </div>
+    <button class="mob-tog" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section class="head">
+  <div class="wrap narrow">
+    <div class="eyebrow">Legale</div>
+    <h1 class="h1">⚖️ Avviso di Copyright e Proprietà Intellettuale</h1>
+    <p class="owner">© 2024–2026 Ceol Andrea — Tutti i diritti riservati</p>
+    <div class="legal-banner"><strong>AVVISO LEGALE:</strong> Questo software, la sua architettura, il codice sorgente, l'interfaccia grafica, la documentazione e l'idea progettuale sottostante — incluso il presente sito web — sono opera dell'ingegno di Ceol Andrea e sono protetti dalla normativa italiana, europea e internazionale in materia di diritto d'autore e proprietà intellettuale.</div>
+  </div>
+</section>
+
+<section class="legal">
+  <div class="wrap narrow">
+
+    <h2>Art. 1 — Titolarità dei Diritti</h2>
+    <p>1.1. Il software denominato "BusItinera" (di seguito "il Software"), comprensivo di codice sorgente, codice oggetto, interfaccia grafica (GUI), database schema, documentazione tecnica e di utente, materiali grafici, loghi, sito web e ogni altro elemento connesso — fatta eccezione per i componenti di terzi elencati all'Art. 11 — è opera originale dell'ingegno di Ceol Andrea (di seguito "l'Autore" o "il Titolare").</p>
+    <p>1.2. L'Autore è titolare esclusivo di tutti i diritti morali e patrimoniali d'autore ai sensi della Legge 22 aprile 1941, n. 633 e successive modifiche (artt. 1, 2 n. 8, 12-19, 20-24, 64-bis, 64-ter, 64-quater).</p>
+    <p>1.3. Il Software è altresì protetto dal D.Lgs. 10 febbraio 2005, n. 30 (Codice della Proprietà Industriale) per la tutela dei segni distintivi, del know-how e dei segreti commerciali.</p>
+
+    <h2>Art. 2 — Diritto d'Autore sul Software</h2>
+    <p>2.1. Ai sensi dell'art. 2, n. 8 della L. 633/1941, i programmi per elaboratore sono tutelati come opere letterarie ai sensi della Convenzione di Berna.</p>
+    <p>2.2. La tutela si applica a qualsiasi forma di espressione del programma, inclusi codice sorgente, codice oggetto, materiale preparatorio, documentazione e interfaccia utente, purché originali.</p>
+    <p>2.3. La protezione decorre dalla creazione dell'opera e non è soggetta a registrazione (art. 5, comma 2, Convenzione di Berna; art. 6 WIPO Copyright Treaty).</p>
+
+    <h2>Art. 3 — Tutela Europea</h2>
+    <p>3.1. Il Software è protetto dalla Direttiva 2009/24/CE sulla tutela giuridica dei programmi per elaboratore, recepita con D.Lgs. 518/1992.</p>
+    <p>3.2. È inoltre tutelato dalle Direttive 2001/29/CE (InfoSoc) e (UE) 2019/790 sul diritto d'autore nel mercato unico digitale.</p>
+
+    <h2>Art. 4 — Divieti Espressi</h2>
+    <p>Senza il preventivo consenso scritto dell'Autore, è fatto espresso divieto di:</p>
+    <ul>
+      <li><strong>Riproduzione</strong> — copiare, duplicare, riprodurre in tutto o in parte il codice sorgente, il codice oggetto, l'interfaccia grafica, la struttura del database, la documentazione o qualsiasi altro componente (art. 64-bis, lett. a, L. 633/1941).</li>
+      <li><strong>Modifica e Opera Derivata</strong> — tradurre, adattare, trasformare, modificare o crearne opere derivate, incluso reverse engineering, decompilazione e disassemblaggio, salvo i limiti tassativi dell'art. 64-quater L. 633/1941.</li>
+      <li><strong>Distribuzione e Pubblicazione</strong> — distribuire, pubblicare, mettere a disposizione del pubblico o trasmettere il Software o parti di esso, sotto qualsiasi denominazione, a titolo gratuito o oneroso (art. 64-bis, lett. c).</li>
+      <li><strong>Vendita e Commercializzazione</strong> — vendere, concedere in licenza, sub-licenziare, noleggiare o cedere a terzi il Software o qualsiasi diritto relativo.</li>
+      <li><strong>Appropriazione dell'Idea</strong> — utilizzare l'idea progettuale, l'architettura, il modello di dati, i flussi operativi e la logica applicativa per sviluppare prodotti concorrenti (art. 2598 C.C.; artt. 98-99 D.Lgs. 30/2005; Dir. (UE) 2016/943).</li>
+      <li><strong>Rimozione delle Informazioni</strong> — rimuovere o alterare le informazioni sul diritto d'autore, i credits, le avvertenze legali o le indicazioni di titolarità (art. 102-quinquies L. 633/1941).</li>
+      <li><strong>Elusione delle Misure Tecnologiche</strong> — eludere o disattivare qualsiasi misura tecnologica di protezione (art. 102-quater L. 633/1941).</li>
+    </ul>
+
+    <h2>Art. 5 — Tutela dei Segreti Commerciali</h2>
+    <p>Il codice sorgente, l'architettura, gli algoritmi, i modelli di dati e il know-how tecnico costituiscono segreti commerciali ai sensi degli artt. 98-99 D.Lgs. 30/2005 e della Dir. (UE) 2016/943. L'acquisizione, l'utilizzo o la divulgazione illeciti sono puniti ai sensi dell'art. 623 c.p. e comportano responsabilità civile.</p>
+
+    <h2>Art. 6 — Tutela della Concorrenza</h2>
+    <p>Ai sensi dell'art. 2598 C.C. compie concorrenza sleale chi usi segni distintivi confondibili, imiti servilmente i prodotti dell'Autore o si avvalga di mezzi non conformi alla correttezza professionale. L'Autore ha diritto a inibitoria, risarcimento e pubblicazione della sentenza (artt. 2599-2600 C.C.).</p>
+
+    <h2>Art. 7 — Sanzioni e Responsabilità</h2>
+    <p>La violazione dei diritti d'autore è punita ai sensi degli artt. 171, 171-bis, 171-ter L. 633/1941 (reclusione e multa). Il Titolare può agire per inibitoria, sequestro e distruzione delle copie illecite, risarcimento integrale del danno, pubblicazione della sentenza e restituzione degli utili (artt. 156-170 L. 633/1941).</p>
+
+    <h2>Art. 8 — Normativa Internazionale</h2>
+    <p>Il Software è protetto da: Convenzione di Berna (1886, rev. 1979); Accordo TRIPS (1994); WIPO Copyright Treaty (WCT, 1996); Convenzione Universale del Diritto d'Autore (UCC).</p>
+
+    <h2>Art. 9 — Limitazioni d'Uso</h2>
+    <p>9.1. Il Software è concesso in licenza d'uso esclusivamente al cliente finale presso il quale viene installato, limitatamente all'uso operativo interno dell'azienda.</p>
+    <p>9.2. La licenza non comporta il trasferimento della titolarità dei diritti, che rimangono in capo esclusivo all'Autore.</p>
+    <p>9.3. È vietata qualsiasi forma di sub-licenza, cessione o concessione in uso a terzi senza autorizzazione scritta.</p>
+
+    <h2>Art. 10 — Riservatezza del Codice Sorgente</h2>
+    <p>Il codice sorgente è fornito in forma confidenziale e riservata. Il destinatario si impegna a non divulgarlo con qualsiasi mezzo. L'obbligo di riservatezza sopravvive alla cessazione del rapporto e si protrae per tutta la durata della protezione legale.</p>
+
+    <h2>Art. 11 — Componenti di Terzi</h2>
+    <p>Il Software può incorporare componenti di terzi, ciascuno protetto dalla propria licenza: <strong>qrcodejs</strong> (QR del 2FA) — MIT; <strong>Google Places / Maps</strong> — Google LLC; font <strong>DM Sans / DM Mono / Outfit</strong> — SIL Open Font License (OFL). Le rivendicazioni del presente avviso non si estendono a tali componenti; ciò non riduce i diritti dell'Autore sulle parti originali.</p>
+
+    <h2>Art. 12 — Prova di Paternità e Data Certa</h2>
+    <p>La paternità e l'anteriorità sono documentate mediante mezzi idonei a conferire data certa (cronologia di versionamento, marche temporali). L'Autore si riserva la registrazione presso il Registro pubblico speciale SIAE ex art. 6 D.Lgs. 518/1992.</p>
+
+    <h2>Art. 13 — Legge Applicabile e Foro Competente</h2>
+    <p>Il presente avviso è disciplinato dalla legge italiana. Foro competente esclusivo quello del luogo di residenza dell'Autore, fatte salve le sezioni specializzate in materia di impresa (D.Lgs. 168/2003). Per le controversie transnazionali si applica il Reg. (UE) 1215/2012.</p>
+
+    <h2>Art. 14 — Rapporto con il Contratto di Licenza e Accettazione</h2>
+    <p>Il presente avviso integra e non sostituisce l'eventuale contratto di licenza sottoscritto; in caso di contrasto prevale il contratto. L'installazione, l'accesso o l'utilizzo del Software comportano l'accettazione dei presenti termini e delle limitazioni d'uso (Art. 9).</p>
+
+    <h2>Art. 15 — Clausola di Salvaguardia</h2>
+    <p>L'eventuale nullità di una clausola non comporta la nullità delle restanti. La mancata azione dell'Autore non costituisce rinuncia. Nessuna disposizione può escludere i diritti inderogabili dell'utente legittimo (artt. 64-ter e 64-quater L. 633/1941).</p>
+
+    <div class="close">
+      <p><b>© 2024–2026 Ceol Andrea</b></p>
+      <p>Tutti i diritti riservati. All rights reserved. Alle Rechte vorbehalten. Tous droits réservés.</p>
+      <p>Qualsiasi uso non autorizzato del presente Software o del presente sito, in tutto o in parte, sarà perseguito nelle sedi competenti ai sensi della normativa vigente.</p>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 BusItinera Autotrasporti — Progetto di <strong>Andrea Ceol</strong> · <a href="mailto:ceolandrea006@gmail.com">ceolandrea006@gmail.com</a> · <a href="tel:+393274997730">+39 327 499 7730</a></p>
+    <p style="margin-top:8px;font-size:.8rem;color:var(--muted)">© 2024–2026 Ceol Andrea — Tutti i diritti riservati · <a href="copyright.html">Copyright e licenza d'uso</a></p>
+  </div>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>20)});
+document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+</script>
+<script src="bus-notify.js" defer></script>
+</body>
+</html>

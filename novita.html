@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Novità — BusItinera</title>
 <link rel="icon" type="image/png" href="logo.png">
+<link rel="manifest" href="manifest.json">
 <meta name="description" content="Le novità di BusItinera versione dopo versione: fatturazione elettronica, permessi su misura, preventivi con revisioni, chilometri, viaggi all'estero e altro. Cosa è cambiato e perché è utile.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -256,6 +257,7 @@ img.zoom:hover{opacity:.92}
       <a href="funzionalita.html">Funzionalità</a>
       <a href="galleria.html">Galleria</a>
       <a href="novita.html">Novità</a>
+      <a href="download.html">Download</a>
       <a href="chi-sono.html">Chi sono</a>
       <a href="index.html#contatti" class="nav-cta">Richiedi demo</a>
     </div>
@@ -291,6 +293,20 @@ img.zoom:hover{opacity:.92}
 <section class="sec">
   <div class="wrap">
     <ol class="tl">
+
+      <li class="tl-item rv">
+        <div class="tl-marker"></div>
+        <div class="card tl-card">
+          <div class="tl-head"><span class="tl-ver">Versione 1.14</span><span class="tl-date">Settembre 2026</span></div>
+          <h3>Notifiche sul telefono, “Viaggio completato” e sicurezza</h3>
+          <p>Gli autisti restano aggiornati e chiudono i propri viaggi direttamente dal telefono; e l’applicazione è stata sottoposta a una verifica di sicurezza indipendente con relativi irrobustimenti.</p>
+          <ul class="clist">
+            <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Notifiche push agli autisti (nuovo viaggio assegnato, cambio di orario, luogo o cliente) anche ad app chiusa, con l’app installabile sulla schermata Home (PWA)</li>
+            <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Nuovo pulsante “Viaggio completato” nel portale autista: l’autista segna i propri viaggi conclusi, attivabile solo dopo l’orario di rientro previsto</li>
+            <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Verifica di sicurezza indipendente e irrobustimenti: nessuna vulnerabilità di livello critico o alto; fatturazione elettronica validata contro lo schema ufficiale FatturaPA. L’<a href="download.html" style="color:var(--primary);font-weight:600">attestato è scaricabile</a>.</li>
+          </ul>
+        </div>
+      </li>
 
       <li class="tl-item rv">
         <div class="tl-marker"></div>
@@ -469,6 +485,7 @@ img.zoom:hover{opacity:.92}
 <footer>
   <div class="wrap">
     <p>© 2026 BusItinera Autotrasporti — Progetto di <strong>Andrea Ceol</strong> · <a href="mailto:ceolandrea006@gmail.com">ceolandrea006@gmail.com</a> · <a href="tel:+393274997730">+39 327 499 7730</a></p>
+    <p style="margin-top:8px;font-size:.8rem;color:var(--muted)">© 2024–2026 Ceol Andrea — Tutti i diritti riservati · <a href="copyright.html">Copyright e licenza d'uso</a></p>
   </div>
 </footer>
 
@@ -507,5 +524,6 @@ function inviaForm(){
   window.location.href=`mailto:ceolandrea006@gmail.com?subject=Richiesta demo BusItinera — ${encodeURIComponent(nome)}&body=${corpo}`;
 }
 </script>
+<script src="bus-notify.js" defer></script>
 </body>
 </html>

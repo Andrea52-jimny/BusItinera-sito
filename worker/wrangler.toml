@@ -1,0 +1,20 @@
+name = "busitinera-push"
+main = "worker.js"
+compatibility_date = "2024-09-01"
+
+# KV per le iscrizioni push. Crea il namespace e incolla qui l'id:
+#   wrangler kv namespace create SUBS
+[[kv_namespaces]]
+binding = "SUBS"
+id = "INCOLLA_QUI_L_ID_DEL_KV_NAMESPACE"
+
+[vars]
+# Chiave pubblica VAPID (è pubblica: può stare qui e nel client).
+VAPID_PUBLIC = "BC7tA5De-0L2nmqO0jKF4OnofzYP4_bw0S153PICUVCLquORRQbbQNh-ib9_W8LDI---l_labMBpw3vC1KdvjiM"
+VAPID_SUBJECT = "mailto:ceolandrea006@gmail.com"
+# Origine autorizzata a iscriversi (CORS). Metti il dominio del sito.
+ALLOWED_ORIGIN = "https://busitinera.it"
+
+# ── SECRET (NON qui: si impostano con wrangler secret put) ───────────────────
+#   wrangler secret put VAPID_PRIVATE   → incolla: MY4lbK-oy-SdwUh72h6p_vlRb-kxOFs6TBjVcorpj-g
+#   wrangler secret put SEND_SECRET     → una password lunga a tua scelta (serve per inviare le notifiche)

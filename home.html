@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BusItinera — Gestionale per il trasporto persone</title>
 <link rel="icon" type="image/png" href="logo.png">
+<link rel="manifest" href="manifest.json">
 <meta name="description" content="BusItinera: pianifica viaggi, evita doppie prenotazioni di mezzi e autisti, gestisci preventivi, fatturazione elettronica, pagamenti e clienti. Gli autisti vedono i loro viaggi sul telefono. Sul tuo server o nel cloud.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -256,6 +257,7 @@ img.zoom:hover{opacity:.92}
       <a href="funzionalita.html">Funzionalità</a>
       <a href="galleria.html">Galleria</a>
       <a href="novita.html">Novità</a>
+      <a href="download.html">Download</a>
       <a href="chi-sono.html">Chi sono</a>
       <a href="index.html#contatti" class="nav-cta">Richiedi demo</a>
     </div>
@@ -382,6 +384,7 @@ img.zoom:hover{opacity:.92}
 <footer>
   <div class="wrap">
     <p>© 2026 BusItinera Autotrasporti — Progetto di <strong>Andrea Ceol</strong> · <a href="mailto:ceolandrea006@gmail.com">ceolandrea006@gmail.com</a> · <a href="tel:+393274997730">+39 327 499 7730</a></p>
+    <p style="margin-top:8px;font-size:.8rem;color:var(--muted)">© 2024–2026 Ceol Andrea — Tutti i diritti riservati · <a href="copyright.html">Copyright e licenza d'uso</a></p>
   </div>
 </footer>
 
@@ -420,5 +423,6 @@ function inviaForm(){
   window.location.href=`mailto:ceolandrea006@gmail.com?subject=Richiesta demo BusItinera — ${encodeURIComponent(nome)}&body=${corpo}`;
 }
 </script>
+<script src="bus-notify.js" defer></script>
 </body>
 </html>
