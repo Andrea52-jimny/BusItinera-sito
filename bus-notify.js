@@ -12,7 +12,7 @@
 (function () {
   'use strict';
 
-  var WORKER_BASE = 'https://REPLACE-WITH-YOUR-WORKER.workers.dev'; // ← CAMBIA QUESTO
+  var WORKER_BASE = 'https://busitinera-push.ceolandrea006.workers.dev'; // Worker notifiche (deploy 2026-09-29)
   var meta = document.querySelector('meta[name="bi-push"]');
   if (meta && meta.content) WORKER_BASE = meta.content;
   WORKER_BASE = WORKER_BASE.replace(/\/+$/, '');
