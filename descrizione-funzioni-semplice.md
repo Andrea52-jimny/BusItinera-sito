@@ -40,7 +40,7 @@ Ogni autista ha accesso a una versione dedicata sul suo smartphone, dove vede **
 
 Il viaggio in corso è evidenziato in verde, con l'elenco delle tappe in ordine: partenza, soste, arrivo. Ogni indirizzo è un pulsante che apre direttamente la navigazione su Google Maps. Il viaggio successivo mostra un conto alla rovescia ("in partenza tra 45 minuti") che si aggiorna da solo.
 
-Importante per la privacy: l'autista **non vede** prezzi, dati di pagamento o informazioni riservate. Vede solo ciò che gli serve per guidare. Questo riduce le telefonate ("dove devo andare?", "a che ora?") perché ha già tutto in tasca.
+Importante per la privacy: l'autista **non vede** prezzi, dati di pagamento o informazioni riservate. Vede solo ciò che gli serve per guidare. Questo riduce le telefonate ("dove devo andare?", "a che ora?") perché ha già tutto in tasca. E la sera prima di un viaggio l'autista riceve un **promemoria automatico** sul telefono, con orario e tratta del giorno dopo: il programma dell'indomani è chiaro senza dover controllare nulla.
 
 ## Le anagrafiche: mezzi, clienti, autisti sempre in ordine
 
@@ -51,6 +51,10 @@ Il sistema protegge i tuoi dati: non ti fa registrare due clienti con lo stesso 
 ## Amministrazione: pagamenti e conti sotto controllo
 
 Una campanella ti segnala i **pagamenti in scadenza o già scaduti**, con tanto di giorni di ritardo, nome cliente, importo e contatti — così sai chi sollecitare senza cercare tra le carte.
+
+E non è solo una segnalazione da guardare: l'app ti manda **promemoria automatici**, una volta al giorno, quando una scadenza si avvicina — non solo i pagamenti, ma anche bollo, assicurazione, revisione, tagliando, cronotachigrafo, gomme, patente e CQC degli autisti, licenza — con un avviso a 30, 7 e 1 giorno. Così non ti sfugge niente, anche se non apri l'app.
+
+E quando sei in giro: se apri il programma dal **telefono**, come titolare o operatore trovi una **schermata dedicata** in sola lettura, con i viaggi di oggi e domani e le scadenze in ordine di urgenza, a colpo d'occhio — senza il gestionale completo schiacciato su uno schermo piccolo. Per pianificare e fatturare restano comodi computer e tablet.
 
 Quando ti serve un riepilogo (per il commercialista, per un report), esporti tutto in un file Excel scegliendo quali informazioni includere. Il file è già pronto per aprirsi correttamente in Excel italiano.
 
@@ -75,7 +79,7 @@ L'applicazione è identica nei due casi: cambia solo dove "abita". Gira su hardw
 ## In sintesi: cosa ci guadagni
 
 - **Meno errori**: niente doppie prenotazioni di mezzi e autisti, il sistema ti ferma prima.
-- **Meno telefonate**: gli autisti hanno viaggi e navigazione già sul telefono.
+- **Meno telefonate**: gli autisti hanno viaggi e navigazione già sul telefono, e ricevono da soli il promemoria del viaggio del giorno dopo.
 - **Meno tempo perso**: pianifichi, cerchi ed esporti in pochi clic, senza fogli sparsi.
-- **Più controllo**: sai sempre chi deve pagarti e quando, e chi sta facendo cosa.
+- **Più controllo**: sai sempre chi deve pagarti e quando, e chi sta facendo cosa — e l'app ti ricorda per tempo scadenze e pagamenti, anche dal telefono.
 - **Dati al sicuro**: accessi protetti e backup automatici, sul tuo server o nel cloud.
