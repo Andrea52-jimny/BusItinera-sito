@@ -1,0 +1,87 @@
+@font-face{font-family:'DM Sans';src:url('fonts/DMSans-Regular.ttf');font-weight:400;font-style:normal}
+@font-face{font-family:'DM Sans';src:url('fonts/DMSans-Medium.ttf');font-weight:500;font-style:normal}
+@font-face{font-family:'DM Sans';src:url('fonts/DMSans-Bold.ttf');font-weight:700;font-style:normal}
+
+:root{
+  --blue:#1f4e8c; --blue2:#2d6cb5; --ink:#182231; --muted:#5b6672;
+  --line:#dde3ea; --soft:#f5f8fc; --accent:#e07b12; --ok:#1a8f56;
+}
+
+@page{
+  size:A4; margin:20mm 18mm 22mm 18mm;
+  @bottom-left{ content:"© 2024–2026 Ceol Andrea — Tutti i diritti riservati"; font-family:'DM Sans'; font-size:7.5pt; color:#8a929b; }
+  @bottom-center{ content:"BusItinera"; font-family:'DM Sans'; font-size:7.5pt; color:#b6bdc6; }
+  @bottom-right{ content:counter(page); font-family:'DM Sans'; font-size:8pt; color:#8a929b; }
+}
+@page cover{ margin:0; @bottom-left{content:none} @bottom-center{content:none} @bottom-right{content:none} }
+
+*{box-sizing:border-box}
+html{font-family:'DM Sans',sans-serif; color:var(--ink); font-size:10.5pt; line-height:1.5;}
+body{margin:0;}
+
+/* Cover */
+.cover{page:cover; height:297mm; position:relative; color:#fff;
+  background:linear-gradient(150deg,#12345f 0%, #1f4e8c 55%, #2d6cb5 100%);
+  padding:34mm 22mm; }
+.cover .logo{width:34mm; height:auto; background:#fff; padding:5mm; border-radius:8mm; }
+.cover .kicker{margin-top:20mm; font-size:11pt; letter-spacing:.28em; text-transform:uppercase; color:#bcd4f2; font-weight:500}
+.cover h1{font-size:34pt; line-height:1.08; font-weight:700; margin:6mm 0 0; letter-spacing:-.01em}
+.cover .sub{font-size:13pt; color:#e6eefb; margin-top:5mm; font-weight:400; max-width:150mm}
+.cover .meta{position:absolute; left:22mm; right:22mm; bottom:26mm; font-size:9.5pt; color:#cfe0f5; border-top:1px solid rgba(255,255,255,.25); padding-top:5mm}
+.cover .meta b{color:#fff; font-weight:500}
+.cover .band{position:absolute; left:0; right:0; bottom:0; height:10mm; background:var(--accent)}
+
+/* Headings */
+h1,h2,h3{color:var(--blue); font-weight:700; line-height:1.2}
+h2{font-size:17pt; margin:18pt 0 4pt; padding-bottom:3pt; border-bottom:2px solid var(--line); break-after:avoid}
+h3{font-size:12.5pt; margin:12pt 0 3pt; color:var(--ink); break-after:avoid}
+h2.part{color:#fff; background:var(--blue); padding:7pt 12pt; border:0; border-radius:6pt; font-size:15pt; margin-top:16pt}
+p{margin:0 0 6pt}
+ul,ol{margin:4pt 0 8pt; padding-left:16pt}
+li{margin:2pt 0}
+small{color:var(--muted)}
+b,strong{font-weight:700}
+a{color:var(--blue2); text-decoration:none}
+.lead{font-size:11.5pt; color:var(--muted); margin-bottom:10pt}
+
+/* Section wrappers keep together where possible */
+section{break-inside:auto}
+.sec{margin-top:2pt}
+
+/* TOC */
+nav.toc{margin-top:6pt}
+nav.toc h2{border:0}
+nav.toc ol{list-style:none; padding:0; margin:0}
+nav.toc li{margin:3.5pt 0; font-size:10.5pt; border-bottom:1px dotted var(--line); padding-bottom:2.5pt}
+nav.toc li.part{font-weight:700; color:var(--blue); margin-top:9pt; border:0}
+nav.toc a{display:block; color:var(--ink)}
+nav.toc a::after{content: target-counter(attr(href), page); float:right; color:var(--muted); font-weight:400}
+nav.toc li.part a::after{color:var(--blue)}
+
+/* Tables */
+table{width:100%; border-collapse:collapse; margin:6pt 0 10pt; font-size:9pt; break-inside:auto}
+th{background:var(--blue); color:#fff; text-align:left; padding:5pt 7pt; font-weight:500}
+td{padding:5pt 7pt; border-bottom:1px solid var(--line); vertical-align:top}
+tr:nth-child(even) td{background:var(--soft)}
+table.k td:first-child{font-weight:500; white-space:nowrap; width:34%}
+
+/* Callouts */
+.note,.tip,.warn,.new{border-radius:6pt; padding:7pt 10pt; margin:7pt 0; font-size:9.5pt; break-inside:avoid}
+.note{background:var(--soft); border-left:3px solid var(--blue2)}
+.tip{background:#eef8f1; border-left:3px solid var(--ok)}
+.warn{background:#fdf3e8; border-left:3px solid var(--accent)}
+.new{background:#eaf1fb; border-left:3px solid var(--blue)}
+.note b,.tip b,.warn b,.new b{color:var(--ink)}
+.badge{display:inline-block; background:var(--ok); color:#fff; font-size:7.5pt; font-weight:500; padding:1pt 6pt; border-radius:20pt; vertical-align:middle; margin-left:4pt}
+.pill{display:inline-block; background:#eef2f7; color:var(--blue); font-size:8pt; padding:1pt 6pt; border-radius:20pt}
+
+.verdict{border:1.5px solid var(--ok); border-radius:8pt; padding:10pt 12pt; margin:10pt 0; background:#f2fbf6}
+.verdict .big{font-size:14pt; font-weight:700; color:var(--ok)}
+
+hr{border:0; border-top:1px solid var(--line); margin:12pt 0}
+
+/* Copyright appendix */
+.legal{font-size:8.5pt; line-height:1.45; color:#2a333f}
+.legal h3{font-size:10.5pt; color:var(--blue); margin-top:9pt}
+.legal .owner{font-weight:700; color:var(--ink)}
+.disclaimer{font-size:8pt; color:var(--muted); margin-top:8pt}
