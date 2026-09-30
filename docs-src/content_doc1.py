@@ -19,7 +19,7 @@ TOC = [
     ("s13", "13. Veicoli"),
     ("s14", "14. Utenti e permessi granulari"),
     ("s15", "15. Dati Azienda e banche"),
-    ("s16", "16. Password e autenticazione a due fattori (2FA)"),
+    ("s16", "16. Password, 2FA e accesso con impronta"),
     ("s17", "17. Registro attività"),
     ("s18", "18. Fatturazione elettronica (FatturaPA)"),
     ("s19", "19. Portale Autista, Mobile e notifiche"),
@@ -143,8 +143,18 @@ BODY = """
 <h2 id="s15">15. Dati Azienda e banche</h2>
 <p>Anagrafica aziendale, contatti, dati fiscali (regime, licenza comunitaria, PEC) e gestione di più banche con flag "predefinita" (l'impostazione di una nuova deseleziona la precedente). IBAN e BIC/SWIFT vengono salvati in maiuscolo senza spazi. Nella card "Testi dei documenti" si personalizzano i testi di preventivo, conferma e contratto di noleggio (un campo vuoto mantiene il testo predefinito).</p>
 
-<h2 id="s16">16. Password e autenticazione a due fattori (2FA)</h2>
+<h2 id="s16">16. Password, 2FA e accesso con impronta</h2>
 <p>Ogni utente può cambiare la propria password (min. 8 caratteri, attiva immediatamente). Il <b>2FA</b> (per Amministratore e Operatore) aggiunge un codice TOTP a 6 cifre generato da app come Google Authenticator: attivazione con QR o secret manuale, 8 codici di recupero monouso, opzione "Ricordami" per 15 giorni sullo stesso browser. Cambiando password i dispositivi fidati vengono invalidati. Ogni attivazione/disattivazione del 2FA è registrata nel Registro attività; i login e i codici inseriti non vengono tracciati.</p>
+
+<h3>16.1 Accesso con impronta o Face ID (passkey) <span class="badge">NUOVO</span></h3>
+<p>In alternativa a password e codice, si può entrare con l'<b>impronta digitale</b>, il <b>riconoscimento del volto</b> o il <b>codice di sblocco</b> del proprio dispositivo. È lo stesso gesto con cui si sblocca il telefono; la funzione è disponibile a tutti i ruoli, autisti compresi.</p>
+<ul>
+<li><b>Come si attiva:</b> una volta sola per dispositivo, da dentro l'applicazione (quindi già connessi, senza reinserire le credenziali). Dal pannello "Accesso con impronta" — raggiungibile dal menu del proprio nome nel gestionale, e dall'icona in alto nel portale autista e nella home mobile — si tocca "Registra questo dispositivo".</li>
+<li><b>Come si entra:</b> nella schermata di accesso, il pulsante "Entra con impronta o Face ID" — il dispositivo propone l'account, senza digitare nome utente né password.</li>
+<li><b>Più dispositivi:</b> se ne registrano quanti se ne vuole (telefono, tablet, computer), ognuno con un nome riconoscibile, rinominabile o rimovibile in qualsiasi momento.</li>
+</ul>
+<div class="note"><b>Sicurezza.</b> La passkey sostituisce sia la password sia il 2FA, senza indebolire l'accesso: per entrare servono il dispositivo registrato <b>e</b> la verifica biometrica di chi lo possiede (due fattori in un gesto). La chiave privata non lascia mai il dispositivo e sul server non è conservato alcun segreto riutilizzabile. <b>Password e 2FA restano sempre attivi come alternativa:</b> se un dispositivo si perde o si sostituisce, si accede come sempre e se ne registra uno nuovo. Ogni registrazione e rimozione è annotata nel Registro attività.</div>
+<p>La funzione richiede una connessione sicura (HTTPS) ed è compatibile con iPhone/iPad (Face ID, Touch ID), Android (impronta), Windows Hello, Mac e chiavette di sicurezza.</p>
 
 <h2 id="s17">17. Registro attività</h2>
 <p>Diario di bordo immutabile: annota ogni azione di scrittura andata a buon fine (creazioni, modifiche, eliminazioni di viaggi, preventivi, noleggi, clienti, veicoli, utenti; pagamenti; cambi di ruolo/permessi; unione clienti; attivazioni 2FA), spesso con il dettaglio di cosa è cambiato. Le voci non si possono cancellare né modificare. Filtri per tipo e per data/utente/cliente/n. preventivo. Conservazione 24 mesi. Per riservatezza, login e logout non vengono tracciati.</p>
