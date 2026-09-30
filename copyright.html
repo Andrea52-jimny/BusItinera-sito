@@ -53,6 +53,41 @@ footer a{color:var(--primary);text-decoration:none;font-weight:500}
 footer strong{color:var(--ink2)}
 @media(max-width:700px){.nav-links{display:none}.mob-tog{display:block}.head{padding:120px 0 24px}}
 .nav-links.open{display:flex!important;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,.98);backdrop-filter:blur(16px);padding:22px;gap:18px;border-bottom:1px solid var(--line)}
+
+/* ── ICONE (SVG lineari, colore ereditato dal contenitore) ── */
+svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
+.card-ic{--isz:25px}.dicon{--isz:20px}.bic{--isz:24px}.dl-ic{--isz:20px}
+.ben-ic{--isz:19px}.doc-ic{--isz:27px}.hic{--isz:28px}
+.ic-b,.di-b{color:var(--primary)}
+.ic-o,.di-o{color:var(--accent)}
+.ic-g,.di-g{color:var(--green)}
+.ic-v,.di-v{color:var(--violet)}
+.ic-inline{display:inline-block;vertical-align:-4px;margin-left:8px;--isz:18px}
+
+/* ── BANDA "IN SINTESI" — versione chiara ── */
+.band{background:var(--card);border:1px solid var(--line);border-radius:28px;
+  padding:56px 48px;color:var(--ink2);
+  box-shadow:0 1px 2px rgba(16,27,45,.04),0 20px 54px rgba(16,27,45,.09)}
+.band h2{color:var(--ink);font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:800;
+  letter-spacing:-.03em;margin-bottom:38px;text-align:center}
+.band-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+.band-item{text-align:center;padding:0 18px;position:relative}
+.band-item+.band-item::before{content:'';position:absolute;left:0;top:6px;bottom:6px;
+  width:1px;background:var(--line)}
+.band-item .bic{width:54px;height:54px;border-radius:16px;display:flex;
+  align-items:center;justify-content:center;margin:0 auto 14px;
+  background:var(--primary-soft);color:var(--primary)}
+.band-item:nth-child(1) .bic{background:var(--green-soft);color:var(--green)}
+.band-item:nth-child(2) .bic{background:var(--accent-soft);color:var(--accent)}
+.band-item:nth-child(3) .bic{background:var(--primary-soft);color:var(--primary)}
+.band-item:nth-child(4) .bic{background:var(--violet-soft);color:var(--violet)}
+.band-item:nth-child(5) .bic{background:var(--green-soft);color:var(--green)}
+.band-item h4{font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:6px}
+.band-item p{font-size:.85rem;color:var(--muted);line-height:1.55}
+@media(max-width:980px){.band-grid{grid-template-columns:repeat(2,1fr);gap:30px 0}
+  .band-item:nth-child(odd)::before{display:none}}
+@media(max-width:700px){.band-grid{grid-template-columns:1fr;gap:26px}
+  .band-item::before{display:none!important}.band{padding:38px 24px}}
 </style>
 </head>
 <body>
@@ -76,7 +111,7 @@ footer strong{color:var(--ink2)}
 <section class="head">
   <div class="wrap narrow">
     <div class="eyebrow">Legale</div>
-    <h1 class="h1">⚖️ Avviso di Copyright e Proprietà Intellettuale</h1>
+    <h1 class="h1">Avviso di Copyright e Proprietà Intellettuale</h1>
     <p class="owner">© 2024–2026 Ceol Andrea — Tutti i diritti riservati</p>
     <div class="legal-banner"><strong>AVVISO LEGALE:</strong> Questo software, la sua architettura, il codice sorgente, l'interfaccia grafica, la documentazione e l'idea progettuale sottostante — incluso il presente sito web — sono opera dell'ingegno di Ceol Andrea e sono protetti dalla normativa italiana, europea e internazionale in materia di diritto d'autore e proprietà intellettuale.</div>
   </div>

@@ -244,6 +244,49 @@ img.zoom:hover{opacity:.92}
 
 @media(max-width:900px){.shot-trio,.gallery{grid-template-columns:1fr 1fr}}
 @media(max-width:700px){.shot-duo,.shot-trio,.gallery{grid-template-columns:1fr}}
+
+/* ── ICONE (SVG lineari, colore ereditato dal contenitore) ── */
+svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
+.card-ic{--isz:25px}.dicon{--isz:20px}.bic{--isz:24px}.dl-ic{--isz:20px}
+.ben-ic{--isz:19px}.doc-ic{--isz:27px}.hic{--isz:28px}
+.ic-b,.di-b{color:var(--primary)}
+.ic-o,.di-o{color:var(--accent)}
+.ic-g,.di-g{color:var(--green)}
+.ic-v,.di-v{color:var(--violet)}
+.ic-inline{display:inline-block;vertical-align:-4px;margin-left:8px;--isz:18px}
+.btn-submit{display:flex;align-items:center;justify-content:center;gap:0}
+
+/* ── BANDA "IN SINTESI" — versione chiara ── */
+.band{background:var(--card);border:1px solid var(--line);border-radius:28px;
+  padding:56px 48px;color:var(--ink2);
+  box-shadow:0 1px 2px rgba(16,27,45,.04),0 20px 54px rgba(16,27,45,.09)}
+.band h2{color:var(--ink);font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:800;
+  letter-spacing:-.03em;margin-bottom:38px;text-align:center}
+.band-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+.band-item{text-align:center;padding:0 18px;position:relative}
+.band-item+.band-item::before{content:'';position:absolute;left:0;top:6px;bottom:6px;
+  width:1px;background:var(--line)}
+.band-item .bic{width:54px;height:54px;border-radius:16px;display:flex;
+  align-items:center;justify-content:center;margin:0 auto 14px;
+  background:var(--primary-soft);color:var(--primary)}
+.band-item:nth-child(1) .bic{background:var(--green-soft);color:var(--green)}
+.band-item:nth-child(2) .bic{background:var(--accent-soft);color:var(--accent)}
+.band-item:nth-child(3) .bic{background:var(--primary-soft);color:var(--primary)}
+.band-item:nth-child(4) .bic{background:var(--violet-soft);color:var(--violet)}
+.band-item:nth-child(5) .bic{background:var(--green-soft);color:var(--green)}
+.band-item h4{font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:6px}
+.band-item p{font-size:.85rem;color:var(--muted);line-height:1.55}
+@media(max-width:980px){.band-grid{grid-template-columns:repeat(2,1fr);gap:30px 0}
+  .band-item:nth-child(odd)::before{display:none}}
+@media(max-width:700px){.band-grid{grid-template-columns:1fr;gap:26px}
+  .band-item::before{display:none!important}.band{padding:38px 24px}}
+
+.card.nw{display:block}
+.nw-ver{display:inline-block;font-weight:800;font-size:.78rem;letter-spacing:.01em;
+  color:var(--accent);background:var(--accent-soft);border-radius:100px;
+  padding:4px 13px;margin-bottom:13px}
+.card.nw:nth-child(2) .nw-ver{color:var(--primary);background:var(--primary-soft)}
+.card.nw:nth-child(3) .nw-ver{color:var(--green);background:var(--green-soft)}
 </style>
 </head>
 <body>
@@ -294,6 +337,8 @@ img.zoom:hover{opacity:.92}
       <div class="chip"><span class="dot dot-g"></span>Scadenze di veicoli e patenti</div>
       <div class="chip"><span class="dot dot-o"></span>Registro attività</div>
       <div class="chip"><span class="dot dot-v"></span>Note private per l'ufficio</div>
+      <div class="chip"><span class="dot dot-v"></span>Promemoria automatici delle scadenze</div>
+      <div class="chip"><span class="dot dot-g"></span>Accesso con impronta o volto</div>
     </div>
   </div>
 </div>
@@ -312,18 +357,21 @@ img.zoom:hover{opacity:.92}
     <div class="center" style="margin-bottom:56px">
       <div class="eyebrow">Tutto in un posto</div>
       <h2 class="h2 rv">Cosa fa BusItinera</h2>
-      <p class="sub rv d1">Le funzioni principali in breve. Apri "Funzionalità" per vederle in dettaglio, con gli screenshot reali dell'app.</p>
+      <p class="sub rv d1">Le funzioni principali in breve, aggiornate all'ultima versione. Apri &ldquo;Funzionalità&rdquo; per vederle in dettaglio, con gli screenshot reali dell'app.</p>
     </div>
     <div class="grid4">
-      <a href="funzionalita.html#calendario" class="card rv" style="text-decoration:none;display:block"><div class="card-ic ic-b">📅</div><h3>Agenda</h3><p>Vista giorno, settimana e mese, con i mezzi a colpo d'occhio.</p></a>
-      <a href="funzionalita.html#gestione" class="card rv d1" style="text-decoration:none;display:block"><div class="card-ic ic-o">🚌</div><h3>Viaggi</h3><p>Crei un viaggio in un modulo solo, senza doppie prenotazioni.</p></a>
-      <a href="funzionalita.html#preventivi" class="card rv d2" style="text-decoration:none;display:block"><div class="card-ic ic-v">📄</div><h3>Preventivi</h3><p>Offerta, conferma d'ordine e conversione in viaggio con un clic.</p></a>
-      <a href="funzionalita.html#autisti" class="card rv d3" style="text-decoration:none;display:block"><div class="card-ic ic-g">📱</div><h3>Portale autista</h3><p>Ogni autista vede i suoi viaggi sul telefono, con navigazione e inserimento dei km.</p></a>
-      <a href="funzionalita.html#anagrafiche" class="card rv" style="text-decoration:none;display:block"><div class="card-ic ic-b">🗂️</div><h3>Anagrafiche</h3><p>Mezzi, clienti e autisti sempre in ordine e senza doppioni.</p></a>
-      <a href="funzionalita.html#fatturazione" class="card rv d1" style="text-decoration:none;display:block"><div class="card-ic ic-b">🧾</div><h3>Fatturazione</h3><p>Fattura elettronica (FatturaPA), anche verso Comuni e scuole (PA), da viaggi e noleggi.</p></a>
-      <a href="funzionalita.html#amministrazione" class="card rv d2" style="text-decoration:none;display:block"><div class="card-ic ic-o">🔔</div><h3>Amministrazione</h3><p>Avvisi sui pagamenti, export in Excel e ricerca unica.</p></a>
-      <a href="funzionalita.html#sicurezza" class="card rv d3" style="text-decoration:none;display:block"><div class="card-ic ic-g">🔒</div><h3>Accessi e sicurezza</h3><p>Ruoli e permessi su misura, 2FA e registro attività.</p></a>
-      <a href="funzionalita.html#deploy" class="card rv d3" style="text-decoration:none;display:block"><div class="card-ic ic-b">☁️</div><h3>Dove funziona</h3><p>Sul tuo server aziendale o nel cloud: decidi tu.</p></a>
+      <a href="funzionalita.html#calendario" class="card rv" style="text-decoration:none;display:block"><div class="card-ic ic-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg></div><h3>Agenda</h3><p>Vista giorno, settimana e mese, con i mezzi a colpo d'occhio.</p></a>
+      <a href="funzionalita.html#gestione" class="card rv d1" style="text-decoration:none;display:block"><div class="card-ic ic-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.5" width="18" height="13" rx="3"/><path d="M3 10h18M7.5 16.5v1.1M16.5 16.5v1.1"/><circle cx="7.5" cy="19" r="1.5"/><circle cx="16.5" cy="19" r="1.5"/></svg></div><h3>Viaggi</h3><p>Crei un viaggio in un modulo solo, senza doppie prenotazioni.</p></a>
+      <a href="funzionalita.html#preventivi" class="card rv d2" style="text-decoration:none;display:block"><div class="card-ic ic-v"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div><h3>Preventivi</h3><p>Offerta, conferma d'ordine e conversione in viaggio con un clic.</p></a>
+      <a href="funzionalita.html#autisti" class="card rv d3" style="text-decoration:none;display:block"><div class="card-ic ic-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.6"/><path d="M10.5 18.5h3"/></svg></div><h3>Portale autista</h3><p>Ogni autista vede i suoi viaggi sul telefono, con navigazione e inserimento dei km.</p></a>
+      <a href="funzionalita.html#anagrafiche" class="card rv" style="text-decoration:none;display:block"><div class="card-ic ic-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5V18a2 2 0 0 0 2 2h13"/><path d="M6 4.5h3.6l1.6 2H19a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z"/></svg></div><h3>Anagrafiche</h3><p>Mezzi, clienti e autisti sempre in ordine e senza doppioni.</p></a>
+      <a href="funzionalita.html#fatturazione" class="card rv d1" style="text-decoration:none;display:block"><div class="card-ic ic-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12a1 1 0 0 1 1 1v17l-2.7-1.6L14 21l-2-1.4L10 21l-2.3-1.6L5 21V4a1 1 0 0 1 1-1z"/><path d="M9 8.5h6M9 12.5h6M9 16.5h3"/></svg></div><h3>Fatturazione</h3><p>Fattura elettronica (FatturaPA) generata dal viaggio o dal noleggio.</p></a>
+      <a href="funzionalita.html#fatturazione" class="card rv d2" style="text-decoration:none;display:block"><div class="card-ic ic-v"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 9.6 12 4.2l8.6 5.4"/><path d="M5.8 9.8v8M10 9.8v8M14 9.8v8M18.2 9.8v8"/><path d="M3 20.6h18"/></svg></div><h3>Fatture alla PA</h3><p>Comuni, scuole ed enti pubblici: formato dedicato, split payment, CIG e CUP.</p></a>
+      <a href="funzionalita.html#amministrazione" class="card rv d3" style="text-decoration:none;display:block"><div class="card-ic ic-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13.2" r="7.8"/><path d="M12 9.2v4l2.6 1.8"/><path d="M4.8 3.4 2.6 5.5M19.2 3.4 21.4 5.5"/></svg></div><h3>Scadenze e promemoria</h3><p>Bollo, revisione, patenti e pagamenti: l'app ti avvisa a 30, 7 e 1 giorno.</p></a>
+      <a href="funzionalita.html#autisti" class="card rv" style="text-decoration:none;display:block"><div class="card-ic ic-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8.7a6 6 0 1 0-12 0c0 5.8-2.4 7.3-2.4 7.3h16.8S18 14.5 18 8.7"/><path d="M13.7 19.5a2 2 0 0 1-3.4 0"/></svg></div><h3>Notifiche sul telefono</h3><p>Nuovo viaggio, cambio di orario, viaggi di domani: l'avviso arriva da solo.</p></a>
+      <a href="funzionalita.html#amministrazione" class="card rv d1" style="text-decoration:none;display:block"><div class="card-ic ic-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 20.6h17.2"/><path d="M6.6 20.6v-6.2M11 20.6V9.4M15.4 20.6v-8.4M19.8 20.6V6"/></svg></div><h3>Amministrazione</h3><p>Avvisi sui pagamenti, export in Excel e ricerca unica.</p></a>
+      <a href="funzionalita.html#sicurezza" class="card rv d2" style="text-decoration:none;display:block"><div class="card-ic ic-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4.4a7.5 7.5 0 0 0-7.5 7.5v2.2"/><path d="M19.5 13.8v-1.9A7.5 7.5 0 0 0 15.2 5.1"/><path d="M8.6 12a3.4 3.4 0 0 1 6.8 0v3.4a9.5 9.5 0 0 1-.7 3.6"/><path d="M12 12v4.4a12.5 12.5 0 0 1-.9 4.6"/><path d="M6.6 17.6a9.3 9.3 0 0 0 .9-3.6V12"/></svg></div><h3>Accessi e sicurezza</h3><p>Ruoli su misura, accesso con impronta o volto, verifica in due passaggi.</p></a>
+      <a href="funzionalita.html#deploy" class="card rv d3" style="text-decoration:none;display:block"><div class="card-ic ic-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.4 19.4H7a4.5 4.5 0 0 1-.6-8.95 6 6 0 0 1 11.55 1.7 3.63 3.63 0 0 1-.55 7.25z"/></svg></div><h3>Dove funziona</h3><p>Sul tuo server aziendale o nel cloud: decidi tu.</p></a>
     </div>
     <div class="center" style="margin-top:44px">
       <a href="funzionalita.html" class="btn-p" style="display:inline-flex">Esplora tutte le funzioni
@@ -332,17 +380,48 @@ img.zoom:hover{opacity:.92}
     </div>
   </div>
 </section>
+<!-- ULTIME NOVITÀ -->
+<section class="sec sec-soft">
+  <div class="wrap">
+    <div class="center" style="margin-bottom:48px">
+      <div class="eyebrow gr">Ultime novità</div>
+      <h2 class="h2 rv">Cosa è arrivato di recente</h2>
+      <p class="sub rv d1">BusItinera cresce di continuo. Le tre novità più fresche, in due righe ciascuna.</p>
+    </div>
+    <div class="grid3">
+      <a href="novita.html" class="card nw rv" style="text-decoration:none;display:block">
+        <span class="nw-ver">Versione 1.16</span>
+        <h3>Entri con l&rsquo;impronta o il volto</h3>
+        <p>Lo stesso gesto con cui sblocchi il telefono: un tocco e sei dentro. Password e verifica in due passaggi restano sempre disponibili.</p>
+      </a>
+      <a href="novita.html" class="card nw rv d1" style="text-decoration:none;display:block">
+        <span class="nw-ver">Versione 1.15</span>
+        <h3>Promemoria che partono da soli</h3>
+        <p>Scadenze dei mezzi e degli autisti e pagamenti in arrivo, segnalati a 30, 7 e 1 giorno. E una schermata pensata per il telefono anche per l&rsquo;ufficio.</p>
+      </a>
+      <a href="novita.html" class="card nw rv d2" style="text-decoration:none;display:block">
+        <span class="nw-ver">Versione 1.14</span>
+        <h3>Notifiche e &ldquo;viaggio completato&rdquo;</h3>
+        <p>Gli autisti ricevono gli avvisi sul telefono anche ad app chiusa e chiudono i viaggi da lì. Con verifica di sicurezza indipendente superata.</p>
+      </a>
+    </div>
+    <div class="center" style="margin-top:40px">
+      <a href="novita.html" class="btn-s" style="display:inline-flex">Tutte le novità, versione per versione<svg class="ic ic-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
 <!-- SUMMARY BAND -->
-<section class="sec" style="padding-top:0">
+<section class="sec">
   <div class="wrap">
     <div class="band rv">
       <h2>In sintesi: cosa ci guadagni</h2>
       <div class="band-grid">
-        <div class="band-item"><div class="bic">✅</div><h4>Meno errori</h4><p>Niente doppie prenotazioni di mezzi e autisti</p></div>
-        <div class="band-item"><div class="bic">📵</div><h4>Meno telefonate</h4><p>Gli autisti hanno viaggi e navigazione sul telefono</p></div>
-        <div class="band-item"><div class="bic">⚡</div><h4>Meno tempo perso</h4><p>Pianifichi, cerchi ed esporti in pochi clic</p></div>
-        <div class="band-item"><div class="bic">🎯</div><h4>Più controllo</h4><p>Sai chi deve pagarti e chi sta facendo cosa</p></div>
-        <div class="band-item"><div class="bic">🔒</div><h4>Dati al sicuro</h4><p>Accessi protetti e backup automatici</p></div>
+        <div class="band-item"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M8.2 12.3l2.6 2.6 5-5.4"/></svg></div><h4>Meno errori</h4><p>Niente doppie prenotazioni di mezzi e autisti</p></div>
+        <div class="band-item"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.6 3.6h3l1.5 3.9-1.9 1.3a11.5 11.5 0 0 0 6 6l1.3-1.9 3.9 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.8a2 2 0 0 1 2-2.2z"/><path d="M20.4 3.6 3.6 20.4"/></svg></div><h4>Meno telefonate</h4><p>Gli autisti hanno viaggi e navigazione sul telefono</p></div>
+        <div class="band-item"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.2 2.6 4.9 13.1a.6.6 0 0 0 .47 1h5.05l-1.05 7.3 8.53-10.7a.6.6 0 0 0-.47-1h-5.13z"/></svg></div><h4>Meno tempo perso</h4><p>Pianifichi, cerchi ed esporti in pochi clic</p></div>
+        <div class="band-item"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><circle cx="12" cy="12" r="4.6"/><circle cx="12" cy="12" r="1"/></svg></div><h4>Più controllo</h4><p>Sai chi deve pagarti e chi sta facendo cosa</p></div>
+        <div class="band-item"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.4" width="15" height="10.6" rx="2.6"/><path d="M8 10.4V7.6a4 4 0 0 1 8 0v2.8M12 14.6v2.4"/></svg></div><h4>Dati al sicuro</h4><p>Accessi protetti e backup automatici</p></div>
       </div>
     </div>
   </div>
@@ -357,13 +436,13 @@ img.zoom:hover{opacity:.92}
         <h2 class="h2">Pronto a digitalizzare la tua flotta?</h2>
         <p class="sub" style="margin-bottom:30px">Sono Andrea Ceol, lo sviluppatore di BusItinera. Scrivimi direttamente per una demo o per qualsiasi domanda: risponde chi ha costruito il programma.</p>
         <div class="dlinks">
-          <a href="mailto:ceolandrea006@gmail.com" class="dl"><span class="dl-ic">✉️</span><span><strong>ceolandrea006@gmail.com</strong><small>Rispondo entro 24 ore</small></span></a>
-          <a href="tel:+393274997730" class="dl"><span class="dl-ic">📞</span><span><strong>+39 327 499 7730</strong><small>Anche WhatsApp</small></span></a>
+          <a href="mailto:ceolandrea006@gmail.com" class="dl"><span class="dl-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.8" y="5" width="18.4" height="14" rx="2.5"/><path d="M3.4 7.4 12 13.1l8.6-5.7"/></svg></span><span><strong>ceolandrea006@gmail.com</strong><small>Rispondo entro 24 ore</small></span></a>
+          <a href="tel:+393274997730" class="dl"><span class="dl-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.6 3.6h3l1.5 3.9-1.9 1.3a11.5 11.5 0 0 0 6 6l1.3-1.9 3.9 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.8a2 2 0 0 1 2-2.2z"/></svg></span><span><strong>+39 327 499 7730</strong><small>Anche WhatsApp</small></span></a>
         </div>
         <div class="benefits">
-          <div class="ben"><div class="ben-ic">🎯</div><div><h4>Demo su misura</h4><p>Ti mostro le funzioni più utili per il tuo tipo di trasporto: NCC, bus, scuolabus.</p></div></div>
-          <div class="ben"><div class="ben-ic">⚡</div><div><h4>Installazione guidata</h4><p>Ti affianco nel setup con i tuoi dati reali, fino al primo accesso.</p></div></div>
-          <div class="ben"><div class="ben-ic">🤝</div><div><h4>Supporto diretto</h4><p>Parli con me. Nessun call center, nessun ticket.</p></div></div>
+          <div class="ben"><div class="ben-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><circle cx="12" cy="12" r="4.6"/><circle cx="12" cy="12" r="1"/></svg></div><div><h4>Demo su misura</h4><p>Ti mostro le funzioni più utili per il tuo tipo di trasporto: NCC, bus, scuolabus.</p></div></div>
+          <div class="ben"><div class="ben-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.2 2.6 4.9 13.1a.6.6 0 0 0 .47 1h5.05l-1.05 7.3 8.53-10.7a.6.6 0 0 0-.47-1h-5.13z"/></svg></div><div><h4>Installazione guidata</h4><p>Ti affianco nel setup con i tuoi dati reali, fino al primo accesso.</p></div></div>
+          <div class="ben"><div class="ben-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 12.1a7.9 7.9 0 0 1-8.5 7.9 8.8 8.8 0 0 1-2.9-.6L4.2 21l1.5-4.6a7.8 7.8 0 0 1-1-3.9 7.9 7.9 0 0 1 8.5-7.9 8.1 8.1 0 0 1 7.4 7.5z"/><path d="M9 12.2h.01M12 12.2h.01M15 12.2h.01"/></svg></div><div><h4>Supporto diretto</h4><p>Parli con me. Nessun call center, nessun ticket.</p></div></div>
         </div>
       </div>
       <div class="form rv d1">
@@ -381,7 +460,7 @@ img.zoom:hover{opacity:.92}
         <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label for="f_website">Lascia vuoto</label><input type="text" id="f_website" tabindex="-1" autocomplete="off"></div>
         <div id="tsWidget" style="margin:4px 0"></div>
         <div id="demoMsg" role="status" style="display:none"></div>
-        <button class="btn-submit" type="button" onclick="inviaDemo(event)">Invia richiesta demo →</button>
+        <button class="btn-submit" type="button" onclick="inviaDemo(event)">Invia richiesta demo<svg class="ic ic-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
       </div>
     </div>
   </div>
@@ -434,6 +513,41 @@ window.addEventListener('load', function(){
 });
 
 function _v(id){ var e=document.getElementById(id); return e ? e.value.trim() : ''; }
+
+/* Stesse regole applicate dal Worker (il controllo vero resta lato server). */
+var _LETT = "A-Za-zÀ-ÖØ-öø-ɏ";
+var _RE_NOME = new RegExp("^[" + _LETT + "'\\-]+( [" + _LETT + "'\\-]+)+$");
+function _refOk(s){
+  var v = String(s||'').replace(/\s+/g,' ').trim();
+  if(v.length < 4 || v.length > 120 || !_RE_NOME.test(v)) return false;
+  var p = v.split(' ');
+  return p.length >= 2 && p.every(function(x){ return x.replace(/['\-]/g,'').length >= 2; });
+}
+function _emailOk(s){
+  var v = String(s||'').trim();
+  if(!v || v.length > 160 || /\s/.test(v)) return false;
+  var p = v.split('@'); if(p.length !== 2) return false;
+  if(!/^[A-Za-z0-9._%+\-]+$/.test(p[0])) return false;
+  if(!/^[A-Za-z0-9.\-]+$/.test(p[1])) return false;
+  if(p[1].indexOf('.') < 0) return false;
+  if(/^[.\-]|[.\-]$|\.\./.test(p[1])) return false;
+  return /\.[A-Za-z]{2,}$/.test(p[1]);
+}
+function _telOk(s){
+  var v = String(s||'').trim();
+  if(!v || v.length > 60 || !/^\+?[0-9 ./()\-]+$/.test(v)) return false;
+  var c = v.replace(/\D/g,''); return c.length >= 6 && c.length <= 15;
+}
+function _sitoOk(s){
+  var v = String(s||'').trim(); if(!v) return true;
+  if(v.length > 160) return false;
+  v = v.replace(/^https?:\/\//i,'').replace(/\/+$/,'');
+  if(!/^[A-Za-z0-9.\-]+$/.test(v)) return false;
+  if(v.indexOf('.') < 0) return false;
+  if(/^[.\-]|[.\-]$|\.\./.test(v)) return false;
+  return /\.[A-Za-z]{2,}$/.test(v);
+}
+
 async function inviaDemo(ev){
   var msg=document.getElementById('demoMsg');
   function show(t, ok){ msg.textContent=t; msg.style.display='block'; msg.style.padding='11px 14px';
@@ -443,23 +557,27 @@ async function inviaDemo(ev){
   var azienda=_v('f_azienda'), referente=_v('f_referente'), email=_v('f_email'),
       tel=_v('f_tel'), sito=_v('f_sito'), note=_v('f_msg'), hp=_v('f_website');
   if(!azienda||!referente||(!email&&!tel)){ show('Compila azienda, referente e almeno un contatto (email o telefono).', false); return; }
+  if(!_refOk(referente)){ show('Indica nome e cognome della persona di riferimento, senza numeri né simboli.', false); document.getElementById('f_referente').focus(); return; }
+  if(email && !_emailOk(email)){ show("L'email non è valida: serve una sola chiocciola e un dominio con almeno un punto (es. info@azienda.it).", false); document.getElementById('f_email').focus(); return; }
+  if(tel && !_telOk(tel)){ show('Il telefono deve contenere solo numeri (da 6 a 15 cifre), eventualmente con il prefisso internazionale.', false); document.getElementById('f_tel').focus(); return; }
+  if(sito && !_sitoOk(sito)){ show('Il sito non è valido: usa un indirizzo con almeno un punto e senza caratteri speciali (es. www.azienda.it).', false); document.getElementById('f_sito').focus(); return; }
   var ts=''; try{ if(window.turnstile && window.__tsId!=null) ts=window.turnstile.getResponse(window.__tsId)||''; }catch(e){}
   if(_tsActive() && !ts){ show('Completa la verifica anti-bot qui sopra.', false); return; }
-  var btn=ev && ev.target ? ev.target : null, old = btn ? btn.textContent : '';
-  if(btn){ btn.disabled=true; btn.textContent='Invio…'; }
+  var btn=ev && ev.target ? ev.target.closest('button') : null, old = btn ? btn.innerHTML : '';
+  if(btn){ btn.disabled=true; btn.innerHTML='Invio&hellip;'; }
   try{
     var r=await fetch(DEMO_WORKER_BASE+'/api/demo', { method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({ azienda:azienda, referente:referente, email:email, telefono:tel, sito:sito, note:note, hp:hp, ts:ts }) });
     var d=await r.json().catch(function(){ return {}; });
     if(r.ok && d.ok){
-      show('Richiesta inviata ✓ Ti ricontatto al più presto per organizzare la demo.', true);
+      show('Richiesta inviata. Ti ricontatto al più presto per organizzare la demo.', true);
       ['f_azienda','f_referente','f_email','f_tel','f_sito','f_msg'].forEach(function(id){ var e=document.getElementById(id); if(e) e.value=''; });
       try{ if(window.turnstile && window.__tsId!=null) window.turnstile.reset(window.__tsId); }catch(e){}
     } else {
       show((d && d.message) || 'Invio non riuscito. Riprova, oppure scrivimi a ceolandrea006@gmail.com.', false);
     }
   }catch(e){ show('Errore di rete. Riprova, oppure scrivimi a ceolandrea006@gmail.com.', false); }
-  finally{ if(btn){ btn.disabled=false; btn.textContent=old; } }
+  finally{ if(btn){ btn.disabled=false; btn.innerHTML=old; } }
 }
 </script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>

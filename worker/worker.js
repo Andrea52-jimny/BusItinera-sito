@@ -52,6 +52,55 @@ async function sha256hex(str) {
 // ── Richieste demo: helper anti-abuso ────────────────────────────────────────
 function clip(s, n) { return String(s == null ? '' : s).slice(0, n).trim(); }
 
+// ── Richieste demo: validazione dei campi ────────────────────────────────────
+// Lettere (anche accentate), apostrofo e trattino: niente cifre né simboli.
+const LETTERE = "A-Za-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u024F";
+const RE_NOME = new RegExp("^[" + LETTERE + "'\\-]+( [" + LETTERE + "'\\-]+)+$");
+
+// Persona di riferimento: almeno due parole, solo lettere (+ ' e -).
+function referenteValido(s) {
+  const v = String(s || '').replace(/\s+/g, ' ').trim();
+  if (v.length < 4 || v.length > 120) return false;
+  if (!RE_NOME.test(v)) return false;
+  const parti = v.split(' ');
+  return parti.length >= 2 && parti.every(p => p.replace(/['\-]/g, '').length >= 2);
+}
+
+// Email: una sola chiocciola e almeno un punto nel dominio.
+function emailValida(s) {
+  const v = String(s || '').trim();
+  if (!v || v.length > 160 || /\s/.test(v)) return false;
+  const parti = v.split('@');
+  if (parti.length !== 2) return false;              // esattamente una chiocciola
+  const [locale, dominio] = parti;
+  if (!/^[A-Za-z0-9._%+\-]+$/.test(locale)) return false;
+  if (!/^[A-Za-z0-9.\-]+$/.test(dominio)) return false;
+  if (dominio.indexOf('.') < 0) return false;        // almeno un punto
+  if (/^[.\-]|[.\-]$|\.\./.test(dominio)) return false;
+  return /\.[A-Za-z]{2,}$/.test(dominio);
+}
+
+// Telefono: solo cifre (con prefisso + e separatori di lettura), da 6 a 15 cifre.
+function telefonoValido(s) {
+  const v = String(s || '').trim();
+  if (!v || v.length > 60) return false;
+  if (!/^\+?[0-9 ./()\-]+$/.test(v)) return false;   // nessuna lettera, nessun simbolo estraneo
+  const cifre = v.replace(/\D/g, '');
+  return cifre.length >= 6 && cifre.length <= 15;
+}
+
+// Sito: almeno un punto, niente caratteri speciali (schema e / finale ammessi).
+function sitoValido(s) {
+  let v = String(s || '').trim();
+  if (!v) return true;                               // campo facoltativo
+  if (v.length > 160) return false;
+  v = v.replace(/^https?:\/\//i, '').replace(/\/+$/, '');
+  if (!/^[A-Za-z0-9.\-]+$/.test(v)) return false;
+  if (v.indexOf('.') < 0) return false;
+  if (/^[.\-]|[.\-]$|\.\./.test(v)) return false;
+  return /\.[A-Za-z]{2,}$/.test(v);
+}
+
 // Rate limit per IP: max 5 richieste demo all'ora (contatore in KV con TTL).
 async function demoRateOk(env, ip) {
   try {
@@ -217,6 +266,18 @@ export default {
         const sito = clip(b && b.sito, 160), note = clip(b && b.note, 1000);
         if (!azienda || !referente || (!email && !telefono)) {
           return json({ error: 'invalid', message: 'Azienda, referente e almeno un contatto sono obbligatori.' }, 400, env, req);
+        }
+        if (!referenteValido(referente)) {
+          return json({ error: 'referente', message: 'Indica nome e cognome della persona di riferimento, senza numeri né simboli.' }, 400, env, req);
+        }
+        if (email && !emailValida(email)) {
+          return json({ error: 'email', message: "L'email non è valida: serve una sola chiocciola e un dominio con almeno un punto (es. info@azienda.it)." }, 400, env, req);
+        }
+        if (telefono && !telefonoValido(telefono)) {
+          return json({ error: 'telefono', message: 'Il telefono deve contenere solo numeri (da 6 a 15 cifre), eventualmente con il prefisso internazionale.' }, 400, env, req);
+        }
+        if (sito && !sitoValido(sito)) {
+          return json({ error: 'sito', message: 'Il sito non è valido: usa un indirizzo con almeno un punto e senza caratteri speciali (es. www.azienda.it).' }, 400, env, req);
         }
         const ip = req.headers.get('CF-Connecting-IP') || '';
         if (!(await turnstileOk(env, b && b.ts, ip))) {

@@ -244,6 +244,43 @@ img.zoom:hover{opacity:.92}
 
 @media(max-width:900px){.shot-trio,.gallery{grid-template-columns:1fr 1fr}}
 @media(max-width:700px){.shot-duo,.shot-trio,.gallery{grid-template-columns:1fr}}
+
+/* ── ICONE (SVG lineari, colore ereditato dal contenitore) ── */
+svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
+.card-ic{--isz:25px}.dicon{--isz:20px}.bic{--isz:24px}.dl-ic{--isz:20px}
+.ben-ic{--isz:19px}.doc-ic{--isz:27px}.hic{--isz:28px}
+.ic-b,.di-b{color:var(--primary)}
+.ic-o,.di-o{color:var(--accent)}
+.ic-g,.di-g{color:var(--green)}
+.ic-v,.di-v{color:var(--violet)}
+.ic-inline{display:inline-block;vertical-align:-4px;margin-left:8px;--isz:18px}
+
+/* ── BANDA "IN SINTESI" — versione chiara ── */
+.band{background:var(--card);border:1px solid var(--line);border-radius:28px;
+  padding:56px 48px;color:var(--ink2);
+  box-shadow:0 1px 2px rgba(16,27,45,.04),0 20px 54px rgba(16,27,45,.09)}
+.band h2{color:var(--ink);font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:800;
+  letter-spacing:-.03em;margin-bottom:38px;text-align:center}
+.band-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+.band-item{text-align:center;padding:0 18px;position:relative}
+.band-item+.band-item::before{content:'';position:absolute;left:0;top:6px;bottom:6px;
+  width:1px;background:var(--line)}
+.band-item .bic{width:54px;height:54px;border-radius:16px;display:flex;
+  align-items:center;justify-content:center;margin:0 auto 14px;
+  background:var(--primary-soft);color:var(--primary)}
+.band-item:nth-child(1) .bic{background:var(--green-soft);color:var(--green)}
+.band-item:nth-child(2) .bic{background:var(--accent-soft);color:var(--accent)}
+.band-item:nth-child(3) .bic{background:var(--primary-soft);color:var(--primary)}
+.band-item:nth-child(4) .bic{background:var(--violet-soft);color:var(--violet)}
+.band-item:nth-child(5) .bic{background:var(--green-soft);color:var(--green)}
+.band-item h4{font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:6px}
+.band-item p{font-size:.85rem;color:var(--muted);line-height:1.55}
+@media(max-width:980px){.band-grid{grid-template-columns:repeat(2,1fr);gap:30px 0}
+  .band-item:nth-child(odd)::before{display:none}}
+@media(max-width:700px){.band-grid{grid-template-columns:1fr;gap:26px}
+  .band-item::before{display:none!important}.band{padding:38px 24px}}
+.ph-chip{display:inline-flex;align-items:center;gap:5px}
+.ic-chip{--isz:13px;color:var(--primary)}
 </style>
 </head>
 <body>
@@ -285,9 +322,9 @@ img.zoom:hover{opacity:.92}
         <h2 class="h2">La tua flotta a colpo d'occhio</h2>
         <p class="sub">Aprendo l'agenda vedi subito cosa sta succedendo. È come avere un grande planning appeso al muro, ma sempre aggiornato, consultabile da qualsiasi computer o telefono, e senza cancellature.</p>
         <div class="dlist">
-          <div class="ditem"><div class="dicon di-b">📅</div><div><h4>Giorno, settimana o mese</h4><p>Puoi visualizzare la giornata odierna, la settimana intera o tutto il mese con un clic. Ogni viaggio è colorato in base al mezzo, così riconosci al volo i veicoli e il loro impegno.</p></div></div>
-          <div class="ditem"><div class="dicon di-o">➕</div><div><h4>Aggiungere un viaggio è immediato</h4><p>Cliccando sulla casella del giorno il modulo si apre con la data già precompilata. Meno passaggi, meno errori.</p></div></div>
-          <div class="ditem"><div class="dicon di-g">🎨</div><div><h4>Tutto riconoscibile a vista</h4><p>Colori per i mezzi e icone per il tipo di impegno (viaggio, noleggio, appuntamento). Capisci la situazione senza aprire nulla.</p></div></div>
+          <div class="ditem"><div class="dicon di-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg></div><div><h4>Giorno, settimana o mese</h4><p>Puoi visualizzare la giornata odierna, la settimana intera o tutto il mese con un clic. Ogni viaggio è colorato in base al mezzo, così riconosci al volo i veicoli e il loro impegno.</p></div></div>
+          <div class="ditem"><div class="dicon di-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8.4v7.2M8.4 12h7.2"/></svg></div><div><h4>Aggiungere un viaggio è immediato</h4><p>Cliccando sulla casella del giorno il modulo si apre con la data già precompilata. Meno passaggi, meno errori.</p></div></div>
+          <div class="ditem"><div class="dicon di-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2a8.8 8.8 0 0 0 0 17.6c1.2 0 2-.8 2-1.8 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-1 .8-1.8 1.8-1.8h1.4A4.6 4.6 0 0 0 20.8 10c0-3.8-3.9-6.8-8.8-6.8z"/><circle cx="8" cy="10.2" r="1.1"/><circle cx="12" cy="7.8" r="1.1"/><circle cx="16" cy="10.2" r="1.1"/></svg></div><div><h4>Tutto riconoscibile a vista</h4><p>Colori per i mezzi e icone per il tipo di impegno (viaggio, noleggio, appuntamento). Capisci la situazione senza aprire nulla.</p></div></div>
         </div>
       </div>
     </div>
@@ -308,7 +345,7 @@ img.zoom:hover{opacity:.92}
     </div>
     <div class="grid2">
       <div class="card rv">
-        <div class="card-ic ic-o">🚌</div>
+        <div class="card-ic ic-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.5" width="18" height="13" rx="3"/><path d="M3 10h18M7.5 16.5v1.1M16.5 16.5v1.1"/><circle cx="7.5" cy="19" r="1.5"/><circle cx="16.5" cy="19" r="1.5"/></svg></div>
         <h3>Creare un viaggio in un colpo solo</h3>
         <p>Cliente, data e ora, luogo di ritiro, tappe, mezzo, autisti e prezzo: tutto in un unico modulo, senza saltare da una schermata all'altra.</p>
         <ul class="clist">
@@ -319,7 +356,7 @@ img.zoom:hover{opacity:.92}
         </ul>
       </div>
       <div class="card rv d1">
-        <div class="card-ic ic-b">🛡️</div>
+        <div class="card-ic ic-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 4.6 5.8v5.3c0 4.6 3.1 8.3 7.4 10.2 4.3-1.9 7.4-5.6 7.4-10.2V5.8z"/><path d="M9 11.8l2.2 2.2 4.1-4.4"/></svg></div>
         <h3>Niente più mezzi o autisti prenotati due volte</h3>
         <p>Il cuore del programma. Se assegni un mezzo o un autista già impegnato in quelle ore, il sistema ti avvisa prima che tu possa salvare e evidenza mezzi e autisti impegnati.</p>
         <ul class="clist">
@@ -330,7 +367,7 @@ img.zoom:hover{opacity:.92}
         </ul>
       </div>
       <div class="card rv d2">
-        <div class="card-ic ic-v">📋</div>
+        <div class="card-ic ic-v"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.6" y="4.6" width="14.8" height="16.8" rx="2.6"/><path d="M9 4.6V3.5A1.4 1.4 0 0 1 10.4 2.1h3.2A1.4 1.4 0 0 1 15 3.5v1.1z"/><path d="M8.6 10.4h6.8M8.6 14h6.8M8.6 17.6h4"/></svg></div>
         <h3>Il dettaglio del viaggio, sempre a portata</h3>
         <p>Selezioni un viaggio e vedi tutto: percorso, mezzo, cliente e conti. Con pochi click aggiorni lo stato senza rifare il modulo.</p>
         <ul class="clist">
@@ -341,7 +378,7 @@ img.zoom:hover{opacity:.92}
         </ul>
       </div>
       <div class="card rv d3">
-        <div class="card-ic ic-g">🔑</div>
+        <div class="card-ic ic-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.9 2.9 7.4 12 11.9l9.1-4.5z"/><path d="M2.9 12.2 12 16.7l9.1-4.5M2.9 16.7 12 21.2l9.1-4.5"/></svg></div>
         <h3>Non solo viaggi: noleggi e appuntamenti</h3>
         <p>Gestisci nello stesso posto i noleggi dei mezzi e gli appuntamenti (revisioni, manutenzioni), con le stesse protezioni anti-sovrapposizione.</p>
         <ul class="clist">
@@ -370,7 +407,7 @@ img.zoom:hover{opacity:.92}
     </div>
     <div class="grid2">
       <div class="card rv">
-        <div class="card-ic ic-o">📄</div>
+        <div class="card-ic ic-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div>
         <h3>Preventivi per viaggi e per noleggi</h3>
         <p>Due elenchi separati, così non si mescolano offerte di tipo diverso. Ogni preventivo ha il suo numero e il suo stato.</p>
         <ul class="clist">
@@ -381,7 +418,7 @@ img.zoom:hover{opacity:.92}
         </ul>
       </div>
       <div class="card rv d1">
-        <div class="card-ic ic-b">🖨️</div>
+        <div class="card-ic ic-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9.2V3.6h10v5.6"/><path d="M6.8 17.4H5a2 2 0 0 1-2-2v-4.2a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4.2a2 2 0 0 1-2 2h-1.8"/><rect x="6.8" y="14" width="10.4" height="6.6" rx="1.2"/></svg></div>
         <h3>Due documenti, uno per ogni momento</h3>
         <p>Lo stesso preventivo si stampa in due versioni diverse, a seconda che tu stia proponendo o confermando.</p>
         <ul class="clist">
@@ -392,7 +429,7 @@ img.zoom:hover{opacity:.92}
         </ul>
       </div>
       <div class="card rv d2">
-        <div class="card-ic ic-v">💶</div>
+        <div class="card-ic ic-v"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6.6a7.2 7.2 0 1 0 0 10.8"/><path d="M4.6 10.4h8.2M4.6 13.9h8.2"/></svg></div>
         <h3>Conti chiari: IVA, acconto e saldo</h3>
         <p>Ogni voce con il suo importo e il totale calcolato da solo. Il cliente vede subito quanto e quando deve pagare.</p>
         <ul class="clist">
@@ -403,7 +440,7 @@ img.zoom:hover{opacity:.92}
         </ul>
       </div>
       <div class="card rv d3">
-        <div class="card-ic ic-g">⚡</div>
+        <div class="card-ic ic-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.2 2.6 4.9 13.1a.6.6 0 0 0 .47 1h5.05l-1.05 7.3 8.53-10.7a.6.6 0 0 0-.47-1h-5.13z"/></svg></div>
         <h3>Accettato? Diventa viaggio con un clic</h3>
         <p>Quando il cliente conferma, il preventivo si trasforma nel viaggio o nel noleggio reale, già compilato.</p>
         <ul class="clist">
@@ -418,7 +455,7 @@ img.zoom:hover{opacity:.92}
     <div class="rv" style="margin-top:32px">
       <div class="card" style="padding:34px 32px">
         <div style="display:flex;gap:14px;align-items:center;margin-bottom:10px">
-          <div class="card-ic ic-v" style="margin-bottom:0">🕓</div>
+          <div class="card-ic ic-v" style="margin-bottom:0"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.4 11.4a8.4 8.4 0 0 0-14.6-4.6L3.6 9"/><path d="M3.6 12.6a8.4 8.4 0 0 0 14.6 4.6l2.2-2.2"/><path d="M3.6 4.6V9h4.4M20.4 19.4V15H16"/></svg></div>
           <h3 style="font-size:1.25rem">Revisioni tracciate, il documento inviato non cambia</h3>
         </div>
         <p style="margin-bottom:16px">Un preventivo può avere più revisioni nel tempo, ma quella già inviata al cliente resta congelata: è la copia esatta di ciò che ha ricevuto. Se cambi qualcosa, nasce una nuova revisione, senza sovrascrivere la precedente.</p>
@@ -438,7 +475,7 @@ img.zoom:hover{opacity:.92}
     <div class="rv" style="margin-top:32px">
       <div class="card" style="padding:34px 32px">
         <div style="display:flex;gap:14px;align-items:center;margin-bottom:10px">
-          <div class="card-ic ic-g" style="margin-bottom:0">🖨️</div>
+          <div class="card-ic ic-g" style="margin-bottom:0"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9.2V3.6h10v5.6"/><path d="M6.8 17.4H5a2 2 0 0 1-2-2v-4.2a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4.2a2 2 0 0 1-2 2h-1.8"/><rect x="6.8" y="14" width="10.4" height="6.6" rx="1.2"/></svg></div>
           <h3 style="font-size:1.25rem">Moduli operativi: ordine di servizio e contratto di noleggio</h3>
         </div>
         <p style="margin-bottom:16px">Oltre a preventivo e conferma, stampi in un clic anche i moduli di tutti i giorni, già compilati con i dati che hai in agenda: meno carta da riempire a mano.</p>
@@ -472,12 +509,12 @@ img.zoom:hover{opacity:.92}
         <h2 class="h2">Il telefono dell'autista diventa il suo cruscotto</h2>
         <p class="sub">Ogni autista accede a una versione dedicata nel suo smartphone, dove vede solo i suoi viaggi. Semplice, pulita, sempre in tasca.</p>
         <div class="dlist">
-          <div class="ditem"><div class="dicon di-g">🟢</div><div><h4>Il viaggio in corso, evidenziato</h4><p>La tappa di partenza, le soste e l'arrivo in ordine. Ogni indirizzo è un pulsante che apre la navigazione su Google Maps.</p></div></div>
-          <div class="ditem"><div class="dicon di-o">⏱️</div><div><h4>Conto alla rovescia sul prossimo viaggio</h4><p>“In partenza tra 45 minuti”, aggiornato in automatico. L'autista sa sempre quando muoversi.</p></div></div>
-          <div class="ditem"><div class="dicon di-v">🔒</div><div><h4>Solo ciò che gli serve</h4><p>Prezzi, pagamenti e dati riservati non sono visibili all'autista. Meno telefonate del tipo “dove devo andare?” e “a che ora?”.</p></div></div>
-          <div class="ditem"><div class="dicon di-b">📏</div><div><h4>Ordine di servizio e chilometri, dal telefono</h4><p>Per i viaggi in corso l’autista apre l’ordine di servizio e inserisce i chilometri di partenza e ritorno: finiscono subito nel viaggio, senza passare dall’ufficio.</p></div></div>
-          <div class="ditem"><div class="dicon di-g">🏁</div><div><h4>“Viaggio completato”, dal telefono</h4><p>L’autista segna come conclusi i propri viaggi direttamente dal portale mobile. Il pulsante si attiva solo dopo l’orario di rientro previsto, così lo stato è sempre affidabile.</p></div></div>
-          <div class="ditem"><div class="dicon di-o">🔔</div><div><h4>Notifiche sul telefono</h4><p>Riceve un avviso quando gli viene assegnato un nuovo viaggio o cambia orario, luogo o cliente — anche ad app chiusa. L’app si aggiunge alla schermata Home come un’app normale.</p></div></div>
+          <div class="ditem"><div class="dicon di-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M10.3 8.9 15.3 12l-5 3.1z"/></svg></div><div><h4>Il viaggio in corso, evidenziato</h4><p>La tappa di partenza, le soste e l'arrivo in ordine. Ogni indirizzo è un pulsante che apre la navigazione su Google Maps.</p></div></div>
+          <div class="ditem"><div class="dicon di-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13.6" r="7.5"/><path d="M12 10v3.6l2.3 1.4"/><path d="M9.4 2.6h5.2"/></svg></div><div><h4>Conto alla rovescia sul prossimo viaggio</h4><p>“In partenza tra 45 minuti”, aggiornato in automatico. L'autista sa sempre quando muoversi.</p></div></div>
+          <div class="ditem"><div class="dicon di-v"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.4" width="15" height="10.6" rx="2.6"/><path d="M8 10.4V7.6a4 4 0 0 1 8 0v2.8M12 14.6v2.4"/></svg></div><div><h4>Solo ciò che gli serve</h4><p>Prezzi, pagamenti e dati riservati non sono visibili all'autista. Meno telefonate del tipo “dove devo andare?” e “a che ora?”.</p></div></div>
+          <div class="ditem"><div class="dicon di-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.3 2.9 21.1 7.7a1.3 1.3 0 0 1 0 1.9L9.6 21.1a1.3 1.3 0 0 1-1.9 0L2.9 16.3a1.3 1.3 0 0 1 0-1.9L14.4 2.9a1.3 1.3 0 0 1 1.9 0z"/><path d="M12.6 4.7 14.9 7M9.9 7.4l2.3 2.3M7.2 10.1l2.3 2.3M4.5 12.8l2.3 2.3"/></svg></div><div><h4>Ordine di servizio e chilometri, dal telefono</h4><p>Per i viaggi in corso l’autista apre l’ordine di servizio e inserisce i chilometri di partenza e ritorno: finiscono subito nel viaggio, senza passare dall’ufficio.</p></div></div>
+          <div class="ditem"><div class="dicon di-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21.4V3.4"/><path d="M5 4.4h12.6l-2 3.6 2 3.6H5z"/></svg></div><div><h4>“Viaggio completato”, dal telefono</h4><p>L’autista segna come conclusi i propri viaggi direttamente dal portale mobile. Il pulsante si attiva solo dopo l’orario di rientro previsto, così lo stato è sempre affidabile.</p></div></div>
+          <div class="ditem"><div class="dicon di-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8.7a6 6 0 1 0-12 0c0 5.8-2.4 7.3-2.4 7.3h16.8S18 14.5 18 8.7"/><path d="M13.7 19.5a2 2 0 0 1-3.4 0"/></svg></div><div><h4>Notifiche sul telefono</h4><p>Riceve un avviso quando gli viene assegnato un nuovo viaggio o cambia orario, luogo o cliente — anche ad app chiusa. L’app si aggiunge alla schermata Home come un’app normale.</p></div></div>
         </div>
       </div>
       <div class="rv d1" style="display:flex;justify-content:center">
@@ -493,7 +530,7 @@ img.zoom:hover{opacity:.92}
                 <div class="ph-stop"><span class="t">09:15</span><br>Sosta pranzo — Autogrill</div>
                 <div class="ph-stop"><span class="t">12:00</span><br><strong>Fiera di Roma</strong></div>
               </div>
-              <div class="ph-info"><span class="ph-chip">🚌 Corriera Blu</span><span class="ph-chip">Comune di Venezia</span></div>
+              <div class="ph-info"><span class="ph-chip"><svg class="ic ic-chip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.5" width="18" height="13" rx="3"/><path d="M3 10h18M7.5 16.5v1.1M16.5 16.5v1.1"/><circle cx="7.5" cy="19" r="1.5"/><circle cx="16.5" cy="19" r="1.5"/></svg>Corriera Blu</span><span class="ph-chip">Comune di Venezia</span></div>
             </div>
             <div class="ph-card o">
               <div class="ph-badge o"><span class="pdot"></span>Tra 45 min</div>
@@ -501,7 +538,7 @@ img.zoom:hover{opacity:.92}
                 <div class="ph-stop"><span class="t">14:30</span><br><strong>Hotel Danieli, VE</strong></div>
                 <div class="ph-stop"><span class="t">16:00</span><br><strong>Aeroporto Marco Polo</strong></div>
               </div>
-              <div class="ph-info"><span class="ph-chip">🚐 NCC Nero</span><span class="ph-chip">Agenzia Stella</span></div>
+              <div class="ph-info"><span class="ph-chip"><svg class="ic ic-chip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.5" width="18" height="13" rx="3"/><path d="M3 10h18M7.5 16.5v1.1M16.5 16.5v1.1"/><circle cx="7.5" cy="19" r="1.5"/><circle cx="16.5" cy="19" r="1.5"/></svg>NCC Nero</span><span class="ph-chip">Agenzia Stella</span></div>
             </div>
           </div>
         </div>
@@ -519,9 +556,9 @@ img.zoom:hover{opacity:.92}
       <p class="sub rv d1">Registri le tue risorse una volta e le richiami con un clic. Il programma protegge i dati da errori e doppioni.</p>
     </div>
     <div class="grid3">
-      <div class="card rv"><div class="card-ic ic-b">🚌</div><h3>Mezzi</h3><p>Targa, soprannome, tipo e un colore personalizzato che ritrovi a calendario.</p><ul class="clist"><li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Segni “fuori servizio” quando è in officina e sparisce dalle scelte</li><li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Non lo cancelli per sbaglio se ha viaggi collegati</li></ul></div>
-      <div class="card rv d1"><div class="card-ic ic-o">👥</div><h3>Clienti</h3><p>Nome, ragione sociale, telefono ed email, tutti a portata di clic.</p><ul class="clist"><li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Niente doppioni: il numero di telefono è controllato</li><li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Ricerca istantanea per trovarli subito</li></ul></div>
-      <div class="card rv d2"><div class="card-ic ic-g">🧑‍✈️</div><h3>Autisti</h3><p>Ognuno con il suo accesso e il portale dedicato sul telefono.</p><ul class="clist"><li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Se sospendi un autista, lo storico dei suoi viaggi resta</li><li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Un autista non disponibile è segnato a calendario</li></ul></div>
+      <div class="card rv"><div class="card-ic ic-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.5" width="18" height="13" rx="3"/><path d="M3 10h18M7.5 16.5v1.1M16.5 16.5v1.1"/><circle cx="7.5" cy="19" r="1.5"/><circle cx="16.5" cy="19" r="1.5"/></svg></div><h3>Mezzi</h3><p>Targa, soprannome, tipo e un colore personalizzato che ritrovi a calendario.</p><ul class="clist"><li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Segni “fuori servizio” quando è in officina e sparisce dalle scelte</li><li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Non lo cancelli per sbaglio se ha viaggi collegati</li></ul></div>
+      <div class="card rv d1"><div class="card-ic ic-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.2" cy="8.2" r="3.5"/><path d="M2.8 20.2c0-3.5 2.9-5.8 6.4-5.8s6.4 2.3 6.4 5.8"/><path d="M16.4 5.2a3.5 3.5 0 0 1 0 6.3M18 15c2 .8 3.3 2.5 3.3 5.2"/></svg></div><h3>Clienti</h3><p>Nome, ragione sociale, telefono ed email, tutti a portata di clic.</p><ul class="clist"><li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Niente doppioni: il numero di telefono è controllato</li><li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Ricerca istantanea per trovarli subito</li></ul></div>
+      <div class="card rv d2"><div class="card-ic ic-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="7.8" r="3.6"/><path d="M3.3 20.2c0-3.6 3-5.9 6.7-5.9 1 0 2 .2 2.9.5"/><path d="M15.2 17.8l2 2 3.6-4"/></svg></div><h3>Autisti</h3><p>Ognuno con il suo accesso e il portale dedicato sul telefono.</p><ul class="clist"><li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Se sospendi un autista, lo storico dei suoi viaggi resta</li><li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Un autista non disponibile è segnato a calendario</li></ul></div>
     </div>
     <div class="shot-trio">
       <figure class="shot rv"><img class="zoom" src="images/veicoli.png" data-cap="Anagrafica veicoli" alt="Anagrafica veicoli" loading="lazy"><figcaption>Veicoli</figcaption></figure>
@@ -537,12 +574,15 @@ img.zoom:hover{opacity:.92}
     <div class="center" style="margin-bottom:56px">
       <div class="eyebrow or">Amministrazione</div>
       <h2 class="h2 rv">Pagamenti e conti sotto controllo</h2>
-      <p class="sub rv d1">Gli strumenti che trasformano il caos amministrativo in un flusso ordinato.</p>
+      <p class="sub rv d1">Gli strumenti che trasformano il caos amministrativo in un flusso ordinato &mdash; comprese le scadenze che l&rsquo;app tiene d&rsquo;occhio al posto tuo.</p>
     </div>
     <div class="grid3">
-      <div class="card rv"><div class="card-ic ic-o">🔔</div><h3>Avvisi sui pagamenti</h3><p>Una campanella ti segnala i pagamenti in scadenza o già scaduti, con i giorni di ritardo, il nome del cliente, l'importo e i contatti. Sai chi sollecitare senza cercare tra le carte.</p></div>
-      <div class="card rv d1"><div class="card-ic ic-b">📊</div><h3>Esporti in Excel</h3><p>Ti serve un riepilogo per il commercialista? Esporti tutto in un file Excel scegliendo quali informazioni includere. Già pronto per aprirsi correttamente in Excel italiano.</p></div>
-      <div class="card rv d2"><div class="card-ic ic-g">🔎</div><h3>Ricerca unica</h3><p>Scrivi un nome cliente, un indirizzo o una targa e trovi subito tutti i viaggi collegati. Filtri per mese, periodo, autista o mezzo.</p></div>
+      <div class="card rv"><div class="card-ic ic-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8.7a6 6 0 1 0-12 0c0 5.8-2.4 7.3-2.4 7.3h16.8S18 14.5 18 8.7"/><path d="M13.7 19.5a2 2 0 0 1-3.4 0"/></svg></div><h3>Avvisi sui pagamenti</h3><p>Una campanella ti segnala i pagamenti in scadenza o già scaduti, con i giorni di ritardo, il nome del cliente, l'importo e i contatti. Sai chi sollecitare senza cercare tra le carte.</p></div>
+      <div class="card rv d1"><div class="card-ic ic-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 20.6h17.2"/><path d="M6.6 20.6v-6.2M11 20.6V9.4M15.4 20.6v-8.4M19.8 20.6V6"/></svg></div><h3>Esporti in Excel</h3><p>Ti serve un riepilogo per il commercialista? Esporti tutto in un file Excel scegliendo quali informazioni includere. Già pronto per aprirsi correttamente in Excel italiano.</p></div>
+      <div class="card rv d2"><div class="card-ic ic-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.9"/><path d="M15.8 15.8 21 21"/></svg></div><h3>Ricerca unica</h3><p>Scrivi un nome cliente, un indirizzo o una targa e trovi subito tutti i viaggi collegati. Filtri per mese, periodo, autista o mezzo.</p></div>
+      <div class="card rv"><div class="card-ic ic-v"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.6" y="4.6" width="14.8" height="16.8" rx="2.6"/><path d="M9 4.6V3.5A1.4 1.4 0 0 1 10.4 2.1h3.2A1.4 1.4 0 0 1 15 3.5v1.1z"/><path d="M8.6 10.4h6.8M8.6 14h6.8M8.6 17.6h4"/></svg></div><h3>Scadenze di mezzi e autisti</h3><p>Bollo, assicurazione, revisione e tagliando per ogni mezzo; patente, CQC e licenza per ogni autista. Tutte le date in un posto solo, ordinate per urgenza.</p></div>
+      <div class="card rv d1"><div class="card-ic ic-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13.2" r="7.8"/><path d="M12 9.2v4l2.6 1.8"/><path d="M4.8 3.4 2.6 5.5M19.2 3.4 21.4 5.5"/></svg></div><h3>Promemoria automatici</h3><p>Non devi ricordartene tu: l'app avvisa chi gestisce l'azienda a <strong>30, 7 e 1 giorno</strong> dalla scadenza, e segnala i pagamenti in arrivo. I controlli partono da soli, ogni giorno.</p></div>
+      <div class="card rv d2"><div class="card-ic ic-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.6"/><path d="M10.5 18.5h3"/></svg></div><h3>BusItinera dal telefono</h3><p>Anche titolari e operatori hanno una schermata pensata per lo schermo piccolo: viaggi di oggi e domani e scadenze in ordine di urgenza, senza il gestionale &ldquo;schiacciato&rdquo;.</p></div>
     </div>
     <figure class="shot shot-single rv d1"><img class="zoom" src="images/avvisi.png" data-cap="Avvisi sui pagamenti in scadenza e scaduti" alt="Avvisi pagamenti" loading="lazy"><figcaption>Il pannello avvisi: pagamenti in scadenza e scaduti, con giorni di ritardo e contatti</figcaption></figure>
   </div>
@@ -558,7 +598,7 @@ img.zoom:hover{opacity:.92}
     </div>
     <div class="grid2">
       <div class="card rv">
-        <div class="card-ic ic-b">🧾</div>
+        <div class="card-ic ic-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12a1 1 0 0 1 1 1v17l-2.7-1.6L14 21l-2-1.4L10 21l-2.3-1.6L5 21V4a1 1 0 0 1 1-1z"/><path d="M9 8.5h6M9 12.5h6M9 16.5h3"/></svg></div>
         <h3>La fatturi partendo dal servizio</h3>
         <p>Scegli il cliente e spunti i viaggi o i noleggi ancora da fatturare: il documento nasce già compilato, con una riga per ogni servizio.</p>
         <ul class="clist">
@@ -568,7 +608,7 @@ img.zoom:hover{opacity:.92}
         </ul>
       </div>
       <div class="card rv d1">
-        <div class="card-ic ic-o">🧮</div>
+        <div class="card-ic ic-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="2.6" width="15" height="18.8" rx="2.6"/><path d="M8 6.6h8"/><path d="M8.4 11h.01M12 11h.01M15.6 11h.01M8.4 14.4h.01M12 14.4h.01M15.6 14.4h.01M8.4 17.8h.01M12 17.8h.01M15.6 17.8h.01"/></svg></div>
         <h3>Il regime giusto, calcolato per te</h3>
         <p>BusItinera segue il regime fiscale impostato nei Dati Azienda e compila la fattura di conseguenza.</p>
         <ul class="clist">
@@ -578,7 +618,7 @@ img.zoom:hover{opacity:.92}
         </ul>
       </div>
       <div class="card rv d2">
-        <div class="card-ic ic-v">✏️</div>
+        <div class="card-ic ic-v"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.5 3.6 20.4 7.5 8.4 19.5l-4.5.9.9-4.5z"/><path d="M14.3 5.8 18.2 9.7"/></svg></div>
         <h3>Anteprima modificabile prima di emettere</h3>
         <p>Prima di confermare vedi la fattura come sarà e puoi ritoccarla: descrizioni, quantità, prezzi, aliquote e causale. Nulla viene emesso finché non dai l'ok finale.</p>
         <ul class="clist">
@@ -588,7 +628,7 @@ img.zoom:hover{opacity:.92}
         </ul>
       </div>
       <div class="card rv d3">
-        <div class="card-ic ic-g">↩️</div>
+        <div class="card-ic ic-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.6h11a5.6 5.6 0 0 1 0 11.2H9.4"/><path d="M7.8 5.8 4 9.6l3.8 3.8"/></svg></div>
         <h3>Note di credito e numerazione in ordine</h3>
         <p>Se serve annullare o correggere, emetti una nota di credito collegata alla fattura di origine, in modo totale o parziale.</p>
         <ul class="clist">
@@ -602,7 +642,7 @@ img.zoom:hover{opacity:.92}
     <div class="rv" style="margin-top:32px">
       <div class="card" style="padding:34px 32px">
         <div style="display:flex;gap:14px;align-items:center;margin-bottom:10px">
-          <div class="card-ic ic-b" style="margin-bottom:0">🏛️</div>
+          <div class="card-ic ic-b" style="margin-bottom:0"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 9.6 12 4.2l8.6 5.4"/><path d="M5.8 9.8v8M10 9.8v8M14 9.8v8M18.2 9.8v8"/><path d="M3 20.6h18"/></svg></div>
           <h3 style="font-size:1.25rem">Fatture verso Comuni, scuole ed enti pubblici</h3>
         </div>
         <p style="margin-bottom:16px">Se lavori con la Pubblica Amministrazione, BusItinera genera la fattura nel formato corretto per la PA e ti guida sui dati richiesti dagli enti, così il documento è completo già alla prima emissione.</p>
@@ -639,7 +679,7 @@ img.zoom:hover{opacity:.92}
     </div>
     <div class="grid2">
       <div class="card rv">
-        <div class="card-ic ic-b">🌍</div>
+        <div class="card-ic ic-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M3.5 12h17"/><path d="M12 3.4a13.5 13.5 0 0 1 0 17.2 13.5 13.5 0 0 1 0-17.2z"/></svg></div>
         <h3>Servizi all'estero, in regola</h3>
         <p>Per i viaggi fuori dall'Italia il documento tratta correttamente la parte estera, con la natura IVA giusta e l'imposta di bollo dove serve.</p>
         <ul class="clist">
@@ -649,7 +689,7 @@ img.zoom:hover{opacity:.92}
         </ul>
       </div>
       <div class="card rv d1">
-        <div class="card-ic ic-g">📏</div>
+        <div class="card-ic ic-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.3 2.9 21.1 7.7a1.3 1.3 0 0 1 0 1.9L9.6 21.1a1.3 1.3 0 0 1-1.9 0L2.9 16.3a1.3 1.3 0 0 1 0-1.9L14.4 2.9a1.3 1.3 0 0 1 1.9 0z"/><path d="M12.6 4.7 14.9 7M9.9 7.4l2.3 2.3M7.2 10.1l2.3 2.3M4.5 12.8l2.3 2.3"/></svg></div>
         <h3>Chilometri sotto controllo</h3>
         <p>Registri i chilometri alla partenza e al ritorno, sui viaggi e sui noleggi, e tieni aggiornato il chilometraggio di ogni mezzo.</p>
         <ul class="clist">
@@ -671,15 +711,15 @@ img.zoom:hover{opacity:.92}
         <h2 class="h2">I tuoi dati al sicuro, il giusto accesso a ciascuno</h2>
         <p class="sub">Ognuno entra con il proprio account e vede solo quello che gli spetta. I dati sono protetti, tracciati e salvati in automatico.</p>
         <div class="dlist">
-          <div class="ditem"><div class="dicon di-b">👤</div><div><h4>Ruoli e permessi su misura</h4><p>Quattro profili pronti all'uso e, se serve, interruttori per accendere o spegnere singole capacità (preventivi, pagamenti, fatture e altro) utente per utente.</p></div></div>
-          <div class="ditem"><div class="dicon di-g">🔐</div><div><h4>Ingresso protetto: password, due passaggi o impronta</h4><p>Password robuste e, per chi gestisce l'azienda, l'autenticazione a due fattori come per l'home banking. In pi&ugrave; si pu&ograve; entrare con l'<strong>impronta digitale o il volto</strong>, senza digitare nulla: comodo soprattutto per gli autisti dal telefono.</p></div></div>
-          <div class="ditem"><div class="dicon di-v">🗒️</div><div><h4>Registro attività</h4><p>Ogni operazione importante resta tracciata: chi ha fatto cosa e quando, con filtri per tipo e conservazione nel tempo. Utile per controllo e trasparenza.</p></div></div>
-          <div class="ditem"><div class="dicon di-o">💾</div><div><h4>Backup automatici</h4><p>I dati vengono salvati ogni giorno e le copie conservate per due settimane. Anche se qualcosa va storto, non si perde nulla.</p></div></div>
+          <div class="ditem"><div class="dicon di-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.8"/><path d="M4.6 20.4c0-3.8 3.4-6.2 7.4-6.2s7.4 2.4 7.4 6.2"/></svg></div><div><h4>Ruoli e permessi su misura</h4><p>Quattro profili pronti all'uso e, se serve, interruttori per accendere o spegnere singole capacità (preventivi, pagamenti, fatture e altro) utente per utente.</p></div></div>
+          <div class="ditem"><div class="dicon di-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4.4a7.5 7.5 0 0 0-7.5 7.5v2.2"/><path d="M19.5 13.8v-1.9A7.5 7.5 0 0 0 15.2 5.1"/><path d="M8.6 12a3.4 3.4 0 0 1 6.8 0v3.4a9.5 9.5 0 0 1-.7 3.6"/><path d="M12 12v4.4a12.5 12.5 0 0 1-.9 4.6"/><path d="M6.6 17.6a9.3 9.3 0 0 0 .9-3.6V12"/></svg></div><div><h4>Ingresso protetto: password, due passaggi o impronta</h4><p>Password robuste e, per chi gestisce l'azienda, l'autenticazione a due fattori come per l'home banking. In pi&ugrave; si pu&ograve; entrare con l'<strong>impronta digitale o il volto</strong>, senza digitare nulla: comodo soprattutto per gli autisti dal telefono.</p></div></div>
+          <div class="ditem"><div class="dicon di-v"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.6" y="4.6" width="14.8" height="16.8" rx="2.6"/><path d="M9 4.6V3.5A1.4 1.4 0 0 1 10.4 2.1h3.2A1.4 1.4 0 0 1 15 3.5v1.1z"/><path d="M8.6 10.4h6.8M8.6 14h6.8M8.6 17.6h4"/></svg></div><div><h4>Registro attività</h4><p>Ogni operazione importante resta tracciata: chi ha fatto cosa e quando, con filtri per tipo e conservazione nel tempo. Utile per controllo e trasparenza.</p></div></div>
+          <div class="ditem"><div class="dicon di-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5.8" rx="7.6" ry="3.3"/><path d="M4.4 5.8v12.4c0 1.8 3.4 3.3 7.6 3.3s7.6-1.5 7.6-3.3V5.8"/><path d="M4.4 12c0 1.8 3.4 3.3 7.6 3.3s7.6-1.5 7.6-3.3"/></svg></div><div><h4>Backup automatici</h4><p>I dati vengono salvati ogni giorno e le copie conservate per due settimane. Anche se qualcosa va storto, non si perde nulla.</p></div></div>
         </div>
       </div>
       <div class="rv d1">
         <div class="card" style="padding:38px">
-          <div class="card-ic ic-b" style="width:56px;height:56px;font-size:1.6rem">🗂️</div>
+          <div class="card-ic ic-b" style="width:56px;height:56px;font-size:1.6rem"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20.4v-6.2M5 10.4V3.6M12 20.4v-9.8M12 6.8V3.6M19 20.4v-4.6M19 12V3.6"/><path d="M2.8 14.2h4.4M9.8 10.6h4.4M16.8 15.8h4.4"/></svg></div>
           <h3 style="font-size:1.3rem">Quattro profili, permessi affinabili</h3>
           <p style="margin-bottom:20px">Parti da un profilo e, quando serve, regoli i singoli interruttori del singolo utente.</p>
           <div style="display:flex;flex-direction:column;gap:12px">
@@ -709,7 +749,7 @@ img.zoom:hover{opacity:.92}
     <div class="grid2">
       <div class="card deploy-card rv">
         <div class="deploy-badge db-b">Opzione A</div>
-        <div class="card-ic ic-b">🏠</div>
+        <div class="card-ic ic-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 10.6 12 3.4l8.6 7.2"/><path d="M5.6 9.6v11h12.8v-11"/><path d="M9.8 20.6v-6h4.4v6"/></svg></div>
         <h3>Sul tuo server aziendale</h3>
         <p>BusItinera gira sul tuo NAS o su una macchina in azienda: i dati restano fisicamente da te.</p>
         <ul class="clist">
@@ -721,7 +761,7 @@ img.zoom:hover{opacity:.92}
       </div>
       <div class="card deploy-card rv d1">
         <div class="deploy-badge db-o">Opzione B</div>
-        <div class="card-ic ic-o">☁️</div>
+        <div class="card-ic ic-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.4 19.4H7a4.5 4.5 0 0 1-.6-8.95 6 6 0 0 1 11.55 1.7 3.63 3.63 0 0 1-.55 7.25z"/></svg></div>
         <h3>Nel cloud, senza hardware</h3>
         <p>Non hai un server? Te la configuro nel cloud, pronta all'uso e accessibile da ovunque.</p>
         <ul class="clist">

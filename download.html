@@ -76,6 +76,43 @@ footer strong{color:var(--ink2)}
 @media(max-width:820px){.docs{grid-template-columns:1fr}}
 @media(max-width:700px){.nav-links{display:none}.mob-tog{display:block}.head{padding:120px 0 30px}}
 .nav-links.open{display:flex!important;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,.98);backdrop-filter:blur(16px);padding:22px;gap:18px;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+
+/* ── ICONE (SVG lineari, colore ereditato dal contenitore) ── */
+svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
+.card-ic{--isz:25px}.dicon{--isz:20px}.bic{--isz:24px}.dl-ic{--isz:20px}
+.ben-ic{--isz:19px}.doc-ic{--isz:27px}.hic{--isz:28px}
+.ic-b,.di-b{color:var(--primary)}
+.ic-o,.di-o{color:var(--accent)}
+.ic-g,.di-g{color:var(--green)}
+.ic-v,.di-v{color:var(--violet)}
+.ic-inline{display:inline-block;vertical-align:-4px;margin-left:8px;--isz:18px}
+
+/* ── BANDA "IN SINTESI" — versione chiara ── */
+.band{background:var(--card);border:1px solid var(--line);border-radius:28px;
+  padding:56px 48px;color:var(--ink2);
+  box-shadow:0 1px 2px rgba(16,27,45,.04),0 20px 54px rgba(16,27,45,.09)}
+.band h2{color:var(--ink);font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:800;
+  letter-spacing:-.03em;margin-bottom:38px;text-align:center}
+.band-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+.band-item{text-align:center;padding:0 18px;position:relative}
+.band-item+.band-item::before{content:'';position:absolute;left:0;top:6px;bottom:6px;
+  width:1px;background:var(--line)}
+.band-item .bic{width:54px;height:54px;border-radius:16px;display:flex;
+  align-items:center;justify-content:center;margin:0 auto 14px;
+  background:var(--primary-soft);color:var(--primary)}
+.band-item:nth-child(1) .bic{background:var(--green-soft);color:var(--green)}
+.band-item:nth-child(2) .bic{background:var(--accent-soft);color:var(--accent)}
+.band-item:nth-child(3) .bic{background:var(--primary-soft);color:var(--primary)}
+.band-item:nth-child(4) .bic{background:var(--violet-soft);color:var(--violet)}
+.band-item:nth-child(5) .bic{background:var(--green-soft);color:var(--green)}
+.band-item h4{font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:6px}
+.band-item p{font-size:.85rem;color:var(--muted);line-height:1.55}
+@media(max-width:980px){.band-grid{grid-template-columns:repeat(2,1fr);gap:30px 0}
+  .band-item:nth-child(odd)::before{display:none}}
+@media(max-width:700px){.band-grid{grid-template-columns:1fr;gap:26px}
+  .band-item::before{display:none!important}.band{padding:38px 24px}}
+.notice h4{display:flex;align-items:center;gap:9px}
+.ic-h4{--isz:20px;color:var(--accent)}
 </style>
 </head>
 <body>
@@ -112,7 +149,7 @@ footer strong{color:var(--ink2)}
     <div class="docs">
 
       <article class="doc">
-        <div class="doc-ic ic-b">📘</div>
+        <div class="doc-ic ic-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 4.4A2.4 2.4 0 0 1 7 2h12.4v15.6H7a2.4 2.4 0 0 0-2.4 2.4z"/><path d="M4.6 19.6A2.4 2.4 0 0 1 7 17.2h12.4V22H7a2.4 2.4 0 0 1-2.4-2.4z"/></svg></div>
         <h3>Documentazione delle Funzionalità</h3>
         <p>Guida completa a tutte le funzioni del gestionale: calendario e pianificazione, viaggi e noleggi, preventivi, contabilità e congelamento, fatturazione elettronica FatturaPA, utenti e permessi granulari, portale autista e molto altro.</p>
         <div class="doc-meta"><span class="tag pdf">PDF</span><span class="tag">12 pagine</span><span class="tag">Aggiornato 09/2026</span></div>
@@ -123,7 +160,7 @@ footer strong{color:var(--ink2)}
       </article>
 
       <article class="doc">
-        <div class="doc-ic ic-g">🛡️</div>
+        <div class="doc-ic ic-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 4.6 5.8v5.3c0 4.6 3.1 8.3 7.4 10.2 4.3-1.9 7.4-5.6 7.4-10.2V5.8z"/><path d="M9 11.8l2.2 2.2 4.1-4.4"/></svg></div>
         <h3>Attestato Funzionale e di Sicurezza</h3>
         <p>Esito del collaudo funzionale, della conformità della fatturazione elettronica (XML validati contro lo schema ufficiale FatturaPA v1.2) e della verifica di sicurezza applicativa: nessuna vulnerabilità di livello Critico o Alto.</p>
         <div class="doc-meta"><span class="tag pdf">PDF</span><span class="tag">6 pagine</span><span class="tag">Aggiornato 09/2026</span></div>
@@ -136,7 +173,7 @@ footer strong{color:var(--ink2)}
     </div>
 
     <div class="notice">
-      <h4>⚖️ Nota di copyright e uso consentito</h4>
+      <h4><svg class="ic ic-h4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.4v17.2M7.4 20.6h9.2"/><path d="M12 6.4 4.8 8.2M12 6.4l7.2 1.8"/><path d="M4.8 8.2 2.4 14.4h4.8z"/><path d="M19.2 8.2 16.8 14.4h4.8z"/></svg>Nota di copyright e uso consentito</h4>
       <p>I documenti e il software BusItinera sono opera dell'ingegno di <strong>Ceol Andrea</strong>, © 2024–2026, e sono protetti dalla normativa italiana, europea e internazionale sul diritto d'autore. Ne è vietata la riproduzione, modifica, distribuzione o commercializzazione senza autorizzazione scritta. Consulta l'<a href="copyright.html">Avviso di Copyright e licenza d'uso</a> per i termini completi.</p>
     </div>
   </div>
