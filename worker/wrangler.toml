@@ -11,7 +11,7 @@ id = "3c6a525cd80747aa869ba6ab96d7ccfc"
 [vars]
 # Chiave pubblica VAPID (è pubblica: può stare qui e nel client).
 VAPID_PUBLIC = "BC7tA5De-0L2nmqO0jKF4OnofzYP4_bw0S153PICUVCLquORRQbbQNh-ib9_W8LDI---l_labMBpw3vC1KdvjiM"
-VAPID_SUBJECT = "mailto:ceolandrea006@gmail.com"
+VAPID_SUBJECT = "mailto:busitinera@gmail.com"
 # Origine autorizzata a iscriversi (CORS). Metti il dominio del sito.
 ALLOWED_ORIGIN = "https://busitinera.it"
 

@@ -133,7 +133,7 @@ async function vapidJWT(endpoint, env) {
   const header = bytesToB64url(enc.encode(JSON.stringify({ typ: 'JWT', alg: 'ES256' })));
   const payload = bytesToB64url(enc.encode(JSON.stringify({
     aud, exp: Math.floor(Date.now() / 1000) + 12 * 3600,
-    sub: env.VAPID_SUBJECT || 'mailto:ceolandrea006@gmail.com'
+    sub: env.VAPID_SUBJECT || 'mailto:busitinera@gmail.com'
   })));
   const signingInput = header + '.' + payload;
   const pub = b64urlToBytes(env.VAPID_PUBLIC); // 0x04 || x(32) || y(32)

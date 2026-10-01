@@ -437,7 +437,7 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
         <h2 class="h2">Pronto a digitalizzare la tua flotta?</h2>
         <p class="sub" style="margin-bottom:30px">Sono Andrea Ceol, lo sviluppatore di BusItinera. Scrivimi direttamente per una demo o per qualsiasi domanda: risponde chi ha costruito il programma.</p>
         <div class="dlinks">
-          <a href="mailto:ceolandrea006@gmail.com" class="dl"><span class="dl-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.8" y="5" width="18.4" height="14" rx="2.5"/><path d="M3.4 7.4 12 13.1l8.6-5.7"/></svg></span><span><strong>ceolandrea006@gmail.com</strong><small>Rispondo entro 24 ore</small></span></a>
+          <a href="mailto:busitinera@gmail.com" class="dl"><span class="dl-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.8" y="5" width="18.4" height="14" rx="2.5"/><path d="M3.4 7.4 12 13.1l8.6-5.7"/></svg></span><span><strong>busitinera@gmail.com</strong><small>Rispondo entro 24 ore</small></span></a>
           <a href="tel:+393274997730" class="dl"><span class="dl-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.6 3.6h3l1.5 3.9-1.9 1.3a11.5 11.5 0 0 0 6 6l1.3-1.9 3.9 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.8a2 2 0 0 1 2-2.2z"/></svg></span><span><strong>+39 327 499 7730</strong><small>Anche WhatsApp</small></span></a>
         </div>
         <div class="benefits">
@@ -470,7 +470,7 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
 <!-- FOOTER -->
 <footer>
   <div class="wrap">
-    <p>© 2026 BusItinera Autotrasporti — Progetto di <strong>Andrea Ceol</strong> · <a href="mailto:ceolandrea006@gmail.com">ceolandrea006@gmail.com</a> · <a href="tel:+393274997730">+39 327 499 7730</a></p>
+    <p>© 2026 BusItinera Autotrasporti — Progetto di <strong>Andrea Ceol</strong> · <a href="mailto:busitinera@gmail.com">busitinera@gmail.com</a> · <a href="tel:+393274997730">+39 327 499 7730</a></p>
     <p style="margin-top:8px;font-size:.8rem;color:var(--muted)">© 2024–2026 Ceol Andrea — Tutti i diritti riservati · <a href="copyright.html">Copyright e licenza d'uso</a></p>
   </div>
 </footer>
@@ -575,9 +575,9 @@ async function inviaDemo(ev){
       ['f_azienda','f_referente','f_email','f_tel','f_sito','f_msg'].forEach(function(id){ var e=document.getElementById(id); if(e) e.value=''; });
       try{ if(window.turnstile && window.__tsId!=null) window.turnstile.reset(window.__tsId); }catch(e){}
     } else {
-      show((d && d.message) || 'Invio non riuscito. Riprova, oppure scrivimi a ceolandrea006@gmail.com.', false);
+      show((d && d.message) || 'Invio non riuscito. Riprova, oppure scrivimi a busitinera@gmail.com.', false);
     }
-  }catch(e){ show('Errore di rete. Riprova, oppure scrivimi a ceolandrea006@gmail.com.', false); }
+  }catch(e){ show('Errore di rete. Riprova, oppure scrivimi a busitinera@gmail.com.', false); }
   finally{ if(btn){ btn.disabled=false; btn.innerHTML=old; } }
 }
 </script>

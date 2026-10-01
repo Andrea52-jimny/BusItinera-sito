@@ -50,7 +50,7 @@ id = "INCOLLA_QUI_L_ID_DEL_KV_NAMESPACE"
 
 [vars]
 VAPID_PUBLIC = "BC7tA5De-0L2nmqO0jKF4OnofzYP4_bw0S153PICUVCLquORRQbbQNh-ib9_W8LDI---l_labMBpw3vC1KdvjiM"
-VAPID_SUBJECT = "mailto:ceolandrea006@gmail.com"
+VAPID_SUBJECT = "mailto:busitinera@gmail.com"
 ALLOWED_ORIGIN = "https://busitinera.it"
 ```
 > La riga `pages_build_output_dir` del vecchio `wrangler.toml` va rimossa (era specifica di Pages).

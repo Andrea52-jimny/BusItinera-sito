@@ -337,7 +337,7 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
 <!-- FOOTER -->
 <footer>
   <div class="wrap">
-    <p>© 2026 BusItinera Autotrasporti — Progetto di <strong>Andrea Ceol</strong> · <a href="mailto:ceolandrea006@gmail.com">ceolandrea006@gmail.com</a> · <a href="tel:+393274997730">+39 327 499 7730</a></p>
+    <p>© 2026 BusItinera Autotrasporti — Progetto di <strong>Andrea Ceol</strong> · <a href="mailto:busitinera@gmail.com">busitinera@gmail.com</a> · <a href="tel:+393274997730">+39 327 499 7730</a></p>
     <p style="margin-top:8px;font-size:.8rem;color:var(--muted)">© 2024–2026 Ceol Andrea — Tutti i diritti riservati · <a href="copyright.html">Copyright e licenza d'uso</a></p>
   </div>
 </footer>
@@ -374,7 +374,7 @@ function inviaForm(){
   const msg=document.getElementById('messaggio').value.trim();
   if(!nome||!email||!msg){alert('Compila nome, email e messaggio.');return;}
   const corpo=`Nome: ${nome}%0D%0AAzienda: ${azienda||'-'}%0D%0AEmail: ${email}%0D%0ATelefono: ${tel||'-'}%0D%0A%0D%0A${msg}`;
-  window.location.href=`mailto:ceolandrea006@gmail.com?subject=Richiesta demo BusItinera — ${encodeURIComponent(nome)}&body=${corpo}`;
+  window.location.href=`mailto:busitinera@gmail.com?subject=Richiesta demo BusItinera — ${encodeURIComponent(nome)}&body=${corpo}`;
 }
 </script>
 <script src="bus-notify.js" defer></script>
