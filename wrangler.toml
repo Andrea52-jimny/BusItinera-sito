@@ -1,2 +1,2 @@
 name = "busitinera"
-pages_build_output_dir = "." # La cartella dove si trova l'index.html
+pages_build_output_dir = "public" # Solo questa cartella e' pubblica sul web
