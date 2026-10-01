@@ -1,7 +1,7 @@
 # docs-src — sorgenti dei PDF pubblici
 
 Qui vivono i sorgenti dei due PDF scaricabili da `download.html`. I PDF in
-`../docs/` sono **generati**: non si modificano a mano, si rigenerano da qui.
+`../public/docs/` sono **generati**: non si modificano a mano, si rigenerano da qui.
 
 ## Rigenerare
 
@@ -11,8 +11,8 @@ pip install --break-system-packages weasyprint   # solo la prima volta
 python3 build.py
 ```
 
-Scrive `../docs/BusItinera_Documentazione_Funzionalita.pdf` e
-`../docs/BusItinera_Attestato_Funzionale_e_Sicurezza.pdf`.
+Scrive `../public/docs/BusItinera_Documentazione_Funzionalita.pdf` e
+`../public/docs/BusItinera_Attestato_Funzionale_e_Sicurezza.pdf`.
 
 ## Cosa sta dove
 
@@ -25,7 +25,9 @@ Scrive `../docs/BusItinera_Documentazione_Funzionalita.pdf` e
 | `common.css` | Impaginazione: A4, copertina, footer, tabelle, callout. Non serve toccarlo per un aggiornamento di testo. |
 | `fonts/` | DM Sans Regular/Medium/Bold, istanze statiche del font variabile di Google Fonts (OFL). |
 
-Il logo di copertina è `../logo.png`, quello del sito: non c'è una seconda copia.
+Il logo di copertina è `../public/logo-chiaro.png`: la variante per fondo chiaro.
+Il `logo.png` del sito ha "Itinera" e il payoff in bianco (è disegnato per fondo
+scuro) e sul riquadro bianco della copertina sparirebbe, lasciando solo "Bus".
 
 ## Aggiornare un documento
 

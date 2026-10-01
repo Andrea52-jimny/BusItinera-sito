@@ -6,11 +6,13 @@ realmente svolta. Non va aggiornato "per allineamento" quando esce una nuova
 versione: la data in DATA_COLLAUDO e l'esito vanno cambiati solo dopo che la
 verifica è stata effettivamente rieseguita sul codice di quella versione.
 
-Stato: collaudo del 29 settembre 2026, eseguito sulla v1.14.
+Stato: collaudo del 29 settembre 2026, eseguito sul codice allora in linea
+(v1.14 piu' le funzioni rilasciate il giorno dopo come v1.15). Le versioni
+1.15 e 1.16 nel loro complesso NON sono coperte: vanno collaudate a parte.
 """
 
 DATA_COLLAUDO = "29 settembre 2026"
-VERSIONE_COLLAUDATA = "1.14"
+VERSIONE_COLLAUDATA = "1.14 (codice del 29 settembre 2026)"
 
 TOC = [
     ("s1", "1. Oggetto, ambito e metodo"),
@@ -76,6 +78,9 @@ BODY = """
 
 <h2 id="s6">6. Dichiarazione conclusiva e avvertenze</h2>
 <p>Sulla base delle attività svolte, alla data del __DATA__ il software BusItinera risulta <b>funzionalmente conforme</b> alla propria documentazione, con fatturazione elettronica <b>validata contro lo schema ufficiale FatturaPA</b>, e <b>privo di vulnerabilità di sicurezza di livello Critico o Alto</b> tra quelle oggetto di verifica.</p>
+<div class="note">
+<p><b>Versione coperta da questo collaudo.</b> Le verifiche sono state eseguite il __DATA__ sul codice allora in linea: la versione 1.14, comprensiva delle funzioni rilasciate il giorno successivo come 1.15 — fra cui «Viaggio completato» del portale autista, elencata al capitolo 2. Le versioni 1.15 e 1.16 nel loro complesso <b>non sono oggetto del presente attestato</b>; in particolare l'accesso con impronta o Face ID (passkey), introdotto con la 1.16, non è stato sottoposto a questa verifica.</p>
+</div>
 <div class="disclaimer">
 <p><b>Avvertenze.</b> Il presente attestato è redatto a fini informativi e di collaudo interno. L'audit è stato condotto con l'assistenza di un sistema di intelligenza artificiale (Claude di Anthropic) per conto del titolare del software; non costituisce una certificazione accreditata di terza parte né una garanzia assoluta di assenza di difetti o vulnerabilità. La sicurezza informatica è un processo continuo: l'esito si riferisce all'ambito, alla versione e alla data indicati. Restano impregiudicati i termini di licenza e le limitazioni di responsabilità applicabili al software.</p>
 </div>

@@ -6,8 +6,8 @@
 
 Dipendenze:  pip install --break-system-packages weasyprint
 Font:        fonts/DMSans-{Regular,Medium,Bold}.ttf (già nel repo)
-Output:      ../docs/BusItinera_Documentazione_Funzionalita.pdf
-             ../docs/BusItinera_Attestato_Funzionale_e_Sicurezza.pdf
+Output:      ../public/docs/BusItinera_Documentazione_Funzionalita.pdf
+             ../public/docs/BusItinera_Attestato_Funzionale_e_Sicurezza.pdf
 
 I contenuti stanno in content_doc1.py / content_doc2.py; la presentazione in
 common.css. Per aggiornare un documento si modifica il testo nel file dei
@@ -25,14 +25,14 @@ import content_doc2
 from legal import COPYRIGHT
 
 HERE = Path(__file__).resolve().parent
-OUT = HERE.parent / "docs"
+OUT = HERE.parent / "public" / "docs"
 
 # ─── Metadati di copertina ──────────────────────────────────────────────────
 # VERSIONE: la release del gestionale che i contenuti descrivono.
 # La data dell'attestato NON si tocca qui: vive in content_doc2.DATA_COLLAUDO,
 # perché è la data di una verifica realmente svolta.
 VERSIONE_DOC = "1.16.0"
-DATA_DOC = "30 settembre 2026"
+DATA_DOC = "1 ottobre 2026"
 
 PRODOTTO = ("BusItinera — Gestionale viaggi, noleggi e fatturazione "
             "per aziende di trasporto con autista")
@@ -49,7 +49,7 @@ def cover(kicker, titolo, sottotitolo, nome_doc, data, versione=None):
     riga_ver = f"  ·  Versione del software: <b>{_h.escape(versione)}</b>" if versione else ""
     return f"""
 <div class="cover">
-  <img class="logo" src="../logo.png" alt="BusItinera">
+  <img class="logo" src="../public/logo-chiaro.png" alt="BusItinera">
   <div class="kicker">{_h.escape(kicker)}</div>
   <h1>{_h.escape(titolo)}</h1>
   <div class="sub">{_h.escape(sottotitolo)}</div>

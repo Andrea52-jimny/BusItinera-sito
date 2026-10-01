@@ -204,4 +204,14 @@ BODY = """
 
 <h2 id="s21">21. Solidità e controlli</h2>
 <p>L'applicazione include protezioni pensate per il lavoro condiviso: congelamento dei documenti contabili, rilevamento delle modifiche simultanee, controllo formale di P.IVA/CF, unione clienti tracciata e irreversibile, registro attività immutabile. Gli accessi sono protetti da ruoli e permessi granulari, autenticazione a due fattori e sessioni irrobustite.</p>
+
+<h3>21.1 Irrobustimenti delle versioni 1.15 e 1.16 <span class="badge">NUOVO</span></h3>
+<ul>
+<li><b>Cambio password, sessioni chiuse ovunque.</b> Cambiando la propria password, le altre sessioni ancora aperte di quell'utente vengono terminate — il computer di casa, il telefono lasciato in ufficio. Resta attiva solo quella da cui si è fatto il cambio.</li>
+<li><b>Freno ai tentativi ripetuti anche per rete di provenienza.</b> Al blocco per nome utente si affianca un limite per indirizzo di rete: una raffica di tentativi distribuita su molti nomi utente diversi viene fermata ugualmente. Vale anche per l'accesso con impronta.</li>
+<li><b>Segreto del 2FA cifrato a riposo.</b> Il codice che genera le cifre temporanee può essere conservato cifrato nella banca dati, con una chiave tenuta fuori da essa: chi leggesse il database non otterrebbe un secondo fattore utilizzabile.</li>
+<li><b>Export CSV a prova di formula.</b> Le celle che iniziano con i simboli usati dai fogli di calcolo per le formule vengono neutralizzate prima dell'esportazione: aprendo il file, il contenuto resta testo e non viene eseguito.</li>
+<li><b>Nessuna libreria caricata da terzi.</b> Il codice che disegna il QR per il 2FA è servito dal server dell'azienda e non più da una rete di distribuzione esterna: una libreria altrui compromessa non può entrare nelle pagine del gestionale.</li>
+<li><b>Accesso senza segreti riutilizzabili sul server.</b> Con l'impronta o il Face ID (par. 16.1) la chiave privata non lascia il dispositivo e sul server non resta nulla che, se letto, consenta di entrare.</li>
+</ul>
 """
