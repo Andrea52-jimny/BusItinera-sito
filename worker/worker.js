@@ -112,6 +112,22 @@ async function demoRateOk(env, ip) {
   } catch (e) { return true; } // errore KV: non blocchiamo l'utente onesto
 }
 
+// Accetta solo endpoint dei veri servizi push (Chrome/FCM, Firefox, Edge/WNS,
+// Safari/Apple): blocca gli endpoint-spazzatura dei bot PRIMA di scrivere in KV.
+// È la difesa principale contro l'esaurimento della quota KV.
+function isValidPushEndpoint(ep) {
+  try {
+    const u = new URL(String(ep));
+    if (u.protocol !== 'https:') return false;
+    const h = u.hostname.toLowerCase();
+    return h === 'fcm.googleapis.com'
+      || h === 'android.googleapis.com'
+      || h.endsWith('.push.apple.com')
+      || h.endsWith('.notify.windows.com')
+      || h.endsWith('.push.services.mozilla.com');
+  } catch (e) { return false; }
+}
+
 // Verifica Turnstile. Se TURNSTILE_SECRET non è impostato, il controllo è
 // disattivato (ritorna true) così il form funziona anche prima di creare le chiavi.
 async function turnstileOk(env, token, ip) {
@@ -213,6 +229,10 @@ export default {
       if (path === '/api/subscribe' && req.method === 'POST') {
         const b = await req.json();
         if (!b || !b.endpoint || !b.keys || !b.keys.p256dh || !b.keys.auth) return json({ error: 'invalid' }, 400, env, req);
+        // Endpoint non-push o campi anomali ⇒ rifiuta SENZA scrivere in KV (anti-bot).
+        if (!isValidPushEndpoint(b.endpoint) || String(b.endpoint).length > 1024
+            || String(b.keys.p256dh).length > 200 || String(b.keys.auth).length > 60)
+          return json({ error: 'invalid_endpoint' }, 400, env, req);
         const id = await sha256hex(b.endpoint);
         await env.SUBS.put('sub:' + id, JSON.stringify({ endpoint: b.endpoint, keys: b.keys, ts: Date.now() }));
         return json({ ok: true }, 200, env, req);
@@ -220,7 +240,7 @@ export default {
 
       if (path === '/api/unsubscribe' && req.method === 'POST') {
         const b = await req.json();
-        if (!b || !b.endpoint) return json({ error: 'invalid' }, 400, env, req);
+        if (!b || !b.endpoint || !isValidPushEndpoint(b.endpoint)) return json({ error: 'invalid' }, 400, env, req);
         await env.SUBS.delete('sub:' + await sha256hex(b.endpoint));
         return json({ ok: true }, 200, env, req);
       }
