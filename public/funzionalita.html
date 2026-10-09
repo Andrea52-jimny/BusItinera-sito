@@ -595,48 +595,72 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
     <div class="center" style="margin-bottom:56px">
       <div class="eyebrow">Fatturazione elettronica</div>
       <h2 class="h2 rv">La fattura elettronica, direttamente dal viaggio</h2>
-      <p class="sub rv d1">BusItinera genera il file XML in formato FatturaPA a partire dai viaggi e dai noleggi che hai già inserito. Nessun doppio inserimento, conti sempre coerenti con quello che hai pianificato.</p>
+      <p class="sub rv d1">BusItinera genera il file XML in formato FatturaPA a partire dai viaggi e dai noleggi che hai già inserito. Ogni documento nasce come bozza che puoi rileggere e correggere, e diventa definitivo solo quando lo dichiari inviato allo SdI.</p>
     </div>
     <div class="grid2">
       <div class="card rv">
         <div class="card-ic ic-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12a1 1 0 0 1 1 1v17l-2.7-1.6L14 21l-2-1.4L10 21l-2.3-1.6L5 21V4a1 1 0 0 1 1-1z"/><path d="M9 8.5h6M9 12.5h6M9 16.5h3"/></svg></div>
-        <h3>La fatturi partendo dal servizio</h3>
-        <p>Scegli il cliente e spunti i viaggi o i noleggi ancora da fatturare: il documento nasce già compilato, con una riga per ogni servizio.</p>
+        <h3>Parti da «Da fatturare», non da un foglio bianco</h3>
+        <p>Una scheda raccoglie tutti i viaggi e i noleggi conclusi e non ancora fatturati, raggruppati per cliente con subtotali: vedi a colpo d’occhio quanto resta da incassare e spunti cosa fatturare.</p>
         <ul class="clist">
-          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Fattura riepilogativa: più servizi dello stesso cliente in un unico documento</li>
-          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Ogni viaggio o noleggio si fattura una volta sola, senza rischio di duplicati</li>
-          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Intestazioni prese in automatico dai Dati Azienda e dalla scheda del cliente</li>
-          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Gestisce anche i clienti esteri: la nazione del cliente finisce al posto giusto nel file</li>
+          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Imponibile, IVA, totale e <strong>importo ancora da fatturare</strong> per ogni servizio</li>
+          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Gli <strong>acconti già emessi</strong> sono scomputati: entra in fattura solo il saldo</li>
+          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Filtri per cliente, periodo e codice evento, con stampa dell’elenco</li>
+          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Viaggi e noleggi restano separati, e ogni servizio si fattura una volta sola</li>
         </ul>
       </div>
       <div class="card rv d1">
+        <div class="card-ic ic-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.2 2.8 2.9 9.9l7.3 3.1 3.1 7.3z"/><path d="M21.2 2.8 10.2 13.8"/></svg></div>
+        <h3>Prima la bozza, poi l’invio allo SdI</h3>
+        <p>Ogni documento nasce come <strong>bozza</strong>: lo rileggi, lo correggi, lo cancelli se hai sbagliato. Diventa definitivo solo quando premi «Inviato allo SdI».</p>
+        <ul class="clist">
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Finché è bozza non ha né numero né file XML: cancellarla non lascia buchi nella numerazione</li>
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>All’invio arrivano insieme numero progressivo, file XML e blocco del documento</li>
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Se cancelli una bozza, i servizi collegati tornano subito fra quelli da fatturare</li>
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Un responsabile può riportare in bozza l’ultima fattura dell’anno, con traccia di chi l’ha fatto</li>
+        </ul>
+      </div>
+      <div class="card rv d2">
+        <div class="card-ic ic-v"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.5 3.6 20.4 7.5 8.4 19.5l-4.5.9.9-4.5z"/><path d="M14.3 5.8 18.2 9.7"/></svg></div>
+        <h3>Anteprima modificabile fino all’ultimo</h3>
+        <p>Prima di confermare vedi la fattura come sarà e puoi ritoccarla: descrizioni, quantità, prezzi, aliquote e causale. E ci puoi tornare finché resta una bozza.</p>
+        <ul class="clist">
+          <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Aggiungi o togli righe e correggi gli importi al volo</li>
+          <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Totali e bollo ricalcolati in tempo reale mentre modifichi</li>
+          <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Ritocchi anche l’importo dell’IVA per l’arrotondamento</li>
+          <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Un avviso ti ricorda che le modifiche fiscali vanno fatte con cognizione</li>
+        </ul>
+      </div>
+      <div class="card rv d3">
+        <div class="card-ic ic-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 12h5.1"/><path d="M8.5 12 14 6.1h5.8"/><path d="M8.5 12 14 17.9h5.8"/><path d="M17.3 3.6 20.6 6.1l-3.3 2.5"/><path d="M17.3 15.4l3.3 2.5-3.3 2.5"/></svg></div>
+        <h3>Dividi l’importo tra più soggetti</h3>
+        <p>Quando un servizio lo pagano in due — la scuola e il comitato genitori, il committente e l’ente — dividi la bozza in più fatture intestate a clienti diversi, presi dalla rubrica.</p>
+        <ul class="clist">
+          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Indichi gli importi in euro, e una barra ti dice subito se la somma quadra</li>
+          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>La divisione è proporzionale riga per riga: regge anche <strong>IVA diversa</strong> nello stesso documento</li>
+          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Ogni quota segue il regime del proprio intestatario: PA con split payment, privati normale</li>
+          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Su ogni documento compare la dicitura «quota parte», con CIG e CUP conservati</li>
+        </ul>
+      </div>
+      <div class="card rv d4">
         <div class="card-ic ic-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="2.6" width="15" height="18.8" rx="2.6"/><path d="M8 6.6h8"/><path d="M8.4 11h.01M12 11h.01M15.6 11h.01M8.4 14.4h.01M12 14.4h.01M15.6 14.4h.01M8.4 17.8h.01M12 17.8h.01M15.6 17.8h.01"/></svg></div>
         <h3>Il regime giusto, calcolato per te</h3>
         <p>BusItinera segue il regime fiscale impostato nei Dati Azienda e compila la fattura di conseguenza.</p>
         <ul class="clist">
           <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Regime ordinario (RF01): imponibile e IVA calcolati per aliquota</li>
-          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Regime forfettario (RF19): senza IVA, con la natura corretta e l'imposta di bollo</li>
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Regime forfettario (RF19): senza IVA, con la natura corretta e l’imposta di bollo</li>
           <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Riepilogo IVA e totale documento sempre aggiornati</li>
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Intestazioni prese in automatico dai Dati Azienda e dalla scheda del cliente</li>
         </ul>
       </div>
-      <div class="card rv d2">
-        <div class="card-ic ic-v"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.5 3.6 20.4 7.5 8.4 19.5l-4.5.9.9-4.5z"/><path d="M14.3 5.8 18.2 9.7"/></svg></div>
-        <h3>Anteprima modificabile prima di emettere</h3>
-        <p>Prima di confermare vedi la fattura come sarà e puoi ritoccarla: descrizioni, quantità, prezzi, aliquote e causale. Nulla viene emesso finché non dai l'ok finale.</p>
-        <ul class="clist">
-          <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Aggiungi o togli righe e correggi gli importi al volo</li>
-          <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Totali e bollo ricalcolati in tempo reale mentre modifichi</li>
-          <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Ritocchi anche l’importo dell’IVA per l’arrotondamento, su una finestra più ampia e senza scorrimento</li>
-          <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Un avviso ti ricorda che le modifiche fiscali vanno fatte con cognizione</li>
-        </ul>
-      </div>
-      <div class="card rv d3">
+      <div class="card rv d4">
         <div class="card-ic ic-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.6h11a5.6 5.6 0 0 1 0 11.2H9.4"/><path d="M7.8 5.8 4 9.6l3.8 3.8"/></svg></div>
         <h3>Note di credito e numerazione in ordine</h3>
-        <p>Se serve annullare o correggere, emetti una nota di credito collegata alla fattura di origine, in modo totale o parziale.</p>
+        <p>Se serve annullare o correggere, emetti una nota di credito collegata alla fattura di origine, in modo totale o parziale. Anche la nota passa dalla bozza.</p>
         <ul class="clist">
           <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Storno totale o parziale, scegliendo cosa e quanto stornare</li>
-          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Numerazione progressiva unica per anno, senza buchi</li>
+          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Lo storno ha effetto all’invio: una bozza di nota di credito non annulla ancora nulla</li>
+          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Numerazione progressiva unica per anno, assegnata all’invio e senza buchi</li>
           <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>La nota resta collegata alla fattura da cui nasce</li>
         </ul>
       </div>
@@ -668,7 +692,7 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
       <figure class="shot rv d2"><img class="zoom" src="images/nota_credito.png" data-cap="Nota di credito: storno totale o parziale" alt="Nota di credito" loading="lazy"><figcaption>Nota di credito</figcaption></figure>
     </div>
 
-    <p class="center rv d2" style="margin-top:36px;color:var(--muted);font-size:.95rem;max-width:720px;margin-left:auto;margin-right:auto">Il file XML prodotto è pronto per lo SdI: lo scarichi e lo trasmetti tu o il tuo commercialista. <strong style="color:var(--ink)">Nessun servizio esterno e nessun invio automatico</strong>, coerente con la scelta di tenere i dati in casa.</p>
+    <p class="center rv d2" style="margin-top:36px;color:var(--muted);font-size:.95rem;max-width:720px;margin-left:auto;margin-right:auto">Il file XML prodotto è pronto per lo SdI: lo scarichi — uno per volta o <strong style="color:var(--ink)">tutti insieme in un unico ZIP per anno</strong> — e lo trasmetti tu o il tuo commercialista. <strong style="color:var(--ink)">Nessun servizio esterno e nessun invio automatico</strong>, coerente con la scelta di tenere i dati in casa.</p>
   </div>
 </section>
 

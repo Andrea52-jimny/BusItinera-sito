@@ -65,14 +65,15 @@ BODY = """
 <li><b>Autisti:</b> uno o più; blocco dell'assegnazione se già impegnati, con messaggio d'errore contenente il nome.</li>
 <li><b>Dati economici:</b> prezzo, CIG/ordine, metodo di pagamento, modalità (unico o acconto+saldo), costi extra con somma automatica, accompagnatore con recapito visibile all'autista.</li>
 <li><b>Note:</b> Nota di Viaggio condivisa con gli autisti; Note Private visibili solo ad admin/editor (mai esposte agli autisti, nemmeno via risposta API grezza).</li>
+<li><b>Codice evento</b> <span class="badge">NUOVO</span><b>:</b> campo facoltativo che lega fra loro i servizi di una stessa manifestazione (una gita con dieci navette, una trasferta sportiva). Serve a raggruppare i servizi in fase di fatturazione (par. 18.2) e viene riportato in testata sulla fattura cumulativa.</li>
 </ul>
-<p>Al salvataggio il sistema controlla automaticamente conflitti di veicolo e autisti. Dal dettaglio si modifica (anche inline le località, con l'icona matita) o si elimina, con pulizia dei collegamenti (autisti, tappe, servizi).</p>
+<p>Al salvataggio il sistema controlla automaticamente conflitti di veicolo e autisti. Dal dettaglio si modifica (anche inline le località, con l'icona matita), si <b>duplica</b> (il nuovo viaggio nasce con gli stessi dati, da riposizionare nel tempo) o si elimina, con pulizia dei collegamenti (autisti, tappe, servizi).</p>
 
 <h2 id="s4">4. Assegnazione autisti</h2>
 <p>Nella sezione Autisti del form si cerca per nome; gli autisti già impegnati mostrano il badge OCCUPATO e finiscono in fondo alla lista, quelli sospesi non appaiono. Selezione multipla con chip rimovibili.</p>
 
 <h2 id="s5">5. Noleggi</h2>
-<p>Il noleggio traccia la locazione di un veicolo aziendale (veicolo interno obbligatorio, nessuna opzione esterna), con numero contratto, date e luogo di riconsegna, controllo automatico di sovrapposizione. Dal dettaglio si stampa il contratto di locazione senza conducente, con la tabella degli utilizzatori autorizzati.</p>
+<p>Il noleggio traccia la locazione di un veicolo aziendale (veicolo interno obbligatorio, nessuna opzione esterna), con numero contratto, date e luogo di riconsegna, controllo automatico di sovrapposizione. Dispone dello stesso <b>Codice evento</b> dei viaggi (cap. 3) e si può <b>duplicare</b> dal dettaglio. Da lì si stampa anche il contratto di locazione senza conducente, con la tabella degli utilizzatori autorizzati.</p>
 
 <h2 id="s6">6. Appuntamenti</h2>
 <p>Eventi generici (riunioni, manutenzioni, formazioni) non collegati a veicoli o autisti, visibili solo ad admin ed editor. Titolo obbligatorio, durata minima 15 minuti (default 60), icona campanella su sfondo giallo.</p>
@@ -166,7 +167,38 @@ BODY = """
 <tr><td>RF01 — Ordinario</td><td>Con IVA (l'aliquota del viaggio/noleggio, es. 10%).</td></tr>
 <tr><td>RF19 — Forfettario</td><td>Senza IVA: Natura N2.2 e, se l'importo supera 77,47 €, bollo da 2 €.</td></tr>
 </table>
-<p><b>Funzioni principali:</b> editor con anteprima modificabile prima dell'emissione; numerazione progressiva annuale (serie unica con le note di credito); fattura dal dettaglio del viaggio; acconto + saldo separati (il viaggio risulta fatturato solo dopo il saldo); riepilogativa multi-viaggio dello stesso cliente; Nota di Credito TD04 (storno totale che libera i viaggi, o parziale). Per la Pubblica Amministrazione il formato passa a FPA12 con Codice Univoco Ufficio, split payment, CIG e CUP; senza CIG e Codice Ufficio il viaggio non si chiude. Il testo digitato viene ripulito dai caratteri non ammessi dal tracciato (es. la freccia → e il trattino lungo — diventano un trattino semplice).</p>
+<p>Per la Pubblica Amministrazione il formato passa a <b>FPA12</b> con Codice Univoco Ufficio, split payment, CIG e CUP; senza CIG e Codice Ufficio il viaggio non si chiude. Il testo digitato viene ripulito dai caratteri non ammessi dal tracciato (es. la freccia → e il trattino lungo — diventano un trattino semplice).</p>
+
+<h3>18.1 Ciclo di vita: bozza, poi invio allo SdI <span class="badge">NUOVO</span></h3>
+<p>Ogni documento — fattura o nota di credito — nasce come <b>bozza</b>, sullo stesso modello dei preventivi. Finché è una bozza <b>non ha né numero né file XML</b>: si rilegge, si modifica e all'occorrenza si elimina. Un unico pulsante <b>«Inviato allo SdI»</b> assegna il numero progressivo annuale, genera l'XML e <b>blocca</b> il documento.</p>
+<ul>
+<li>Il numero arriva solo all'invio: eliminare una bozza <b>non lascia buchi</b> nella numerazione.</li>
+<li>I viaggi e i noleggi collegati a una bozza risultano già impegnati e non ricompaiono fra quelli da fatturare; eliminando la bozza tornano disponibili.</li>
+<li>Una fattura inviata non si modifica più: la correzione avviene con nota di credito.</li>
+<li><b>Riapertura:</b> chi ha l'interruttore «Può modificare viaggi già fatturati o pagati» può riportare in bozza l'<b>ultima</b> fattura dell'anno — solo l'ultima, per non lasciare buchi — con traccia nel Registro attività.</li>
+</ul>
+<div class="note"><b>La nota di credito segue le stesse regole.</b> Anche la NC nasce come bozza: gli effetti dello storno — annullamento della fattura di origine e liberazione dei viaggi collegati — scattano all'invio, non alla creazione. Una bozza di nota di credito non storna ancora nulla.</div>
+
+<h3>18.2 La vista «Da fatturare» <span class="badge">NUOVO</span></h3>
+<p>Una sotto-scheda della sezione Fatture elenca tutti i servizi <b>chiusi e non ancora fatturati</b>, raggruppati per cliente con subtotali e totale generale. Per ogni riga: numero del servizio, descrizione, periodo, automezzo, imponibile, altre voci, IVA, totale, <b>acconto già emesso</b> e <b>importo ancora da fatturare</b>.</p>
+<ul>
+<li>Filtri per <b>cliente</b>, <b>periodo</b> e <b>codice evento</b>, più <b>Stampa elenco</b>.</li>
+<li><b>Viaggi e noleggi restano separati</b> in due sotto-viste distinte: non finiscono mai nella stessa fattura.</li>
+<li>Gli <b>acconti già fatturati vengono scomputati</b>: entra in fattura il solo saldo residuo.</li>
+</ul>
+<p>Selezionando i servizi si creano le bozze in blocco, in due modi: <b>una fattura per servizio</b>, oppure una <b>fattura cumulativa</b> che raccoglie i servizi con stesso cliente e stesso codice evento. La cumulativa è una normale fattura multi-riga — quindi <b>un solo XML</b> — con una riga per ciascun servizio.</p>
+
+<h3>18.3 Frazionamento su più soggetti <span class="badge">NUOVO</span></h3>
+<p>Quando un servizio viene pagato da più soggetti — la scuola e il comitato genitori, il committente e l'ente — il pulsante <b>Fraziona</b> divide una bozza in più fatture intestate a clienti diversi, scelti dall'anagrafica.</p>
+<ul>
+<li>Le quote si indicano <b>per importo in euro</b>, con verifica in tempo reale che la somma coincida col totale della bozza.</li>
+<li>La ripartizione avviene <b>riga per riga in proporzione</b>: regge quindi anche <b>aliquote IVA diverse</b> nello stesso documento, e conserva CIG e CUP.</li>
+<li>Ogni quota segue il <b>regime del proprio intestatario</b>: FPA12 con split payment verso la PA, FPR12 per i privati. Su ciascun documento compare la dicitura «quota parte».</li>
+<li>Il frazionamento non è ammesso sui documenti con <b>marca da bollo</b> (cifra fissa per documento, non divisibile) né sulle note di credito.</li>
+</ul>
+
+<h3>18.4 Altre funzioni della sezione Fatture</h3>
+<p><b>Editor con anteprima modificabile</b> prima del salvataggio: descrizioni, quantità, prezzi, aliquote, causale, data e modalità di pagamento, con totali e bollo ricalcolati in tempo reale; sono ritoccabili anche l'<b>importo dell'IVA</b> e il <b>totale documento</b> per gli arrotondamenti. <b>Fattura dal dettaglio del viaggio</b>, costruita sui dati attuali del viaggio. <b>Acconto e saldo</b> separati: il viaggio risulta fatturato solo dopo il saldo. <b>Nota di credito TD04</b> collegata alla fattura di origine, con storno totale (che libera i viaggi) o parziale. <b>Numerazione progressiva annuale</b>, serie unica con le note di credito. <b>Download ZIP</b> <span class="badge">NUOVO</span>: un unico archivio con tutti gli XML delle fatture inviate dell'anno selezionato, per il passaggio al commercialista o all'altro gestionale.</p>
 <div class="tip"><b>Conformità verificata:</b> in sede di collaudo gli XML generati sono stati validati con successo contro lo schema ufficiale FatturaPA v1.2 (fattura ordinaria privata con IVA, fattura PA con split payment e CIG/CUP, nota di credito TD04).</div>
 
 <h2 id="s19">19. Portale Autista, Mobile e notifiche</h2>
