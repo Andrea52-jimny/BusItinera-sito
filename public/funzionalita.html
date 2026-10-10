@@ -136,6 +136,8 @@ nav.scrolled{box-shadow:0 4px 24px rgba(16,27,45,.06)}
 .phone{width:280px;margin:0 auto;background:var(--ink);border-radius:38px;padding:12px;box-shadow:var(--shadow-lg)}
 .phone-notch{width:120px;height:26px;background:var(--ink);border-radius:0 0 16px 16px;margin:0 auto}
 .phone-screen{background:var(--soft);border-radius:28px;padding:20px 16px;min-height:440px;margin-top:-13px}
+.phone-real{width:264px;margin:0 auto;background:#111827;border-radius:40px;padding:10px;box-shadow:var(--shadow-lg);border:1px solid #222a3a}
+.phone-real img{width:100%;height:auto;display:block;border-radius:30px}
 .ph-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .ph-head h5{font-size:.9rem;font-weight:700;color:var(--ink)}
 .ph-head span{font-size:.72rem;color:var(--muted)}
@@ -221,8 +223,8 @@ footer strong{color:var(--ink2)}
 /* screenshot rows & figures */
 figure.shot{display:flex;flex-direction:column;background:var(--card)}
 .shot figcaption{padding:11px 16px;font-size:.83rem;font-weight:600;color:var(--ink2);border-top:1px solid var(--line);background:var(--card)}
-.shot-duo{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.shot-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+.shot-duo{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.shot-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px;align-items:start}
 .shot-single{max-width:780px;margin:44px auto 0}
 img.zoom{cursor:zoom-in;transition:opacity .2s}
 img.zoom:hover{opacity:.92}
@@ -526,35 +528,10 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
         </div>
       </div>
       <div class="rv d1" style="display:flex;justify-content:center">
-        <div class="phone">
-          <div class="phone-notch"></div>
-          <div class="phone-screen">
-            <div class="ph-head"><h5>I miei viaggi</h5><span>Marco B.</span></div>
-            <div class="ph-tabs"><div class="ph-tab on">Giorno</div><div class="ph-tab">Settimana</div><div class="ph-tab">Mese</div></div>
-            <div class="ph-card g">
-              <div class="ph-badge g"><span class="pdot"></span>In corso</div>
-              <div class="ph-line">
-                <div class="ph-stop"><span class="t">07:30</span><br><strong>Piazzale Roma, Venezia</strong></div>
-                <div class="ph-stop"><span class="t">09:15</span><br>Sosta pranzo — Autogrill</div>
-                <div class="ph-stop"><span class="t">12:00</span><br><strong>Fiera di Roma</strong></div>
-              </div>
-              <div class="ph-info"><span class="ph-chip"><svg class="ic ic-chip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.5" width="18" height="13" rx="3"/><path d="M3 10h18M7.5 16.5v1.1M16.5 16.5v1.1"/><circle cx="7.5" cy="19" r="1.5"/><circle cx="16.5" cy="19" r="1.5"/></svg>Corriera Blu</span><span class="ph-chip">Comune di Venezia</span></div>
-            </div>
-            <div class="ph-card o">
-              <div class="ph-badge o"><span class="pdot"></span>Tra 45 min</div>
-              <div class="ph-line">
-                <div class="ph-stop"><span class="t">14:30</span><br><strong>Hotel Danieli, VE</strong></div>
-                <div class="ph-stop"><span class="t">16:00</span><br><strong>Aeroporto Marco Polo</strong></div>
-              </div>
-              <div class="ph-info"><span class="ph-chip"><svg class="ic ic-chip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.5" width="18" height="13" rx="3"/><path d="M3 10h18M7.5 16.5v1.1M16.5 16.5v1.1"/><circle cx="7.5" cy="19" r="1.5"/><circle cx="16.5" cy="19" r="1.5"/></svg>NCC Nero</span><span class="ph-chip">Agenzia Stella</span></div>
-            </div>
-          </div>
+        <div class="phone-real">
+          <img src="images/autista_mobile.png" alt="Il portale autista sul telefono: viaggio in corso, ordine di servizio e km" loading="lazy">
         </div>
       </div>
-    </div>
-    <div class="shot-duo" style="margin-top:44px">
-      <figure class="shot rv"><img class="zoom" src="images/autista_mobile.png" data-cap="Portale autista dal telefono: viaggi e km" alt="Portale autista dal telefono" loading="lazy"><figcaption>Portale autista dal telefono</figcaption></figure>
-      <figure class="shot rv d1"><img class="zoom" src="images/autista_desktop.png" data-cap="Portale autista: viaggio in corso, ordine di servizio e km" alt="Portale autista — viaggio in corso" loading="lazy"><figcaption>Portale autista — viaggio in corso</figcaption></figure>
     </div>
   </div>
 </section>
@@ -594,17 +571,22 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
       <p class="sub rv d1">Gli strumenti che trasformano il caos amministrativo in un flusso ordinato &mdash; comprese le scadenze che l&rsquo;app tiene d&rsquo;occhio al posto tuo.</p>
     </div>
     <div class="grid3">
-      <div class="card rv"><div class="card-ic ic-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8.7a6 6 0 1 0-12 0c0 5.8-2.4 7.3-2.4 7.3h16.8S18 14.5 18 8.7"/><path d="M13.7 19.5a2 2 0 0 1-3.4 0"/></svg></div><h3>Avvisi sui pagamenti</h3><p>Una campanella ti segnala i pagamenti in scadenza o già scaduti, con i giorni di ritardo, il nome del cliente, l'importo e i contatti. Sai chi sollecitare senza cercare tra le carte.</p></div>
+      <div class="card rv"><div class="card-ic ic-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8.7a6 6 0 1 0-12 0c0 5.8-2.4 7.3-2.4 7.3h16.8S18 14.5 18 8.7"/><path d="M13.7 19.5a2 2 0 0 1-3.4 0"/></svg></div><h3>Avvisi sui pagamenti</h3><p>Una campanella ti segnala i pagamenti in scadenza o già scaduti, con i giorni di ritardo, il nome del cliente, l'importo e i contatti: sai chi sollecitare senza cercare tra le carte. Da qui, con <strong>Incassato</strong>, segni pagato un acconto o un saldo e la voce sparisce subito, senza riaprire il viaggio.</p></div>
       <div class="card rv d1"><div class="card-ic ic-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 20.6h17.2"/><path d="M6.6 20.6v-6.2M11 20.6V9.4M15.4 20.6v-8.4M19.8 20.6V6"/></svg></div><h3>Esporti in Excel</h3><p>Ti serve un riepilogo per il commercialista? Esporti tutto in un file Excel scegliendo quali informazioni includere. Già pronto per aprirsi correttamente in Excel italiano.</p></div>
       <div class="card rv d2"><div class="card-ic ic-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.9"/><path d="M15.8 15.8 21 21"/></svg></div><h3>Ricerca unica</h3><p>Scrivi un nome cliente, un indirizzo o una targa e trovi subito tutti i viaggi collegati. Filtri per mese, periodo, autista o mezzo.</p></div>
       <div class="card rv"><div class="card-ic ic-v"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.6" y="4.6" width="14.8" height="16.8" rx="2.6"/><path d="M9 4.6V3.5A1.4 1.4 0 0 1 10.4 2.1h3.2A1.4 1.4 0 0 1 15 3.5v1.1z"/><path d="M8.6 10.4h6.8M8.6 14h6.8M8.6 17.6h4"/></svg></div><h3>Scadenze di mezzi e autisti</h3><p>Bollo, assicurazione, revisione e tagliando per ogni mezzo; patente, CQC e licenza per ogni autista. Tutte le date in un posto solo, ordinate per urgenza.</p></div>
       <div class="card rv d1"><div class="card-ic ic-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13.2" r="7.8"/><path d="M12 9.2v4l2.6 1.8"/><path d="M4.8 3.4 2.6 5.5M19.2 3.4 21.4 5.5"/></svg></div><h3>Promemoria automatici</h3><p>Non devi ricordartene tu: l'app avvisa chi gestisce l'azienda a <strong>30, 7 e 1 giorno</strong> dalla scadenza, e segnala i pagamenti in arrivo. I controlli partono da soli, ogni giorno.</p></div>
       <div class="card rv d2"><div class="card-ic ic-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.6"/><path d="M10.5 18.5h3"/></svg></div><h3>BusItinera dal telefono</h3><p>Anche titolari e operatori hanno una schermata pensata per lo schermo piccolo: viaggi di oggi e domani e scadenze in ordine di urgenza, senza il gestionale &ldquo;schiacciato&rdquo;.</p></div>
     </div>
-    <div class="shot-trio" style="margin-top:44px">
+    <div class="shot-duo" style="margin-top:44px">
       <figure class="shot rv"><img class="zoom" src="images/scadenze.png" data-cap="Scadenze: bollo, assicurazione, revisione, patenti e CQC" alt="Scadenze mezzi e autisti" loading="lazy"><figcaption>Scadenze mezzi e autisti</figcaption></figure>
       <figure class="shot rv d1"><img class="zoom" src="images/avvisi.png" data-cap="Avvisi sui pagamenti in scadenza e scaduti" alt="Avvisi pagamenti" loading="lazy"><figcaption>Avvisi pagamenti</figcaption></figure>
-      <figure class="shot rv d2"><img class="zoom" src="images/admin_mobile.png" data-cap="Home mobile di titolari e operatori" alt="Home mobile (ufficio)" loading="lazy"><figcaption>Home mobile (ufficio)</figcaption></figure>
+    </div>
+    <div class="rv d1" style="display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:30px">
+      <div class="phone-real">
+        <img src="images/admin_mobile.png" alt="La home mobile di titolari e operatori: viaggi di oggi e domani e scadenze in ordine di urgenza" loading="lazy">
+      </div>
+      <p class="sub" style="text-align:center;max-width:420px;margin:0">La stessa panoramica dal telefono di titolari e operatori: viaggi di oggi e domani e scadenze in ordine di urgenza.</p>
     </div>
   </div>
 </section>
@@ -718,7 +700,7 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
     </div>
     <figure class="shot shot-single rv d1" style="max-width:460px"><img class="zoom" src="images/fattura_pdf.png" data-cap="PDF della fattura elettronica per la PA, con split payment" alt="Fattura PDF con split payment" loading="lazy"><figcaption>Il PDF della fattura elettronica alla PA, con scissione dei pagamenti (split payment)</figcaption></figure>
 
-    <p class="center rv d2" style="margin-top:36px;color:var(--muted);font-size:.95rem;max-width:720px;margin-left:auto;margin-right:auto">Il file XML prodotto è pronto per lo SdI: lo scarichi — uno per volta o <strong style="color:var(--ink)">tutti insieme in un unico ZIP per anno</strong> — e lo trasmetti tu o il tuo commercialista. <strong style="color:var(--ink)">Nessun servizio esterno e nessun invio automatico</strong>, coerente con la scelta di tenere i dati in casa.</p>
+    <p class="center rv d2" style="margin-top:36px;color:var(--muted);font-size:.95rem;max-width:720px;margin-left:auto;margin-right:auto">Il file XML prodotto è pronto per lo SdI: lo scarichi — uno per volta o <strong style="color:var(--ink)">tutti insieme in un unico ZIP</strong>, per il periodo che preferisci (mese, trimestre o anno intero) — e lo trasmetti tu o il tuo commercialista. Della fattura puoi anche <strong style="color:var(--ink)">salvare o stampare una versione in PDF</strong>, leggibile per il cliente. <strong style="color:var(--ink)">Nessun servizio esterno e nessun invio automatico</strong>, coerente con la scelta di tenere i dati in casa.</p>
   </div>
 </section>
 
