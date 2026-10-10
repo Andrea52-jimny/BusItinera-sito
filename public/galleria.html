@@ -233,6 +233,9 @@ img.zoom:hover{opacity:.92}
 .gitem:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
 .gitem img{width:100%;height:180px;object-fit:cover;object-position:top center;display:block}
 .gitem figcaption{padding:11px 15px;font-size:.82rem;font-weight:600;color:var(--ink2)}
+.gcat{font-size:1.2rem;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin:52px 0 20px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.gcat:first-of-type{margin-top:0}
+.gcat span{color:var(--muted);font-weight:600;font-size:.85rem;margin-left:8px}
 
 /* lightbox */
 .lb{position:fixed;inset:0;z-index:1000;background:rgba(10,17,28,.92);display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:36px}
@@ -305,31 +308,77 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
     <div class="center" style="margin-bottom:56px">
       <div class="eyebrow vi">Guarda l'app</div>
       <h2 class="h2 rv">Screenshot reali della dashboard</h2>
-      <p class="sub rv d1">Nessun mockup: queste sono le schermate vere di BusItinera. Clicca su un'immagine per ingrandirla.</p>
+      <p class="sub rv d1">Nessun mockup: sono le schermate vere di BusItinera nella versione più recente — gestionale da ufficio e app da telefono, raggruppate per area. Clicca su un'immagine per ingrandirla.</p>
     </div>
+    <h3 class="gcat rv">Calendario e pianificazione<span>4</span></h3>
     <div class="gallery">
-      <figure class="gitem rv"><img class="zoom" src="images/calendario.png" data-cap="Calendario — vista mese" alt="Calendario vista mese" loading="lazy"><figcaption>Calendario — vista mese</figcaption></figure>
-      <figure class="gitem rv d1"><img class="zoom" src="images/giorno.png" data-cap="Calendario — vista giorno" alt="Vista giorno" loading="lazy"><figcaption>Calendario — vista giorno</figcaption></figure>
-      <figure class="gitem rv d2"><img class="zoom" src="images/settimana.png" data-cap="Calendario — vista settimana" alt="Vista settimana" loading="lazy"><figcaption>Calendario — vista settimana</figcaption></figure>
+      <figure class="gitem rv"><img class="zoom" src="images/calendario.png" data-cap="Calendario — vista mese" alt="Calendario — mese" loading="lazy"><figcaption>Calendario — mese</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/settimana.png" data-cap="Calendario — vista settimana" alt="Vista settimana" loading="lazy"><figcaption>Vista settimana</figcaption></figure>
+      <figure class="gitem rv d2"><img class="zoom" src="images/giorno.png" data-cap="Calendario — vista giorno con riepilogo" alt="Vista giorno" loading="lazy"><figcaption>Vista giorno</figcaption></figure>
+      <figure class="gitem rv"><img class="zoom" src="images/calendario_mezzi.png" data-cap="Calendario mezzi: pianificazione e conflitti" alt="Calendario mezzi" loading="lazy"><figcaption>Calendario mezzi</figcaption></figure>
+    </div>
+    <h3 class="gcat rv">Viaggi, noleggi e appuntamenti<span>6</span></h3>
+    <div class="gallery">
+      <figure class="gitem rv"><img class="zoom" src="images/viaggi_noleggi.png" data-cap="Elenco viaggi e noleggi con filtri" alt="Elenco viaggi e noleggi" loading="lazy"><figcaption>Elenco viaggi e noleggi</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/dettagli_viaggio.png" data-cap="Dettaglio viaggio con CIG/CUP e scadenza pagamento" alt="Dettaglio viaggio" loading="lazy"><figcaption>Dettaglio viaggio</figcaption></figure>
+      <figure class="gitem rv d2"><img class="zoom" src="images/dettaglio_noleggio.png" data-cap="Dettaglio noleggio con contratto" alt="Dettaglio noleggio" loading="lazy"><figcaption>Dettaglio noleggio</figcaption></figure>
       <figure class="gitem rv"><img class="zoom" src="images/nuovo_viaggio.png" data-cap="Creazione di un nuovo viaggio" alt="Nuovo viaggio" loading="lazy"><figcaption>Nuovo viaggio</figcaption></figure>
-      <figure class="gitem rv d1"><img class="zoom" src="images/dettagli_viaggio.png" data-cap="Dettaglio di un viaggio" alt="Dettaglio viaggio" loading="lazy"><figcaption>Dettaglio viaggio</figcaption></figure>
-      <figure class="gitem rv d2"><img class="zoom" src="images/viaggi_noleggi.png" data-cap="Elenco viaggi e noleggi con filtri" alt="Elenco viaggi e noleggi" loading="lazy"><figcaption>Elenco viaggi e noleggi</figcaption></figure>
-      <figure class="gitem rv"><img class="zoom" src="images/nuovo_noleggio.png" data-cap="Creazione di un nuovo noleggio" alt="Nuovo noleggio" loading="lazy"><figcaption>Nuovo noleggio</figcaption></figure>
-      <figure class="gitem rv d1"><img class="zoom" src="images/nuovo_appuntamento.png" data-cap="Creazione di un nuovo appuntamento" alt="Nuovo appuntamento" loading="lazy"><figcaption>Nuovo appuntamento</figcaption></figure>
-      <figure class="gitem rv d2"><img class="zoom" src="images/preventivi.png" data-cap="Elenco dei preventivi con stati e filtri" alt="Elenco preventivi" loading="lazy"><figcaption>Elenco preventivi</figcaption></figure>
-      <figure class="gitem rv"><img class="zoom" src="images/nuovo_preventivo.png" data-cap="Creazione di un nuovo preventivo" alt="Nuovo preventivo" loading="lazy"><figcaption>Nuovo preventivo</figcaption></figure>
-      <figure class="gitem rv d1"><img class="zoom" src="images/fatture.png" data-cap="Elenco delle fatture elettroniche" alt="Elenco fatture elettroniche" loading="lazy"><figcaption>Fatture elettroniche</figcaption></figure>
-      <figure class="gitem rv d2"><img class="zoom" src="images/fattura_editor.png" data-cap="Anteprima della fattura modificabile prima dell'emissione" alt="Anteprima fattura modificabile" loading="lazy"><figcaption>Anteprima fattura modificabile</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/nuovo_noleggio.png" data-cap="Creazione di un nuovo noleggio" alt="Nuovo noleggio" loading="lazy"><figcaption>Nuovo noleggio</figcaption></figure>
+      <figure class="gitem rv d2"><img class="zoom" src="images/nuovo_appuntamento.png" data-cap="Creazione di un nuovo appuntamento" alt="Nuovo appuntamento" loading="lazy"><figcaption>Nuovo appuntamento</figcaption></figure>
+    </div>
+    <h3 class="gcat rv">Preventivi<span>3</span></h3>
+    <div class="gallery">
+      <figure class="gitem rv"><img class="zoom" src="images/preventivi.png" data-cap="Elenco dei preventivi con stati e filtri" alt="Elenco preventivi" loading="lazy"><figcaption>Elenco preventivi</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/nuovo_preventivo.png" data-cap="Creazione di un preventivo viaggio" alt="Nuovo preventivo" loading="lazy"><figcaption>Nuovo preventivo</figcaption></figure>
+      <figure class="gitem rv d2"><img class="zoom" src="images/preventivo_noleggio.png" data-cap="Creazione di un preventivo noleggio" alt="Preventivo noleggio" loading="lazy"><figcaption>Preventivo noleggio</figcaption></figure>
+    </div>
+    <h3 class="gcat rv">Fatturazione elettronica alla PA<span>7</span></h3>
+    <div class="gallery">
+      <figure class="gitem rv"><img class="zoom" src="images/fatture.png" data-cap="Elenco delle fatture elettroniche inviate allo SdI" alt="Fatture elettroniche" loading="lazy"><figcaption>Fatture elettroniche</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/fattura_editor.png" data-cap="Editor fattura: cliente PA, FPA12 e split payment" alt="Editor fattura (PA)" loading="lazy"><figcaption>Editor fattura (PA)</figcaption></figure>
+      <figure class="gitem rv d2"><img class="zoom" src="images/anteprima_fattura.png" data-cap="Anteprima del documento XML FatturaPA ufficiale" alt="Anteprima FatturaPA" loading="lazy"><figcaption>Anteprima FatturaPA</figcaption></figure>
+      <figure class="gitem rv"><img class="zoom" src="images/fattura_pdf.png" data-cap="PDF della fattura elettronica per la PA, con split payment (scissione dei pagamenti)" alt="Fattura PDF con split payment" loading="lazy"><figcaption>Fattura PDF (split payment)</figcaption></figure>
       <figure class="gitem rv"><img class="zoom" src="images/nota_credito.png" data-cap="Nota di credito: storno totale o parziale" alt="Nota di credito" loading="lazy"><figcaption>Nota di credito</figcaption></figure>
-      <figure class="gitem rv d2"><img class="zoom" src="images/avvisi.png" data-cap="Avvisi sui pagamenti in scadenza e scaduti" alt="Avvisi pagamenti" loading="lazy"><figcaption>Avvisi pagamenti</figcaption></figure>
-      <figure class="gitem rv"><img class="zoom" src="images/veicoli.png" data-cap="Anagrafica veicoli" alt="Anagrafica veicoli" loading="lazy"><figcaption>Anagrafica veicoli</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/fraziona_fattura.png" data-cap="Frazionamento della fattura su più soggetti" alt="Fraziona fattura" loading="lazy"><figcaption>Fraziona fattura</figcaption></figure>
+      <figure class="gitem rv d2"><img class="zoom" src="images/da_fatturare.png" data-cap="Viaggi e noleggi chiusi, pronti da fatturare con un clic" alt="Da fatturare" loading="lazy"><figcaption>Da fatturare</figcaption></figure>
+    </div>
+    <h3 class="gcat rv">Scadenze e avvisi<span>2</span></h3>
+    <div class="gallery">
+      <figure class="gitem rv"><img class="zoom" src="images/scadenze.png" data-cap="Scadenze: bollo, assicurazione, revisione, patenti e CQC" alt="Scadenze mezzi e autisti" loading="lazy"><figcaption>Scadenze mezzi e autisti</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/avvisi.png" data-cap="Avvisi sui pagamenti in scadenza e scaduti" alt="Avvisi pagamenti" loading="lazy"><figcaption>Avvisi pagamenti</figcaption></figure>
+    </div>
+    <h3 class="gcat rv">Anagrafiche: veicoli e clienti<span>5</span></h3>
+    <div class="gallery">
+      <figure class="gitem rv"><img class="zoom" src="images/veicoli.png" data-cap="Anagrafica veicoli con stato e assegnazioni" alt="Anagrafica veicoli" loading="lazy"><figcaption>Anagrafica veicoli</figcaption></figure>
       <figure class="gitem rv d1"><img class="zoom" src="images/nuovo_veicolo.png" data-cap="Inserimento di un nuovo veicolo" alt="Nuovo veicolo" loading="lazy"><figcaption>Nuovo veicolo</figcaption></figure>
       <figure class="gitem rv d2"><img class="zoom" src="images/clienti.png" data-cap="Anagrafica clienti" alt="Anagrafica clienti" loading="lazy"><figcaption>Anagrafica clienti</figcaption></figure>
-      <figure class="gitem rv"><img class="zoom" src="images/utenti.png" data-cap="Gestione utenti e ruoli" alt="Utenti e ruoli" loading="lazy"><figcaption>Utenti e ruoli</figcaption></figure>
-      <figure class="gitem rv d1"><img class="zoom" src="images/permessi.png" data-cap="Permessi su misura con interruttori per singolo utente" alt="Permessi utente" loading="lazy"><figcaption>Permessi su misura</figcaption></figure>
+      <figure class="gitem rv"><img class="zoom" src="images/nuovo_cliente.png" data-cap="Scheda nuovo cliente con dati di fatturazione" alt="Nuovo cliente" loading="lazy"><figcaption>Nuovo cliente</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/unisci_doppioni.png" data-cap="Unione dei clienti doppioni" alt="Unisci doppioni" loading="lazy"><figcaption>Unisci doppioni</figcaption></figure>
+    </div>
+    <h3 class="gcat rv">Utenti, ruoli e permessi<span>4</span></h3>
+    <div class="gallery">
+      <figure class="gitem rv"><img class="zoom" src="images/utenti.png" data-cap="Gestione utenti, ruoli e scadenze patenti" alt="Gestione utenti" loading="lazy"><figcaption>Gestione utenti</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/nuovo_utente.png" data-cap="Nuovo utente con ruolo e scadenza patente" alt="Nuovo utente" loading="lazy"><figcaption>Nuovo utente</figcaption></figure>
+      <figure class="gitem rv d2"><img class="zoom" src="images/modifica_utente.png" data-cap="Modifica utente e permessi personalizzati" alt="Modifica utente" loading="lazy"><figcaption>Modifica utente</figcaption></figure>
+      <figure class="gitem rv"><img class="zoom" src="images/permessi.png" data-cap="Permessi su misura con interruttori per singolo utente" alt="Permessi su misura" loading="lazy"><figcaption>Permessi su misura</figcaption></figure>
+    </div>
+    <h3 class="gcat rv">Accesso e sicurezza<span>2</span></h3>
+    <div class="gallery">
+      <figure class="gitem rv"><img class="zoom" src="images/login.png" data-cap="Accesso con password oppure impronta / Face ID" alt="Accesso con impronta" loading="lazy"><figcaption>Accesso con impronta</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/profilo_sicurezza.png" data-cap="Profilo: password, impronta e 2FA" alt="Profilo e sicurezza" loading="lazy"><figcaption>Profilo e sicurezza</figcaption></figure>
+    </div>
+    <h3 class="gcat rv">BusItinera dal telefono<span>3</span></h3>
+    <div class="gallery">
+      <figure class="gitem rv"><img class="zoom" src="images/admin_mobile.png" data-cap="Home mobile di titolari e operatori" alt="Home mobile (ufficio)" loading="lazy"><figcaption>Home mobile (ufficio)</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/autista_mobile.png" data-cap="Portale autista dal telefono: viaggi e km" alt="Portale autista (mobile)" loading="lazy"><figcaption>Portale autista (mobile)</figcaption></figure>
+      <figure class="gitem rv d2"><img class="zoom" src="images/autista_desktop.png" data-cap="Portale autista: viaggio in corso e ordine di servizio" alt="Portale autista" loading="lazy"><figcaption>Portale autista</figcaption></figure>
+    </div>
+    <h3 class="gcat rv">Impostazioni e altro<span>4</span></h3>
+    <div class="gallery">
+      <figure class="gitem rv"><img class="zoom" src="images/dati_azienda.png" data-cap="Dati azienda, regime fiscale e banche" alt="Dati azienda" loading="lazy"><figcaption>Dati azienda</figcaption></figure>
+      <figure class="gitem rv d1"><img class="zoom" src="images/aggiungi_banca.png" data-cap="Aggiunta di una banca con IBAN" alt="Nuova banca" loading="lazy"><figcaption>Nuova banca</figcaption></figure>
       <figure class="gitem rv d2"><img class="zoom" src="images/registro.png" data-cap="Registro attività con filtri per tipo" alt="Registro attività" loading="lazy"><figcaption>Registro attività</figcaption></figure>
-      <figure class="gitem rv d1"><img class="zoom" src="images/dati_azienda.png" data-cap="Dati e impostazioni dell'azienda" alt="Dati azienda" loading="lazy"><figcaption>Dati azienda</figcaption></figure>
-      <figure class="gitem rv d2"><img class="zoom" src="images/documentazione.png" data-cap="Documentazione integrata nell'app" alt="Documentazione" loading="lazy"><figcaption>Documentazione integrata</figcaption></figure>
+      <figure class="gitem rv"><img class="zoom" src="images/documentazione.png" data-cap="Guida operativa integrata nell'app" alt="Documentazione" loading="lazy"><figcaption>Documentazione</figcaption></figure>
     </div>
   </div>
 </section>
