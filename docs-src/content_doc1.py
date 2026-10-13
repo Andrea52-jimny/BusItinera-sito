@@ -60,7 +60,7 @@ BODY = """
 <p>Un viaggio rappresenta un servizio di trasporto con partenza, arrivo, tappe intermedie, veicolo e autisti. Si apre da <b>Nuovo Viaggio</b> nella topbar (solo admin/editor) o cliccando un giorno vuoto sul calendario.</p>
 <ul>
 <li><b>Cliente:</b> ricerca in anagrafica con card riepilogativa; possibilità di creare un cliente "al volo" senza uscire dal form.</li>
-<li><b>Percorso:</b> luogo di partenza e arrivo con autocompletamento Google Maps e nomi personalizzati; tappe intermedie con rinumerazione automatica.</li>
+<li><b>Percorso:</b> luogo di partenza e arrivo con autocompletamento Google Maps e nomi personalizzati; tappe intermedie con rinumerazione automatica. Per ogni tappa si indicano l'<b>orario di arrivo</b> e l'<b>orario di ripartenza</b> <span class="badge">NUOVO</span>, che accompagnano il viaggio fino all'ordine di servizio e al portale autista. Sotto i campi di partenza e arrivo una <b>casella compila l'indirizzo della sede</b> <span class="badge">NUOVO</span> al posto dell'operatore.</li>
 <li><b>Veicolo:</b> ricerca per targa o soprannome; badge OCCUPATO per i mezzi già impegnati; opzione veicolo esterno. Obbligatorio almeno un veicolo interno o un'azienda esterna.</li>
 <li><b>Autisti:</b> uno o più; blocco dell'assegnazione se già impegnati, con messaggio d'errore contenente il nome.</li>
 <li><b>Dati economici:</b> prezzo, CIG/ordine, metodo di pagamento, modalità (unico o acconto+saldo), costi extra con somma automatica, accompagnatore con recapito visibile all'autista.</li>
@@ -73,7 +73,18 @@ BODY = """
 <p>Nella sezione Autisti del form si cerca per nome; gli autisti già impegnati mostrano il badge OCCUPATO e finiscono in fondo alla lista, quelli sospesi non appaiono. Selezione multipla con chip rimovibili.</p>
 
 <h2 id="s5">5. Noleggi</h2>
-<p>Il noleggio traccia la locazione di un veicolo aziendale (veicolo interno obbligatorio, nessuna opzione esterna), con numero contratto, date e luogo di riconsegna, controllo automatico di sovrapposizione. Dispone dello stesso <b>Codice evento</b> dei viaggi (cap. 3) e si può <b>duplicare</b> dal dettaglio. Da lì si stampa anche il contratto di locazione senza conducente, con la tabella degli utilizzatori autorizzati.</p>
+<p>Il noleggio traccia la locazione di un veicolo aziendale (veicolo interno obbligatorio, nessuna opzione esterna), con numero contratto, date, <b>luogo di ritiro</b> <span class="badge">NUOVO</span> e luogo di riconsegna, controllo automatico di sovrapposizione. Entrambi i luoghi hanno la casella che compila l'indirizzo della sede. Dispone dello stesso <b>Codice evento</b> dei viaggi (cap. 3) e si può <b>duplicare</b> dal dettaglio. Da lì si stampa anche il contratto di locazione senza conducente, con la tabella degli utilizzatori autorizzati.</p>
+
+<h3>5.1 Utilizzatori: con o senza conducente <span class="badge">NUOVO</span></h3>
+<p>Gli <b>utilizzatori</b> sono le persone autorizzate a guidare il mezzo durante il noleggio, e finiscono nel contratto con i dati della patente. La casella <b>Senza conducente</b> sceglie fra i due casi possibili.</p>
+<ul>
+<li><b>Con conducente</b> (casella non spuntata): guida l'azienda, e gli utilizzatori si scelgono fra gli <b>autisti in anagrafica</b>; i dati della patente arrivano dalla scheda dell'utente (cap. 14).</li>
+<li><b>Senza conducente</b> (casella spuntata): guida il cliente, e le persone autorizzate non sono utenti del gestionale. Si inseriscono con righe ripetibili, una per persona, con cognome e nome, codice fiscale, luogo e data di nascita, residenza (la via ha l'autocompletamento che compila CAP, comune e provincia), <b>codice patente</b> con controllo di lunghezza sul formato italiano, data di emissione e di scadenza — con verifica che l'emissione preceda la scadenza — e telefono. Queste persone appartengono al singolo noleggio.</li>
+</ul>
+<p>Le due liste vengono conservate entrambe: cambiando idea sulla casella non si perde quanto già inserito, ed è la casella a decidere quale delle due compare nel contratto.</p>
+
+<h3>5.2 Carburante alla consegna <span class="badge">NUOVO</span></h3>
+<p>Il livello di carburante presente alla consegna del mezzo si registra su un <b>quadrante in ottavi</b> (da riserva a pieno) che si trascina come quello di un cruscotto, e risponde anche alle frecce della tastiera. Serve a ricordare a che livello il mezzo deve tornare: il valore compare nel dettaglio del noleggio ed è riportato nella casella «Carburante — Ritiro» del contratto stampato. Il livello può restare <b>non rilevato</b>; i noleggi inseriti prima di questa versione risultano appunto senza il dato.</p>
 
 <h2 id="s6">6. Appuntamenti</h2>
 <p>Eventi generici (riunioni, manutenzioni, formazioni) non collegati a veicoli o autisti, visibili solo ad admin ed editor. Titolo obbligatorio, durata minima 15 minuti (default 60), icona campanella su sfondo giallo.</p>
@@ -213,6 +224,15 @@ BODY = """
 </ul>
 <div class="new"><b>Viaggio completato.</b> L'autista abilitato (interruttore "Può marcare i viaggi come completati") trova nel portale una sezione "Da completare" con il pulsante <b>Viaggio completato</b> per i propri viaggi. Il pulsante è attivabile solo dopo la data e ora di rientro previste del viaggio; la regola è applicata anche lato server (un tentativo anticipato viene rifiutato). Ogni segnalazione è tracciata nel Registro attività. Il controllo è limitato ai soli viaggi effettivamente assegnati all'autista.</div>
 
+<h3>19.1.1 Calendario completo per chi gestisce ed è anche autista <span class="badge">NUOVO</span></h3>
+<p>Un amministratore o un operatore che è anche autista entra, dal telefono, nel portale dei propri viaggi. Da questa versione il <b>calendario</b> del portale — viste giorno, settimana e mese — mostra <b>tutti i viaggi dell'azienda</b> e non più soltanto i propri, così da avere il quadro completo senza passare al computer.</p>
+<ul>
+<li><b>I viaggi propri restano riconoscibili:</b> nelle viste giorno e settimana la scheda dei propri viaggi porta in basso a destra l'indicazione <b>Personale</b>.</li>
+<li><b>Nella vista mese</b> i giorni sono segnati da pallini sotto il numero: <b>arancione</b> se nel giorno ci sono solo viaggi propri, <b>grigio</b> se solo viaggi di altri, <b>entrambi affiancati</b> se il giorno ne ha di tutti e due i tipi.</li>
+<li><b>Il riquadro grande in cima</b> — "In corso", "In partenza" e "Da completare" — continua a riguardare <b>solo i viaggi personali</b>: è lo strumento di chi sta guidando, non una panoramica aziendale.</li>
+</ul>
+<p>Per gli <b>autisti semplici</b> non cambia nulla: continuano a vedere soltanto i viaggi a loro assegnati, e il badge «Personale» non compare. Restano nascosti, come prima, prezzi, dati di pagamento e note private.</p>
+
 <h3>19.2 Home mobile per amministratori e operatori <span class="badge">NUOVO</span></h3>
 <p>Aprendo l'applicazione dal telefono, chi gestisce l'azienda trova una schermata pensata per lo schermo piccolo, invece del gestionale desktop rimpicciolito. È una vista di <b>sola lettura</b>, per capire in pochi secondi come sta andando la giornata:</p>
 <ul>
@@ -232,7 +252,7 @@ BODY = """
 <p>Con le <b>notifiche push</b> attivate l'avviso arriva anche ad app chiusa. L'app è <b>installabile sulla schermata Home</b> (PWA): su Android l'installazione è diretta, su iPhone/iPad un breve tutorial guida "Condividi → Aggiungi a Home" (su iOS le push funzionano dopo l'aggiunta alla Home).</p>
 
 <h2 id="s20">20. Moduli stampabili</h2>
-<p><b>Ordine di Servizio</b> (viaggi) con i dati presenti e le righe da compilare a mano; le voci mancanti mostrano "da compilare". <b>Contratto di locazione</b> (noleggi) con anagrafica cliente, dati del veicolo, tabella degli utilizzatori e dati patente, e condizioni generali personalizzabili.</p>
+<p><b>Ordine di Servizio</b> (viaggi) con i dati presenti e le righe da compilare a mano; le voci mancanti mostrano "da compilare". Il programma del servizio riporta partenza, tappe — con l'orario di arrivo e quello di ripartenza — e rientro. <b>Contratto di locazione</b> (noleggi) con anagrafica cliente, dati del veicolo, tabella degli utilizzatori e dati patente, livello di carburante al ritiro e condizioni generali personalizzabili. Nel noleggio <b>senza conducente</b> la tabella degli utilizzatori riporta i dati anagrafici completi delle persone autorizzate (nascita, residenza, codice fiscale, patente con le sue date, telefono) invece dei soli autisti aziendali.</p>
 
 <h2 id="s21">21. Solidità e controlli</h2>
 <p>L'applicazione include protezioni pensate per il lavoro condiviso: congelamento dei documenti contabili, rilevamento delle modifiche simultanee, controllo formale di P.IVA/CF, unione clienti tracciata e irreversibile, registro attività immutabile. Gli accessi sono protetti da ruoli e permessi granulari, autenticazione a due fattori e sessioni irrobustite.</p>
@@ -243,7 +263,7 @@ BODY = """
 <li><b>Freno ai tentativi ripetuti anche per rete di provenienza.</b> Al blocco per nome utente si affianca un limite per indirizzo di rete: una raffica di tentativi distribuita su molti nomi utente diversi viene fermata ugualmente. Vale anche per l'accesso con impronta.</li>
 <li><b>Segreto del 2FA cifrato a riposo.</b> Il codice che genera le cifre temporanee può essere conservato cifrato nella banca dati, con una chiave tenuta fuori da essa: chi leggesse il database non otterrebbe un secondo fattore utilizzabile.</li>
 <li><b>Export CSV a prova di formula.</b> Le celle che iniziano con i simboli usati dai fogli di calcolo per le formule vengono neutralizzate prima dell'esportazione: aprendo il file, il contenuto resta testo e non viene eseguito.</li>
-<li><b>Nessuna libreria caricata da terzi.</b> Il codice che disegna il QR per il 2FA è servito dal server dell'azienda e non più da una rete di distribuzione esterna: una libreria altrui compromessa non può entrare nelle pagine del gestionale.</li>
+<li><b>Nessuna libreria caricata da terzi.</b> Il codice che disegna il QR per il 2FA è servito dal server dell'applicazione e non più da una rete di distribuzione esterna: una libreria altrui compromessa non può entrare nelle pagine del gestionale.</li>
 <li><b>Accesso senza segreti riutilizzabili sul server.</b> Con l'impronta o il Face ID (par. 16.1) la chiave privata non lascia il dispositivo e sul server non resta nulla che, se letto, consenta di entrare.</li>
 </ul>
 """
