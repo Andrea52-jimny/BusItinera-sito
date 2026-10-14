@@ -1,12 +1,12 @@
-# CeolAgenda — Cosa fa, spiegato semplice
+# BusItinera — Cosa fa, spiegato semplice
 
-*Descrizione pensata per il titolare di un'azienda di trasporti, non per un tecnico. L'idea è far capire in pochi minuti come CeolAgenda cambia la giornata di lavoro.*
+*Descrizione pensata per il titolare di un'azienda di trasporti, non per un tecnico. L'idea è far capire in pochi minuti come BusItinera cambia la giornata di lavoro.*
 
 ---
 
 ## In due righe
 
-CeolAgenda è l'agenda digitale della tua flotta. Sostituisce quaderni, fogli Excel e messaggi WhatsApp con un unico posto dove pianifichi i viaggi, sai sempre quale mezzo e quale autista è libero, e tieni sotto controllo pagamenti e clienti. Gli autisti vedono i loro viaggi direttamente sul telefono.
+BusItinera è l'agenda digitale della tua flotta. Sostituisce quaderni, fogli Excel e messaggi WhatsApp con un unico posto dove pianifichi i viaggi, sai sempre quale mezzo e quale autista è libero, e tieni sotto controllo pagamenti e clienti. Gli autisti vedono i loro viaggi direttamente sul telefono.
 
 ---
 
@@ -70,7 +70,7 @@ L'accesso è protetto da password robuste e, per chi gestisce l'azienda, da un s
 
 ## Dove funziona: a casa tua o nel cloud, decidi tu
 
-Puoi installare CeolAgenda **sul tuo server/NAS in azienda**: i dati restano fisicamente da te, non c'è nessun canone mensile e funziona anche senza internet sulla rete interna. Oppure, se non hai hardware o competenze tecniche, viene configurata **nel cloud** e ci accedi da qualsiasi browser, ovunque tu sia.
+Puoi installare BusItinera **sul tuo server/NAS in azienda**: i dati restano fisicamente da te, non c'è nessun canone mensile e funziona anche senza internet sulla rete interna. Oppure, se non hai hardware o competenze tecniche, viene configurata **nel cloud** e ci accedi da qualsiasi browser, ovunque tu sia.
 
 L'applicazione è identica nei due casi: cambia solo dove "abita". Gira su hardware modesto e consuma pochissime risorse, quindi non serve comprare macchine costose.
 
