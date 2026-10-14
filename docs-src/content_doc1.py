@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """PDF 1 — Documentazione delle Funzionalità.
-Aggiornato alla v1.15.1 (promemoria automatici + home mobile amministratori).
+Aggiornato alla v1.25.0 (portale autista: lista prossimi viaggi nel mese e scheda ingrandibile).
 """
 
 TOC = [
@@ -216,9 +216,11 @@ BODY = """
 <p>Dal telefono l'applicazione si presenta in forma adatta al ruolo di chi accede: <b>Portale Autista</b> per gli autisti, <b>Home mobile</b> per amministratori e operatori. I tablet sono equiparati al desktop e mostrano il pannello completo.</p>
 
 <h3>19.1 Portale Autista</h3>
-<p>Interfaccia dedicata che mostra solo i viaggi assegnati all'autista.</p>
+<p>Interfaccia dedicata che mostra solo i viaggi assegnati all'autista. Si naviga fra le viste <b>Giorno</b>, <b>Settimana</b> e <b>Mese</b> con i tab in fondo alla pagina.</p>
 <ul>
-<li><b>Card "In corso" e "In partenza":</b> timeline con link di navigazione GPS e countdown che si aggiorna da solo.</li>
+<li><b>Card "In corso" e "In partenza" (vista Giorno):</b> timeline con link di navigazione GPS e countdown che si aggiorna da solo; da qui si inseriscono i km, si apre l'ordine di servizio e si segna il viaggio come completato. <b>Compare solo nella vista Giorno</b> <span class="badge">NUOVO</span>: nelle viste Settimana e Mese &egrave; nascosta per lasciare spazio al calendario.</li>
+<li><b>&laquo;I tuoi prossimi viaggi&raquo; nella vista Mese</b> <span class="badge">NUOVO</span>: sotto il calendario a pallini, l'elenco scorrevole dei propri viaggi del mese dal pi&ugrave; vicino &mdash; data, ora, tratta e mezzo. Il calendario fa da navigatore e, toccando una voce della lista, si apre direttamente quel giorno. Nel mese in corso la lista mostra solo i viaggi da oggi in avanti.</li>
+<li><b>Ingrandimento della scheda</b> <span class="badge">NUOVO</span>: toccando una scheda di viaggio &mdash; la card "In corso" o una qualsiasi scheda delle viste &mdash; questa si apre a schermo intero con gli stessi dati ingranditi, comoda da leggere su telefoni piccoli. &Egrave; una vista di sola lettura, che si chiude con la X.</li>
 <li><b>Km di partenza e ritorno:</b> inseriti dall'autista e salvati nel viaggio; bloccati dopo la chiusura.</li>
 <li><b>Ordine di servizio</b> stampabile dal telefono; accompagnatore con chiamata diretta al referente a bordo.</li>
 </ul>
