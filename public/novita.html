@@ -7,9 +7,7 @@
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="manifest" href="manifest.json">
 <meta name="description" content="Le novità di BusItinera versione dopo versione: fatturazione elettronica, permessi su misura, preventivi con revisioni, chilometri, viaggi all'estero e altro. Cosa è cambiato e perché è utile.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -328,6 +326,53 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
 <section class="sec">
   <div class="wrap">
     <ol class="tl">
+
+      <li class="tl-item rv">
+        <div class="tl-marker"></div>
+        <div class="card tl-card">
+          <div class="tl-head"><span class="tl-ver">Versione 1.28</span><span class="tl-date">Ottobre 2026</span></div>
+          <h3>Una sola campanella, e gli appuntamenti con gli invitati</h3>
+          <p>Le due campanelle affiancate erano due elenchi e due numeri da interpretare per cose che chiedono entrambe attenzione. Ora sono una sola. E un appuntamento si pu&ograve; girare alle persone che devono esserci.</p>
+          <ul class="clist">
+            <li><strong>Centro notifiche unico</strong>: scadenze dei mezzi, patenti, pagamenti e messaggi personali in un elenco solo, ordinato per urgenza &mdash; prima ci&ograve; che &egrave; scaduto, poi ci&ograve; che scade oggi, poi il resto. Una riga di filtri porta al volo sulla categoria che cerchi</li>
+            <li><strong>&laquo;Rimanda&raquo; invece di &laquo;letto&raquo;</strong>: una notifica si legge e finisce l&igrave;, una scadenza no &mdash; resta finch&eacute; non la risolvi. Per questo le scadenze si rimandano di una settimana e tornano da sole</li>
+            <li><strong>Inviti agli appuntamenti</strong>: scegli chi deve esserci, o inviti tutti con una spunta. Ognuno riceve la notifica e si trova l&rsquo;appuntamento nel proprio calendario, anche chi non ha accesso a quello dell&rsquo;azienda. Se lo sposti o lo annulli, vengono riavvisati</li>
+            <li><strong>Avviso sui documenti scaduti durante il viaggio</strong>: il triangolo non guarda pi&ugrave; solo com&rsquo;&egrave; la situazione adesso. Se nel periodo del viaggio scadono la patente o la CQC di un autista, o una scadenza del mezzo, la scheda lo segnala &mdash; in anticipo, quando c&rsquo;&egrave; ancora tempo per rimediare</li>
+            <li><strong>Dal telefono si consulta, non si modifica</strong>: viaggi, noleggi e appuntamenti si aprono ingranditi in sola lettura, e la modifica resta al computer per tutti, titolare compreso. Km e &laquo;Viaggio completato&raquo; dell&rsquo;autista restano dove sono sempre stati</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="tl-item rv">
+        <div class="tl-marker"></div>
+        <div class="card tl-card">
+          <div class="tl-head"><span class="tl-ver">Versione 1.27</span><span class="tl-date">Ottobre 2026</span></div>
+          <h3>Il percorso completo gi&agrave; nel preventivo</h3>
+          <p>Le tappe si inserivano solo nel viaggio: quelle pensate in fase di offerta andavano perse e si riscrivevano a mano dopo. Ora il preventivo porta con s&eacute; tutto il percorso.</p>
+          <ul class="clist">
+            <li><strong>Tappe nei preventivi</strong>, di viaggio e di noleggio: nome, indirizzo con ricerca, ora di arrivo e di ripartenza. Alla conversione passano nel viaggio o nel noleggio invece di sparire</li>
+            <li><strong>Filtro per stato in Viaggi e noleggi</strong>: <em>Solo aperti</em>, <em>Solo chiusi</em> o entrambi. I viaggi chiusi da qui non erano raggiungibili; ora lo sono, con sfondo grigio e lucchetto, e il filtro vale anche per l&rsquo;esportazione CSV</li>
+            <li><strong>Carburante anche alla riconsegna</strong>, con la casella <em>Libero</em> quando non c&rsquo;&egrave; un obbligo preciso. Entrambi i livelli finiscono sul contratto stampato</li>
+            <li><strong>I form non si chiudono pi&ugrave; per un clic di troppo</strong>: si chiudono con Esc, con la X o con Annulla, e quello che avevi scritto viene messo da parte come bozza &mdash; ora anche per cliente e utente</li>
+            <li><strong>Preventivi divisi in Viaggi e Noleggi</strong> con due schede in cima, e la lista dei viaggi ordinata dal pi&ugrave; recente</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="tl-item rv">
+        <div class="tl-marker"></div>
+        <div class="card tl-card">
+          <div class="tl-head"><span class="tl-ver">Versione 1.26</span><span class="tl-date">Ottobre 2026</span></div>
+          <h3>Ogni viaggio ha il suo numero</h3>
+          <p>Per citare un viaggio al telefono o scriverlo su un foglio serviva un riferimento leggibile, e non c&rsquo;era: restava il codice interno del record. Ora viaggi, noleggi e contratti hanno una numerazione propria.</p>
+          <ul class="clist">
+            <li><strong>V#/anno e N#/anno</strong>: ogni viaggio e ogni noleggio prendono un numero progressivo che riparte a ogni anno, come i preventivi. Si vede nella scheda in elenco e nel dettaglio, non cambia pi&ugrave; e non viene riusato. Anche lo storico gi&agrave; in archivio &egrave; stato numerato</li>
+            <li><strong>Numero del contratto di noleggio automatico</strong>: non si scrive pi&ugrave; a mano, ha una numerazione sua. Nel modulo resta la sola data di emissione, e il contratto stampato riporta numero, riferimento del noleggio e data</li>
+            <li><strong>Il numero del preventivo apre il preventivo</strong>: i viaggi nati da un&rsquo;offerta mostrano il numero che il cliente conosce, e un clic porta a quel preventivo nel suo elenco, evidenziato</li>
+            <li><strong>Un solo pulsante &laquo;Pianifica&raquo;</strong> al posto dei tre, e le bozze lasciate a met&agrave; compaiono nella barra in alto: si vedono da qualunque schermata, non pi&ugrave; solo dal calendario</li>
+          </ul>
+        </div>
+      </li>
 
       <li class="tl-item rv">
         <div class="tl-marker"></div>
