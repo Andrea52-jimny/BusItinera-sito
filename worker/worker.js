@@ -101,6 +101,11 @@ function sitoValido(s) {
   return /\.[A-Za-z]{2,}$/.test(v);
 }
 
+// Durata massima di una richiesta demo in coda: 30 giorni. Di norma viene
+// evasa e cancellata in pochi giorni; questo e' il tetto oltre il quale sparisce
+// da sola, coerente con quanto dichiarato nell'informativa privacy.
+const DEMO_TTL_SEC = 30 * 24 * 3600;
+
 // Rate limit per IP: max 5 richieste demo all'ora (contatore in KV con TTL).
 async function demoRateOk(env, ip) {
   try {
@@ -287,6 +292,12 @@ export default {
         if (!azienda || !referente || (!email && !telefono)) {
           return json({ error: 'invalid', message: 'Azienda, referente e almeno un contatto sono obbligatori.' }, 400, env, req);
         }
+        // Il consenso e' la base su cui questi dati vengono trattati: senza, la
+        // richiesta non si accetta. Il controllo sta qui e non solo nella
+        // pagina, perche' una spunta lato browser si aggira banalmente.
+        if (b.consenso !== true) {
+          return json({ error: 'consenso', message: 'Per inviare la richiesta serve il consenso al trattamento dei dati.' }, 400, env, req);
+        }
         if (!referenteValido(referente)) {
           return json({ error: 'referente', message: 'Indica nome e cognome della persona di riferimento, senza numeri né simboli.' }, 400, env, req);
         }
@@ -307,10 +318,16 @@ export default {
           return json({ error: 'rate', message: "Troppe richieste da questo indirizzo. Riprova tra un'ora." }, 429, env, req);
         }
         const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+        // Conservazione limitata (art. 5.1.e GDPR): una richiesta si valuta in
+        // pochi giorni — e' un si' o un no — quindi non ha ragione di restare.
+        // Quelle evase vengono rimosse subito dalla console; questa scadenza
+        // copre le altre, cosi' il limite dichiarato nell'informativa vale
+        // davvero anche se nessuno interviene.
         await env.SUBS.put('demo:' + id, JSON.stringify({
           id, azienda, referente, email, telefono, sito, note,
+          consenso: true, ts_consenso: new Date().toISOString(),
           ts_created: new Date().toISOString(), ip
-        }));
+        }), { expirationTtl: DEMO_TTL_SEC });
         return json({ ok: true }, 200, env, req);
       }
 

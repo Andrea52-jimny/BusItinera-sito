@@ -202,6 +202,12 @@ nav.scrolled{box-shadow:0 4px 24px rgba(16,27,45,.06)}
 .fr input::placeholder,.fr textarea::placeholder{color:#9aa7b8}
 .fr textarea{resize:vertical;min-height:120px}
 .fr-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.consenso{display:flex;gap:11px;align-items:flex-start;margin:4px 0 2px;
+  font-size:.86rem;line-height:1.55;color:var(--ink2);cursor:pointer}
+.consenso input{width:18px;height:18px;margin-top:2px;flex:none;accent-color:var(--primary);cursor:pointer}
+.consenso a{color:var(--primary);font-weight:600}
+.consenso.manca{color:#dc2626}
+.consenso.manca input{outline:2px solid #dc2626;outline-offset:2px}
 .btn-submit{width:100%;margin-top:6px;background:var(--primary);color:#fff;font-weight:700;font-size:1rem;padding:16px;border-radius:var(--rs);border:none;cursor:pointer;box-shadow:0 10px 26px rgba(37,99,235,.28);font-family:var(--font);transition:transform .2s,box-shadow .3s}
 .btn-submit:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(37,99,235,.35)}
 
@@ -457,6 +463,12 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
         <!-- honeypot anti-bot: nascosto agli umani, compilato solo dai bot -->
         <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label for="f_website">Lascia vuoto</label><input type="text" id="f_website" tabindex="-1" autocomplete="off"></div>
         <div id="tsWidget" style="margin:4px 0"></div>
+        <!-- Consenso: la richiesta non e' anonima per forza, perche' la demo
+             apre un'istanza funzionante del gestionale e va capito a chi. -->
+        <label class="consenso" for="f_privacy">
+          <input type="checkbox" id="f_privacy">
+          <span>Ho letto l'<a href="privacy.html" target="_blank" rel="noopener">informativa privacy</a> e acconsento al trattamento dei dati che ho inserito, che servono a valutare questa richiesta di demo e non ad altro. *</span>
+        </label>
         <div id="demoMsg" role="status" style="display:none"></div>
         <button class="btn-submit" type="button" onclick="inviaDemo(event)">Invia richiesta demo<svg class="ic ic-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
       </div>
@@ -468,7 +480,7 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
 <footer>
   <div class="wrap">
     <p>© 2026 BusItinera Autotrasporti — Progetto di <strong>Andrea Ceol</strong> · <a href="mailto:busitinera@gmail.com">busitinera@gmail.com</a> · <a href="tel:+393274997730">+39 327 499 7730</a></p>
-    <p style="margin-top:8px;font-size:.8rem;color:var(--muted)">© 2024–2026 Ceol Andrea — Tutti i diritti riservati · <a href="copyright.html">Copyright e licenza d'uso</a></p>
+    <p style="margin-top:8px;font-size:.8rem;color:var(--muted)">© 2024–2026 Ceol Andrea — Tutti i diritti riservati · <a href="copyright.html">Copyright e licenza d'uso</a> · <a href="privacy.html">Informativa privacy</a> · <a href="cookie.html">Cookie policy</a></p>
   </div>
 </footer>
 
@@ -503,11 +515,43 @@ var DEMO_WORKER_BASE = 'https://busitinera-push.ceolandrea006.workers.dev';
 var TURNSTILE_SITEKEY = 'REPLACE_WITH_TURNSTILE_SITEKEY';
 
 function _tsActive(){ return TURNSTILE_SITEKEY && TURNSTILE_SITEKEY.indexOf('REPLACE') < 0; }
-window.addEventListener('load', function(){
-  var el=document.getElementById('tsWidget');
-  if(el && _tsActive() && window.turnstile){
+
+/* Turnstile si carica solo quando serve davvero: quando le chiavi sono
+   configurate e qualcuno comincia a compilare il modulo. Prima lo script di
+   Cloudflare veniva chiesto a ogni apertura della pagina, anche da chi non
+   aveva alcuna intenzione di scrivere: una chiamata a un terzo che nessuno
+   aveva motivo di fare, per di piu' con il captcha spento. */
+var _tsCaricato = false;
+function _tsCarica(){
+  if(_tsCaricato || !_tsActive()) return;
+  _tsCaricato = true;
+  var sc = document.createElement('script');
+  sc.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=_tsPronto';
+  sc.async = true; sc.defer = true;
+  document.head.appendChild(sc);
+}
+window._tsPronto = function(){
+  var el = document.getElementById('tsWidget');
+  if(el && window.turnstile){
     try{ window.__tsId = window.turnstile.render(el, { sitekey: TURNSTILE_SITEKEY }); }catch(e){}
   }
+};
+/* L'evidenza rossa sulla spunta sparisce appena la si mette, non al tentativo
+   d'invio successivo: altrimenti resta a segnalare un errore gia' corretto. */
+window.addEventListener('load', function(){
+  var cb = document.getElementById('f_privacy');
+  if(cb) cb.addEventListener('change', function(){
+    var lab = cb.closest('.consenso');
+    if(lab && cb.checked) lab.classList.remove('manca');
+  });
+});
+
+window.addEventListener('load', function(){
+  if(!_tsActive()) return;
+  ['f_azienda','f_referente','f_email','f_tel','f_sito','f_msg'].forEach(function(id){
+    var e = document.getElementById(id);
+    if(e) e.addEventListener('focus', _tsCarica, { once: true });
+  });
 });
 
 function _v(id){ var e=document.getElementById(id); return e ? e.value.trim() : ''; }
@@ -560,16 +604,30 @@ async function inviaDemo(ev){
   if(tel && !_telOk(tel)){ show('Il telefono deve contenere solo numeri (da 6 a 15 cifre), eventualmente con il prefisso internazionale.', false); document.getElementById('f_tel').focus(); return; }
   if(sito && !_sitoOk(sito)){ show('Il sito non è valido: usa un indirizzo con almeno un punto e senza caratteri speciali (es. www.azienda.it).', false); document.getElementById('f_sito').focus(); return; }
   var ts=''; try{ if(window.turnstile && window.__tsId!=null) ts=window.turnstile.getResponse(window.__tsId)||''; }catch(e){}
-  if(_tsActive() && !ts){ show('Completa la verifica anti-bot qui sopra.', false); return; }
+  if(_tsActive() && !ts){
+    _tsCarica();   // non ancora caricato: lo si chiede ora
+    show('Completa la verifica anti-bot qui sopra.', false);
+    return;
+  }
+  /* Senza consenso non si invia: e' la base su cui i dati vengono trattati.
+     Il Worker ripete il controllo, perche' una spunta lato pagina si aggira. */
+  var cons=document.getElementById('f_privacy');
+  if(!cons || !cons.checked){
+    show("Per inviare la richiesta serve il consenso al trattamento dei dati.", false);
+    if(cons){ var lab=cons.closest('.consenso'); if(lab) lab.classList.add('manca'); cons.focus(); }
+    return;
+  }
+  var lab=cons.closest('.consenso'); if(lab) lab.classList.remove('manca');
   var btn=ev && ev.target ? ev.target.closest('button') : null, old = btn ? btn.innerHTML : '';
   if(btn){ btn.disabled=true; btn.innerHTML='Invio&hellip;'; }
   try{
     var r=await fetch(DEMO_WORKER_BASE+'/api/demo', { method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ azienda:azienda, referente:referente, email:email, telefono:tel, sito:sito, note:note, hp:hp, ts:ts }) });
+      body: JSON.stringify({ azienda:azienda, referente:referente, email:email, telefono:tel, sito:sito, note:note, hp:hp, ts:ts, consenso:true }) });
     var d=await r.json().catch(function(){ return {}; });
     if(r.ok && d.ok){
       show('Richiesta inviata. Ti ricontatto al più presto per organizzare la demo.', true);
       ['f_azienda','f_referente','f_email','f_tel','f_sito','f_msg'].forEach(function(id){ var e=document.getElementById(id); if(e) e.value=''; });
+      var cb=document.getElementById('f_privacy'); if(cb) cb.checked=false;
       try{ if(window.turnstile && window.__tsId!=null) window.turnstile.reset(window.__tsId); }catch(e){}
     } else {
       show((d && d.message) || 'Invio non riuscito. Riprova, oppure scrivimi a busitinera@gmail.com.', false);
@@ -578,7 +636,6 @@ async function inviaDemo(ev){
   finally{ if(btn){ btn.disabled=false; btn.innerHTML=old; } }
 }
 </script>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script src="bus-notify.js" defer></script>
 </body>
 </html>

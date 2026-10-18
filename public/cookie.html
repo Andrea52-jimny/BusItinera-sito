@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookie policy — BusItinera</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="manifest" href="manifest.json">
+<meta name="description" content="Cookie e strumenti tecnici usati dal sito busitinera.it: nessuna profilazione, nessun tracciamento, nessun banner necessario.">
+<link rel="stylesheet" href="fonts.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#ffffff;--soft:#f5f8fc;--soft2:#eef3fa;--card:#ffffff;--ink:#0f1b2d;--ink2:#3b4a5e;--muted:#6b7a90;--line:#e6ecf3;--line2:#d6deea;--primary:#2563eb;--primary-soft:#eaf1ff;--accent:#f97316;--accent-soft:#fff3ea;--r:20px;--rs:14px;--shadow:0 1px 2px rgba(16,27,45,.04),0 8px 24px rgba(16,27,45,.06);--font:'Outfit',system-ui,-apple-system,sans-serif}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font);background:var(--bg);color:var(--ink2);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.narrow{max-width:820px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:7px 16px;border-radius:100px;margin-bottom:20px;color:var(--accent);background:var(--accent-soft)}
+.eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+h1.h1{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;line-height:1.12;letter-spacing:-.03em;color:var(--ink);margin-bottom:10px}
+.owner{font-weight:700;color:var(--ink);font-size:1.05rem;margin-bottom:6px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.82);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid var(--line)}
+nav.scrolled{box-shadow:0 4px 24px rgba(16,27,45,.06)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;max-width:1180px;margin:0 auto;padding:13px 28px}
+.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.nav-badge{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#1a2b45,#0f1b2d);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-badge img{width:66%;height:auto;display:block}
+.nav-logo-t{font-weight:800;font-size:1.12rem;color:var(--ink);letter-spacing:-.02em}
+.nav-logo-t span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:.9rem;font-weight:500;color:var(--ink2);text-decoration:none}
+.nav-links a:hover{color:var(--primary)}
+.nav-cta{background:var(--primary);color:#fff!important;font-weight:600!important;padding:10px 22px;border-radius:100px;font-size:.88rem!important}
+.mob-tog{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.mob-tog span{display:block;width:22px;height:2px;background:var(--ink2);margin:5px 0;border-radius:2px}
+.head{padding:150px 0 30px;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(249,115,22,.06),transparent 70%),linear-gradient(180deg,var(--soft),var(--bg) 85%)}
+.legal-banner{background:var(--soft);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--rs);padding:18px 22px;margin:22px 0 8px;font-size:.92rem;color:var(--ink2)}
+.legal{padding:24px 0 80px}
+.legal h2{font-size:1.15rem;font-weight:700;color:var(--ink);margin:26px 0 8px;padding-top:10px;border-top:1px solid var(--line)}
+.legal p{font-size:.93rem;color:var(--ink2);margin-bottom:9px}
+.legal ul{margin:6px 0 10px 20px}
+.legal li{font-size:.93rem;color:var(--ink2);margin-bottom:6px}
+.legal .close{margin-top:28px;padding:20px 24px;background:linear-gradient(135deg,#1a2b45,#0f1b2d);color:#fff;border-radius:var(--r)}
+.legal .close p{color:rgba(255,255,255,.86);margin-bottom:5px}
+.legal .close b{color:#fff}
+footer{border-top:1px solid var(--line);padding:40px 0;text-align:center;background:var(--soft)}
+footer p{font-size:.85rem;color:var(--muted)}
+footer a{color:var(--primary);text-decoration:none;font-weight:500}
+footer strong{color:var(--ink2)}
+@media(max-width:700px){.nav-links{display:none}.mob-tog{display:block}.head{padding:120px 0 24px}}
+.nav-links.open{display:flex!important;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,.98);backdrop-filter:blur(16px);padding:22px;gap:18px;border-bottom:1px solid var(--line)}
+
+/* ── ICONE (SVG lineari, colore ereditato dal contenitore) ── */
+svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
+.card-ic{--isz:25px}.dicon{--isz:20px}.bic{--isz:24px}.dl-ic{--isz:20px}
+.ben-ic{--isz:19px}.doc-ic{--isz:27px}.hic{--isz:28px}
+.ic-b,.di-b{color:var(--primary)}
+.ic-o,.di-o{color:var(--accent)}
+.ic-g,.di-g{color:var(--green)}
+.ic-v,.di-v{color:var(--violet)}
+.ic-inline{display:inline-block;vertical-align:-4px;margin-left:8px;--isz:18px}
+
+/* ── BANDA "IN SINTESI" — versione chiara ── */
+.band{background:var(--card);border:1px solid var(--line);border-radius:28px;
+  padding:56px 48px;color:var(--ink2);
+  box-shadow:0 1px 2px rgba(16,27,45,.04),0 20px 54px rgba(16,27,45,.09)}
+.band h2{color:var(--ink);font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:800;
+  letter-spacing:-.03em;margin-bottom:38px;text-align:center}
+.band-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+.band-item{text-align:center;padding:0 18px;position:relative}
+.band-item+.band-item::before{content:'';position:absolute;left:0;top:6px;bottom:6px;
+  width:1px;background:var(--line)}
+.band-item .bic{width:54px;height:54px;border-radius:16px;display:flex;
+  align-items:center;justify-content:center;margin:0 auto 14px;
+  background:var(--primary-soft);color:var(--primary)}
+.band-item:nth-child(1) .bic{background:var(--green-soft);color:var(--green)}
+.band-item:nth-child(2) .bic{background:var(--accent-soft);color:var(--accent)}
+.band-item:nth-child(3) .bic{background:var(--primary-soft);color:var(--primary)}
+.band-item:nth-child(4) .bic{background:var(--violet-soft);color:var(--violet)}
+.band-item:nth-child(5) .bic{background:var(--green-soft);color:var(--green)}
+.band-item h4{font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:6px}
+.band-item p{font-size:.85rem;color:var(--muted);line-height:1.55}
+@media(max-width:980px){.band-grid{grid-template-columns:repeat(2,1fr);gap:30px 0}
+  .band-item:nth-child(odd)::before{display:none}}
+@media(max-width:700px){.band-grid{grid-template-columns:1fr;gap:26px}
+  .band-item::before{display:none!important}.band{padding:38px 24px}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo"><span class="nav-badge"><img src="logo.png" alt="BusItinera"></span><div class="nav-logo-t">Bus<span>Itinera</span></div></a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="funzionalita.html">Funzionalità</a>
+      <a href="galleria.html">Galleria</a>
+      <a href="novita.html">Novità</a>
+      <a href="download.html">Download</a>
+      <a href="chi-sono.html">Chi sono</a>
+      <a href="index.html#contatti" class="nav-cta">Richiedi demo</a>
+    </div>
+    <button class="mob-tog" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section class="head">
+  <div class="wrap narrow">
+    <div class="eyebrow">Legale</div>
+    <h1 class="h1">Cookie policy</h1>
+    <p class="owner">Cookie e strumenti tecnici del sito busitinera.it</p>
+    <div class="legal-banner"><strong>Non trovi un banner dei cookie perché non serve.</strong> Questo sito non usa cookie di profilazione, non misura le visite e non ospita strumenti di terze parti che seguano chi naviga. Gli unici strumenti presenti sono tecnici: servono a far funzionare il sito e a proteggere il modulo dagli invii automatici, e per questi il consenso non è richiesto.</div>
+    <p style="font-size:.85rem;color:var(--muted);margin-top:10px">Ultimo aggiornamento: 18 ottobre 2026</p>
+  </div>
+</section>
+
+<section class="legal">
+  <div class="wrap narrow">
+
+    <h2>1. La regola, in breve</h2>
+    <p>Le <em>Linee guida cookie e altri strumenti di tracciamento</em> del Garante per la protezione dei dati personali distinguono due famiglie. I <strong>cookie tecnici</strong>, quelli senza i quali il sito non funziona o non può erogare un servizio che hai chiesto tu, si possono usare <strong>senza consenso</strong>: vanno però dichiarati, ed è ciò che fa questa pagina. I <strong>cookie di profilazione e gli altri strumenti di tracciamento</strong>, che servono a ricostruire comportamenti e preferenze, richiedono un consenso preventivo e libero — e su questo sito non ce ne sono.</p>
+
+    <h2>2. Che cosa usa davvero questo sito</h2>
+    <table style="width:100%;border-collapse:collapse;margin:14px 0;font-size:.9rem">
+      <thead><tr style="text-align:left;border-bottom:2px solid var(--line2)">
+        <th style="padding:9px 10px 9px 0">Strumento</th><th style="padding:9px 10px">A cosa serve</th><th style="padding:9px 0 9px 10px">Consenso</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line)">
+          <td style="padding:9px 10px 9px 0"><strong>Cloudflare Turnstile</strong><br><span style="color:var(--muted);font-size:.84rem">solo nella pagina con il modulo</span></td>
+          <td style="padding:9px 10px">Verifica che a compilare il modulo di richiesta demo sia una persona e non un programma automatico. Può salvare un identificativo tecnico temporaneo per la durata della verifica. Non ricostruisce la navigazione e non serve a riconoscerti su altri siti.</td>
+          <td style="padding:9px 0 9px 10px">Non richiesto<br><span style="color:var(--muted);font-size:.84rem">strumento tecnico di sicurezza</span></td></tr>
+        <tr style="border-bottom:1px solid var(--line)">
+          <td style="padding:9px 10px 9px 0"><strong>Service worker e notifiche</strong><br><span style="color:var(--muted);font-size:.84rem">solo se attivi la campanella</span></td>
+          <td style="padding:9px 10px">Permette al browser di ricevere l'avviso quando esce una versione nuova. Conserva nel browser l'indirizzo di recapito generato dal browser stesso.</td>
+          <td style="padding:9px 0 9px 10px">Sì<br><span style="color:var(--muted);font-size:.84rem">lo dai alla finestra del browser</span></td></tr>
+        <tr>
+          <td style="padding:9px 10px 9px 0"><strong>Log del server</strong></td>
+          <td style="padding:9px 10px">Registrazione tecnica delle connessioni, necessaria a servire le pagine e a difendere il sito dagli attacchi.</td>
+          <td style="padding:9px 0 9px 10px">Non richiesto<br><span style="color:var(--muted);font-size:.84rem">necessità tecnica</span></td></tr>
+      </tbody>
+    </table>
+
+    <h2>3. Che cosa questo sito non fa</h2>
+    <ul>
+      <li>Nessuno strumento di statistica o di analisi del traffico, né di prima né di terza parte.</li>
+      <li>Nessun cookie di profilazione, nessuna pubblicità, nessun <em>pixel</em> di piattaforme pubblicitarie o social.</li>
+      <li>Nessun pulsante social, nessuna mappa incorporata, nessun video ospitato altrove.</li>
+      <li><strong>Nessun carattere tipografico caricato da server esterni.</strong> Il font del sito è servito dal dominio di BusItinera: caricarlo da un fornitore esterno significherebbe comunicargli l'indirizzo IP di ogni visitatore a ogni pagina aperta, senza una base giuridica per farlo.</li>
+    </ul>
+
+    <h2>4. Come si cancellano</h2>
+    <p>Gli strumenti elencati sopra si governano dalle impostazioni del browser, che consente di vedere i dati memorizzati da un sito, cancellarli e bloccarne di nuovi. Le notifiche si disattivano dalla stessa campanella con cui le hai attivate, oppure dalle impostazioni del sito nel browser. Bloccare tutto non impedisce di leggere il sito; potrebbe però impedire l'invio del modulo di richiesta demo, perché la verifica anti-abuso non riuscirebbe a completarsi.</p>
+
+    <h2>5. Dove trovi il resto</h2>
+    <p>Chi tratta i dati, con quale base giuridica, per quanto tempo e quali diritti puoi esercitare è scritto nell'<a href="privacy.html">informativa privacy</a>.</p>
+
+    <div class="close">
+      <p><b>In una riga.</b> Niente banner perché non c'è niente da chiederti: qui non si traccia nessuno.</p>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 BusItinera Autotrasporti — Progetto di <strong>Andrea Ceol</strong> · <a href="mailto:busitinera@gmail.com">busitinera@gmail.com</a> · <a href="tel:+393274997730">+39 327 499 7730</a></p>
+    <p style="margin-top:8px;font-size:.8rem;color:var(--muted)">© 2024–2026 Ceol Andrea — Tutti i diritti riservati · <a href="copyright.html">Copyright e licenza d'uso</a> · <a href="privacy.html">Informativa privacy</a> · <a href="cookie.html">Cookie policy</a></p>
+  </div>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>20)});
+document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+</script>
+<script src="bus-notify.js" defer></script>
+</body>
+</html>
