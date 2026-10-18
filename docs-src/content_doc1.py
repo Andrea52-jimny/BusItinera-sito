@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """PDF 1 — Documentazione delle Funzionalità.
-Aggiornato alla v1.25.0 (portale autista: lista prossimi viaggi nel mese e scheda ingrandibile).
+Aggiornato alla v1.28.3 (numerazione interna, tappe nei preventivi, centro notifiche
+unificato, inviti agli appuntamenti, sola consultazione da telefono).
 """
 
 TOC = [
@@ -14,7 +15,7 @@ TOC = [
     ("s8",  "8. Acconto e saldo"),
     ("s9",  "9. Contabilità: flag di stato e congelamento"),
     ("s10", "10. Lista viaggi, filtri ed export CSV"),
-    ("s11", "11. Avvisi, scadenze e promemoria automatici"),
+    ("s11", "11. Centro notifiche, scadenze e promemoria"),
     ("s12", "12. Clienti"),
     ("s13", "13. Veicoli"),
     ("s14", "14. Utenti e permessi granulari"),
@@ -60,22 +61,34 @@ BODY = """
 <p>Un viaggio rappresenta un servizio di trasporto con partenza, arrivo, tappe intermedie, veicolo e autisti. Si apre da <b>Nuovo Viaggio</b> nella topbar (solo admin/editor) o cliccando un giorno vuoto sul calendario.</p>
 <ul>
 <li><b>Cliente:</b> ricerca in anagrafica con card riepilogativa; possibilità di creare un cliente "al volo" senza uscire dal form.</li>
-<li><b>Percorso:</b> luogo di partenza e arrivo con autocompletamento Google Maps e nomi personalizzati; tappe intermedie con rinumerazione automatica. Per ogni tappa si indicano l'<b>orario di arrivo</b> e l'<b>orario di ripartenza</b> <span class="badge">NUOVO</span>, che accompagnano il viaggio fino all'ordine di servizio e al portale autista. Sotto i campi di partenza e arrivo una <b>casella compila l'indirizzo della sede</b> <span class="badge">NUOVO</span> al posto dell'operatore.</li>
+<li><b>Percorso:</b> luogo di partenza e arrivo con autocompletamento Google Maps e nomi personalizzati; tappe intermedie con rinumerazione automatica. Per ogni tappa si indicano l'<b>orario di arrivo</b> e l'<b>orario di ripartenza</b>, che accompagnano il viaggio fino all'ordine di servizio e al portale autista. Sotto i campi di partenza e arrivo una <b>casella compila l'indirizzo della sede</b> al posto dell'operatore.</li>
 <li><b>Veicolo:</b> ricerca per targa o soprannome; badge OCCUPATO per i mezzi già impegnati; opzione veicolo esterno. Obbligatorio almeno un veicolo interno o un'azienda esterna.</li>
 <li><b>Autisti:</b> uno o più; blocco dell'assegnazione se già impegnati, con messaggio d'errore contenente il nome.</li>
 <li><b>Dati economici:</b> prezzo, CIG/ordine, metodo di pagamento, modalità (unico o acconto+saldo), costi extra con somma automatica, accompagnatore con recapito visibile all'autista.</li>
 <li><b>Note:</b> Nota di Viaggio condivisa con gli autisti; Note Private visibili solo ad admin/editor (mai esposte agli autisti, nemmeno via risposta API grezza).</li>
-<li><b>Codice evento</b> <span class="badge">NUOVO</span><b>:</b> campo facoltativo che lega fra loro i servizi di una stessa manifestazione (una gita con dieci navette, una trasferta sportiva). Serve a raggruppare i servizi in fase di fatturazione (par. 18.2) e viene riportato in testata sulla fattura cumulativa.</li>
+<li><b>Codice evento</b><b>:</b> campo facoltativo che lega fra loro i servizi di una stessa manifestazione (una gita con dieci navette, una trasferta sportiva). Serve a raggruppare i servizi in fase di fatturazione (par. 18.2) e viene riportato in testata sulla fattura cumulativa.</li>
 </ul>
+<h3>3.1 Numerazione interna <span class="badge">NUOVO</span></h3>
+<p>Ogni viaggio prende un numero <b>V#/anno</b> e ogni noleggio un <b>N#/anno</b>, progressivi con azzeramento a ogni anno come già fanno i preventivi. Serve un riferimento stabile e leggibile da citare al telefono o scrivere su un foglio, al posto dell'identificativo tecnico del record.</p>
+<ul>
+<li>Il numero compare <b>in alto a destra nella scheda</b> dell'elenco Viaggi e noleggi e nel <b>dettaglio, a sinistra della X</b>.</li>
+<li>Viene assegnato alla creazione e <b>non cambia più</b>, nemmeno spostando la data dell'evento in un altro anno, e non viene riusato. Lo storico già in archivio è stato numerato a ritroso, anno per anno e in ordine di inserimento.</li>
+<li>I servizi <b>nati da un preventivo</b> mostrano al suo posto il numero del preventivo, che è il riferimento conosciuto dal cliente; un numero interno ce l'hanno comunque, perché serve ai documenti. Cliccando quel numero si raggiunge il preventivo nel suo elenco, evidenziato.</li>
+</ul>
+
+<h3>3.2 Pianifica e bozze locali <span class="badge">NUOVO</span></h3>
+<p>I tre pulsanti di creazione (Nuovo Viaggio, Nuovo Noleggio, Nuovo Appuntamento) sono stati sostituiti da un solo pulsante <b>Pianifica</b> che apre una tendina con le tre voci, liberando spazio nella testata.</p>
+<p>Un form <b>non si chiude più cliccando fuori</b>: si chiude con Esc, con la X o con Annulla. Chiudendo con Esc o con la X quanto scritto viene conservato come <b>bozza locale</b>, che compare come chip nella barra in alto — visibile da qualunque schermata — e riapre il form precompilato con un clic; Annulla invece la scarta. Le bozze valgono per viaggio, noleggio, cliente e utente, restano <b>solo sul dispositivo</b> (cache del browser, per utente) e non raggiungono il server. La bozza dell'utente non contiene la password.</p>
+
 <p>Al salvataggio il sistema controlla automaticamente conflitti di veicolo e autisti. Dal dettaglio si modifica (anche inline le località, con l'icona matita), si <b>duplica</b> (il nuovo viaggio nasce con gli stessi dati, da riposizionare nel tempo) o si elimina, con pulizia dei collegamenti (autisti, tappe, servizi).</p>
 
 <h2 id="s4">4. Assegnazione autisti</h2>
 <p>Nella sezione Autisti del form si cerca per nome; gli autisti già impegnati mostrano il badge OCCUPATO e finiscono in fondo alla lista, quelli sospesi non appaiono. Selezione multipla con chip rimovibili.</p>
 
 <h2 id="s5">5. Noleggi</h2>
-<p>Il noleggio traccia la locazione di un veicolo aziendale (veicolo interno obbligatorio, nessuna opzione esterna), con numero contratto, date, <b>luogo di ritiro</b> <span class="badge">NUOVO</span> e luogo di riconsegna, controllo automatico di sovrapposizione. Entrambi i luoghi hanno la casella che compila l'indirizzo della sede. Dispone dello stesso <b>Codice evento</b> dei viaggi (cap. 3) e si può <b>duplicare</b> dal dettaglio. Da lì si stampa anche il contratto di locazione senza conducente, con la tabella degli utilizzatori autorizzati.</p>
+<p>Il noleggio traccia la locazione di un veicolo aziendale (veicolo interno obbligatorio, nessuna opzione esterna), con numero contratto, date, <b>luogo di ritiro</b> e luogo di riconsegna, controllo automatico di sovrapposizione. Entrambi i luoghi hanno la casella che compila l'indirizzo della sede. Dispone dello stesso <b>Codice evento</b> dei viaggi (cap. 3) e si può <b>duplicare</b> dal dettaglio. Da lì si stampa anche il contratto di locazione senza conducente, con la tabella degli utilizzatori autorizzati.</p>
 
-<h3>5.1 Utilizzatori: con o senza conducente <span class="badge">NUOVO</span></h3>
+<h3>5.1 Utilizzatori: con o senza conducente</h3>
 <p>Gli <b>utilizzatori</b> sono le persone autorizzate a guidare il mezzo durante il noleggio, e finiscono nel contratto con i dati della patente. La casella <b>Senza conducente</b> sceglie fra i due casi possibili.</p>
 <ul>
 <li><b>Con conducente</b> (casella non spuntata): guida l'azienda, e gli utilizzatori si scelgono fra gli <b>autisti in anagrafica</b>; i dati della patente arrivano dalla scheda dell'utente (cap. 14).</li>
@@ -83,11 +96,30 @@ BODY = """
 </ul>
 <p>Le due liste vengono conservate entrambe: cambiando idea sulla casella non si perde quanto già inserito, ed è la casella a decidere quale delle due compare nel contratto.</p>
 
-<h3>5.2 Carburante alla consegna <span class="badge">NUOVO</span></h3>
+<h3>5.2 Carburante alla consegna</h3>
 <p>Il livello di carburante presente alla consegna del mezzo si registra su un <b>quadrante in ottavi</b> (da riserva a pieno) che si trascina come quello di un cruscotto, e risponde anche alle frecce della tastiera. Serve a ricordare a che livello il mezzo deve tornare: il valore compare nel dettaglio del noleggio ed è riportato nella casella «Carburante — Ritiro» del contratto stampato. Il livello può restare <b>non rilevato</b>; i noleggi inseriti prima di questa versione risultano appunto senza il dato.</p>
 
+<h3>5.3 Carburante alla riconsegna e opzione «libero» <span class="badge">NUOVO</span></h3>
+<p>Accanto al quadrante del livello alla consegna ce n'è un secondo per il livello a cui il mezzo va <b>restituito</b>. Parte uguale a quello della consegna, che è il caso più comune, ma appena lo si tocca va per conto suo. Quando non c'è un obbligo preciso, la casella <b>Libero</b> lo dice in modo esplicito invece di lasciare il campo a indovinare. Entrambi i livelli compaiono nel dettaglio del noleggio e nella casella «Carburante» del contratto stampato, dove la voce di riconsegna prima restava sempre in bianco.</p>
+
+<h3>5.4 Numerazione e data del contratto <span class="badge">NUOVO</span></h3>
+<p>Il numero del contratto <b>non si inserisce più a mano</b>: ha una numerazione progressiva tutta sua, separata da quella del noleggio, assegnata al salvataggio. Nel form resta la sola <b>data di emissione</b>, preimpostata a oggi. Il contratto stampabile riporta le tre informazioni che servono a ritrovarlo: numero del contratto, riferimento del noleggio (il numero del preventivo quando il noleggio nasce da uno, altrimenti il suo N#/anno) e data di emissione. I contratti già emessi con un numero scritto a mano conservano quel riferimento.</p>
+
+<h3>5.5 Tappe del noleggio <span class="badge">NUOVO</span></h3>
+<p>Un noleggio può ora avere <b>tappe intermedie</b> come un viaggio. Serviva un posto dove tenerle, che prima non c'era: un preventivo di noleggio può prevedere un percorso, e alla conversione quel percorso deve restare invece di andare perso.</p>
+
 <h2 id="s6">6. Appuntamenti</h2>
-<p>Eventi generici (riunioni, manutenzioni, formazioni) non collegati a veicoli o autisti, visibili solo ad admin ed editor. Titolo obbligatorio, durata minima 15 minuti (default 60), icona campanella su sfondo giallo.</p>
+<p>Eventi generici (riunioni, manutenzioni, formazioni) non collegati a veicoli o autisti. Titolo obbligatorio, durata minima 15 minuti (default 60), icona campanella su sfondo giallo.</p>
+
+<h3>6.1 Invitati <span class="badge">NUOVO</span></h3>
+<p>Nel form un elenco a selezione multipla pesca dalla lista utenti le persone da invitare, e la casella <b>Invia a tutti</b> invita in un colpo tutti gli utenti attivi. Agli appuntamenti partecipano anche persone che non guidano, quindi l'elenco non è limitato agli autisti.</p>
+<ul>
+<li>Ogni invitato riceve una <b>notifica</b>, con lo stesso peso dell'assegnazione di un viaggio.</li>
+<li>L'invitato <b>vede l'appuntamento nel proprio calendario</b> anche se non ha accesso a quello completo dell'azienda: un autista trova i propri appuntamenti senza vedere gli altri.</li>
+<li>Se l'appuntamento viene <b>spostato o annullato</b>, gli invitati ricevono un secondo avviso, con un titolo che distingue i due casi.</li>
+<li>Gli invitati vedono la scheda in <b>sola lettura</b>; modificarla resta di chi gestisce il calendario e <b>solo da computer</b>.</li>
+</ul>
+<div class="note"><b>«Invia a tutti» è una fotografia del momento.</b> Al salvataggio l'elenco degli utenti attivi viene registrato riga per riga, così un utente creato in seguito non si trova invitato a un appuntamento già passato. L'account <b>admin</b>, che è quello di installazione del gestionale e non una persona dell'azienda, resta fuori sia dall'elenco sia da «Invia a tutti».</div>
 
 <h2 id="s7">7. Preventivi</h2>
 <p>La sezione Preventivi formula offerte per viaggi e noleggi, ne segue lo stato e le trasforma in eventi reali. Un preventivo può contenere più blocchi indipendenti con ricalcolo del totale generale.</p>
@@ -98,7 +130,11 @@ BODY = """
 <li><b>Revisioni:</b> su un preventivo inviato si crea una nuova revisione; lo storico è mantenuto, la versione precedente passa a "Sostituito".</li>
 <li><b>Eliminazione:</b> consentita solo su bozze mai inviate e solo all'amministratore.</li>
 </ul>
-<h3>7.2 Stampa e documento archiviato</h3>
+<h3>7.2 Tappe nel preventivo <span class="badge">NUOVO</span></h3>
+<p>Ogni blocco del preventivo ha il proprio elenco di <b>tappe intermedie</b>, con lo stesso componente della creazione diretta del viaggio: nome della tappa, indirizzo con autocompletamento, orario di arrivo e ora di ripartenza. Il percorso preventivato è così completo già in fase di offerta e, alla <b>conversione</b>, le tappe si travasano nel viaggio o nel noleggio invece di andare perse e di essere reinserite a mano. Nei preventivi di <b>noleggio</b> l'ora di ripartenza non compare: il mezzo resta al cliente per tutto il periodo, quindi non è un dato del servizio.</p>
+<p>L'elenco dei preventivi è diviso in due <b>schede, Viaggi e Noleggi</b>, in cima alla lista: la distinzione c'era già ma era affidata a due pillole in fondo alla barra degli strumenti e passava inosservata.</p>
+
+<h3>7.3 Stampa e documento archiviato</h3>
 <p>PDF Preventivo (senza banche/scadenze) e PDF Conferma (con scadenze e IBAN predefinito, dopo la conversione). All'invio viene archiviata la copia esatta del documento: resta identica anche se in futuro cambiano listino o dati aziendali.</p>
 
 <h2 id="s8">8. Acconto e saldo</h2>
@@ -110,15 +146,27 @@ BODY = """
 <p><b>Modifiche simultanee:</b> se due persone salvano quasi insieme lo stesso viaggio/cliente/preventivo, il secondo salvataggio viene fermato con un avviso (nessuna sovrascrittura silenziosa).</p>
 
 <h2 id="s10">10. Lista viaggi, filtri ed export CSV</h2>
-<p>Filtri combinabili (ricerca testuale, mese, intervallo date, autista, veicolo) e pulsante Reset. L'<b>Esporta CSV</b> apre una modale con 8 gruppi di colonne selezionabili; il file usa separatore <b>;</b>, codifica UTF-8 e rispetta i filtri attivi. Le celle sono neutralizzate contro l'esecuzione come formula nei fogli di calcolo.</p>
+<p>Filtri combinabili (ricerca testuale, mese, intervallo date, autista, veicolo, stato) e pulsante Reset. Il selettore di <b>stato</b> <span class="badge">NUOVO</span> sceglie fra <b>Solo aperti</b>, <b>Solo chiusi</b> e <b>Aperti e chiusi</b>: parte su «Solo aperti», che è come si lavora quasi sempre, ma i viaggi chiusi — prima irraggiungibili da questa schermata — ora lo sono, con sfondo grigio e lucchetto. La lista è ordinata per <b>data di partenza, dalla più recente</b>. L'<b>Esporta CSV</b> apre una modale con 8 gruppi di colonne selezionabili; il file usa separatore <b>;</b>, codifica UTF-8 e rispetta i filtri attivi. Le celle sono neutralizzate contro l'esecuzione come formula nei fogli di calcolo.</p>
 
-<h2 id="s11">11. Avvisi, scadenze e promemoria automatici</h2>
-<p>Il gestionale sorveglia le scadenze aziendali in due modi complementari: la <b>campanella Avvisi</b>, che si consulta quando si vuole, e i <b>promemoria automatici</b>, che arrivano da soli senza che nessuno debba ricordarsi di guardare.</p>
+<h2 id="s11">11. Centro notifiche, scadenze e promemoria automatici</h2>
+<p>Il gestionale sorveglia le scadenze aziendali in due modi complementari: il <b>centro notifiche</b>, che si consulta quando si vuole, e i <b>promemoria automatici</b>, che arrivano da soli senza che nessuno debba ricordarsi di guardare.</p>
 
-<h3>11.1 La campanella Avvisi</h3>
-<p>Raccoglie le scadenze aziendali in 4 categorie (Pagamenti, Bollo, Assicurazione, Azienda), con preavviso di 15 giorni. Le scadenze di bollo, assicurazione e licenza sono calcolate dai dati di veicoli e azienda (il Bollo l'ultimo giorno del mese successivo, regola italiana). "Segna come pagato" fa avanzare la data (Bollo +1 anno, Licenza +4 anni, Assicurazione secondo formula) e aggiorna la scheda del mezzo. I mezzi fuori servizio non generano scadenze; l'autista vede solo quelle del proprio mezzo. Per i <b>Pagamenti</b> ogni avviso ha il pulsante <b>Incassato</b> <span class="badge">NUOVO</span>: segna pagato l'acconto, il saldo o il pagamento unico e lo toglie subito dagli avvisi, <b>senza aprire né riaprire</b> il viaggio o il noleggio (i soli flag di pagamento restano modificabili anche sui documenti già chiusi e fatturati).</p>
+<h3>11.1 Il centro notifiche unificato <span class="badge">NUOVO</span></h3>
+<p>Fino alla versione 1.27 c'erano <b>due campanelle affiancate</b>: gli <i>Avvisi</i> (scadenze, ricalcolate a ogni apertura) e le <i>Notifiche</i> personali (righe salvate, con letto e non letto). Due elenchi separati e due numeri da interpretare per cose che chiedono entrambe attenzione. Ora è <b>una sola campanella</b> e un solo elenco, ordinato per urgenza: prima ciò che è scaduto, poi ciò che scade oggi, poi le notifiche non lette, infine il resto.</p>
+<ul>
+<li><b>Filtri per categoria</b> — scadenze mezzi, scadenze autisti, pagamenti, operativo, azienda, sistema — ciascuno col proprio conteggio; le categorie vuote non compaiono. Un interruttore passa dalla lista unica alla vista <b>a sezioni</b>.</li>
+<li><b>Le due nature restano distinte nel comportamento</b>, perché sono diverse per davvero: le notifiche si <b>segnano lette</b>, le scadenze no — sono condizioni che restano finché non le si risolve, quindi si <b>rimandano</b> con «Rimanda» e tornano a galla dopo una settimana. Un collegamento in fondo al pannello ripristina tutti gli avvisi rimandati.</li>
+<li><b>Toccando una voce si va dove si risolve:</b> il viaggio o il noleggio si apre nel dettaglio, una scadenza del mezzo porta all'anagrafica mezzi, una patente a quella delle persone.</li>
+<li><b>Il numero sulla campanella</b> conta le notifiche non lette più gli avvisi in attesa.</li>
+<li><b>Gli avvisi restano riservati a chi gestisce:</b> un autista, o un utente di sola consultazione, nel proprio elenco trova le proprie notifiche e non i pagamenti dei clienti né le scadenze dell'intera flotta.</li>
+</ul>
+<p>Le scadenze aziendali sono raccolte con preavviso di 15 giorni. Le scadenze di bollo, assicurazione e licenza sono calcolate dai dati di veicoli e azienda (il Bollo l'ultimo giorno del mese successivo, regola italiana). "Segna come pagato" fa avanzare la data (Bollo +1 anno, Licenza +4 anni, Assicurazione secondo formula) e aggiorna la scheda del mezzo. I mezzi fuori servizio non generano scadenze; l'autista vede solo quelle del proprio mezzo. Per i <b>Pagamenti</b> ogni avviso ha il pulsante <b>Incassato</b>: segna pagato l'acconto, il saldo o il pagamento unico e lo toglie subito dall'elenco, <b>senza aprire né riaprire</b> il viaggio o il noleggio (i soli flag di pagamento restano modificabili anche sui documenti già chiusi e fatturati). Dal telefono il pulsante non compare, perché lì gli eventi del calendario sono di sola consultazione (par. 19.4).</p>
 
-<h3>11.2 Promemoria automatici <span class="badge">NUOVO</span></h3>
+<h3>11.2 Avviso sui documenti scaduti durante il viaggio <span class="badge">NUOVO</span></h3>
+<p>Il triangolo di avviso sulle schede guardava finora soltanto lo stato di adesso: mezzo fuori servizio o autista non più in servizio. Ora guarda anche le <b>date</b>: se nel periodo del viaggio o del noleggio risultano scadute la <b>patente</b> o la <b>CQC</b> di un autista assegnato, oppure una qualsiasi delle scadenze tracciate del mezzo (bollo, assicurazione, revisione, tagliando, cronotachigrafo, gomme), la scheda porta il triangolo e il dettaglio dice <b>quali</b> documenti sono, con targa e nome.</p>
+<p>Vale per tutti i viaggi, non solo per quelli passati: un viaggio già pianificato con una scadenza che cade a metà percorso viene segnalato in anticipo, quando c'è ancora tempo per rimediare. L'avviso compare anche nel centro notifiche, fra le voci operative.</p>
+
+<h3>11.3 Promemoria automatici</h3>
 <p>L'applicazione esegue da sola un <b>giro di controllo giornaliero</b>, a un orario configurabile (di norma le 18:00), e invia i promemoria a chi di competenza. Non richiede alcun servizio esterno: gira dentro l'installazione, sul server dell'azienda o nel cloud.</p>
 <ul>
 <li><b>"Viaggio di domani" agli autisti.</b> La sera prima, ogni autista riceve l'elenco dei viaggi che lo riguardano il giorno seguente, con orario e tratta.</li>
@@ -158,7 +206,7 @@ BODY = """
 <h2 id="s16">16. Password, 2FA e accesso con impronta</h2>
 <p>Ogni utente può cambiare la propria password (min. 8 caratteri, attiva immediatamente). Il <b>2FA</b> (per Amministratore e Operatore) aggiunge un codice TOTP a 6 cifre generato da app come Google Authenticator: attivazione con QR o secret manuale, 8 codici di recupero monouso, opzione "Ricordami" per 15 giorni sullo stesso browser. Cambiando password i dispositivi fidati vengono invalidati. Ogni attivazione/disattivazione del 2FA è registrata nel Registro attività; i login e i codici inseriti non vengono tracciati.</p>
 
-<h3>16.1 Accesso con impronta o Face ID (passkey) <span class="badge">NUOVO</span></h3>
+<h3>16.1 Accesso con impronta o Face ID (passkey)</h3>
 <p>In alternativa a password e codice, si può entrare con l'<b>impronta digitale</b>, il <b>riconoscimento del volto</b> o il <b>codice di sblocco</b> del proprio dispositivo. È lo stesso gesto con cui si sblocca il telefono; la funzione è disponibile a tutti i ruoli, autisti compresi.</p>
 <ul>
 <li><b>Come si attiva:</b> una volta sola per dispositivo, da dentro l'applicazione (quindi già connessi, senza reinserire le credenziali). Dal pannello "Accesso con impronta" — raggiungibile dal menu del proprio nome nel gestionale, e dall'icona in alto nel portale autista e nella home mobile — si tocca "Registra questo dispositivo".</li>
@@ -180,7 +228,7 @@ BODY = """
 </table>
 <p>Per la Pubblica Amministrazione il formato passa a <b>FPA12</b> con Codice Univoco Ufficio, split payment, CIG e CUP; senza CIG e Codice Ufficio il viaggio non si chiude. Il testo digitato viene ripulito dai caratteri non ammessi dal tracciato (es. la freccia → e il trattino lungo — diventano un trattino semplice).</p>
 
-<h3>18.1 Ciclo di vita: bozza, poi invio allo SdI <span class="badge">NUOVO</span></h3>
+<h3>18.1 Ciclo di vita: bozza, poi invio allo SdI</h3>
 <p>Ogni documento — fattura o nota di credito — nasce come <b>bozza</b>, sullo stesso modello dei preventivi. Finché è una bozza <b>non ha né numero né file XML</b>: si rilegge, si modifica e all'occorrenza si elimina. Un unico pulsante <b>«Inviato allo SdI»</b> assegna il numero progressivo annuale, genera l'XML e <b>blocca</b> il documento.</p>
 <ul>
 <li>Il numero arriva solo all'invio: eliminare una bozza <b>non lascia buchi</b> nella numerazione.</li>
@@ -190,7 +238,7 @@ BODY = """
 </ul>
 <div class="note"><b>La nota di credito segue le stesse regole.</b> Anche la NC nasce come bozza: gli effetti dello storno — annullamento della fattura di origine e liberazione dei viaggi collegati — scattano all'invio, non alla creazione. Una bozza di nota di credito non storna ancora nulla.</div>
 
-<h3>18.2 La vista «Da fatturare» <span class="badge">NUOVO</span></h3>
+<h3>18.2 La vista «Da fatturare»</h3>
 <p>Una sotto-scheda della sezione Fatture elenca tutti i servizi <b>chiusi e non ancora fatturati</b>, raggruppati per cliente con subtotali e totale generale. Per ogni riga: numero del servizio, descrizione, periodo, automezzo, imponibile, altre voci, IVA, totale, <b>acconto già emesso</b> e <b>importo ancora da fatturare</b>.</p>
 <ul>
 <li>Filtri per <b>cliente</b>, <b>periodo</b> e <b>codice evento</b>, più <b>Stampa elenco</b>.</li>
@@ -199,7 +247,7 @@ BODY = """
 </ul>
 <p>Selezionando i servizi si creano le bozze in blocco, in due modi: <b>una fattura per servizio</b>, oppure una <b>fattura cumulativa</b> che raccoglie i servizi con stesso cliente e stesso codice evento. La cumulativa è una normale fattura multi-riga — quindi <b>un solo XML</b> — con una riga per ciascun servizio.</p>
 
-<h3>18.3 Frazionamento su più soggetti <span class="badge">NUOVO</span></h3>
+<h3>18.3 Frazionamento su più soggetti</h3>
 <p>Quando un servizio viene pagato da più soggetti — la scuola e il comitato genitori, il committente e l'ente — il pulsante <b>Fraziona</b> divide una bozza in più fatture intestate a clienti diversi, scelti dall'anagrafica.</p>
 <ul>
 <li>Le quote si indicano <b>per importo in euro</b>, con verifica in tempo reale che la somma coincida col totale della bozza.</li>
@@ -209,7 +257,7 @@ BODY = """
 </ul>
 
 <h3>18.4 Altre funzioni della sezione Fatture</h3>
-<p><b>Editor con anteprima modificabile</b> prima del salvataggio: descrizioni, quantità, prezzi, aliquote, causale, data e modalità di pagamento, con totali e bollo ricalcolati in tempo reale; sono ritoccabili anche l'<b>importo dell'IVA</b> e il <b>totale documento</b> per gli arrotondamenti. <b>Fattura dal dettaglio del viaggio</b>, costruita sui dati attuali del viaggio. <b>Acconto e saldo</b> separati: il viaggio risulta fatturato solo dopo il saldo. <b>Nota di credito TD04</b> collegata alla fattura di origine, con storno totale (che libera i viaggi) o parziale. <b>Numerazione progressiva annuale</b>, serie unica con le note di credito. <b>Stampa PDF della fattura</b> <span class="badge">NUOVO</span>: una rappresentazione visuale del documento (cedente, cessionario, righe con CIG/CUP, riepilogo IVA per aliquota, <b>Totale fattura</b> e <b>Totale da pagare</b> distinti — con lo scorporo dell'IVA quando c'è lo split payment della PA — pagamento e note di regime), da salvare o stampare dalla finestra del browser; disponibile sia sulle fatture inviate sia sulle bozze (marcate come tali). <b>Download ZIP degli XML</b> <span class="badge">NUOVO</span>: un unico archivio con gli XML delle fatture inviate, scegliendo da una finestra i <b>mesi</b> da consegnare al commercialista — anche non consecutivi — con le scorciatoie «Tutto l'anno», «Solo mesi conclusi» e «Deseleziona»; i mesi futuri dell'anno in corso sono disattivati e il mese in corso è selezionabile, perché gli XML sono di fatture già emesse e quindi definitivi anche a mese non concluso.</p>
+<p><b>Editor con anteprima modificabile</b> prima del salvataggio: descrizioni, quantità, prezzi, aliquote, causale, data e modalità di pagamento, con totali e bollo ricalcolati in tempo reale; sono ritoccabili anche l'<b>importo dell'IVA</b> e il <b>totale documento</b> per gli arrotondamenti. <b>Fattura dal dettaglio del viaggio</b>, costruita sui dati attuali del viaggio. <b>Acconto e saldo</b> separati: il viaggio risulta fatturato solo dopo il saldo. <b>Nota di credito TD04</b> collegata alla fattura di origine, con storno totale (che libera i viaggi) o parziale. <b>Numerazione progressiva annuale</b>, serie unica con le note di credito. <b>Stampa PDF della fattura</b>: una rappresentazione visuale del documento (cedente, cessionario, righe con CIG/CUP, riepilogo IVA per aliquota, <b>Totale fattura</b> e <b>Totale da pagare</b> distinti — con lo scorporo dell'IVA quando c'è lo split payment della PA — pagamento e note di regime), da salvare o stampare dalla finestra del browser; disponibile sia sulle fatture inviate sia sulle bozze (marcate come tali). <b>Download ZIP degli XML</b>: un unico archivio con gli XML delle fatture inviate, scegliendo da una finestra i <b>mesi</b> da consegnare al commercialista — anche non consecutivi — con le scorciatoie «Tutto l'anno», «Solo mesi conclusi» e «Deseleziona»; i mesi futuri dell'anno in corso sono disattivati e il mese in corso è selezionabile, perché gli XML sono di fatture già emesse e quindi definitivi anche a mese non concluso.</p>
 <div class="tip"><b>Conformità verificata:</b> in sede di collaudo gli XML generati sono stati validati con successo contro lo schema ufficiale FatturaPA v1.2 (fattura ordinaria privata con IVA, fattura PA con split payment e CIG/CUP, nota di credito TD04).</div>
 
 <h2 id="s19">19. Portale Autista, Mobile e notifiche</h2>
@@ -218,15 +266,15 @@ BODY = """
 <h3>19.1 Portale Autista</h3>
 <p>Interfaccia dedicata che mostra solo i viaggi assegnati all'autista. Si naviga fra le viste <b>Giorno</b>, <b>Settimana</b> e <b>Mese</b> con i tab in fondo alla pagina.</p>
 <ul>
-<li><b>Card "In corso" e "In partenza" (vista Giorno):</b> timeline con link di navigazione GPS e countdown che si aggiorna da solo; da qui si inseriscono i km, si apre l'ordine di servizio e si segna il viaggio come completato. <b>Compare solo nella vista Giorno</b> <span class="badge">NUOVO</span>: nelle viste Settimana e Mese &egrave; nascosta per lasciare spazio al calendario.</li>
-<li><b>&laquo;I tuoi prossimi viaggi&raquo; nella vista Mese</b> <span class="badge">NUOVO</span>: sotto il calendario a pallini, l'elenco scorrevole dei propri viaggi del mese dal pi&ugrave; vicino &mdash; data, ora, tratta e mezzo. Il calendario fa da navigatore e, toccando una voce della lista, si apre direttamente quel giorno. Nel mese in corso la lista mostra solo i viaggi da oggi in avanti.</li>
-<li><b>Ingrandimento della scheda</b> <span class="badge">NUOVO</span>: toccando una scheda di viaggio &mdash; la card "In corso" o una qualsiasi scheda delle viste &mdash; questa si apre a schermo intero con gli stessi dati ingranditi, comoda da leggere su telefoni piccoli. &Egrave; una vista di sola lettura, che si chiude con la X.</li>
+<li><b>Card "In corso" e "In partenza" (vista Giorno):</b> timeline con link di navigazione GPS e countdown che si aggiorna da solo; da qui si inseriscono i km, si apre l'ordine di servizio e si segna il viaggio come completato. <b>Compare solo nella vista Giorno</b>: nelle viste Settimana e Mese &egrave; nascosta per lasciare spazio al calendario.</li>
+<li><b>&laquo;I tuoi prossimi viaggi&raquo; nella vista Mese</b>: sotto il calendario a pallini, l'elenco scorrevole dei propri viaggi del mese dal pi&ugrave; vicino &mdash; data, ora, tratta e mezzo. Il calendario fa da navigatore e, toccando una voce della lista, si apre direttamente quel giorno. Nel mese in corso la lista mostra solo i viaggi da oggi in avanti.</li>
+<li><b>Ingrandimento della scheda</b>: toccando una scheda di viaggio &mdash; la card "In corso" o una qualsiasi scheda delle viste &mdash; questa si apre a schermo intero con gli stessi dati ingranditi, comoda da leggere su telefoni piccoli. &Egrave; una vista di sola lettura, che si chiude con la X.</li>
 <li><b>Km di partenza e ritorno:</b> inseriti dall'autista e salvati nel viaggio; bloccati dopo la chiusura.</li>
 <li><b>Ordine di servizio</b> stampabile dal telefono; accompagnatore con chiamata diretta al referente a bordo.</li>
 </ul>
 <div class="new"><b>Viaggio completato.</b> L'autista abilitato (interruttore "Può marcare i viaggi come completati") trova nel portale una sezione "Da completare" con il pulsante <b>Viaggio completato</b> per i propri viaggi. Il pulsante è attivabile solo dopo la data e ora di rientro previste del viaggio; la regola è applicata anche lato server (un tentativo anticipato viene rifiutato). Ogni segnalazione è tracciata nel Registro attività. Il controllo è limitato ai soli viaggi effettivamente assegnati all'autista.</div>
 
-<h3>19.1.1 Calendario completo per chi gestisce ed è anche autista <span class="badge">NUOVO</span></h3>
+<h3>19.1.1 Calendario completo per chi gestisce ed è anche autista</h3>
 <p>Un amministratore o un operatore che è anche autista entra, dal telefono, nel portale dei propri viaggi. Da questa versione il <b>calendario</b> del portale — viste giorno, settimana e mese — mostra <b>tutti i viaggi dell'azienda</b> e non più soltanto i propri, così da avere il quadro completo senza passare al computer.</p>
 <ul>
 <li><b>I viaggi propri restano riconoscibili:</b> nelle viste giorno e settimana la scheda dei propri viaggi porta in basso a destra l'indicazione <b>Personale</b>.</li>
@@ -235,7 +283,7 @@ BODY = """
 </ul>
 <p>Per gli <b>autisti semplici</b> non cambia nulla: continuano a vedere soltanto i viaggi a loro assegnati, e il badge «Personale» non compare. Restano nascosti, come prima, prezzi, dati di pagamento e note private.</p>
 
-<h3>19.2 Home mobile per amministratori e operatori <span class="badge">NUOVO</span></h3>
+<h3>19.2 Home mobile per amministratori e operatori</h3>
 <p>Aprendo l'applicazione dal telefono, chi gestisce l'azienda trova una schermata pensata per lo schermo piccolo, invece del gestionale desktop rimpicciolito. È una vista di <b>sola lettura</b>, per capire in pochi secondi come sta andando la giornata:</p>
 <ul>
 <li><b>Oggi e Domani:</b> i viaggi con orario, tratta, autisti e mezzo. Un segnale di avvertimento evidenzia gli impegni con un autista sospeso o un mezzo fuori servizio.</li>
@@ -253,13 +301,19 @@ BODY = """
 </ul>
 <p>Con le <b>notifiche push</b> attivate l'avviso arriva anche ad app chiusa. L'app è <b>installabile sulla schermata Home</b> (PWA): su Android l'installazione è diretta, su iPhone/iPad un breve tutorial guida "Condividi → Aggiungi a Home" (su iOS le push funzionano dopo l'aggiunta alla Home).</p>
 
+<h3>19.4 Dal telefono si consulta, non si modifica <span class="badge">NUOVO</span></h3>
+<p>Viaggi, noleggi e appuntamenti <b>non si modificano dal telefono</b>, e questo vale per <b>tutti i ruoli, amministratore compreso</b>: niente creazione, modifica, eliminazione, chiusura o riapertura, e niente interruttori contabili. Lo schermo è stretto, si usa spesso con una mano sola e in movimento: spostare un viaggio o chiuderlo con un tocco involontario è un danno vero e difficile da notare.</p>
+<p>Il blocco è applicato <b>sul server</b> e non soltanto nell'interfaccia: nascondere un pulsante non impedisce la chiamata. Restano possibili le azioni che l'autista compie mentre il viaggio è in corso — <b>chilometri</b> e <b>«Viaggio completato»</b> — che non cambiano ciò che il viaggio è, ma ne registrano l'esecuzione.</p>
+<p>Toccando un viaggio — da una notifica, dalla home mobile o da una scheda del calendario — si apre la <b>scheda ingrandita a tutto schermo</b>, in sola lettura: percorso, orari, tappe, mezzo, autisti, note, con gli indirizzi che restano toccabili per la navigazione e il riquadro di avviso sui documenti scaduti nel periodo. Si chiude con la X o toccando lo sfondo. Lo stesso vale per noleggi e appuntamenti. Nella schermata <b>Azienda</b> del portale tutte le voci si toccano: viaggi e pagamenti aprono la scheda del servizio, le scadenze si aprono ingrandite con di chi sono, per quando e dove si rinnovano.</p>
+<p>Dal telefono la risposta del server è inoltre <b>ridotta</b> per chiunque: prezzi, dati di pagamento, flag contabili e note private non vengono inviati, perché la scheda ingrandita non li mostra e non servono in mobilità.</p>
+
 <h2 id="s20">20. Moduli stampabili</h2>
 <p><b>Ordine di Servizio</b> (viaggi) con i dati presenti e le righe da compilare a mano; le voci mancanti mostrano "da compilare". Il programma del servizio riporta partenza, tappe — con l'orario di arrivo e quello di ripartenza — e rientro. <b>Contratto di locazione</b> (noleggi) con anagrafica cliente, dati del veicolo, tabella degli utilizzatori e dati patente, livello di carburante al ritiro e condizioni generali personalizzabili. Nel noleggio <b>senza conducente</b> la tabella degli utilizzatori riporta i dati anagrafici completi delle persone autorizzate (nascita, residenza, codice fiscale, patente con le sue date, telefono) invece dei soli autisti aziendali.</p>
 
 <h2 id="s21">21. Solidità e controlli</h2>
 <p>L'applicazione include protezioni pensate per il lavoro condiviso: congelamento dei documenti contabili, rilevamento delle modifiche simultanee, controllo formale di P.IVA/CF, unione clienti tracciata e irreversibile, registro attività immutabile. Gli accessi sono protetti da ruoli e permessi granulari, autenticazione a due fattori e sessioni irrobustite.</p>
 
-<h3>21.1 Irrobustimenti delle versioni 1.15 e 1.16 <span class="badge">NUOVO</span></h3>
+<h3>21.1 Irrobustimenti delle versioni 1.15 e 1.16</h3>
 <ul>
 <li><b>Cambio password, sessioni chiuse ovunque.</b> Cambiando la propria password, le altre sessioni ancora aperte di quell'utente vengono terminate — il computer di casa, il telefono lasciato in ufficio. Resta attiva solo quella da cui si è fatto il cambio.</li>
 <li><b>Freno ai tentativi ripetuti anche per rete di provenienza.</b> Al blocco per nome utente si affianca un limite per indirizzo di rete: una raffica di tentativi distribuita su molti nomi utente diversi viene fermata ugualmente. Vale anche per l'accesso con impronta.</li>

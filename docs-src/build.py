@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Genera i due PDF pubblici di BusItinera (cartella ../docs/).
+"""Genera i PDF pubblici di BusItinera (cartella ../docs/).
 
     cd docs-src && python3 build.py
 
@@ -8,6 +8,7 @@ Dipendenze:  pip install --break-system-packages weasyprint
 Font:        fonts/DMSans-{Regular,Medium,Bold}.ttf (già nel repo)
 Output:      ../public/docs/BusItinera_Documentazione_Funzionalita.pdf
              ../public/docs/BusItinera_Attestato_Funzionale_e_Sicurezza.pdf
+             ../public/docs/BusItinera_Accordo_Responsabile_Trattamento.pdf
 
 I contenuti stanno in content_doc1.py / content_doc2.py; la presentazione in
 common.css. Per aggiornare un documento si modifica il testo nel file dei
@@ -22,6 +23,7 @@ from weasyprint import HTML
 
 import content_doc1
 import content_doc2
+import content_doc3
 from legal import COPYRIGHT
 
 HERE = Path(__file__).resolve().parent
@@ -31,8 +33,8 @@ OUT = HERE.parent / "public" / "docs"
 # VERSIONE: la release del gestionale che i contenuti descrivono.
 # La data dell'attestato NON si tocca qui: vive in content_doc2.DATA_COLLAUDO,
 # perché è la data di una verifica realmente svolta.
-VERSIONE_DOC = "1.25.0"
-DATA_DOC = "14 ottobre 2026"
+VERSIONE_DOC = "1.28.3"
+DATA_DOC = "18 ottobre 2026"
 
 PRODOTTO = ("BusItinera — Gestionale viaggi, noleggi e fatturazione "
             "per aziende di trasporto con autista")
@@ -106,6 +108,19 @@ def main():
               "Attestato di Collaudo",
               content_doc2.DATA_COLLAUDO, content_doc2.VERSIONE_COLLAUDATA)
         + toc(content_doc2.TOC) + content_doc2.BODY,
+    )
+
+    print("Accordo art. 28 GDPR…")
+    build(
+        OUT / "BusItinera_Accordo_Responsabile_Trattamento.pdf",
+        "BusItinera — Accordo di nomina a Responsabile del trattamento",
+        cover("Privacy",
+              "Accordo di nomina a Responsabile del trattamento",
+              "Art. 28 del Regolamento (UE) 2016/679. Disciplina il trattamento dei "
+              "dati personali che il fornitore svolge per conto dell'azienda cliente.",
+              "Accordo art. 28 GDPR — versione " + content_doc3.VERSIONE_ACCORDO,
+              content_doc3.DATA_ACCORDO)
+        + toc(content_doc3.TOC) + content_doc3.BODY,
     )
 
     print("Fatto.")

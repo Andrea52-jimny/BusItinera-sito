@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Download — BusItinera</title>
 <link rel="icon" type="image/png" href="logo.png">
-<meta name="description" content="Scarica la documentazione completa delle funzionalità di BusItinera e l'attestato di collaudo funzionale e di sicurezza, in PDF.">
+<meta name="description" content="Scarica la documentazione completa delle funzionalità di BusItinera, l'attestato di collaudo funzionale e di sicurezza, in PDF.">
 <link rel="stylesheet" href="fonts.css">
 <link rel="manifest" href="manifest.json">
 <style>
@@ -52,6 +52,7 @@ nav.scrolled{box-shadow:0 4px 24px rgba(16,27,45,.06)}
 .sec{padding:20px 0 80px}
 /* doc cards */
 .docs{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:8px}
+.doc.wide{grid-column:1/-1}
 .doc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:32px 28px;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s,border-color .3s}
 .doc:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:var(--line2)}
 .doc-ic{width:56px;height:56px;border-radius:15px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:1.6rem}
@@ -137,7 +138,7 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
   <div class="wrap center">
     <div class="eyebrow">Download</div>
     <h1 class="h1">Documentazione e attestati</h1>
-    <p class="sub">Scarica la documentazione completa delle funzionalità di BusItinera e l'attestato di collaudo — funzionale e di sicurezza — in formato PDF.</p>
+    <p class="sub">Scarica la documentazione completa delle funzionalità di BusItinera, l'attestato di collaudo — funzionale e di sicurezza — in formato PDF.</p>
   </div>
 </section>
 
@@ -149,8 +150,8 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
       <article class="doc">
         <div class="doc-ic ic-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 4.4A2.4 2.4 0 0 1 7 2h12.4v15.6H7a2.4 2.4 0 0 0-2.4 2.4z"/><path d="M4.6 19.6A2.4 2.4 0 0 1 7 17.2h12.4V22H7a2.4 2.4 0 0 1-2.4-2.4z"/></svg></div>
         <h3>Documentazione delle Funzionalità</h3>
-        <p>Guida completa a tutte le funzioni del gestionale: calendario e pianificazione, viaggi con tappe e orari di ripartenza, noleggi — con conducente o senza, persone autorizzate alla guida, carburante alla consegna, luoghi di ritiro e riconsegna — preventivi, contabilità e congelamento, fatturazione elettronica FatturaPA — ciclo bozza / invio allo SdI, vista “Da fatturare”, fatture cumulative per evento e frazionamento su più soggetti, archivio ZIP degli XML con i mesi a scelta e stampa PDF del documento — scadenze e promemoria automatici, utenti e permessi granulari, portale autista e app dal telefono.</p>
-        <div class="doc-meta"><span class="tag pdf">PDF</span><span class="tag">15 pagine</span><span class="tag">Versione 1.25.0</span><span class="tag">Aggiornato 10/2026</span></div>
+        <p>Guida completa a tutte le funzioni del gestionale: calendario e pianificazione, viaggi con tappe e orari di ripartenza, noleggi — con conducente o senza, persone autorizzate alla guida, carburante alla consegna, luoghi di ritiro e riconsegna — preventivi, contabilità e congelamento, fatturazione elettronica FatturaPA — ciclo bozza / invio allo SdI, vista “Da fatturare”, fatture cumulative per evento e frazionamento su più soggetti, archivio ZIP degli XML con i mesi a scelta e stampa PDF del documento — numerazione interna di viaggi, noleggi e contratti, tappe gi&agrave; nel preventivo, centro notifiche unificato con scadenze e messaggi personali in un solo elenco, inviti agli appuntamenti, utenti e permessi granulari, portale autista e app dal telefono &mdash; dove gli eventi del calendario sono in sola consultazione per ogni ruolo.</p>
+        <div class="doc-meta"><span class="tag pdf">PDF</span><span class="tag">18 pagine</span><span class="tag">Versione 1.28.3</span><span class="tag">Aggiornato 10/2026</span></div>
         <a class="btn-p" href="docs/BusItinera_Documentazione_Funzionalita.pdf" download>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
           Scarica il PDF
@@ -163,6 +164,17 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
         <p>Esito del collaudo funzionale, della conformità della fatturazione elettronica — gli XML generati dalla versione in collaudo sono stati rivalidati contro lo schema ufficiale FatturaPA v1.2 — e della verifica di sicurezza applicativa: nessuna vulnerabilità di livello Critico o Alto.</p>
         <div class="doc-meta"><span class="tag pdf">PDF</span><span class="tag">7 pagine</span><span class="tag">Collaudo versione 1.23.0</span><span class="tag">Aggiornato 10/2026</span></div>
         <a class="btn-p" href="docs/BusItinera_Attestato_Funzionale_e_Sicurezza.pdf" download>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+          Scarica il PDF
+        </a>
+      </article>
+
+      <article class="doc wide">
+        <div class="doc-ic ic-v"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.6" y="2.6" width="14.8" height="18.8" rx="2.2"/><path d="M8.2 8.4h7.6M8.2 12h7.6M8.2 15.6h4.4"/></svg></div>
+        <h3>Accordo art. 28 GDPR</h3>
+        <p>I dati che finiscono nel gestionale — i tuoi clienti, i tuoi autisti, i tuoi passeggeri — restano tuoi: sei tu il titolare del trattamento, io li tratto per tuo conto. L'art. 28 del Regolamento europeo chiede che il rapporto sia messo per iscritto, e questo è il documento che lo fa: istruzioni, riservatezza, misure di sicurezza, sub-responsabili, gestione dei diritti degli interessati, notifica delle violazioni entro 24 ore, cancellazione al termine. Con tre allegati: cosa viene trattato, chi altro lo tocca, come è protetto. Da firmare in doppia copia all'attivazione del servizio.</p>
+        <div class="doc-meta"><span class="tag pdf">PDF</span><span class="tag">10 pagine</span><span class="tag">Versione 1.0</span><span class="tag">Da firmare</span></div>
+        <a class="btn-p" href="docs/BusItinera_Accordo_Responsabile_Trattamento.pdf" download>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
           Scarica il PDF
         </a>
