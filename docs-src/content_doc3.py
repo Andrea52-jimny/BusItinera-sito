@@ -16,8 +16,8 @@ alla realta' e' peggio che non averlo: dichiara il falso al cliente.
 VERSIONE_ACCORDO / DATA_ACCORDO si spostano quando cambia il testo.
 """
 
-VERSIONE_ACCORDO = "1.0"
-DATA_ACCORDO = "18 ottobre 2026"
+VERSIONE_ACCORDO = "1.1"
+DATA_ACCORDO = "22 ottobre 2026"
 
 TOC = [
     ("a0",  "Premesse e parti"),
@@ -154,10 +154,11 @@ Email: busitinera@gmail.com
 <tr><th>Permessi</th><td>Quattro ruoli predefiniti più interruttori granulari; le funzioni non consentite non sono raggiungibili, non solo nascoste. Dal telefono gli eventi del calendario sono in sola lettura per tutti i ruoli.</td></tr>
 <tr><th>Separazione dei dati</th><td>Ogni azienda ha la propria istanza, con base di dati e credenziali separate: nessun dato è condiviso fra clienti diversi.</td></tr>
 <tr><th>Cifratura</th><td>Trasmissione esclusivamente su HTTPS. Backup cifrati. Segreto della verifica in due passaggi cifrato a riposo quando è configurata la chiave applicativa.</td></tr>
-<tr><th>Integrità</th><td>Interrogazioni parametrizzate, protezione contro le richieste cross-site (CSRF), Content Security Policy restrittiva, neutralizzazione delle formule negli export CSV, operazioni multi-tabella in transazione, controllo di concorrenza sulle modifiche simultanee.</td></tr>
+<tr><th>Integrità</th><td>Interrogazioni parametrizzate; protezione contro le richieste cross-site (CSRF) su tutte le operazioni di scrittura; insieme completo di intestazioni di sicurezza HTTP, Content Security Policy restrittiva inclusa; neutralizzazione delle formule negli export CSV; operazioni multi-tabella in transazione; controllo di concorrenza sulle modifiche simultanee. Nessun componente dipende da codice eseguibile fornito da terzi attraverso la rete: le librerie sono servite dall'applicazione stessa.</td></tr>
+<tr><th>Gestione delle vulnerabilità</th><td>Sorveglianza degli avvisi di sicurezza dei componenti di piattaforma e aggiornamento tempestivo. La versione corretta dell'interprete è imposta da un <b>controllo automatico bloccante</b>: la costruzione di un'immagine applicativa non va a termine se l'interprete non include le correzioni di sicurezza note, così nessuna istanza può entrare in esercizio su una versione vulnerabile. Limiti su dimensione e struttura delle richieste in ingresso, applicati prima dell'elaborazione.</td></tr>
 <tr><th>Tracciabilità</th><td>Registro delle attività immutabile su ogni operazione di scrittura, con utente, momento e dettaglio delle modifiche; conservazione configurabile, predefinita a 24 mesi.</td></tr>
-<tr><th>Continuità</th><td>Backup automatici periodici e copia offsite cifrata; possibilità di ripristino su richiesta del Titolare.</td></tr>
-<tr><th>Verifiche</th><td>Collaudo funzionale e di sicurezza documentato nell'<i>Attestato di Collaudo</i>, disponibile nella sezione Download del sito.</td></tr>
+<tr><th>Continuità</th><td>Backup automatici periodici e copia offsite cifrata; possibilità di ripristino su richiesta del Titolare. Tetto di risorse per singola istanza, così che un'anomalia su un cliente non possa degradare il servizio degli altri.</td></tr>
+<tr><th>Verifiche</th><td>Collaudo funzionale e di sicurezza documentato nell'<i>Attestato di Collaudo</i>; scansione periodica di sicurezza dell'intero stack applicativo — esposizione alle vulnerabilità di piattaforma e verifica per classi di vulnerabilità — documentata nell'<i>Attestato di Cybersecurity</i>. Entrambi disponibili nella sezione Download del sito.</td></tr>
 </table>
 
 <h2 id="firme">Sottoscrizione</h2>
