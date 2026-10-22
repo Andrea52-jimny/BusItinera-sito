@@ -9,6 +9,7 @@ Font:        fonts/DMSans-{Regular,Medium,Bold}.ttf (già nel repo)
 Output:      ../public/docs/BusItinera_Documentazione_Funzionalita.pdf
              ../public/docs/BusItinera_Attestato_Funzionale_e_Sicurezza.pdf
              ../public/docs/BusItinera_Accordo_Responsabile_Trattamento.pdf
+             ../public/docs/BusItinera_Attestato_Cybersecurity.pdf
 
 I contenuti stanno in content_doc1.py / content_doc2.py; la presentazione in
 common.css. Per aggiornare un documento si modifica il testo nel file dei
@@ -24,6 +25,7 @@ from weasyprint import HTML
 import content_doc1
 import content_doc2
 import content_doc3
+import content_doc4
 from legal import COPYRIGHT
 
 HERE = Path(__file__).resolve().parent
@@ -121,6 +123,20 @@ def main():
               "Accordo art. 28 GDPR — versione " + content_doc3.VERSIONE_ACCORDO,
               content_doc3.DATA_ACCORDO)
         + toc(content_doc3.TOC) + content_doc3.BODY,
+    )
+
+    print("Attestato di Cybersecurity…")
+    build(
+        OUT / "BusItinera_Attestato_Cybersecurity.pdf",
+        "BusItinera — Attestato di Cybersecurity",
+        cover("Cybersecurity",
+              "Attestato di Cybersecurity",
+              "Esito della scansione di sicurezza dell'intero stack applicativo: "
+              "vulnerabilità PHP di piattaforma del 21 ottobre 2026 e verifica di "
+              "sicurezza applicativa di gestionale, console, sito e suo servizio.",
+              "Attestato di Cybersecurity",
+              content_doc4.DATA_SCANSIONE, content_doc4.VERSIONE_SCANSIONATA)
+        + toc(content_doc4.TOC) + content_doc4.BODY,
     )
 
     print("Fatto.")
