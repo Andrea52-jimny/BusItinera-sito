@@ -361,7 +361,10 @@ export default {
       }
       return json({ error: 'not_found' }, 404, env, req);
     } catch (e) {
-      return json({ error: 'server_error', detail: String(e && e.message || e) }, 500, env, req);
+      // Niente dettaglio dell'eccezione in risposta: e' informazione interna
+      // e il client non puo' farci nulla. Resta nei log del Worker.
+      console.error('worker error:', e && e.stack || e);
+      return json({ error: 'server_error' }, 500, env, req);
     }
   }
 };
