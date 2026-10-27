@@ -330,6 +330,69 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
       <li class="tl-item rv">
         <div class="tl-marker"></div>
         <div class="card tl-card">
+          <div class="tl-head"><span class="tl-ver">Versione 1.32</span><span class="tl-date">Ottobre 2026</span></div>
+          <h3>I passeggeri dicono com'è andata, senza che nessuno glielo chieda</h3>
+          <p>Un cartello con un QR code dentro il mezzo: chi ha viaggiato lo inquadra, mette le stelle e, se vuole, scrive due righe. Il voto arriva nel gestionale già collegato al mezzo e al viaggio, senza che l'autista debba fare niente. È la prima funzione di BusItinera che riceve qualcosa da chi non ha un account.</p>
+          <ul class="clist">
+            <li><strong>Venti secondi, anonimo, nessuna app da installare</strong>: si apre una pagina, si toccano le stelle e si è finito. Una sola cosa è obbligatoria, il voto generale; chi vuole aggiungere dettagli trova pulizia, comfort, guida e cortesia</li>
+            <li><strong>Il viaggio non sta nel codice, lo capisce il programma</strong>: dall'ora in cui il QR viene inquadrato risale al servizio che quel mezzo stava facendo. Un cartello solo per mezzo, che non si ristampa mai</li>
+            <li><strong>I cartelli si creano per tutta la flotta in una volta</strong>: si spuntano i mezzi e ne esce un documento A5, una pagina per mezzo, da stampare e laminare. L'elenco dice anche quali cartelli stanno portando voti e quali no — «creato, nessuna scansione» dopo settimane di solito vuol dire che si è staccato</li>
+            <li><strong>Un voto da una o due stelle arriva subito</strong>: notifica sulla campanella e sul telefono, con il mezzo e le prime righe del commento. Il feedback è anonimo, quindi non c'è nessuno da richiamare: si può solo intervenire, e per farlo bisogna saperlo in giornata</li>
+            <li><strong>Italiano e inglese da soli</strong>, secondo la lingua del telefono di chi inquadra. Per un gruppo straniero è la differenza fra un giudizio e nessun giudizio, e il cartello resta uno solo</li>
+            <li><strong>Nessun dato personale, per scelta</strong>: niente nome, niente telefono, niente email, e l'indirizzo di rete non viene conservato sul voto. Chi vuole, spunta il consenso a far pubblicare il proprio commento</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="tl-item rv">
+        <div class="tl-marker"></div>
+        <div class="card tl-card">
+          <div class="tl-head"><span class="tl-ver">Versione 1.31</span><span class="tl-date">Ottobre 2026</span></div>
+          <h3>Il tuo sito di tracciamento, a un clic dai mezzi</h3>
+          <p>Chi ha un servizio di localizzazione dei veicoli lo apriva da un segnalibro, da un'altra scheda, da un messaggio vecchio. Ora l'indirizzo si scrive una volta nei dati dell'azienda e il collegamento compare dove serve.</p>
+          <ul class="clist">
+            <li><strong>Campo «Link sito tracking»</strong> in Dati Azienda, insieme agli altri recapiti: è un indirizzo come il sito o la mail, e sta con loro</li>
+            <li><strong>Pulsante nella schermata Veicoli</strong>, accanto a «Nuovo veicolo»: compare soltanto se l'indirizzo è stato scritto, quindi chi non usa un tracciatore non vede un pulsante in più</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="tl-item rv">
+        <div class="tl-marker"></div>
+        <div class="card tl-card">
+          <div class="tl-head"><span class="tl-ver">Versione 1.30</span><span class="tl-date">Ottobre 2026</span></div>
+          <h3>I rifornimenti li registra chi fa il pieno, dal distributore</h3>
+          <p>Gli scontrini del carburante finiscono in un cassetto e qualcuno li ribatte settimane dopo, quando non si ricorda più a quale viaggio appartenessero. Ora l'autista registra il pieno dal telefono mentre è ancora alla pompa, e i conti si fanno da soli.</p>
+          <ul class="clist">
+            <li><strong>Una scheda ⛽ Rifornimenti nel portale autista</strong>: costo, litri e chilometri in pochi secondi. Non si cerca il mezzo in un elenco — compaiono quelli dei propri servizi, da 24 ore prima a 24 ore dopo, perché il pieno si fa spesso al rientro</li>
+            <li><strong>Il prezzo al litro si calcola mentre scrivi</strong>, con un avviso se esce da ogni scala plausibile: è il modo più veloce per accorgersi di una virgola sbagliata prima di salvare</li>
+            <li><strong>Al distributore la rete è quella che è</strong>: se il salvataggio non passa, quello che è stato scritto resta come bozza su quel telefono e si ritrova con «Riprendi»</li>
+            <li><strong>La vista di controllo in Veicoli → ⛽ Rifornimenti</strong>: filtri per mezzo, autista e periodo, e in cima litri, spesa IVA inclusa con l'imponibile scorporato, prezzo medio al litro, chilometri e consumo. Si scarica tutto per il foglio di calcolo</li>
+            <li><strong>I consumi fuori riga si vedono</strong>: quando un tratto si discosta di oltre il 25% dalla media di quel mezzo, la riga viene evidenziata. Un consumo che sale all'improvviso è spesso un guasto che non si è ancora manifestato</li>
+            <li><strong>I chilometri del pieno aggiornano il contachilometri del mezzo</strong>, così l'anagrafica resta allineata senza che nessuno la ritocchi a mano</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="tl-item rv">
+        <div class="tl-marker"></div>
+        <div class="card tl-card">
+          <div class="tl-head"><span class="tl-ver">Versione 1.29</span><span class="tl-date">Ottobre 2026</span></div>
+          <h3>I prezzi si scrivono come li dici al cliente: IVA inclusa</h3>
+          <p>Il prezzo che si concorda al telefono è il totale che il cliente paga. Fino a ieri andava diviso a mano prima di digitarlo, e l'imponibile se lo calcolava chi inseriva. Ora si scrive la cifra concordata e il programma fa il resto.</p>
+          <ul class="clist">
+            <li><strong>Tutti i campi di prezzo accettano il lordo</strong>: viaggio, noleggio, preventivo, servizi extra. Sotto i campi compare il riepilogo che si aggiorna mentre scrivi — imponibile, IVA e totale — e con aliquote diverse nello stesso documento lo scorporo è riga per riga</li>
+            <li><strong>Preventivo, conferma d'ordine e contratto mostrano prima il lordo</strong>, con l'imponibile in piccolo sotto: è il numero di cui si parla con il cliente</li>
+            <li><strong>Quando una cifra tonda non è raggiungibile, il programma lo dice</strong> invece di aggiustarla in silenzio: certi totali semplicemente non esistono, perché l'IVA si arrotonda al centesimo per aliquota, e nasconderlo avrebbe prodotto fatture che non tornano</li>
+            <li><strong>I noleggi compaiono nella home da telefono</strong> di titolari e operatori, con la pastiglia che distingue a colpo d'occhio 🚌 VIAGGIO da 🔑 NOLEGGIO: prima un mezzo dato a noleggio non si vedeva da nessuna parte</li>
+            <li><strong>CIG e CUP solo dove servono</strong>: quei due codici compaiono soltanto quando il cliente è una pubblica amministrazione, perché solo lì finiscono in fattura</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="tl-item rv">
+        <div class="tl-marker"></div>
+        <div class="card tl-card">
           <div class="tl-head"><span class="tl-ver">Versione 1.28</span><span class="tl-date">Ottobre 2026</span></div>
           <h3>Una sola campanella, e gli appuntamenti con gli invitati</h3>
           <p>Le due campanelle affiancate erano due elenchi e due numeri da interpretare per cose che chiedono entrambe attenzione. Ora sono una sola. E un appuntamento si pu&ograve; girare alle persone che devono esserci.</p>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """PDF 1 — Documentazione delle Funzionalità.
-Aggiornato alla v1.28.3 (numerazione interna, tappe nei preventivi, centro notifiche
-unificato, inviti agli appuntamenti, sola consultazione da telefono).
+Aggiornato alla v1.32.0 (prezzi IVA inclusa, rifornimenti e consumi, link al sito
+di tracciamento, feedback dei passeggeri via QR code).
 """
 
 TOC = [
@@ -24,8 +24,10 @@ TOC = [
     ("s17", "17. Registro attività"),
     ("s18", "18. Fatturazione elettronica (FatturaPA)"),
     ("s19", "19. Portale Autista, Mobile e notifiche"),
-    ("s20", "20. Moduli stampabili"),
-    ("s21", "21. Solidità e controlli"),
+    ("s22", "20. Rifornimenti e consumi"),
+    ("s23", "21. Feedback dei passeggeri (QR)"),
+    ("s20", "22. Moduli stampabili"),
+    ("s21", "23. Solidità e controlli"),
     ("legal", "Appendice — Avviso di Copyright"),
 ]
 
@@ -68,6 +70,8 @@ BODY = """
 <li><b>Note:</b> Nota di Viaggio condivisa con gli autisti; Note Private visibili solo ad admin/editor (mai esposte agli autisti, nemmeno via risposta API grezza).</li>
 <li><b>Codice evento</b><b>:</b> campo facoltativo che lega fra loro i servizi di una stessa manifestazione (una gita con dieci navette, una trasferta sportiva). Serve a raggruppare i servizi in fase di fatturazione (par. 18.2) e viene riportato in testata sulla fattura cumulativa.</li>
 </ul>
+<div class="new"><b>I prezzi si inseriscono IVA inclusa.</b> In tutto il programma — viaggio, noleggio, preventivo, servizi extra, editor fattura — il campo prezzo accetta il <b>lordo</b>, cioè la cifra concordata con il cliente. Sotto i campi economici compare il riepilogo che si aggiorna mentre si scrive: <i>Totale imponibile</i>, <i>IVA</i> e <i>Totale (IVA incl.)</i>, con lo scorporo per aliquota quando nello stesso documento ne convivono più d'una. Poiché l'IVA si arrotonda al centesimo per aliquota, alcuni totali tondi non sono raggiungibili: in quel caso il riquadro lo dichiara (<i>«digitato € 500,00: + € 0,01 per l'arrotondamento dell'IVA»</i>) invece di correggere in silenzio, così il totale del form, quello della stampa e quello della fattura coincidono sempre al centesimo.</div>
+
 <h3>3.1 Numerazione interna <span class="badge">NUOVO</span></h3>
 <p>Ogni viaggio prende un numero <b>V#/anno</b> e ogni noleggio un <b>N#/anno</b>, progressivi con azzeramento a ogni anno come già fanno i preventivi. Serve un riferimento stabile e leggibile da citare al telefono o scrivere su un foglio, al posto dell'identificativo tecnico del record.</p>
 <ul>
@@ -182,6 +186,8 @@ BODY = """
 <h2 id="s13">13. Veicoli</h2>
 <p>Gestione flotta (solo amministratore): anagrafica completa (targa univoca, telaio, posti, colore identificativo nel calendario), autista assegnato, dati di assicurazione e bollo con formula di scadenza. Un mezzo "Fuori servizio" non appare nelle ricerche né tra le scadenze. Non è eliminabile se associato a viaggi.</p>
 
+<p>Se nei Dati Azienda è stato scritto il <b>Link sito tracking</b> (par. 15), in questa schermata compare un pulsante che apre quel sito, accanto a «Nuovo veicolo». Senza quell'indirizzo il pulsante non esiste.</p>
+
 <h2 id="s14">14. Utenti e permessi granulari</h2>
 <p>Sezione riservata all'amministratore. Alla creazione lo username è generato automaticamente in formato <b>nome.cognome</b>; password minima 8 caratteri; al primo accesso è obbligatorio cambiarla. Il flag <b>Autista</b> abilita il portale mobile e il blocco scadenze patente/CQC.</p>
 <h3>14.1 Gli interruttori</h3>
@@ -202,6 +208,8 @@ BODY = """
 
 <h2 id="s15">15. Dati Azienda e banche</h2>
 <p>Anagrafica aziendale, contatti, dati fiscali (regime, licenza comunitaria, PEC) e gestione di più banche con flag "predefinita" (l'impostazione di una nuova deseleziona la precedente). IBAN e BIC/SWIFT vengono salvati in maiuscolo senza spazi. Nella card "Testi dei documenti" si personalizzano i testi di preventivo, conferma e contratto di noleggio (un campo vuoto mantiene il testo predefinito).</p>
+
+<p>Fra i contatti c'è il campo <b>Link sito tracking</b>: l'indirizzo del servizio di localizzazione dei mezzi, se l'azienda ne usa uno. È un recapito come il sito o la PEC, e sta con loro; una volta scritto, il collegamento compare nella schermata Veicoli.</p>
 
 <h2 id="s16">16. Password, 2FA e accesso con impronta</h2>
 <p>Ogni utente può cambiare la propria password (min. 8 caratteri, attiva immediatamente). Il <b>2FA</b> (per Amministratore e Operatore) aggiunge un codice TOTP a 6 cifre generato da app come Google Authenticator: attivazione con QR o secret manuale, 8 codici di recupero monouso, opzione "Ricordami" per 15 giorni sullo stesso browser. Cambiando password i dispositivi fidati vengono invalidati. Ogni attivazione/disattivazione del 2FA è registrata nel Registro attività; i login e i codici inseriti non vengono tracciati.</p>
@@ -307,13 +315,59 @@ BODY = """
 <p>Toccando un viaggio — da una notifica, dalla home mobile o da una scheda del calendario — si apre la <b>scheda ingrandita a tutto schermo</b>, in sola lettura: percorso, orari, tappe, mezzo, autisti, note, con gli indirizzi che restano toccabili per la navigazione e il riquadro di avviso sui documenti scaduti nel periodo. Si chiude con la X o toccando lo sfondo. Lo stesso vale per noleggi e appuntamenti. Nella schermata <b>Azienda</b> del portale tutte le voci si toccano: viaggi e pagamenti aprono la scheda del servizio, le scadenze si aprono ingrandite con di chi sono, per quando e dove si rinnovano.</p>
 <p>Dal telefono la risposta del server è inoltre <b>ridotta</b> per chiunque: prezzi, dati di pagamento, flag contabili e note private non vengono inviati, perché la scheda ingrandita non li mostra e non servono in mobilità.</p>
 
-<h2 id="s20">20. Moduli stampabili</h2>
+<h2 id="s22">20. Rifornimenti e consumi</h2>
+<p>Lo storico dei pieni, registrato da chi il pieno lo fa. Nel <b>Portale Autista</b> c'è la scheda <b>Rifornimenti</b>; la vista di controllo per chi gestisce è in <b>Veicoli &rarr; Rifornimenti</b>.</p>
+
+<h3>20.1 Registrazione dal telefono</h3>
+<ul>
+<li><b>Quali mezzi compaiono:</b> quelli dei propri servizi, da <b>24 ore prima</b> dell'inizio a <b>24 ore dopo</b> la fine — il pieno si fa spesso al rientro. Una riga per mezzo anche con più servizi nella stessa finestra; fra i servizi vince quello in corso, a pari stato il più recente. I noleggi <b>senza conducente</b> e i viaggi con mezzo di un'altra ditta non compaiono.</li>
+<li><b>Chi vede cosa:</b> un autista vede solo i mezzi dei propri servizi; un amministratore o operatore che sia anche autista vede tutti i mezzi dell'azienda — i propri servizi in cima, poi gli altri, infine i mezzi fermi, ed è così che si rifornisce un mezzo in deposito.</li>
+<li><b>Campi:</b> costo, litri e chilometri del mezzo. Il <b>prezzo al litro</b> si calcola mentre si scrive, con avviso quando esce da ogni scala plausibile (sotto 0,50 € o sopra 4 € al litro): è il modo più rapido per accorgersi di una virgola sbagliata prima di salvare.</li>
+<li><b>Senza rete:</b> se il salvataggio non passa, o il form si chiude per sbaglio, quanto scritto resta come <b>bozza su quel telefono</b> e si ritrova in cima alla scheda con «Riprendi».</li>
+<li><b>Ultimi tre pieni del mezzo</b> sotto il form, chiunque li abbia fatti, con data, km, litri e nome: serve a non ripetere un pieno appena fatto da un collega. I costi dei colleghi non arrivano al telefono.</li>
+</ul>
+
+<h3>20.2 Vista di controllo, conti e anomalie</h3>
+<p>Elenco filtrabile per mezzo, autista e periodo, con i totali del periodo in cima: litri, <b>spesa IVA inclusa</b> con l'imponibile scorporato al 22% (l'aliquota dei carburanti per autotrazione), prezzo medio al litro, chilometri percorsi e consumo medio.</p>
+<div class="note"><b>Consumi fuori riga.</b> Quando il consumo di un tratto si discosta di oltre il <b>25%</b> dalla media di quel mezzo, la riga viene evidenziata con la spiegazione nel suggerimento. Il confronto parte da <b>tre tratti</b> in su, perché su due misure «anomalo» non significa niente. Un consumo che sale all'improvviso è spesso un guasto che non si è ancora manifestato.</div>
+<p>L'elenco filtrato si scarica per il foglio di calcolo (CSV con punto e virgola e BOM, come l'export dei viaggi), con imponibile, IVA, consumo e marcatura delle anomalie in colonne separate.</p>
+<p><b>Chilometraggio.</b> I km del rifornimento aggiornano il contachilometri del mezzo in anagrafica. Il valore non torna indietro: tre strade scrivono quel campo — chiusura di un viaggio, chiusura di un noleggio e rifornimento — e non arrivano in ordine di data.</p>
+<p><b>Correzioni.</b> Un autista può correggere o eliminare i rifornimenti registrati da lui per le prime <b>48 ore</b>; dopo, quella riga è un dato su cui qualcuno ha fatto i conti e serve un amministratore. Inserimenti, modifiche ed eliminazioni finiscono nel Registro attività.</p>
+
+<h2 id="s23">21. Feedback dei passeggeri (QR)</h2>
+<p>È la prima funzione che riceve dati da <b>chi non ha fatto login</b>: un cartello con un QR code attaccato dentro il mezzo, il passeggero lo inquadra e vota. La schermata <b>Feedback</b> (solo amministratore, sotto Documentazione in menu) raccoglie i voti; la scheda <b>Cartelli QR</b> li produce.</p>
+
+<h3>21.1 La pagina pubblica</h3>
+<ul>
+<li><b>Obbligatorio il solo voto generale</b> da 1 a 5. Subito sotto compaiono quattro voti facoltativi di dettaglio: pulizia, comfort, guida, cortesia — due sul mezzo e due sul servizio, tenuti distinti perché un voto basso dica <i>quale</i> delle due.</li>
+<li><b>Con 1 o 2 stelle il commento si apre da sé</b> e chiede cosa è andato storto; all'invio senza commento c'è una conferma gentile, mai un blocco. Essendo il voto anonimo, il commento è l'unica informazione utilizzabile.</li>
+<li><b>Il viaggio non sta nel codice:</b> il server lo deduce dall'ora della scansione, con finestra di <b>12 ore</b> (vince il servizio in corso, a pari stato il più recente). Se in quella finestra sul mezzo non risulta un servizio, si legge «Nessun viaggio da valutare» e <b>il modulo non compare</b>; il controllo è ripetuto all'invio.</li>
+<li><b>Italiano e inglese</b> secondo la lingua del telefono, con link per cambiare e scelta ricordata. Il cartello resta uno solo.</li>
+<li><b>Un marcatore tecnico</b> (cookie di 12 ore) mostra «grazie, ci siamo già» a chi riapre lo stesso codice, con il link <i>Non eri tu? Lascia un altro voto</i>, perché due amici possono passarsi un telefono.</li>
+<li><b>La raccolta nasce spenta</b> e si spegne con un interruttore: a porta chiusa la pagina risponde «codice non in uso» e non tocca la banca dati. I voti già raccolti restano.</li>
+</ul>
+
+<h3>21.2 I cartelli</h3>
+<p>In <b>Feedback &rarr; Cartelli QR</b> si spuntano i mezzi — o tutta la flotta — e si preme <b>Crea i cartelli</b>: esce un documento <b>A5, una pagina per mezzo</b>, dalla stessa strada dell'ordine di servizio, da stampare o salvare in PDF. Il pulsante per il mezzo singolo resta sulla riga e in Veicoli, per l'autobus nuovo.</p>
+<p>Il cartello porta nome e logo dell'azienda, cinque stelle, la domanda grande, il QR (66 mm, correzione d'errore H perché dentro un bus il cartello si sporca e si graffia) e tre riquadri che smontano i motivi per cui di solito una recensione non la si lascia: <i>20 secondi · anonimo · niente app</i>.</p>
+<p>L'elenco è anche una <b>diagnosi</b>: per ogni mezzo dice se il cartello esiste, quanti feedback ha portato, la media e la data dell'ultimo. «Creato, nessuna scansione» dopo settimane significa quasi sempre che il cartello non è mai stato attaccato o si è staccato. Il codice di un mezzo si può <b>rigenerare</b> con conferma esplicita: i cartelli già stampati di quel mezzo smettono di funzionare, i feedback ricevuti restano.</p>
+
+<h3>21.3 La schermata dei voti</h3>
+<p>Elenco <b>diviso per anni</b>, con media, numero di feedback, quota di voti 4–5 e distribuzione 1–5 ricalcolate sull'anno scelto; filtri per mezzo, voto, stato e intervallo di date; azioni per riga <i>Letto</i>, <i>Nascondi</i>, <i>Spam</i>, più «Segna tutto come letto» sull'anno in corso. La colonna <b>Servizio</b> porta numero del viaggio, autista e cliente, e il numero apre la scheda del servizio sopra l'elenco.</p>
+<div class="note"><b>Un voto da 1 o 2 stelle accoda subito una notifica</b> a tutti gli amministratori attivi, con voto, mezzo e prime righe del commento, consegnata anche via push. Il feedback è anonimo: non c'è nessuno da richiamare, si può solo agire sul mezzo o sul servizio, e bisogna saperlo in giornata.</div>
+
+<h3>21.4 Privacy e abusi</h3>
+<p><b>Nessun dato personale, per scelta:</b> niente nome, telefono o email, e l'indirizzo IP <b>non viene salvato</b> sulla riga del voto — il suo hash vive solo nella tabella dei conteggi, serve a contare e non a identificare. Una casella facoltativa raccoglie il consenso alla pubblicazione del commento; quel consenso vale per chi lo dà e <b>non copre il nome di altre persone</b>, quindi un commento che nomina un autista non va pubblicato nemmeno se è un elogio.</p>
+<p><b>Contro gli abusi,</b> nell'ordine in cui scattano: token casuale di 22 caratteri non derivabile dall'identificativo del mezzo; campo-trappola invisibile; tempo minimo di compilazione; e tre tetti distinti — <b>200 voti al giorno per mezzo</b> (il freno vero, tarato su una giornata piena di un granturismo), <b>60 all'ora per indirizzo IP</b> (guardia anti-alluvione larga quanto un pullman, perché col WiFi di bordo i passeggeri escono tutti dallo stesso IP) e <b>3 all'ora per coppia IP+mezzo</b>, che ferma il buontempone senza toccare i passeggeri veri. Un tetto superato finisce nel Registro attività.</p>
+<p>La pagina pubblica è un <b>file a sé</b>: apre una connessione propria, non avvia la sessione dell'applicazione e non legge il cookie di accesso. Dietro la porta aperta ci sono poche centinaia di righe, non l'intero gestionale.</p>
+
+<h2 id="s20">22. Moduli stampabili</h2>
 <p><b>Ordine di Servizio</b> (viaggi) con i dati presenti e le righe da compilare a mano; le voci mancanti mostrano "da compilare". Il programma del servizio riporta partenza, tappe — con l'orario di arrivo e quello di ripartenza — e rientro. <b>Contratto di locazione</b> (noleggi) con anagrafica cliente, dati del veicolo, tabella degli utilizzatori e dati patente, livello di carburante al ritiro e condizioni generali personalizzabili. Nel noleggio <b>senza conducente</b> la tabella degli utilizzatori riporta i dati anagrafici completi delle persone autorizzate (nascita, residenza, codice fiscale, patente con le sue date, telefono) invece dei soli autisti aziendali.</p>
 
-<h2 id="s21">21. Solidità e controlli</h2>
+<h2 id="s21">23. Solidità e controlli</h2>
 <p>L'applicazione include protezioni pensate per il lavoro condiviso: congelamento dei documenti contabili, rilevamento delle modifiche simultanee, controllo formale di P.IVA/CF, unione clienti tracciata e irreversibile, registro attività immutabile. Gli accessi sono protetti da ruoli e permessi granulari, autenticazione a due fattori e sessioni irrobustite.</p>
 
-<h3>21.1 Irrobustimenti delle versioni 1.15 e 1.16</h3>
+<h3>23.1 Irrobustimenti delle versioni 1.15 e 1.16</h3>
 <ul>
 <li><b>Cambio password, sessioni chiuse ovunque.</b> Cambiando la propria password, le altre sessioni ancora aperte di quell'utente vengono terminate — il computer di casa, il telefono lasciato in ufficio. Resta attiva solo quella da cui si è fatto il cambio.</li>
 <li><b>Freno ai tentativi ripetuti anche per rete di provenienza.</b> Al blocco per nome utente si affianca un limite per indirizzo di rete: una raffica di tentativi distribuita su molti nomi utente diversi viene fermata ugualmente. Vale anche per l'accesso con impronta.</li>

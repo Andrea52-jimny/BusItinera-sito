@@ -35,8 +35,8 @@ OUT = HERE.parent / "public" / "docs"
 # VERSIONE: la release del gestionale che i contenuti descrivono.
 # La data dell'attestato NON si tocca qui: vive in content_doc2.DATA_COLLAUDO,
 # perché è la data di una verifica realmente svolta.
-VERSIONE_DOC = "1.28.3"
-DATA_DOC = "18 ottobre 2026"
+VERSIONE_DOC = "1.32.0"
+DATA_DOC = "27 ottobre 2026"
 
 PRODOTTO = ("BusItinera — Gestionale viaggi, noleggi e fatturazione "
             "per aziende di trasporto con autista")
