@@ -620,7 +620,7 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
     <div class="center" style="margin-bottom:56px">
       <div class="eyebrow">Fatturazione elettronica</div>
       <h2 class="h2 rv">La fattura elettronica, direttamente dal viaggio</h2>
-      <p class="sub rv d1">BusItinera genera il file XML in formato FatturaPA a partire dai viaggi e dai noleggi che hai già inserito. Ogni documento nasce come bozza che puoi rileggere e correggere, e diventa definitivo solo quando lo dichiari inviato allo SdI.</p>
+      <p class="sub rv d1">BusItinera genera il file XML in formato FatturaPA a partire dai viaggi e dai noleggi che hai già inserito. Ogni documento nasce come bozza che puoi rileggere e correggere, e diventa definitivo quando crei l’XML. Il file lo trasmetti tu o il tuo commercialista: l’app lo prepara, non lo invia.</p>
     </div>
     <div class="grid2">
       <div class="card rv">
@@ -636,11 +636,11 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
       </div>
       <div class="card rv d1">
         <div class="card-ic ic-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.2 2.8 2.9 9.9l7.3 3.1 3.1 7.3z"/><path d="M21.2 2.8 10.2 13.8"/></svg></div>
-        <h3>Prima la bozza, poi l’invio allo SdI</h3>
-        <p>Ogni documento nasce come <strong>bozza</strong>: lo rileggi, lo correggi, lo cancelli se hai sbagliato. Diventa definitivo solo quando premi «Inviato allo SdI».</p>
+        <h3>Prima la bozza, poi l’XML</h3>
+        <p>Ogni documento nasce come <strong>bozza</strong>: lo rileggi, lo correggi, lo cancelli se hai sbagliato. Diventa definitivo solo quando premi «Crea XML».</p>
         <ul class="clist">
           <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Finché è bozza non ha né numero né file XML: cancellarla non lascia buchi nella numerazione</li>
-          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>All’invio arrivano insieme numero progressivo, file XML e blocco del documento</li>
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Alla creazione dell’XML arrivano insieme numero progressivo, file e blocco del documento</li>
           <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Se cancelli una bozza, i servizi collegati tornano subito fra quelli da fatturare</li>
           <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Un responsabile può riportare in bozza l’ultima fattura dell’anno, con traccia di chi l’ha fatto</li>
         </ul>
@@ -663,7 +663,7 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
         <ul class="clist">
           <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Indichi gli importi in euro, e una barra ti dice subito se la somma quadra</li>
           <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>La divisione è proporzionale riga per riga: regge anche <strong>IVA diversa</strong> nello stesso documento</li>
-          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Ogni quota segue il regime del proprio intestatario: PA con split payment, privati normale</li>
+          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Ogni quota segue il regime del proprio intestatario: chi è in scissione dell’IVA e chi no</li>
           <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Su ogni documento compare la dicitura «quota parte», con CIG e CUP conservati</li>
         </ul>
       </div>
@@ -684,9 +684,31 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
         <p>Se serve annullare o correggere, emetti una nota di credito collegata alla fattura di origine, in modo totale o parziale. Anche la nota passa dalla bozza.</p>
         <ul class="clist">
           <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Storno totale o parziale, scegliendo cosa e quanto stornare</li>
-          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Lo storno ha effetto all’invio: una bozza di nota di credito non annulla ancora nulla</li>
-          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Numerazione progressiva unica per anno, assegnata all’invio e senza buchi</li>
+          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Lo storno ha effetto quando crei l’XML: una bozza di nota di credito non annulla ancora nulla</li>
+          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Numerazione progressiva unica per anno, assegnata alla creazione dell’XML e senza buchi</li>
           <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>La nota resta collegata alla fattura da cui nasce</li>
+        </ul>
+      </div>
+      <div class="card rv d4">
+        <div class="card-ic ic-v"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.4v10.2"/><path d="M8.2 10.2 12 14l3.8-3.8"/><path d="M4 16.4v2.4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2.4"/></svg></div>
+        <h3>Sai quali XML sono già usciti di qui</h3>
+        <p>«Questa fattura l’ho già passata al commercialista?» è una domanda che torna, e la risposta stava a memoria. Ora l’elenco se la ricorda: di ogni fattura sai se il file è stato scaricato e quando.</p>
+        <ul class="clist">
+          <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>L’archivio ZIP si fa <strong>spuntando le fatture in elenco</strong>, e il pulsante dice quante ne hai scelte</li>
+          <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Un contrassegno «scaricato» con la data, e quante volte se più d’una</li>
+          <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Nessun limite di scarico: un file si perde, il commercialista lo richiede, il trimestre si rifà</li>
+          <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Sbirciare l’anteprima non conta: solo lo scarico vero segna la fattura</li>
+        </ul>
+      </div>
+      <div class="card rv d4">
+        <div class="card-ic ic-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.6" y="5.8" width="18.8" height="12.4" rx="2.4"/><path d="M11.4 14.6a3.2 3.2 0 1 1 0-5.2"/><path d="M6.8 11.2h4.4M6.8 12.8h4.4"/><path d="M15.2 13.4l1.5 1.5 3-3.2"/></svg></div>
+        <h3>L’incasso segnato una volta, sui servizi che copre</h3>
+        <p>Una fattura riepilogativa chiude dieci servizi con un bonifico solo, e spuntare i viaggi uno per uno era un lavoro a mano che si dimenticava a metà. La colonna «Incassato» lo fa in un passaggio.</p>
+        <ul class="clist">
+          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Premi «Incassa», l’app ti dice cosa sta per fare, e <strong>tutti i viaggi e i noleggi coperti</strong> risultano pagati</li>
+          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Spariscono dagli avvisi «da incassare» subito, non il giorno dopo</li>
+          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Se togli l’incasso i viaggi restano pagati: lì il pagamento è un fatto, non una conseguenza del documento</li>
+          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Modalità <strong>«Pagamento effettuato»</strong> per chi incassa alla partenza e fattura dopo: in stampa «Totale da pagare 0», senza scadenza e senza IBAN</li>
         </ul>
       </div>
     </div>
@@ -695,17 +717,19 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
       <div class="card" style="padding:34px 32px">
         <div style="display:flex;gap:14px;align-items:center;margin-bottom:10px">
           <div class="card-ic ic-b" style="margin-bottom:0"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 9.6 12 4.2l8.6 5.4"/><path d="M5.8 9.8v8M10 9.8v8M14 9.8v8M18.2 9.8v8"/><path d="M3 20.6h18"/></svg></div>
-          <h3 style="font-size:1.25rem">Fatture verso Comuni, scuole ed enti pubblici</h3>
+          <h3 style="font-size:1.25rem">Enti pubblici e clienti in scissione dell’IVA</h3>
         </div>
-        <p style="margin-bottom:16px">Se lavori con la Pubblica Amministrazione, BusItinera genera la fattura nel formato corretto per la PA e ti guida sui dati richiesti dagli enti, così il documento è completo già alla prima emissione.</p>
+        <p style="margin-bottom:16px">Se lavori con la Pubblica Amministrazione, BusItinera genera la fattura nel formato corretto per la PA e ti guida sui dati richiesti dagli enti, così il documento è completo già alla prima emissione. E la scissione dei pagamenti non è più una cosa da soli enti pubblici: esistono aziende private che versano l’IVA loro all’Erario, e ora puoi fatturarle come vanno fatturate.</p>
         <div class="grid2" style="gap:16px">
           <ul class="clist" style="margin-top:0">
-            <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Formato dedicato alla Pubblica Amministrazione, con la scissione dei pagamenti (split payment)</li>
+            <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Formato dedicato alla Pubblica Amministrazione, con la <strong>scissione dei pagamenti</strong> sempre attiva: verso l’ente è un obbligo di legge, non una scelta</li>
             <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Codici CIG e CUP gestiti dove richiesti dagli enti pubblici</li>
+            <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>L’app segnala i dati mancanti prima di chiudere il viaggio</li>
           </ul>
           <ul class="clist" style="margin-top:0">
-            <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>L’app segnala i dati mancanti prima di chiudere il viaggio</li>
-            <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Per i clienti privati non cambia nulla: stesso flusso di sempre</li>
+            <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>La scissione si spunta anche su un <strong>cliente privato</strong>: società controllate dallo Stato o da enti pubblici e società quotate in borsa ricevono una fattura normale, ma l’IVA la versano loro</li>
+            <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Richiede la partita IVA, e senza quella la casella non si attiva: una fattura in scissione a chi non è soggetto IVA è un errore che si scopre mesi dopo, in contabilità</li>
+            <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Per tutti gli altri clienti privati non cambia nulla: stesso flusso di sempre</li>
           </ul>
         </div>
       </div>
@@ -723,7 +747,7 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
     </div>
     <figure class="shot shot-single rv d1" style="max-width:460px"><img class="zoom" src="images/fattura_pdf.png" data-cap="PDF della fattura elettronica per la PA, con split payment" alt="Fattura PDF con split payment" loading="lazy"><figcaption>Il PDF della fattura elettronica alla PA, con scissione dei pagamenti (split payment)</figcaption></figure>
 
-    <p class="center rv d2" style="margin-top:36px;color:var(--muted);font-size:.95rem;max-width:720px;margin-left:auto;margin-right:auto">Il file XML prodotto è pronto per lo SdI: lo scarichi — uno per volta o <strong style="color:var(--ink)">tutti insieme in un unico ZIP</strong>, scegliendo da una finestra i mesi che ti servono — anche non consecutivi — e lo trasmetti tu o il tuo commercialista. Della fattura puoi anche <strong style="color:var(--ink)">salvare o stampare una versione in PDF</strong>, leggibile per il cliente. <strong style="color:var(--ink)">Nessun servizio esterno e nessun invio automatico</strong>: le tue fatture non passano da un intermediario, e l'XML resta tuo finché non lo trasmetti.</p>
+    <p class="center rv d2" style="margin-top:36px;color:var(--muted);font-size:.95rem;max-width:720px;margin-left:auto;margin-right:auto">Il file XML prodotto è pronto per lo SdI: lo scarichi — uno per volta o <strong style="color:var(--ink)">tutti insieme in un unico ZIP</strong>, spuntando in elenco esattamente le fatture che ti servono — e lo trasmetti tu o il tuo commercialista. Della fattura puoi anche <strong style="color:var(--ink)">salvare o stampare una versione in PDF</strong>, leggibile per il cliente. <strong style="color:var(--ink)">Nessun servizio esterno e nessun invio automatico</strong>: le tue fatture non passano da un intermediario, e l'XML resta tuo finché non lo trasmetti.</p>
   </div>
 </section>
 

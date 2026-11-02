@@ -330,6 +330,23 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
       <li class="tl-item rv">
         <div class="tl-marker"></div>
         <div class="card tl-card">
+          <div class="tl-head"><span class="tl-ver">Versione 1.33</span><span class="tl-date">Ottobre 2026</span></div>
+          <h3>Le fatture dicono cosa è uscito di qui e cosa è stato incassato</h3>
+          <p>Una fattura emessa finiva in elenco con un numero e uno stato, e lì si fermava. Se quell'XML era già stato passato al commercialista, se i soldi erano arrivati, se il cliente aveva pagato alla partenza: erano cose che si tenevano a mente o su un foglio a parte. Ora le tiene il gestionale, e lo stato della fattura chiama le cose col loro nome.</p>
+          <ul class="clist">
+            <li><strong>La scissione dei pagamenti non è più una cosa da enti pubblici</strong>: esiste il caso opposto e prima era inesprimibile. Società controllate dallo Stato o da enti pubblici e società quotate in borsa ricevono una fattura normale, ma l'IVA la versano loro all'Erario. Ora è una proprietà del cliente, spuntabile su chiunque abbia la partita IVA, e verso la Pubblica Amministrazione resta attiva per obbligo di legge</li>
+            <li><strong>«XML creato» al posto di «Inviato allo SDI»</strong>: BusItinera prepara il file della fattura elettronica, non lo trasmette all'Agenzia delle Entrate, e non l'ha mai fatto. Il nome vecchio prometteva un invio che non avveniva, e davanti a una fattura rifiutata mandava a cercare il problema nel posto sbagliato</li>
+            <li><strong>L'archivio XML si fa spuntando le fatture che servono</strong>: una colonna di caselle in elenco e il pulsante che dice quante ne hai scelte. Al posto della finestra che chiedeva anno e mesi, che rispondeva alla domanda sbagliata — chi esporta sa quali fatture gli servono, non in che periodo cadono</li>
+            <li><strong>Un contrassegno dice quali XML sono già usciti</strong>, con la data e quante volte. Riscaricarli non è limitato in nessun modo: un file si perde, il commercialista lo richiede, il trimestre si rifà. Il contrassegno serve a raccontare cosa è successo, non a mettere un blocco</li>
+            <li><strong>Colonna «Incassato», pensata per le fatture riepilogative</strong>: un bonifico solo chiude dieci servizi. Premi «Incassa», l'app ti dice cosa sta per fare, e tutti i viaggi e i noleggi coperti da quel documento risultano pagati e spariscono dagli avvisi. Togliendo l'incasso i viaggi restano pagati, perché lì il pagamento è un fatto e non una conseguenza del documento</li>
+            <li><strong>Modalità «Pagamento effettuato» per chi incassa alla partenza e fattura dopo</strong>: se il viaggio risulta già pagato l'editor la propone da sola. In stampa esce «Totale da pagare 0», senza scadenza e senza IBAN, perché non c'è niente da versare e non ha senso dire dove</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="tl-item rv">
+        <div class="tl-marker"></div>
+        <div class="card tl-card">
           <div class="tl-head"><span class="tl-ver">Versione 1.32</span><span class="tl-date">Ottobre 2026</span></div>
           <h3>I passeggeri dicono com'è andata, senza che nessuno glielo chieda</h3>
           <p>Un cartello con un QR code dentro il mezzo: chi ha viaggiato lo inquadra, mette le stelle e, se vuole, scrive due righe. Il voto arriva nel gestionale già collegato al mezzo e al viaggio, senza che l'autista debba fare niente. È la prima funzione di BusItinera che riceve qualcosa da chi non ha un account.</p>
@@ -524,7 +541,7 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
           <p>Come i preventivi: prima la salvi, la ricontrolli e la correggi; quando sei sicuro un pulsante la rende definitiva e la blocca.</p>
           <ul class="clist">
             <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><strong>Bozza modificabile</strong>: niente numero finch&eacute; non sei sicuro, cos&igrave; puoi correggerla o eliminarla senza lasciare buchi nella numerazione</li>
-            <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><strong>Un solo pulsante per chiudere</strong>: &laquo;Inviato allo SDI&raquo; assegna il numero progressivo, genera l&rsquo;XML e blocca il documento</li>
+            <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><strong>Un solo pulsante per chiudere</strong>: &laquo;Inviato allo SDI&raquo; &mdash; dalla 1.33 si chiama &laquo;Crea XML&raquo; &mdash; assegna il numero progressivo, genera l&rsquo;XML e blocca il documento</li>
             <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><strong>Ripensamento possibile</strong>: l&rsquo;ultima fattura dell&rsquo;anno si pu&ograve; riaprire e correggere; per le altre resta la nota di credito</li>
             <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><strong>Stesso percorso per la nota di credito</strong>, che storna la fattura solo quando la invii davvero</li>
           </ul>

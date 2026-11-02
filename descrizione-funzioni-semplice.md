@@ -84,7 +84,9 @@ Finito il servizio, non riparti da un foglio bianco: in **Da fatturare** trovi i
 
 L'anteprima si modifica fino all'ultimo, il regime IVA giusto è già calcolato — compresi i servizi all'estero e l'imposta di bollo dove serve — e l'importo si può dividere tra più soggetti quando il viaggio lo pagano in tanti. Ci sono le **note di credito** e una numerazione che resta in ordine.
 
-Per i clienti pubblici — Comuni, scuole, enti — il documento esce nel formato giusto, con scissione dei pagamenti, CIG e CUP. Il file XML pronto per lo SdI lo scarichi tu (uno per volta o tutti insieme in uno ZIP) e lo trasmetti tu o il tuo commercialista: **nessun invio automatico, nessun servizio esterno di mezzo**.
+Per i clienti pubblici — Comuni, scuole, enti — il documento esce nel formato giusto, con scissione dei pagamenti, CIG e CUP. La scissione si spunta anche su un **cliente privato** che la prevede, come le società controllate da enti pubblici e quelle quotate in borsa: ricevono una fattura normale, ma l'IVA la versano loro. Il file XML lo scarichi tu (uno per volta, o in uno ZIP spuntando in elenco le fatture che ti servono) e lo trasmetti tu o il tuo commercialista: **nessun invio automatico, nessun servizio esterno di mezzo**. BusItinera prepara il file, non lo manda all'Agenzia delle Entrate, e lo stato della fattura lo dice: «XML creato».
+
+Dopo l'emissione la fattura non ti lascia a memoria: un contrassegno ti dice **quali XML sono già usciti** di qui e quando, e la colonna **Incassato** segna l'incasso del documento sistemando in un colpo tutti i viaggi che copre — comodo sulle riepilogative, dove un bonifico solo chiude dieci servizi. Per chi incassa alla partenza e fattura dopo c'è la modalità **«Pagamento effettuato»**, che in stampa mette «Totale da pagare 0» senza scadenza né IBAN.
 
 ## Amministrazione: pagamenti e scadenze sotto controllo
 
