@@ -330,6 +330,91 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
       <li class="tl-item rv">
         <div class="tl-marker"></div>
         <div class="card tl-card">
+          <div class="tl-head"><span class="tl-ver">Versione 1.38</span><span class="tl-date">Novembre 2026</span></div>
+          <h3>Le indicazioni stradali si accendono un viaggio alla volta</h3>
+          <p>Sul telefono dell'autista l'indirizzo di destinazione era un collegamento: si toccava e si apriva Google Maps. Ma il percorso che Maps calcola è quello di un'automobile, e non sa né quanto è alta né quanto pesa una corriera. Chi lo segue e rovina il mezzo poi dice, con una certa ragione, che la strada gliel'ha data il gestionale. Ora quel collegamento non nasce più da solo: lo si accende viaggio per viaggio, quando il percorso è adatto al mezzo che lo fa.</p>
+          <ul class="clist">
+            <li><strong>Un interruttore nel modulo del viaggio, subito sotto le tappe</strong>, spento di serie. Chi pianifica il viaggio è anche chi sa se quella strada una corriera la può fare: la decisione sta lì, non nelle impostazioni generali</li>
+            <li><strong>Acceso, sul telefono compare un pulsante «Indicazioni Maps»</strong>: uno nella scheda del viaggio, verso la destinazione, e uno per ogni punto nella vista del viaggio in corso, che è quella dove l'autista naviga davvero tappa per tappa</li>
+            <li><strong>Il nome del luogo non è più cliccabile in nessun caso</strong>: o non c'è collegamento, o c'è un pulsante che dice cosa fa. Un pulsante con scritto «Indicazioni Maps» non si preme credendo di toccare un'etichetta</li>
+            <li><strong>Spento, il collegamento non esiste nemmeno in ufficio</strong>: toglierlo solo all'autista avrebbe lasciato in piedi la strada per cui il percorso arriva comunque, copiato da una schermata del gestionale</li>
+            <li><strong>I viaggi già in archivio restano senza indicazioni</strong> finché qualcuno non li apre e accende l'interruttore. È il valore prudente applicato allo storico, non una dimenticanza</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="tl-item rv">
+        <div class="tl-marker"></div>
+        <div class="card tl-card">
+          <div class="tl-head"><span class="tl-ver">Versione 1.37</span><span class="tl-date">Novembre 2026</span></div>
+          <h3>Il cartello del QR diventa A4, e la raccolta si spegne un mezzo alla volta</h3>
+          <p>Due cose che la raccolta dei feedback, nata nella 1.32, non aveva ancora: un cartello che si legga dal fondo del pullman e un modo di sospendere un singolo mezzo. Prima l'unico comando era generale, e per smettere di raccogliere da un bus in officina o appena venduto bisognava spegnere tutta la flotta.</p>
+          <ul class="clist">
+            <li><strong>Un interruttore sulla riga di ogni mezzo</strong>, nella scheda Cartelli QR. Quello generale resta e comanda su tutto: spento, non si raccoglie da nessuna parte. Il nuovo è più fine, per il mezzo fermo, venduto o col cartello staccato</li>
+            <li><strong>Il cartello passa da A5 ad A4</strong>: il QR era 66mm e da due metri — la distanza vera da cui un passeggero seduto lo guarda — era al limite del leggibile. Ora è 88mm, e il codice è generato più grande alla fonte, perché ingrandire un'immagine piccola la sgrana</li>
+            <li><strong>Il logo dell'azienda è due volte e mezza più grande</strong>, non solo scalato col foglio: in A5 era una miniatura in un angolo</li>
+            <li><strong>Il nome del mezzo in basso a sinistra si legge davvero</strong>: era grigio chiaro e piccolo come la firma dell'app, e serve a chi attacca i cartelli per non sbagliare bus</li>
+            <li><strong>Un cartello, una pagina</strong>: prima ne usciva una seconda bianca dietro ognuno</li>
+            <li><strong>Un mezzo sospeso risponde come un mezzo che non esiste.</strong> Se avesse risposto in modo diverso, chi prova codici a caso avrebbe saputo di averne trovato uno buono</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="tl-item rv">
+        <div class="tl-marker"></div>
+        <div class="card tl-card">
+          <div class="tl-head"><span class="tl-ver">Versione 1.36</span><span class="tl-date">Novembre 2026</span></div>
+          <h3>Il carburante di casa: l'autista scrive i litri, il costo lo fa il gestionale</h3>
+          <p>Chi ha la cisterna in sede si trovava davanti un modulo che chiedeva il costo e il distributore, cioè due cose che in sede non esistono o che l'autista non deve sapere. Ora c'è una spunta: l'autista mette i chilometri e i litri, il prezzo al litro è quello dichiarato nei dati dell'azienda e il conto lo fa il programma.</p>
+          <ul class="clist">
+            <li><strong>Un riquadro nuovo nei Dati Azienda</strong>, «Siti e carburante in sede», con sito web e link del tracking — che sono indirizzi di servizi esterni, non recapiti — e i quattro prezzi: benzina, diesel e GPL in euro al litro, elettrico in euro al kWh</li>
+            <li><strong>L'alimentazione diventa un dato del mezzo</strong> (diesel, benzina, GPL, elettrico), accanto al tipo: è lei a decidere quale dei quattro prezzi vale per quel veicolo</li>
+            <li><strong>Spunta «Rifornimento in sede» nel modulo di rifornimento</strong>: spuntandola spariscono Costo e Distributore, perché il primo lo calcola il gestionale e il secondo in sede è la sede. Restano i chilometri e i litri</li>
+            <li><strong>Se per quell'alimentazione non c'è un prezzo, la spunta non compare.</strong> Un prezzo lasciato vuoto vale «in sede questo carburante non si eroga», e i mezzi senza alimentazione dichiarata non la vedono affatto</li>
+            <li><strong>Il prezzo aziendale non arriva al telefono di chi non deve conoscerlo.</strong> Non è nascosto in interfaccia: non viene proprio mandato. Il conto lo fa il server, e un costo mandato lo stesso viene ignorato, così non lo si può nemmeno dedurre a tentativi. L'amministratore invece vede tutto, costo e prezzo al litro</li>
+            <li><strong>Il costo si congela nella riga</strong>: cambiando domani il prezzo in sede, i rifornimenti di ieri non si riscrivono</li>
+            <li><strong>Impaginazione dei Dati Azienda rifatta</strong>: la pagina aveva tre buchi veri, fino a 337px di spazio morto accanto a una card bassa. Ora Contatti e Siti stanno impilati nella stessa colonna, Testi dei documenti e Banche prendono tutta la riga, e la pagina è un terzo più corta</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="tl-item rv">
+        <div class="tl-marker"></div>
+        <div class="card tl-card">
+          <div class="tl-head"><span class="tl-ver">Versione 1.35</span><span class="tl-date">Novembre 2026</span></div>
+          <h3>Anche noleggi e preventivi si compilano in tre passi</h3>
+          <p>Quello che nella 1.34 era successo al modulo del viaggio arriva al noleggio e ai preventivi di entrambi. Stessa struttura, stesso modo di lavorare: tre schede, un riepilogo in fondo che dice cosa manca, e nessun campo nascosto a chi quel dato ce l'ha già.</p>
+          <ul class="clist">
+            <li><strong>Nuovo noleggio in tre passi</strong>: Il noleggio (cliente, periodo, ritiro e riconsegna) · Mezzo e utilizzatori · Costi e note. Ritiro e riconsegna diventano un blocco solo, con i pallini come il percorso del viaggio</li>
+            <li><strong>Nuovo preventivo in tre passi</strong>, uguali per i due tipi: Il cliente · I viaggi (o I noleggi) · Costi e validità. La scelta fra viaggio e noleggio non è un passo e sta sopra le schede, perché cambia la natura del documento</li>
+            <li><strong>I chilometri del noleggio stanno dietro un interruttore</strong>, perché di solito si compilano alla riconsegna; scegliendo il mezzo si precompilano da soli, e in quel caso l'interruttore si apre da sé — un campo compilato dentro un blocco chiuso finirebbe nel salvataggio senza che nessuno l'abbia visto</li>
+            <li><strong>«Come paga» è una coppia di pulsanti</strong> anche su noleggio e preventivo, al posto delle due tendine che si chiamavano quasi uguale</li>
+            <li><strong>Tutti e quattro i moduli hanno ora la stessa larghezza e un'altezza ferma.</strong> Il preventivo si allargava solo per il tipo viaggio, quindi cambiava misura a metà compilazione; e l'altezza, che prima la decideva il contenuto, faceva saltare il riquadro a ogni cambio di scheda</li>
+            <li><strong>Via la barra «Viaggio / Noleggio / Appuntamento» dentro i moduli.</strong> Non era una scelta innocua: cambiare tipo chiudeva il modulo aperto e ne riapriva uno vuoto, buttando via tutto quello che era stato scritto, senza chiedere conferma. Il tipo si sceglie prima, dai tre pulsanti di «Pianifica»</li>
+            <li><strong>«Data e ora riconsegna» non è più segnata come obbligatoria</strong>, perché non lo è: un noleggio senza data di fine il gestionale lo accetta e il calendario dei mezzi lo gestisce già</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="tl-item rv">
+        <div class="tl-marker"></div>
+        <div class="card tl-card">
+          <div class="tl-head"><span class="tl-ver">Versione 1.34</span><span class="tl-date">Novembre 2026</span></div>
+          <h3>Il modulo del viaggio è diviso in tre passi</h3>
+          <p>Un modulo solo, lunghissimo, con tutto in vista: cliente, date, luoghi, mezzo, autisti, prezzo, servizi, pagamento, note. Chi lo apriva per la prima volta non sapeva da dove cominciare, e chi lo apriva per correggere un prezzo doveva scorrere tutto. Ora è diviso in tre schede, e sono schede, non una procedura guidata: restano tutte cliccabili e Salva è sempre a portata.</p>
+          <ul class="clist">
+            <li><strong>Il viaggio</strong> (cliente, date, percorso) · <strong>Mezzo e persone</strong> · <strong>Costi e note</strong>. In creazione si fanno in ordine; in modifica si va diretti al passo che serve</li>
+            <li><strong>Partenza, tappe e destinazione diventano un percorso solo</strong>, incolonnato, con le tappe numerate in mezzo — dove stanno nel viaggio vero — invece che in un riquadro a parte più in basso</li>
+            <li><strong>Nella riga di ogni luogo l'indirizzo viene prima del nome</strong>: il nome è il facoltativo dei due e sta sotto, più piccolo</li>
+            <li><strong>Quello che serve di rado sta dietro un interruttore</strong>, con una riga che dice a cosa serve: mezzo di un'altra azienda, accompagnatore, chilometri, nota privata. Un viaggio ordinario non li vede mai, ma aprendo un viaggio che quei dati ce li ha l'interruttore si apre da solo</li>
+            <li><strong>Una barra di riepilogo in fondo</strong> mostra cliente, data, tratta, mezzo e prezzo mentre si scrive, segna in giallo quello che manca e tiene Salva spento finché resta qualcosa, con un pallino sul passo da completare. Prima lo si scopriva premendo Salva e leggendo l'errore in cima</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="tl-item rv">
+        <div class="tl-marker"></div>
+        <div class="card tl-card">
           <div class="tl-head"><span class="tl-ver">Versione 1.33</span><span class="tl-date">Ottobre 2026</span></div>
           <h3>Le fatture dicono cosa è uscito di qui e cosa è stato incassato</h3>
           <p>Una fattura emessa finiva in elenco con un numero e uno stato, e lì si fermava. Se quell'XML era già stato passato al commercialista, se i soldi erano arrivati, se il cliente aveva pagato alla partenza: erano cose che si tenevano a mente o su un foglio a parte. Ora le tiene il gestionale, e lo stato della fattura chiama le cose col loro nome.</p>

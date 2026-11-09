@@ -353,9 +353,13 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
     <div class="grid2">
       <div class="card rv">
         <div class="card-ic ic-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.5" width="18" height="13" rx="3"/><path d="M3 10h18M7.5 16.5v1.1M16.5 16.5v1.1"/><circle cx="7.5" cy="19" r="1.5"/><circle cx="16.5" cy="19" r="1.5"/></svg></div>
-        <h3>Creare un viaggio in un colpo solo</h3>
-        <p>Cliente, data e ora, luogo di ritiro, tappe, mezzo, autisti e prezzo: tutto in un unico modulo, senza saltare da una schermata all'altra.</p>
+        <h3>Creare un viaggio in tre passi</h3>
+        <p>Cliente, date e percorso · mezzo e persone · costi e note. Tre schede, non una procedura guidata: restano tutte cliccabili e <strong>Salva è sempre a portata</strong>, così in modifica si va diretti al passo che serve.</p>
         <ul class="clist">
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Partenza, tappe e destinazione sono un percorso solo, incolonnato, con le tappe in mezzo come nel viaggio vero</li>
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Una barra in fondo riepiloga cliente, data, tratta, mezzo e prezzo mentre scrivi e segna in giallo quello che manca: non lo scopri premendo Salva</li>
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Quello che serve di rado — mezzo di un'altra azienda, accompagnatore, chilometri, nota privata — sta dietro un interruttore, e si apre da sé sui viaggi che quei dati ce li hanno</li>
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Un interruttore sotto le tappe decide se l'autista avrà le indicazioni stradali su quel percorso: Maps calcola per un'automobile e non conosce sagoma e peso di una corriera, quindi di serie è spento</li>
           <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Gli indirizzi si completano da soli mentre scrivi, come su Google Maps</li>
           <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Aggiungi tutte le tappe intermedie che vuoi, con orario di arrivo e di ripartenza</li>
           <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Partenza o arrivo in sede: una spunta compila l&rsquo;indirizzo al posto tuo</li>
@@ -382,7 +386,7 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
         <h3>Il dettaglio del viaggio, sempre a portata</h3>
         <p>Selezioni un viaggio e vedi tutto: percorso, mezzo, cliente e conti. Con pochi click aggiorni lo stato senza rifare il modulo.</p>
         <ul class="clist">
-          <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Percorso apribile su Google Maps per la navigazione</li>
+          <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Percorso apribile su Google Maps, se le indicazioni sono state accese per quel viaggio</li>
           <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Riepilogo economico: prezzo base, extra e totale</li>
           <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Segni con un tocco: fatturato, pagato, ordine di servizio creato</li>
           <li><svg class="tick-v" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Telefono ed email del cliente cliccabili</li>
@@ -393,7 +397,8 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
         <h3>Non solo viaggi: noleggi e appuntamenti</h3>
         <p>Gestisci nello stesso posto i noleggi dei mezzi e gli appuntamenti (revisioni, manutenzioni), con le stesse protezioni anti-sovrapposizione.</p>
         <ul class="clist">
-          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Noleggi con ritiro e riconsegna: date, orari, luoghi, contratto e prezzo</li>
+          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Noleggi con ritiro e riconsegna: date, orari, luoghi, contratto e prezzo, negli stessi tre passi del viaggio e con la stessa barra di riepilogo</li>
+          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>I chilometri del noleggio stanno dietro un interruttore, perché di solito si compilano alla riconsegna; scegliendo il mezzo si precompilano da soli e l'interruttore si apre</li>
           <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Senza conducente: registri chi è autorizzato a guidare, con i dati della patente</li>
           <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Livello di carburante alla consegna, per sapere a quanto va riconsegnato</li>
           <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Un mezzo a noleggio non risulta libero per un viaggio nello stesso periodo</li>
@@ -420,7 +425,7 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
     <div class="center" style="margin-bottom:56px">
       <div class="eyebrow or">Preventivi</div>
       <h2 class="h2 rv">Dal preventivo alla conferma d'ordine, senza riscrivere nulla</h2>
-      <p class="sub rv d1">Prepari l'offerta al cliente, la stampi come documento professionale e, quando la accetta, la trasformi nel viaggio reale con un clic.</p>
+      <p class="sub rv d1">Prepari l'offerta al cliente, la stampi come documento professionale e, quando la accetta, la trasformi nel viaggio reale con un clic. Il modulo è diviso negli stessi tre passi degli altri: <strong>Il cliente · I viaggi (o I noleggi) · Costi e validità</strong>.</p>
     </div>
     <div class="grid2">
       <div class="card rv">
@@ -432,6 +437,7 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
           <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Ricerca per numero, cliente o tratta, con filtro per stato</li>
           <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Cliente scelto dall'anagrafica, senza riscrivere i dati</li>
           <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Preventivo multi-viaggio: più tratte in un unico documento, ognuna con i suoi servizi</li>
+          <li><svg class="tick-o" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>La scelta fra viaggio e noleggio sta sopra le schede e cambia le etichette del secondo passo: è la natura del documento, non uno dei passi</li>
         </ul>
       </div>
       <div class="card rv d1">
@@ -527,7 +533,7 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
         <h2 class="h2">Il telefono diventa il cruscotto, per chi guida e per chi gestisce</h2>
         <p class="sub">Due viste dedicate allo schermo piccolo: l&rsquo;autista vede i propri viaggi, titolari e operatori la giornata dell&rsquo;azienda. Semplici, pulite, sempre in tasca.</p>
         <div class="dlist">
-          <div class="ditem"><div class="dicon di-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M10.3 8.9 15.3 12l-5 3.1z"/></svg></div><div><h4>Il viaggio in corso, evidenziato</h4><p>La tappa di partenza, le soste e l'arrivo in ordine. Ogni indirizzo è un pulsante che apre la navigazione su Google Maps.</p></div></div>
+          <div class="ditem"><div class="dicon di-g"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M10.3 8.9 15.3 12l-5 3.1z"/></svg></div><div><h4>Il viaggio in corso, evidenziato</h4><p>La tappa di partenza, le soste e l'arrivo in ordine. Se chi ha pianificato il viaggio ha acceso le indicazioni, sotto ogni luogo compare un pulsante «Indicazioni Maps» che apre la navigazione.</p></div></div>
           <div class="ditem"><div class="dicon di-o"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13.6" r="7.5"/><path d="M12 10v3.6l2.3 1.4"/><path d="M9.4 2.6h5.2"/></svg></div><div><h4>Conto alla rovescia sul prossimo viaggio</h4><p>“In partenza tra 45 minuti”, aggiornato in automatico. L'autista sa sempre quando muoversi.</p></div></div>
           <div class="ditem"><div class="dicon di-v"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.4" width="15" height="10.6" rx="2.6"/><path d="M8 10.4V7.6a4 4 0 0 1 8 0v2.8M12 14.6v2.4"/></svg></div><div><h4>Solo ciò che gli serve</h4><p>Prezzi, pagamenti e dati riservati non sono visibili all'autista. Meno telefonate del tipo “dove devo andare?” e “a che ora?”.</p></div></div>
           <div class="ditem"><div class="dicon di-b"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.3 2.9 21.1 7.7a1.3 1.3 0 0 1 0 1.9L9.6 21.1a1.3 1.3 0 0 1-1.9 0L2.9 16.3a1.3 1.3 0 0 1 0-1.9L14.4 2.9a1.3 1.3 0 0 1 1.9 0z"/><path d="M12.6 4.7 14.9 7M9.9 7.4l2.3 2.3M7.2 10.1l2.3 2.3M4.5 12.8l2.3 2.3"/></svg></div><div><h4>Ordine di servizio e chilometri, dal telefono</h4><p>Per i viaggi in corso l’autista apre l’ordine di servizio e inserisce i chilometri di partenza e ritorno: finiscono subito nel viaggio, senza passare dall’ufficio.</p></div></div>
@@ -547,7 +553,7 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
           </div>
           <figcaption>
             <div class="pd-t">La vista dell&rsquo;autista</div>
-            <div class="pd-s">Vista Giorno: il viaggio in corso in evidenza, gli indirizzi che aprono il navigatore, i chilometri e l&rsquo;ordine di servizio. Mese e settimana con tutti i viaggi, e un tocco per ingrandire.</div>
+            <div class="pd-s">Vista Giorno: il viaggio in corso in evidenza, i pulsanti delle indicazioni dove sono stati accesi, i chilometri e l&rsquo;ordine di servizio. Mese e settimana con tutti i viaggi, e un tocco per ingrandire.</div>
           </figcaption>
         </figure>
         <figure>
@@ -758,7 +764,7 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
     <div class="center" style="margin-bottom:56px">
       <div class="eyebrow gr">Carburante</div>
       <h2 class="h2 rv">Il pieno lo registra chi lo fa, dal distributore</h2>
-      <p class="sub rv d1">Gli scontrini finiscono in un cassetto e qualcuno li ribatte settimane dopo, quando non si ricorda più a quale viaggio appartenessero. Qui il pieno si segna mentre si è ancora alla pompa, e i conti si fanno da soli.</p>
+      <p class="sub rv d1">Gli scontrini finiscono in un cassetto e qualcuno li ribatte settimane dopo, quando non si ricorda più a quale viaggio appartenessero. Qui il pieno si segna mentre si è ancora alla pompa, e i conti si fanno da soli. Chi ha la cisterna in sede fa ancora meno: scrive i litri, e il costo lo calcola il gestionale.</p>
     </div>
     <div class="grid2">
       <div class="card rv">
@@ -770,6 +776,8 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
           <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Il prezzo al litro si calcola mentre scrivi, con un avviso se esce da ogni scala plausibile — è il modo più veloce per vedere una virgola sbagliata</li>
           <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Se al distributore la rete non c'è, quello che hai scritto resta come bozza sul telefono e lo ritrovi con «Riprendi»</li>
           <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Sotto il modulo ci sono gli ultimi tre pieni di quel mezzo, chiunque li abbia fatti: serve a non rifare un pieno appena fatto da un collega</li>
+          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Spunta <strong>«Rifornimento in sede»</strong> per chi ha la cisterna: spariscono costo e distributore, restano chilometri e litri. Il prezzo è quello dichiarato nei dati dell'azienda, scelto in base all'alimentazione del mezzo</li>
+          <li><svg class="tick-g" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>La spunta compare solo dove un prezzo c'è: un prezzo lasciato vuoto vale «in sede questo carburante non si eroga»</li>
         </ul>
       </div>
       <div class="card rv d1">
@@ -786,7 +794,9 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
     </div>
     <figure class="shot shot-single rv d2" style="max-width:860px"><img class="zoom" src="images/rifornimenti.png" data-cap="Veicoli &rarr; Rifornimenti: spesa, prezzo medio, chilometri e consumi del periodo" alt="Storico dei rifornimenti con i conti del periodo" loading="lazy"><figcaption>Veicoli &rarr; Rifornimenti: i conti del periodo in cima, ogni pieno con imponibile, prezzo al litro e servizio collegato</figcaption></figure>
 
-    <p class="center rv d2" style="margin-top:36px;color:var(--muted);font-size:.95rem;max-width:720px;margin-left:auto;margin-right:auto">Un autista corregge i propri rifornimenti per <strong style="color:var(--ink)">48 ore</strong>; dopo, quella riga è un dato su cui qualcuno ha fatto i conti e serve un amministratore. Ogni inserimento, modifica ed eliminazione resta nel registro attività.</p>
+    <p class="center rv d2" style="margin-top:36px;color:var(--muted);font-size:.95rem;max-width:760px;margin-left:auto;margin-right:auto"><strong style="color:var(--ink)">Il prezzo del carburante in sede non arriva al telefono dell'autista.</strong> Non è nascosto in interfaccia, dove basterebbe un po' di curiosità per leggerlo: non viene proprio mandato. L'autista manda litri e spunta, il conto lo fa il server, e un costo mandato lo stesso viene ignorato — così non lo si può nemmeno dedurre a tentativi. L'amministratore invece vede tutto: costo, imponibile e prezzo al litro.</p>
+
+    <p class="center rv d2" style="margin-top:18px;color:var(--muted);font-size:.95rem;max-width:720px;margin-left:auto;margin-right:auto">Un autista corregge i propri rifornimenti per <strong style="color:var(--ink)">48 ore</strong>; dopo, quella riga è un dato su cui qualcuno ha fatto i conti e serve un amministratore. Ogni inserimento, modifica ed eliminazione resta nel registro attività.</p>
   </div>
 </section>
 
@@ -850,7 +860,9 @@ svg.ic{width:var(--isz,22px);height:var(--isz,22px);flex:none;display:block}
         <h3>I cartelli si fanno per tutta la flotta in una volta</h3>
         <p>Perché il caso vero non è stampare un cartello: è attrezzare la flotta una volta sola, col laminatore acceso.</p>
         <ul class="clist">
-          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Spunti i mezzi — o tutti — e ne esce un documento <strong>A5, una pagina per mezzo</strong>, da stampare o salvare in PDF</li>
+          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Spunti i mezzi — o tutti — e ne esce un documento <strong>A4, una pagina per mezzo</strong>, da stampare o salvare in PDF</li>
+          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Il QR è grande 88mm, perché la distanza vera da cui un passeggero seduto lo guarda è due metri. Il logo dell'azienda è in evidenza e il nome del mezzo si legge in basso, per chi attacca i cartelli e non deve sbagliare bus</li>
+          <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Un interruttore sulla riga di ogni mezzo sospende la raccolta solo per quello: il bus in officina, quello appena venduto, quello col cartello staccato. Quello generale resta e comanda su tutto</li>
           <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Il cartello porta il nome e il logo della tua azienda, la domanda grande e tre righe che smontano i motivi per cui di solito una recensione non la si lascia</li>
           <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>L'elenco è anche una diagnosi: dice quali cartelli stanno portando voti e quali no. «Creato, nessuna scansione» dopo settimane vuol dire quasi sempre che si è staccato</li>
           <li><svg class="tick-b" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Se un codice finisce dove non deve, lo rigeneri: i cartelli vecchi di quel mezzo smettono di funzionare, i voti già ricevuti restano</li>
